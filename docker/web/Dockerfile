@@ -18,24 +18,20 @@ WORKDIR /usr/src/app
 COPY web/package.json /usr/src/app/package.json
 COPY web/yarn.lock /usr/src/app/yarn.lock
 RUN yarn install --frozen-lockfile --silent
-COPY . /usr/src/app/
+COPY web/craco.config.js /usr/src/app/craco.config.js
+COPY web/public /usr/src/app/public
+COPY web/src /usr/src/app/src
+COPY web/tsconfig* /usr/src/app/
 ARG PUBLIC_URL
 ARG REACT_APP_ENV
 ARG REACT_APP_EXAMPLE_URL
 RUN yarn build
 
-# Stage 2: run nginx
-FROM nginx:1.19.2-alpine@sha256:a97eb9ecc708c8aa715ccfb5e9338f5456e4b65575daf304f108301f3b497314
-RUN mkdir -p /app
-WORKDIR /app
-RUN chown -R nginx:nginx /app && chmod -R 755 /app && \
-  chown -R nginx:nginx /var/cache/nginx && \
-  chown -R nginx:nginx /var/log/nginx && \
-  chown -R nginx:nginx /etc/nginx/conf.d
-RUN touch /var/run/nginx.pid && \
-  chown -R nginx:nginx /var/run/nginx.pid
-USER nginx
-COPY --from=base /usr/src/app/build /app/demo
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+# Stage 2: run caddy
+FROM abiosoft/caddy:1.0.0-no-stats as caddy
+ARG PROJECT_DIR
+COPY --from=base /usr/src/app/build /srv
+COPY web/Caddyfile /etc/Caddyfile
+
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+

@@ -93,7 +93,10 @@ steps:
       status:
         - failure
         - success
-
+    depends_on:
+      - front
+      - run_all_tests
+      - deploy
 ---
 kind: pipeline
 type: kubernetes
@@ -146,7 +149,7 @@ steps:
       - "cd web"
       - "yarn"
       - "yarn lint"
-      - "yarn test"
+    # to be removed when we have front test  - "yarn test"
     environment:
       <<: *conf_test_front
 
@@ -193,7 +196,6 @@ steps:
         - failure
         - success
     depends_on:
-      - api
       - front
       - run_all_tests
       - deploy

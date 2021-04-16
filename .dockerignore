@@ -5,7 +5,7 @@
 
 !web/public
 !web/src
-!web/nginx/nginx.conf
+!web/Caddyfile
 !web/package.json
 !web/craco.config.js
 !web/tsconfig*.json
