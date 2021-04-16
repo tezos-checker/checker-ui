@@ -94,7 +94,9 @@ steps:
         - failure
         - success
     depends_on:
-      - deploy
+      - front
+      - run_all_tests
+      - deploy_prod
 ---
 kind: pipeline
 type: kubernetes
