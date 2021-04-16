@@ -14,5 +14,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "upbots.fullname" . }}:{{ .Values.api.service.port }}']
+      args:  ['{{ include "upbots.fullname" . }}:{{ .Values.front.service.port }}']
   restartPolicy: Never

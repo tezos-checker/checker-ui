@@ -33,5 +33,5 @@ ARG PROJECT_DIR
 COPY --from=base /usr/src/app/build /srv
 COPY web/Caddyfile /etc/Caddyfile
 
-EXPOSE 3000
+EXPOSE 80
 
