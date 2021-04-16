@@ -1,0 +1,101 @@
+{
+  "name": "tezos-react-starter",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=v12.0.0",
+    "yarn": "^1.12.3"
+  },
+  "scripts": {
+    "audit": "audit-ci --moderate",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "lint": "yarn lint:eslint && yarn lint:tsc && yarn lint:prettier",
+    "lint:eslint": "eslint './src/**/*.{ts,tsx}'",
+    "lint:prettier": "prettier --write './src/**/*.{ts,tsx}'",
+    "lint:tsc": "tsc --noEmit --incremental false",
+    "prettier-check": "prettier --check './src/**/*.{ts,tsx,json,md}'"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.0.9",
+    "@chakra-ui/react": "^1.5.0",
+    "@craco/craco": "^6.1.1",
+    "@emotion/react": "11.1.5",
+    "@emotion/styled": "11.1.5",
+    "@taquito/signer": "^8.1.1",
+    "@taquito/taquito": "^8.1.1",
+    "@taquito/utils": "^8.1.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "big-number-input": "^1.0.2",
+    "bignumber.js": "^9.0.0",
+    "dayjs": "^1.8.28",
+    "framer-motion": "^4.1.3",
+    "i18next": "^20.2.1",
+    "rc-progress": "^3.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-i18next": "^11.8.13",
+    "react-loader-spinner": "^3.1.14",
+    "react-modal": "^3.11.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-table": "^7.6.3",
+    "react-toast-notifications": "^2.4.0",
+    "react-tooltip": "^4.2.5",
+    "react-virtualized-auto-sizer": "^1.0.5",
+    "react-waypoint": "^9.0.2",
+    "react-window": "^1.8.6",
+    "use-async-memo": "^1.2.2",
+    "websocket-extensions": "0.1.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.41",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-loader-spinner": "^3.1.0",
+    "@types/react-modal": "^3.10.5",
+    "@types/react-toast-notifications": "^2.4.0",
+    "@tsconfig/node14": "^1.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/react-table": "^7.0.29",
+    "@types/react-virtualized-auto-sizer": "^1.0.0",
+    "@types/react-window": "^1.8.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "8.2.0",
+    "eslint-plugin-cypress": "^2.10.3",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "7.23.2",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "precompress": "^6.3.2",
+    "prettier": "2.2.1",
+    "ts-node": "^9.1.1",
+    "tsc-watch": "^4.2.8",
+    "tslint": "~6.1.0",
+    "typescript": "~4.2.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@theme": ["src/theme/index.ts"],
+      "@shared/ui": ["src/shared/shared-ui/index.ts"],
+      "@shared/utils": ["src/shared/shared-utils/index.ts"]
+    }
+  }
+}
