@@ -126,7 +126,6 @@ trigger:
       - master
   event:
     - pull_request
-    - push
 steps:
   - name: front
     image: plugins/docker
@@ -152,7 +151,6 @@ steps:
     # to be removed when we have front test  - "yarn test"
     environment:
       <<: *conf_test_front
-
   - name: deploy
     image: pelotech/drone-helm3
     environment:
