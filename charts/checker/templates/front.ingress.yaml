@@ -1,0 +1,32 @@
+{{- if .Values.front.ingress.enabled -}}
+{{- $fullName := include "checker.fullname" . -}}
+{{- $ingressPath := .Values.front.ingress.path -}}
+
+{{- $dot := . }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-front
+  labels:
+    app.kubernetes.io/name: {{ include "checker.name" . }}
+    helm.sh/chart: {{ include "checker.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- with .Values.front.ingress.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  tls:
+    - hosts:
+        - {{ include "checker.frontDomain" . }}
+      secretName: {{ template "checker.name" $dot }}-front-cert
+  rules:
+    - host: {{ include "checker.frontDomain" . }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ template "checker.fullname" $dot }}-front
+              servicePort: 80
+{{- end }}

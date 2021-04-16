@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "checker.fullname" . }}-front
+  labels:
+    app.kubernetes.io/name: {{ include "checker.name" . }}
+    helm.sh/chart: {{ include "checker.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    component: front
+spec:
+  type: {{ .Values.front.service.type }}
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "checker.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    component: front

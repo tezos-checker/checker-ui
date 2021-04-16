@@ -1,14 +1,13 @@
-import React from 'react'
 import BigNumber from 'bignumber.js'
-
+import React from 'react'
 import { tzFormatter } from '../utils/tool'
 
-interface BalanceVariationItem {
+interface Props {
   amountFrom: BigNumber
   amountTo: Maybe<BigNumber>
 }
 
-export const BalanceVariationItem = (props: BalanceVariationItem) => {
+export const BalanceVariationItem = (props: Props) => {
   const { amountFrom, amountTo } = props
   return (
     <>

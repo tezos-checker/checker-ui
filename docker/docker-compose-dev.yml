@@ -1,0 +1,23 @@
+version: "3"
+services:
+  checkerWeb:
+    build:
+      context: ../
+      dockerfile: ./docker/web/Dockerfile
+    # image: docker.cogarius.com/upbots/api
+    env_file:
+      - ../web/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "mongodb"
+
+  #apiupbottest:
+  # build:
+  #   context: .
+  #   dockerfile: ./api/Dockerfile
+  # env_file:
+  #   - .env.file
+  # depends_on:
+  #   - "apiupbot"
+  # command: "npm run test:e2e"

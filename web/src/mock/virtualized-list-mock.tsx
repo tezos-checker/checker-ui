@@ -8,7 +8,7 @@ type Person = {
 
 const VirtualizedListMock = () => {
   const data: Person[] = []
-  for (let i = 0; i < 500; i + 1) {
+  for (let i = 0; i < 500; i += 1) {
     data.push({ firstName: `firstName ${i}`, lastName: `firstName ${i}` })
   }
 

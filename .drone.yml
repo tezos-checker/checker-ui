@@ -1,0 +1,247 @@
+kind: pipeline
+type: kubernetes
+name: checker_PROD
+image_pull_secrets:
+  - dockerconfigjson
+globals:
+  - &docker_creds
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+  - &front_prod
+    NODE_ENV: production
+  - &conf_front
+    NODE_ENV: production
+    REACT_APP_TOKEN_CONTRACT_ADDRESS: "KT1Sq1ZtVGpfKSpBYLWHT3g61Z2uBShgGEUF"
+    REACT_APP_TEZOS_RPC: "https://api.tez.ie/rpc/carthagenet"
+    REACT_APP_BCD_API: "https://api.better-call.dev/v1/"
+  - &conf_test_front
+    REACT_APP_TOKEN_CONTRACT_ADDRESS: "KT1Sq1ZtVGpfKSpBYLWHT3g61Z2uBShgGEUF"
+    REACT_APP_TEZOS_RPC: "https://api.tez.ie/rpc/carthagenet"
+    REACT_APP_BCD_API: "https://api.better-call.dev/v1/"
+trigger:
+  branch:
+    - master
+  event:
+    exclude:
+      - pull_request
+steps:
+  - name: front
+    image: plugins/docker
+    environment:
+      <<: *conf_front
+    settings:
+      storage_driver: overlay
+      debug: true
+      repo: docker.cogarius.com/checker/front
+      registry: https://docker.cogarius.com
+      dockerfile: ./docker/web/Dockerfile
+      tags: ["${DRONE_COMMIT_SHA:0:7}", "latest"]
+      build_args:
+        <<: *front_prod
+      <<: *docker_creds
+  # The commands are executed inside the root directory of your git repository.
+  - name: run_all_tests
+    image: node:12.16
+    commands:
+      - "cd web"
+      - "yarn"
+      - "yarn lint"
+      - "yarn test"
+    environment:
+      <<: *conf_test_front
+  - name: deploy_prod
+    image: pelotech/drone-helm3
+    environment:
+      RECAPTCHA_SECRET_KEY:
+        from_secret: api-recaptcha-sk
+    settings:
+      mode: upgrade
+      chart: ./charts/checker
+      release: checker
+      namespace: checker
+      debug: true
+      kube_service_account: cicd
+      kube_api_server: "https://94.130.97.84:6443"
+      kube_token:
+        from_secret: kube_token
+      kube_certificate:
+        from_secret: kube_ca_certificate
+      values:
+        - "domain=checker.cogarius.com"
+        - "front.subDomain="
+        - "front.image.repository=docker.cogarius.com/checker/front"
+      cleanup_failed_upgrade: true
+    depends_on:
+      - front
+      - run_all_tests
+  - name: notification
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_token
+      to: "-449921520"
+      message: >
+        📝 {{repo.name}} / {{commit.branch}} - {{commit.message}}
+        {{#success build.status}}
+          ✅ succeeded  for 👷‍♂️ build {{build.number}}
+        {{else}}
+          🛑 failed for 👷‍♂️ build {{build.number}}
+        {{/success}}
+    when:
+      status:
+        - failure
+        - success
+
+---
+kind: pipeline
+type: kubernetes
+name: checker_staging
+image_pull_secrets:
+  - dockerconfigjson
+globals:
+  - &docker_creds
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+  - &front_prod
+    NODE_ENV: production
+  - &conf_front
+    NODE_ENV: production
+    REACT_APP_TOKEN_CONTRACT_ADDRESS: "KT1Sq1ZtVGpfKSpBYLWHT3g61Z2uBShgGEUF"
+    REACT_APP_TEZOS_RPC: "https://api.tez.ie/rpc/carthagenet"
+    REACT_APP_BCD_API: "https://api.better-call.dev/v1/"
+  - &conf_test_front
+    REACT_APP_TOKEN_CONTRACT_ADDRESS: "KT1Sq1ZtVGpfKSpBYLWHT3g61Z2uBShgGEUF"
+    REACT_APP_TEZOS_RPC: "https://api.tez.ie/rpc/carthagenet"
+    REACT_APP_BCD_API: "https://api.better-call.dev/v1/"
+trigger:
+  branch:
+    exclude:
+      - master
+  event:
+    - pull_request
+    - push
+steps:
+  - name: front
+    image: plugins/docker
+    environment:
+      <<: *conf_front
+    settings:
+      storage_driver: overlay
+      debug: true
+      repo: docker.cogarius.com/checker/front-staging
+      registry: https://docker.cogarius.com
+      <<: *docker_creds
+      dockerfile: ./docker/web/Dockerfile
+      tags: ["${DRONE_COMMIT_SHA:0:7}", "latest"]
+      build_args:
+        - NODE_ENV=production
+    # The commands are executed inside the root directory of your git repository.
+  - name: run_all_tests
+    image: node:12.16
+    commands:
+      - "cd web"
+      - "yarn"
+      - "yarn lint"
+      - "yarn test"
+    environment:
+      <<: *conf_test_front
+
+  - name: deploy
+    image: pelotech/drone-helm3
+    environment:
+      RECAPTCHA_SECRET_KEY:
+        from_secret: api-recaptcha-sk
+    settings:
+      mode: upgrade
+      chart: ./charts/checker
+      release: checker
+      namespace: checker-staging
+      debug: true
+      kube_service_account: cicd
+      kube_api_server: "https://94.130.97.84:6443"
+      kube_token:
+        from_secret: kube_token
+      kube_certificate:
+        from_secret: kube_ca_certificate
+      values:
+        - "domain=checker.cogarius.com"
+        - "front.subDomain=staging"
+        - "front.image.repository=docker.cogarius.com/checker/front-staging"
+      cleanup_failed_upgrade: true
+    depends_on:
+      - front
+      - run_all_tests
+  - name: notification
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_token
+      to: "-449921520"
+      message: >
+        📝 {{repo.name}} / {{commit.branch}} - {{commit.message}}
+        {{#success build.status}}
+          ✅ succeeded  for 👷‍♂️ build {{build.number}}
+        {{else}}
+          🛑 failed for 👷‍♂️ build {{build.number}}
+        {{/success}}
+    when:
+      status:
+        - failure
+        - success
+    depends_on:
+      - api
+      - front
+      - run_all_tests
+      - deploy
+---
+kind: secret
+name: api-recaptcha-sk
+get:
+  path: kv/data/secret/drone/exchange-price-feed
+  name: RECAPTCHA_SECRET_KEY
+---
+kind: secret
+name: front-recaptcha-key
+get:
+  path: kv/data/secret/drone/exchange-price-feed
+  name: VUE_APP_RECAPTCHA_SITE_KEY
+---
+kind: secret
+name: telegram_token
+get:
+  path: kv/data/secret/drone/telegram
+  name: token
+---
+kind: secret
+name: kube_token
+get:
+  path: kv/data/secret/drone/kubernetes
+  name: token
+---
+kind: secret
+name: kube_ca_certificate
+get:
+  path: kv/data/secret/drone/kubernetes
+  name: kube_ca_certificate_base64_enc
+---
+kind: secret
+name: docker_username
+get:
+  path: kv/data/secret/docker/login
+  name: username
+---
+kind: secret
+name: docker_password
+get:
+  path: kv/data/secret/docker/login
+  name: password
+---
+kind: secret
+name: dockerconfigjson
+get:
+  path: kv/data/secret/docker/json
+  name: value

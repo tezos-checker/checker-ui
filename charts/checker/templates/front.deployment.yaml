@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "checker.fullname" . }}-front
+  labels:
+    app.kubernetes.io/name: {{ include "checker.name" . }}
+    helm.sh/chart: {{ include "checker.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    component: front
+spec:
+  replicas: {{ .Values.front.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "checker.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: front
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "checker.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        component: front
+    spec:
+      containers:
+      - name: front
+        image: {{ .Values.front.image.repository }}:{{ .Values.imageTag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+      imagePullSecrets:
+        - name: coga-secret-docker.cogarius.com-default
+      {{- with .Values.nodeSelector }}
+        nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}

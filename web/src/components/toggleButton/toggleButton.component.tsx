@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import './toggleButton.component.css'
 
 interface Props {
@@ -23,7 +22,7 @@ export const ToggleButton = (props: Props) => {
   }
 
   return (
-    <div className={'toggle-switch' + (small ? ' small-switch' : '')}>
+    <div className={`toggle-switch' ${small ? ' small-switch' : ''}`}>
       <input
         id={id}
         name={name}
