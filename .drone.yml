@@ -48,7 +48,7 @@ steps:
       - "cd web"
       - "yarn"
       - "yarn lint"
-      - "yarn test"
+        # to be removed when we have front test  - "yarn test"
     environment:
       <<: *conf_test_front
   - name: deploy_prod
@@ -93,7 +93,8 @@ steps:
       status:
         - failure
         - success
-
+    depends_on:
+      - deploy
 ---
 kind: pipeline
 type: kubernetes
