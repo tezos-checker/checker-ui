@@ -93,10 +93,7 @@ steps:
       status:
         - failure
         - success
-    depends_on:
-      - front
-      - run_all_tests
-      - deploy
+
 ---
 kind: pipeline
 type: kubernetes
