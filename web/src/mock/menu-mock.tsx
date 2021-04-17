@@ -10,7 +10,7 @@ export const MenuMock: FunctionComponent = () => {
   return (
     <VStack>
       {appRoutes.map((route: AppRoute, index: number) => (
-        <route.menu />
+        <route.menu key={route.path} />
       ))}
     </VStack>
   )
