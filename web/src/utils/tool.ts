@@ -99,10 +99,11 @@ export const fetchOperations = async (
   let totalOperations: any[] = []
   let lastIdParam = lastIdParamIn
 
+  //  https://api.better-call.dev/v1/contract/{network}/{address}
   while (callUntil) {
-    let url = `${BAKING_BAD_API}contract/carthagenet/${TOKEN_CONTRACT_ADDRESS}/operations`
+    let url = `${BAKING_BAD_API}contract/edo2net/${TOKEN_CONTRACT_ADDRESS}/operations`
     if (lastIdParam > 0) {
-      url = `${BAKING_BAD_API}contract/carthagenet/${TOKEN_CONTRACT_ADDRESS}/operations?last_id=${lastIdParam}`
+      url = `${BAKING_BAD_API}contract/edo2net/${TOKEN_CONTRACT_ADDRESS}/operations?last_id=${lastIdParam}`
     }
 
     // eslint-disable-next-line no-await-in-loop
