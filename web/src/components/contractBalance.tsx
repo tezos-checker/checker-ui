@@ -66,7 +66,7 @@ const ContractBalanceConnected = ({
           <div className="col">Token decimals:</div>
           <div className="col is-right">
             {tokenInformation ? (
-              tokenInformation.decimals.toNumber()
+              tokenInformation.decimals?.toNumber()
             ) : (
               <Loader visible={true} type="ThreeDots" color="#14854f" height={18} width={18} />
             )}

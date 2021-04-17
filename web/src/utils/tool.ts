@@ -86,7 +86,7 @@ export const tokenAmountInUnitsWithSymbol = (
   units: unknown,
   decimals: BigNumber,
   symbol: string,
-): string => `${tokenAmountInUnits(units as any, decimals)} ${symbol.toLowerCase()}`
+): string => `${tokenAmountInUnits(units as any, decimals)} ${symbol?.toLowerCase()}`
 
 export const isAddressValid = (address: string): boolean =>
   validateKeyHash(address) === ValidationResult.VALID

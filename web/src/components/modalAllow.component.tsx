@@ -124,7 +124,7 @@ const ModalAllow = (props: Props) => {
         <div className="row" style={{ marginTop: '30px' }}>
           <div className="is-center">
             <BigNumberInput
-              decimals={(tokenInformation && tokenInformation.decimals.toNumber()) || 18}
+              decimals={(tokenInformation && tokenInformation.decimals?.toNumber()) || 18}
               onChange={(newValue) =>
                 newValue ? setAmount(new BigNumber(newValue)) : setAmount(null)
               }

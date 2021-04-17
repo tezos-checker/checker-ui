@@ -18,8 +18,14 @@ class TokenService {
   }
 
   static async create(contractAddress: string, taquito: TezosToolkit) {
-    const contract = await taquito.contract.at(contractAddress)
-    return new TokenService(contractAddress, contract, taquito.signer)
+    try {
+      const contract = await taquito.contract.at(contractAddress)
+      return new TokenService(contractAddress, contract, taquito.signer)
+    } catch (error) {
+      // eslint-disable-next-line
+      console.log(error)
+      return null
+    }
   }
 
   getStorage = async () => this.contract.storage()
@@ -93,7 +99,7 @@ class TokenService {
   isOwner = async (address: string) => {
     const storage = await this.getStorage()
     const { owners } = storage
-    return owners.includes(address)
+    return owners && owners.includes(address)
   }
 }
 

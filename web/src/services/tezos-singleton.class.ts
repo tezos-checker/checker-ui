@@ -1,3 +1,4 @@
+import { InMemorySigner } from '@taquito/signer'
 import { TezosToolkit } from '@taquito/taquito'
 
 class TezosSingleton {
@@ -18,9 +19,13 @@ class TezosSingleton {
   public static getInstance(): TezosToolkit {
     if (!TezosSingleton.instance) {
       //  fixme ==> url to put? env ?
-      TezosSingleton.instance = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL')
-    }
+      TezosSingleton.instance = new TezosToolkit('https://api.tez.ie/rpc/edonet')
 
+      TezosSingleton.instance.tz
+        .getBalance('tz1h3rQ8wBxFd8L9B3d7Jhaawu6Z568XU3xY')
+        .then((balance) => console.log(`${balance.toNumber() / 1000000} ꜩ`))
+        .catch((error) => console.log(JSON.stringify(error)))
+    }
     return TezosSingleton.instance
   }
 }
