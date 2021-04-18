@@ -113,7 +113,7 @@ export const fetchOperations = async (
 
     // Filter only this actions
     const operationsFiltered = operations.filter((operation: any) =>
-      ['transfer', 'mint', 'allow'].includes(operation.entrypoint),
+      ['transfer', 'mint', 'allow', 'increment'].includes(operation.entrypoint),
     )
     if (operationsFiltered.length > 0) {
       totalOperations = [...totalOperations, ...operationsFiltered]
