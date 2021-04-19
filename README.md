@@ -1,6 +1,6 @@
 [![Build Status](https://drone.cogarius.com/api/badges/cogarius/checker/status.svg)](https://drone.cogarius.com/cogarius/checker)
-# Tezos DApp React Starter Kit
-Build React-based DApps in Tezos. Check out a <a href="https://tezos-react-starter.netlify.app/" target="_blank">demo</a>.
+# Cogarius Checker Tezos DApp
+React-based DApps in Tezos. Check out a <a href="https://checker.cogarius.com/" target="_blank">demo</a>.
 
 ## How to start
 - Download an [owner wallet](https://gist.github.com/mariano-aguero/808d4d64a89e8fd673b9cd3cce629214) that can mint tokens
@@ -17,6 +17,7 @@ To use a DApp, you can always download wallets from [Tezos faucet](https://fauce
 - Connection to a wallet previously downloaded from the [faucet](https://faucet.tzalpha.net/)
 - Token transfer and amount limit configuration in a LIGO [FA1.2](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-7/tzip-7.md) smart contract
 
+https://chakra-ui.com/
 ## Sections
 
 #### Home
@@ -60,8 +61,8 @@ You can access to the contract right [here](https://ide.ligolang.org/p/rUi98Tfoo
 
 ## TODO:
 
-- Add [TezBridge](https://www.tezbridge.com/)
-- Add more UI Components
+- [TezBridge](https://www.tezbridge.com/)
+- [UIComponents] (https://chakra-ui.com/)
 
 ## Requirements
 
@@ -80,9 +81,9 @@ You can access to the contract right [here](https://ide.ligolang.org/p/rUi98Tfoo
     yarn install
 
 ## Develop
-- Rename the `.env.example` to `.env`
+- Rename the `local.env` to `.env`
 - Use `yarn start` in this project
 
 ## Licensing
-[MIT](https://github.com/protofire/tezos-react-starter/blob/master/LICENSE)
+
 
