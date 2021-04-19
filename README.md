@@ -18,7 +18,8 @@ To use a DApp, you can always download wallets from [Tezos faucet](https://fauce
 - Token transfer and amount limit configuration in a LIGO [FA1.2](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-7/tzip-7.md) smart contract
 - [TezBridge](https://www.tezbridge.com/)
 - [UIComponents] (https://chakra-ui.com/)
-- node version : Version 6.10.2
+- npm version : Version 6.10.2
+- node versio : Version 12.9.0
 
 ## Sections
 
