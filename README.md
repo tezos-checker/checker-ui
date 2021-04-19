@@ -16,8 +16,9 @@ To use a DApp, you can always download wallets from [Tezos faucet](https://fauce
 - Examples based on [taquito](https://github.com/ecadlabs/taquito)
 - Connection to a wallet previously downloaded from the [faucet](https://faucet.tzalpha.net/)
 - Token transfer and amount limit configuration in a LIGO [FA1.2](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-7/tzip-7.md) smart contract
+- [TezBridge](https://www.tezbridge.com/)
+- [UIComponents] (https://chakra-ui.com/)
 
-https://chakra-ui.com/
 ## Sections
 
 #### Home
@@ -58,11 +59,6 @@ https://chakra-ui.com/
 
 ## FA 1.2 Contract
 You can access to the contract right [here](https://ide.ligolang.org/p/rUi98TfooS8_H_skgKj4wg)
-
-## TODO:
-
-- [TezBridge](https://www.tezbridge.com/)
-- [UIComponents] (https://chakra-ui.com/)
 
 ## Requirements
 
