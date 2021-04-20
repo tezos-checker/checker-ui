@@ -3,9 +3,7 @@ import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
 import './i18n'
-import { AppRouterContentMock } from './mock/app-router-content-mock'
-import { MenuMock } from './mock/menu-mock'
-import HeaderV2 from './pages/header-v2.component'
+import { PageBody, PageHeader, PageMenu } from '@pages'
 
 const App: React.FC = () => {
   const { isMobOrTabletScreen } = useScreenBreakPoint()
@@ -19,7 +17,7 @@ const App: React.FC = () => {
   return (
     <Grid sx={style.container}>
       <GridItem sx={style.header}>
-        <HeaderV2>
+        <PageHeader>
           {isMobOrTabletScreen ? (
             <IconButton
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -28,14 +26,14 @@ const App: React.FC = () => {
               aria-label={'menu'}
             />
           ) : null}
-        </HeaderV2>
+        </PageHeader>
       </GridItem>
       <GridItem sx={style.body}>
         <Box sx={style.menu}>
-          <MenuMock />
+          <PageMenu />
         </Box>
         <Flex sx={style.bodyContent}>
-          <AppRouterContentMock />
+          <PageBody />
         </Flex>
       </GridItem>
       <GridItem sx={style.footer}>FOOTER</GridItem>

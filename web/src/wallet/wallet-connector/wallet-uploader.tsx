@@ -1,13 +1,13 @@
 import { AddIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 import { DropZone, useAppToast } from '@shared/ui'
-import React from 'react'
-import { activateAccount } from '../../../_old_/utils/tool'
-import { useConnectedContext } from '../../../_old_/state/connected.context'
-import { Account } from '../../../_old_/utils/types'
+import React, { FunctionComponent } from 'react'
+import { activateAccount } from '../../_old_/utils/tool'
+import { useConnectedContext } from '../../_old_/state/connected.context'
+import { Account } from '../../_old_/utils/types'
 
 const fileTypeAccepted = '.json,application/json'
-const WalledUploader: React.FC = () => {
+const WalledUploader: FunctionComponent = () => {
   const { successToast, errorToast } = useAppToast()
   const { setCurrentAccount } = useConnectedContext()
   const fileInput = React.useRef<HTMLInputElement>(null)

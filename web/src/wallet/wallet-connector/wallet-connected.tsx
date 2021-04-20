@@ -1,9 +1,9 @@
 import { Box, CloseButton, Flex, IconButton } from '@chakra-ui/react'
-import React from 'react'
-import { truncateStringInTheMiddle } from '../../../_old_/utils/tool'
-import { useConnectedContext } from '../../../_old_/state/connected.context'
+import React, { FunctionComponent } from 'react'
+import { truncateStringInTheMiddle } from '../../_old_/utils/tool'
+import { useConnectedContext } from '../../_old_/state/connected.context'
 
-const WalledConnected: React.FC = () => {
+const WalledConnected: FunctionComponent = () => {
   const { account, clearCurrentAccount } = useConnectedContext()
 
   if (!account) {

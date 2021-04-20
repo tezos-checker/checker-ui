@@ -1,12 +1,12 @@
 /* eslint-disable */
 import { Box } from '@chakra-ui/react'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useConnectedContext } from '../../../_old_/state/connected.context'
+import { useConnectedContext } from '../../_old_/state/connected.context'
 import WalledConnected from './wallet-connected'
 import WalledUploader from './wallet-uploader'
 
-export const WalletV2 = () => {
+export const WalletConnector: FunctionComponent = () => {
   const { t } = useTranslation()
   const { account } = useConnectedContext()
   return (

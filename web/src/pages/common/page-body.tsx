@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { FunctionComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useCheckerRoute } from '../config/routing/useCheckerRoute.hook'
+import { useCheckerRoute } from '../../config/routing/useCheckerRoute.hook'
 
-export const AppRouterContentMock: FunctionComponent = () => {
+export const PageBody: FunctionComponent = () => {
   const { checkerRoutes } = useCheckerRoute()
 
   return (
