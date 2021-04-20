@@ -1,15 +1,15 @@
 /* eslint-disable */
 import { VStack } from '@chakra-ui/layout'
 import React, { FunctionComponent } from 'react'
-import { AppRoute } from '../../src/routing/app-routes.constant'
-import { useAppRoutes } from '../../src/routing/app-routes.hook'
+import { CheckerRoute } from '../config/routing/checker-routes'
+import { useCheckerRoute } from '../config/routing/useCheckerRoute.hook'
 
 export const MenuMock: FunctionComponent = () => {
-  const { appRoutes } = useAppRoutes()
+  const { checkerRoutes } = useCheckerRoute()
 
   return (
     <VStack>
-      {appRoutes.map((route: AppRoute, index: number) => (
+      {checkerRoutes.map((route: CheckerRoute, index: number) => (
         <route.menu />
       ))}
     </VStack>

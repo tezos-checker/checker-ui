@@ -1,8 +1,8 @@
 import { InMemorySigner } from '@taquito/signer'
 import { validateKeyHash, ValidationResult } from '@taquito/utils'
 import BigNumber from 'bignumber.js'
-import { BAKING_BAD_API, TEZOS_RPC as rpc, TOKEN_CONTRACT_ADDRESS } from '../config/constants'
 import TezosSingleton from '../services/tezos-singleton.class'
+import { BAKING_BAD_API, TEZOS_RPC as rpc, TOKEN_CONTRACT_ADDRESS } from '../config/constants'
 import { Account } from './types'
 
 export const truncateStringInTheMiddle = (

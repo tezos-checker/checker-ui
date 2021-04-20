@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React from 'react'
 import { Link } from 'react-router-dom'
-import VirtualizedListMock from '../../src/mock/virtualized-list-mock'
-import { WalletV2 } from '../../src/modules/refactoring/wallet/walled-v2.component'
-import HomePage from '../../src/pages/home.page'
+import VirtualizedListMock from '../../mock/virtualized-list-mock'
+import { WalletV2 } from '../../modules/refactoring/wallet/walled-v2.component'
+import HomePage from '../../_old_/pages/home.page'
 
-export type AppRoute = {
+export type CheckerRoute = {
   path: string
   exact: boolean
   isPrivate: boolean
@@ -13,7 +13,7 @@ export type AppRoute = {
   component: () => React.ReactElement
 }
 
-export const appRoutes: AppRoute[] = [
+export const checkerRoutes: CheckerRoute[] = [
   {
     path: '/old',
     exact: true,
