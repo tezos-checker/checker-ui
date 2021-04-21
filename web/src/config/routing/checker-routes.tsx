@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { HomePageOld, HomePage, VirtualListExemplePage } from '@pages'
+import { HomePageOld, HomePage, VirtualListExemplePage, StoreExemplePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ const exempleRoutes = [
     path: '/exemple/store',
     exact: true,
     menu: () => <Link to="/exemple/store">Redux, Observable exemple</Link>,
-    component: () => <VirtualListExemplePage />,
+    component: () => <StoreExemplePage />,
     isPrivate: false,
   },
 ]
