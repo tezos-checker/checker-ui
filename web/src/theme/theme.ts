@@ -9,4 +9,5 @@ const overrides = {
   },
 }
 
-export default extendTheme(overrides)
+const checkerTheme = extendTheme(overrides)
+export default checkerTheme
