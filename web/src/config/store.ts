@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { personSlice } from '../example/person/state/person.slice'
 import { counterSlice } from '../example/counter/state/counter.slice'
+import { personSlice } from '../example/person/state/person.slice'
+import { postSlice } from '../example/post/state/post.slice'
 
 export const store = configureStore({
   reducer: {
     // TODO delete once the project has started
     counter: counterSlice.reducer,
     persons: personSlice.reducer,
+    posts: postSlice.reducer,
   },
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself
