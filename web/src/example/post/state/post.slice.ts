@@ -3,6 +3,7 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { CancelToken } from 'axios'
 import { Post } from './post-state.type'
 import {
+  LoadPostAction,
   LoadPostErrorAction,
   loadPostErrorReducer,
   loadPostReducer,
@@ -26,7 +27,7 @@ export const postSlice = createSlice({
     addPost: postAdapter.addOne,
     deletePost: postAdapter.removeOne,
 
-    loadPost: (state) => loadPostReducer(state),
+    loadPost: (state, action: LoadPostAction) => loadPostReducer(state),
     loadPostSuccess: (state, action: LoadPostSuccessAction) =>
       loadPostSuccessReducer(state, action, postAdapter),
     loadPostError: (state, action: LoadPostErrorAction) => loadPostErrorReducer(state, action),

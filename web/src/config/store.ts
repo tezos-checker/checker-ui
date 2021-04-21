@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { counterSlice } from '../example/counter/state/counter.slice'
 import { personSlice } from '../example/person/state/person.slice'
 import { postSlice } from '../example/post/state/post.slice'
+import { epicMiddleware } from './store.epic'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     persons: personSlice.reducer,
     posts: postSlice.reducer,
   },
+  middleware: [epicMiddleware],
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
