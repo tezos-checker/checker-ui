@@ -91,6 +91,12 @@
 │   │    ├── validator-x.spec.tsx
 │   │    └── validator-y.spec.tsx
 │   └── index.ts
+── translations
+│   ├── en
+│   │    └── namespaceX.json
+│   └── fr
+│        └── namespaceX.json
+│
 ```
 
 ### Project strucure
