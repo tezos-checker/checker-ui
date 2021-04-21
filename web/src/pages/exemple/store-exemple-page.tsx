@@ -1,8 +1,10 @@
 import React from 'react'
-import { CounterExemple } from '../../exemple/counterExemple'
+import { PersonExample } from '../../exemple/person/person-example'
+import { CounterExemple } from '../../exemple/counter/counterExemple'
 
 export const StoreExemplePage = () => (
   <>
     <CounterExemple />
+    <PersonExample />
   </>
 )
