@@ -1,13 +1,12 @@
-import { Provider } from 'react-redux'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, theme } from '@chakra-ui/react'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import { store } from './config/store'
 import * as serviceWorker from './serviceWorker'
 import { ConnectedNetwork } from './_old_/state/connected.context'
-import theme from './theme/theme'
-import { store } from './config/store'
 
 ReactDOM.render(
   <React.StrictMode>

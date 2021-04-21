@@ -1,9 +1,9 @@
 import { Box, Flex, Grid, GridItem, IconButton, useMultiStyleConfig } from '@chakra-ui/react'
+import { PageBody, PageHeader, PageMenu } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
 import './i18n'
-import { PageBody, PageHeader, PageMenu } from '@pages'
 
 const App: React.FC = () => {
   const { isMobOrTabletScreen } = useScreenBreakPoint()
