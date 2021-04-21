@@ -1,10 +1,10 @@
 import React from 'react'
-import { PersonExample } from '../../exemple/person/person-example'
-import { CounterExemple } from '../../exemple/counter/counterExemple'
+import { CounterExample } from '../../example/counter/counter-example'
+import { PersonExample } from '../../example/person/person-example'
 
 export const StoreExemplePage = () => (
   <>
-    <CounterExemple />
+    <CounterExample />
     <PersonExample />
   </>
 )

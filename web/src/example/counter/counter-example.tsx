@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@config'
 import React, { useState } from 'react'
 import { decrement, increment, incrementByAmount } from './state'
 
-export function CounterExemple() {
+export function CounterExample() {
   // The `state` arg is correctly typed as `RootState` already
   const count = useAppSelector((state) => state.counter.value)
   const dispatch = useAppDispatch()

@@ -1,14 +1,11 @@
 import React from 'react'
-import { Box, Button, Flex, HStack } from '@chakra-ui/react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
-
-import { PayloadAction } from '@reduxjs/toolkit'
 
 import { useAppDispatch } from '@config'
 
 import { personActions, personsSelectors } from './state'
 import { Person } from './state/person.state'
-import { personAdapter } from './state/person.slice'
 
 export function PersonExample() {
   const dispatch = useAppDispatch()
