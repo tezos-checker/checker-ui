@@ -3,8 +3,11 @@
     "baseUrl": ".",
     "paths": {
       "@theme": ["src/theme/index.ts"],
-      "@shared/ui": ["src/shared/shared-ui/index.ts"],
-      "@shared/utils": ["src/shared/shared-utils/index.ts"]
+      "@shared/ui": ["src/shared-ui/index.ts"],
+      "@shared/utils": ["src/shared-utils/index.ts"],
+      "@pages": ["src/pages/index.ts"],
+      "@config": ["src/config/index.ts"],
+      "@api": ["src/api/index.ts"]
     }
   }
 }
