@@ -9,8 +9,8 @@ export type Post = {
   body: string
 }
 
-export type PostState = EntityState<Post> & {
+export type EntityPostState = EntityState<Post> & {
   requestStatus: RequestStatus
-  axiosCancelToken: CancelToken
+  axiosCancelToken: CancelToken | undefined
   errorMsg: string
 }

@@ -34,7 +34,7 @@
 │       │      ├── y.reducer.ts
 │       │      ├── z.reducer.ts
 │       ├── feature.slice.ts
-│       ├── feature.state.ts
+│       ├── feature.type.ts
 │
 ├── pages
 │   ├── x-page.component.tsx
@@ -70,14 +70,14 @@
 │
 ├── shared-utils
 │   ├── _test_
-│   │    ├── test-x.spec.tsx
-│   │    └── test-y.spec.tsx
+│   │    ├── test-x.spec.ts
+│   │    └── test-y.spec.ts
 │   ├── x.utils.ts
 │   ├── x.enum.ts
 │   ├── x.mapper.ts
 │   ├── hook
-│   │    ├── hook1.hook.tsx
-│   │    └── hook2.hook.tsx
+│   │    ├── hook1.hook.ts
+│   │    └── hook2.hook.ts
 │   └── index.ts
 │
 ├── form-controls

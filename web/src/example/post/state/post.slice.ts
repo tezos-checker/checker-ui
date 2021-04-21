@@ -9,7 +9,7 @@ import {
   loadPostReducer,
   LoadPostSuccessAction,
   loadPostSuccessReducer,
-} from './reducer/post-reducer'
+} from './post/post-reducer'
 
 export const postAdapter = createEntityAdapter<Post>({
   // Assume IDs are stored in a field other than `person.id`
@@ -27,7 +27,7 @@ export const postSlice = createSlice({
     addPost: postAdapter.addOne,
     deletePost: postAdapter.removeOne,
 
-    loadPost: (state, action: LoadPostAction) => loadPostReducer(state),
+    loadPost: (state, action: LoadPostAction): void => loadPostReducer(state),
     loadPostSuccess: (state, action: LoadPostSuccessAction) =>
       loadPostSuccessReducer(state, action, postAdapter),
     loadPostError: (state, action: LoadPostErrorAction) => loadPostErrorReducer(state, action),

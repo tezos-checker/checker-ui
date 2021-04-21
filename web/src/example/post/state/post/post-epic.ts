@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, map, mergeMap } from 'rxjs/operators'
 import { Post } from '../post-state.type'
-import { LoadPostAction, LoadPostErrorAction, LoadPostSuccessAction } from '../reducer/post-reducer'
+import { LoadPostAction, LoadPostErrorAction, LoadPostSuccessAction } from './post-reducer'
 
 export const fetchPostRequest = (data: LoadPostAction) =>
   from(findPostById(data.payload.postId, data.payload.axiosCancelToken)).pipe(
@@ -28,7 +28,7 @@ export const fetchPostRequest = (data: LoadPostAction) =>
     ),
   )
 
-export const fetchPostEpic = (action$: any, state$: any) =>
+export const fetchPostEpic = (action$: any) =>
   action$.pipe(
     ofType('post/loadPost'),
     mergeMap((action: LoadPostAction) => fetchPostRequest(action)),
