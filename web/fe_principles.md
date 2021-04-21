@@ -100,3 +100,25 @@
 ```
 
 ### Project strucure
+
+### Redux
+
+#### /!\ redux-toolkit adapatater
+
+- when we use the redux-toolkit adapatater, the reducer MUST NOT return a new state but has the change the properties of the state like state.x = ...
+
+```
+export const loadPostReducer = (state: EntityPostState) => {
+  state.requestStatus = RequestStatus.loading
+}
+```
+
+naming convention: id we work with an adaptater the type name has to be Entity[...]State
+
+```
+export type EntityPostState = EntityState<Post> & {
+  requestStatus: RequestStatus
+  axiosCancelToken: CancelToken | undefined
+  errorMsg: string
+}
+```
