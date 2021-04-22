@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs'
 
 export type AppToastType = {
-  type: 'info' | 'warning' | 'success' | 'error'
+  status: 'info' | 'warning' | 'success' | 'error'
   title: string
   description: string
 }

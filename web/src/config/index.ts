@@ -1,3 +1,4 @@
+export * from './app-toast.config'
 export * from './axios-config'
 export * from './beacon-wallet.config'
 export * from './routing/checker-routes'

@@ -1,29 +1,29 @@
-import { AppToastObservable } from 'src/config/app-toast.config'
+import { AppToastObservable } from '@config'
 
 export const successToast = (title: string, description: string) =>
   AppToastObservable.next({
-    type: 'success',
+    status: 'success',
     title,
     description,
   })
 
 export const errorToast = (title: string, description: string) =>
   AppToastObservable.next({
-    type: 'error',
+    status: 'error',
     title,
     description,
   })
 
 export const infoToast = (title: string, description: string) =>
   AppToastObservable.next({
-    type: 'info',
+    status: 'info',
     title,
     description,
   })
 
 export const warningToast = (title: string, description: string) =>
   AppToastObservable.next({
-    type: 'warning',
+    status: 'warning',
     title,
     description,
   })

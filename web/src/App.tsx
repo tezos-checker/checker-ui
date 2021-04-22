@@ -22,11 +22,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     AppToastObservable.subscribe({
-      next: (v: AppToastType) =>
+      next: (toastProps: AppToastType) => {
         toast({
-          ...v,
+          ...toastProps,
           position: 'bottom-right',
-        }),
+        })
+      },
     })
     return () => AppToastObservable.unsubscribe()
   }, [])

@@ -1,25 +1,15 @@
 import { RequestStatus } from '@api'
 import { Box, Button, Spinner } from '@chakra-ui/react'
 import { useAppDispatch } from '@config'
-import { useAppToast } from '@shared/ui'
-import React, { FunctionComponent, useEffect } from 'react'
+import { successToast } from '@shared/ui'
+import React, { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { walletActions } from '../state/wallet.slice'
 import { walletSelector } from '../state/wallet/wallet-selector'
 
 export const WalledLoader: FunctionComponent = () => {
   const dispatch = useAppDispatch()
-  const { status, address, errMsg } = useSelector(walletSelector)
-  const { successToast, errorToast } = useAppToast()
-
-  useEffect(() => {
-    if (status === RequestStatus.error) {
-      errorToast('Wallet connection', errMsg)
-    }
-    if (status === RequestStatus.success) {
-      successToast('Wallet', 'Connection success')
-    }
-  }, [status])
+  const { status, address } = useSelector(walletSelector)
 
   const renderWallet = () => {
     switch (status) {
@@ -31,6 +21,7 @@ export const WalledLoader: FunctionComponent = () => {
           <>
             <Box> Your are not connected </Box>
             <Button onClick={() => dispatch(walletActions.connect())}>Connect</Button>
+            <Button onClick={() => successToast('a', 'b')}>Connect</Button>
           </>
         )
       case RequestStatus.success:
