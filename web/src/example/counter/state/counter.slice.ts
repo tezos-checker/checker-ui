@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '@config'
-import { IncrementReducer } from './reducer/increment.reducer'
+import { CounterState } from './counter.state'
 import { DecrementReducer } from './reducer/decrement.reducer'
 import { IncrementByAmountReducer } from './reducer/increment-by-amount.reducer'
-import { CounterState } from './counter.state'
+import { IncrementReducer } from './reducer/increment.reducer'
 
 // Define the initial state using that type
 const initialState: CounterState = {

@@ -1,14 +1,35 @@
-import { Box, Flex, Grid, GridItem, IconButton, useMultiStyleConfig } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  IconButton,
+  useMultiStyleConfig,
+  useToast,
+} from '@chakra-ui/react'
 import { PageBody, PageHeader, PageMenu } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
+import { AppToastObservable, AppToastType } from './config/app-toast.config'
 import './i18n'
 
 const App: React.FC = () => {
   const { isMobOrTabletScreen } = useScreenBreakPoint()
   const [isMenuOpen, setIsMenuOpen] = useState(!isMobOrTabletScreen)
   const style = useMultiStyleConfig('ui/page', { isMenuOpen })
+  const toast = useToast()
+
+  useEffect(() => {
+    AppToastObservable.subscribe({
+      next: (v: AppToastType) =>
+        toast({
+          ...v,
+          position: 'bottom-right',
+        }),
+    })
+    return () => AppToastObservable.unsubscribe()
+  }, [])
 
   useEffect(() => {
     setIsMenuOpen(!isMobOrTabletScreen)

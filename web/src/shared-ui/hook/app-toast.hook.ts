@@ -10,7 +10,7 @@ export const useAppToast = () => {
         title,
         description,
         status: 'success',
-        position: 'top',
+        position: 'bottom-right',
       })
     },
     errorToast: (title: string, description: string = errorGeneric) => {
@@ -18,7 +18,7 @@ export const useAppToast = () => {
         title,
         description,
         status: 'error',
-        position: 'top',
+        position: 'bottom',
       })
     },
   }

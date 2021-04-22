@@ -5,6 +5,8 @@ import { counterSlice } from '../example/counter/state/counter.slice'
 import { personSlice } from '../example/person/state/person.slice'
 import { postSlice } from '../example/post/state/post.slice'
 import { fetchPostEpic } from '../example/post/state/post/post-epic'
+import { walletEpics } from '../wallet/state/wallet.epics'
+import { walletSlice } from '../wallet/state/wallet.slice'
 
 const epicMiddleware = createEpicMiddleware()
 
@@ -14,6 +16,7 @@ const checkerStore = configureStore({
     counter: counterSlice.reducer,
     persons: personSlice.reducer,
     posts: postSlice.reducer,
+    wallet: walletSlice.reducer,
   },
   middleware: [epicMiddleware],
 })
@@ -26,6 +29,6 @@ export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-epicMiddleware.run(combineEpics(fetchPostEpic))
+epicMiddleware.run(combineEpics(fetchPostEpic, walletEpics))
 
 export const store = checkerStore
