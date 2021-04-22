@@ -6,4 +6,4 @@ export type AppToastType = {
   description: string
 }
 
-export const AppToastObservable = new Subject<AppToastType>()
+export const appToastObservable = new Subject<AppToastType>()

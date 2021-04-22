@@ -1,7 +1,6 @@
 import { RequestStatus } from '@api'
 import { Box, Button, Spinner } from '@chakra-ui/react'
 import { useAppDispatch } from '@config'
-import { successToast } from '@shared/ui'
 import React, { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { walletActions } from '../state/wallet.slice'
@@ -21,7 +20,6 @@ export const WalledLoader: FunctionComponent = () => {
           <>
             <Box> Your are not connected </Box>
             <Button onClick={() => dispatch(walletActions.connect())}>Connect</Button>
-            <Button onClick={() => successToast('a', 'b')}>Connect</Button>
           </>
         )
       case RequestStatus.success:
