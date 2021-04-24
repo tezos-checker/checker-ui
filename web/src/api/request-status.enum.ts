@@ -1,6 +1,7 @@
 export enum RequestStatus {
-  loading,
-  success,
-  error,
-  idle,
+  loading = 'loading', // @depreciated  - todo remove loading
+  pending = 'pending',
+  success = 'success',
+  error = 'error',
+  idle = 'idle',
 }
