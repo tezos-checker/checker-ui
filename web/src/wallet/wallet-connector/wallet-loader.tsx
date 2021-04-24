@@ -12,7 +12,7 @@ export const WalledLoader: FunctionComponent = () => {
 
   const renderWallet = () => {
     switch (status) {
-      case RequestStatus.loading:
+      case RequestStatus.pending:
         return <Spinner />
       case RequestStatus.error:
       case RequestStatus.idle:

@@ -14,7 +14,7 @@ export const PostExample: FunctionComponent = () => {
 
   const getPostBox = () => {
     switch (status) {
-      case RequestStatus.loading:
+      case RequestStatus.pending:
         return <Spinner />
       case RequestStatus.error:
         return <Box>Oups, {errorMsg}</Box>

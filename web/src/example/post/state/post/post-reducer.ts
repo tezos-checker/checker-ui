@@ -10,7 +10,7 @@ export type LoadPostSuccessAction = PayloadAction<Post>
 
 // /!\ As we work with an adaptater, we don't need to return a new state
 export const loadPostReducer = (state: EntityPostState) => {
-  state.requestStatus = RequestStatus.loading
+  state.requestStatus = RequestStatus.pending
 }
 
 export const loadPostSuccessReducer = (

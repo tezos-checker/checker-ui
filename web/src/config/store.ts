@@ -7,6 +7,8 @@ import { postSlice } from '../example/post/state/post.slice'
 import { fetchPostEpic } from '../example/post/state/post/post-epic'
 import { opIncrementEpic } from '../sc-operation/state/op-increment/op-increment-epic'
 import { scOperationSlice } from '../sc-operation/state/sc-operation.slice'
+import { loadStorageEpic } from '../sc-storage/state/sc-storage.epic'
+import { scStorageSlice } from '../sc-storage/state/sc-storage.slice'
 import { walletEpics } from '../wallet/state/wallet.epics'
 import { walletSlice } from '../wallet/state/wallet.slice'
 
@@ -22,6 +24,7 @@ const checkerStore = configureStore({
     // PROJECT
     wallet: walletSlice.reducer,
     scOperations: scOperationSlice.reducer,
+    scStorage: scStorageSlice.reducer,
   },
   middleware: [epicMiddleware],
 })
@@ -34,6 +37,6 @@ export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-epicMiddleware.run(combineEpics(fetchPostEpic, walletEpics, opIncrementEpic))
+epicMiddleware.run(combineEpics(fetchPostEpic, walletEpics, opIncrementEpic, loadStorageEpic))
 
 export const store = checkerStore

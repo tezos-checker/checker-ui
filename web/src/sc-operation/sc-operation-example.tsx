@@ -23,7 +23,7 @@ export const ScOperationExample: FunctionComponent = () => {
 
   return (
     <>
-      <Box m={'10px'}>
+      <Box m={'25px'}>
         <h2>Opérations</h2>
         <HStack>
           <Button onClick={dispatchScIncrement(incrementValue, amount, confirmation)}>

@@ -9,7 +9,7 @@ export type WalletConnectSuccessAction = PayloadAction<string>
 
 export const walletConnectReducer = (state: WalletState): WalletState => ({
   ...state,
-  connectionStatus: RequestStatus.loading,
+  connectionStatus: RequestStatus.pending,
 })
 
 export const walletConnectSuccessReducer = (
