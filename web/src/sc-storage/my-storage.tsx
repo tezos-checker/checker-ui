@@ -1,13 +1,12 @@
 import { RequestStatus } from '@api'
 import { Box, Button, Spinner } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
-import { useSelector } from 'react-redux'
-import { scStorageSelector } from './state/sc-storage.selector'
 import { ScStorage } from './state/sc-storage.type'
 import { dispatchLoadStorage } from './state/useDispatchLoadStorage'
+import { useStorageData } from './state/useStorageData'
 
 export const MyStorage: FunctionComponent = () => {
-  const scStorage = useSelector(scStorageSelector)
+  const scStorage = useStorageData()
 
   const renderStorage = () => {
     const { status, content, errMsg } = scStorage as ScStorage
@@ -26,7 +25,12 @@ export const MyStorage: FunctionComponent = () => {
   return (
     <Box m={'25px'}>
       <h2>Storage</h2>
-      <Button onClick={dispatchLoadStorage()}>Load storage</Button>
+      <Button
+        onClick={dispatchLoadStorage()}
+        isLoading={scStorage !== null && scStorage.status === RequestStatus.pending}
+      >
+        Load storage
+      </Button>
       {scStorage ? renderStorage() : null}
     </Box>
   )

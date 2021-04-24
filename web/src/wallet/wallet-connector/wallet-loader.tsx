@@ -7,6 +7,7 @@ import { WalletPayload } from '../state/wallet-state.type'
 
 export const WalledLoader: FunctionComponent = () => {
   const wallet = walletData()
+  const hasWallet = wallet !== null
 
   const renderWallet = () => {
     const { status, address, errMsg } = wallet as WalletPayload
@@ -28,7 +29,8 @@ export const WalledLoader: FunctionComponent = () => {
         <h2>Your wallet</h2>
         <Button
           onClick={dispatchLoadWallet()}
-          disabled={wallet !== null && wallet.status === RequestStatus.success}
+          disabled={hasWallet && wallet?.status === RequestStatus.success}
+          isLoading={hasWallet && wallet?.status === RequestStatus.pending}
         >
           Connect
         </Button>
