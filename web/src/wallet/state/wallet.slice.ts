@@ -1,31 +1,15 @@
-import { RequestStatus } from '@api'
-import { createSlice } from '@reduxjs/toolkit'
-import { WalletState } from './wallet-state.type'
-import {
-  WalletConnectErrorAction,
-  walletConnectErrorReducer,
-  walletConnectReducer,
-  WalletConnectSuccessAction,
-  walletConnectSuccessReducer,
-} from './wallet/wallet-reducer'
+import { RootState } from '@config'
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { WalletPayload } from './wallet-state.type'
 
-// Define the initial state using that type
-const initialState: WalletState = {
-  address: '',
-  connectionStatus: RequestStatus.idle,
-  errMsg: '',
-}
-
+export const walletAdapter = createEntityAdapter<WalletPayload>()
 export const walletSlice = createSlice({
   name: 'wallet',
-  initialState,
+  initialState: walletAdapter.getInitialState(),
   reducers: {
-    connect: (state) => walletConnectReducer(state),
-    connectSuccess: (state, action: WalletConnectSuccessAction) =>
-      walletConnectSuccessReducer(state, action),
-    connectError: (state, action: WalletConnectErrorAction) =>
-      walletConnectErrorReducer(state, action),
+    loadWallet: walletAdapter.upsertOne,
   },
 })
 
 export const walletActions = walletSlice.actions
+export const walletSelectors = walletAdapter.getSelectors<RootState>((state) => state.wallet)

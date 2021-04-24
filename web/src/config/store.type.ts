@@ -4,13 +4,13 @@ import { Person } from 'src/example/person/state/person.state'
 import { EntityPostState } from 'src/example/post/state/post-state.type'
 import { EntityOperationState } from 'src/sc-operation/state/sc-operation-state.type'
 import { EntityStorageState } from 'src/sc-storage/state/sc-storage.type'
-import { WalletState } from 'src/wallet/state/wallet-state.type'
+import { EntityWalletState } from 'src/wallet/state/wallet-state.type'
 
 export type CheckerState = {
   counter: CounterState
   persons: EntityState<Person>
   posts: EntityPostState
-  wallet: WalletState
+  wallet: EntityWalletState
   scOperations: EntityOperationState
   scStorage: EntityStorageState
 }

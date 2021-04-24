@@ -1,7 +1,11 @@
 import { RequestStatus } from '@api'
+import { EntityState } from '@reduxjs/toolkit'
 
-export type WalletState = {
+export type WalletPayload = {
+  id: string
   address: string
   errMsg: string
-  connectionStatus: RequestStatus
+  status: RequestStatus
 }
+
+export type EntityWalletState = EntityState<WalletPayload>
