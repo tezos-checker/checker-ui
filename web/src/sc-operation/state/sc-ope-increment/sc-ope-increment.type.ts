@@ -1,11 +1,11 @@
 import { TransactionWalletOperation } from '@taquito/taquito'
 
-export type OpeParams_Increment_Transfert = {
+export type ScOpeParamsIncrementTransfert = {
   value: number
   nbConfirmation: number
 }
 
-export type OpeParams_Increment_Confirmation = {
+export type ScOpeParamsIncrementConfirmation = {
   operation: TransactionWalletOperation
   nbConfirmation: number
 }

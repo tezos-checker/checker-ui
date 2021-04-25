@@ -2,11 +2,11 @@ import { RequestStatus } from '@api'
 import { useAppDispatch } from '@config'
 import { ScOpeEntryPoint, ScOpeStep } from '../sc-ope-state.type'
 import { scOpeActions } from '../sc-ope.slice'
-import { OpeParams_Increment_Transfert } from './sc-ope-increment.type'
+import { ScOpeParamsIncrementTransfert } from './sc-ope-increment.type'
 
 export const dispatchScIncrement = (value: number, amount: number, nbConfirmation: number) => {
   const dispatch = useAppDispatch()
-  const opeParams: OpeParams_Increment_Transfert = {
+  const opeParams: ScOpeParamsIncrementTransfert = {
     value,
     nbConfirmation,
   }

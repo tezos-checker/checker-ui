@@ -10,8 +10,8 @@ import {
 } from '../../../api/sc-ope-increment.api'
 import { ScOpeAction, ScOpePayload, ScOpeStep } from '../sc-ope-state.type'
 import {
-  OpeParams_Increment_Confirmation,
-  OpeParams_Increment_Transfert,
+  ScOpeParamsIncrementConfirmation,
+  ScOpeParamsIncrementTransfert,
 } from './sc-ope-increment.type'
 
 const getAction = (payload: ScOpePayload): any => ({
@@ -21,11 +21,11 @@ const getAction = (payload: ScOpePayload): any => ({
 
 // step 1 - execute transfert
 const exeOpeIncrementTransfert = (payload: ScOpePayload): Observable<ScOpePayload> => {
-  const { value, nbConfirmation } = payload.opeParams as OpeParams_Increment_Transfert
+  const { value, nbConfirmation } = payload.opeParams as ScOpeParamsIncrementTransfert
 
   return from(scOpeIncrementTransfert(value)).pipe(
     map((operation: TransactionWalletOperation) => {
-      const opeParams: OpeParams_Increment_Confirmation = {
+      const opeParams: ScOpeParamsIncrementConfirmation = {
         operation,
         nbConfirmation,
       }
@@ -44,7 +44,7 @@ const exeOpeIncrementTransfert = (payload: ScOpePayload): Observable<ScOpePayloa
 
 // step 2 - wait the transfert confirmation
 const exeOpeIncrementConfimation = (payload: ScOpePayload) => {
-  const { operation, nbConfirmation } = payload.opeParams as OpeParams_Increment_Confirmation
+  const { operation, nbConfirmation } = payload.opeParams as ScOpeParamsIncrementConfirmation
   return from(scOpeIncrementConfirmation(operation, nbConfirmation)).pipe(
     map((res: string) =>
       getAction({
