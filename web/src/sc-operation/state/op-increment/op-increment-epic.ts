@@ -18,7 +18,7 @@ const getAction = (payload: ScOperation): any => ({
 
 const increment = (payload: ScOperation): Observable<ScOperation> => {
   const { value, nbConfirmation } = payload.operationParams as IncrementTransfertOpParams
-  debugger // eslint-disable-line no-debugger
+
   return from(OpIncrementExecute(value)).pipe(
     map((operation: TransactionWalletOperation) => {
       const operationParams: IncrementConfirmationOpParams = {

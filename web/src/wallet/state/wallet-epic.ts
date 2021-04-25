@@ -18,11 +18,18 @@ export const fetchStorageRequest = (x: WalletPayload) =>
         ...x,
         status: RequestStatus.error,
         errMsg: 'internal error',
-        address: '',
+        address: undefined,
       })
     }),
     catchError((err) =>
-      of(createAction({ ...x, status: RequestStatus.error, errMsg: err.message, address: '' })),
+      of(
+        createAction({
+          ...x,
+          status: RequestStatus.error,
+          errMsg: err.message,
+          address: undefined,
+        }),
+      ),
     ),
   )
 

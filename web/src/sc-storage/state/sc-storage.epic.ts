@@ -2,13 +2,13 @@ import { getStorage, RequestStatus } from '@api'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
-import { ScStorage } from './sc-storage.type'
+import { ScStoragePayload } from './sc-storage.type'
 
 const actionType = 'storage/loadStorage'
 
-const createAction = (payload: ScStorage) => ({ type: actionType, payload })
+const createAction = (payload: ScStoragePayload) => ({ type: actionType, payload })
 
-export const fetchStorageRequest = (x: ScStorage) =>
+export const fetchStorageRequest = (x: ScStoragePayload) =>
   from(getStorage()).pipe(
     map((res: any) => {
       if (res) {
@@ -32,6 +32,6 @@ export const loadStorageEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: any) => x.payload),
-    filter((x: ScStorage) => isRequestOnPending(x.status)),
-    mergeMap((x: ScStorage) => fetchStorageRequest(x)),
+    filter((x: ScStoragePayload) => isRequestOnPending(x.status)),
+    mergeMap((x: ScStoragePayload) => fetchStorageRequest(x)),
   )
