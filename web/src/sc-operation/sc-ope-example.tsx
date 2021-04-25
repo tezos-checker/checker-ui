@@ -20,12 +20,18 @@ export const ScOperationExample: FunctionComponent = () => {
   const [amount, setAmount] = useState<number>(0)
   const [confirmation, setConfirmation] = useState<number>(1)
 
+  const resetForm = () => {
+    setAmount(0)
+    setConfirmation(1)
+    setIncrementValue(0)
+  }
+
   return (
     <>
       <Box m={'25px'}>
         <h2>Opérations</h2>
         <HStack>
-          <Button onClick={dispatchScIncrement(incrementValue, amount, confirmation)}>
+          <Button onClick={dispatchScIncrement(incrementValue, amount, confirmation, resetForm)}>
             Increment
           </Button>
         </HStack>

@@ -23,7 +23,7 @@ const getAction = (payload: ScOpePayload): any => ({
 const exeOpeIncrementTransfert = (payload: ScOpePayload): Observable<ScOpePayload> => {
   const { value, nbConfirmation } = payload.opeParams as ScOpeParamsIncrementTransfert
 
-  return from(scOpeIncrementTransfert(value)).pipe(
+  return from(scOpeIncrementTransfert(value, payload.amount)).pipe(
     map((operation: TransactionWalletOperation) => {
       const opeParams: ScOpeParamsIncrementConfirmation = {
         operation,

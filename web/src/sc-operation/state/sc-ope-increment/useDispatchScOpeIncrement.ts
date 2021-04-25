@@ -4,14 +4,19 @@ import { ScOpeEntryPoint, ScOpeStep } from '../sc-ope-state.type'
 import { scOpeActions } from '../sc-ope.slice'
 import { ScOpeParamsIncrementTransfert } from './sc-ope-increment.type'
 
-export const dispatchScIncrement = (value: number, amount: number, nbConfirmation: number) => {
+export const dispatchScIncrement = (
+  value: number,
+  amount: number,
+  nbConfirmation: number,
+  callBack: () => void,
+) => {
   const dispatch = useAppDispatch()
   const opeParams: ScOpeParamsIncrementTransfert = {
     value,
     nbConfirmation,
   }
 
-  return () =>
+  return () => {
     dispatch(
       scOpeActions.increment({
         id: `${Math.floor(Math.random() * 99)}_${new Date().getTime()}`,
@@ -23,4 +28,6 @@ export const dispatchScIncrement = (value: number, amount: number, nbConfirmatio
         amount,
       }),
     )
+    callBack()
+  }
 }
