@@ -1,4 +1,5 @@
 import { loadWallet, RequestStatus } from '@api'
+import { errorToast, successToast } from '@shared/ui'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
@@ -12,8 +13,10 @@ export const fetchStorageRequest = (x: WalletPayload) =>
   from(loadWallet()).pipe(
     map((address: string) => {
       if (address) {
+        successToast('Wallet', 'Wallet connected')
         return createAction({ ...x, status: RequestStatus.success, address })
       }
+      errorToast('Wallet', 'Wallet connection failed')
       return createAction({
         ...x,
         status: RequestStatus.error,
@@ -21,16 +24,17 @@ export const fetchStorageRequest = (x: WalletPayload) =>
         address: undefined,
       })
     }),
-    catchError((err) =>
-      of(
+    catchError((err) => {
+      errorToast('Wallet', err.message)
+      return of(
         createAction({
           ...x,
           status: RequestStatus.error,
           errMsg: err.message,
           address: undefined,
         }),
-      ),
-    ),
+      )
+    }),
   )
 
 const isRequestOnPending = (status: RequestStatus) => status === RequestStatus.pending
