@@ -10,13 +10,12 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/react'
 import React, { FunctionComponent, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { dispatchScIncrement } from './state/op-increment/useDispatchScIncrement'
-import { ScOperation } from './state/sc-operation-state.type'
-import { scOperationSelectors } from './state/sc-operation.slice'
+import { dispatchScIncrement } from './state/sc-ope-increment/useDispatchScOpeIncrement'
+import { ScOpePayload } from './state/sc-ope-state.type'
+import { useOpeData } from './state/useScOpeData'
 
 export const ScOperationExample: FunctionComponent = () => {
-  const operationList = useSelector(scOperationSelectors.selectAll)
+  const operationList = useOpeData()
   const [incrementValue, setIncrementValue] = useState<number>(0)
   const [amount, setAmount] = useState<number>(0)
   const [confirmation, setConfirmation] = useState<number>(1)
@@ -76,19 +75,17 @@ export const ScOperationExample: FunctionComponent = () => {
       </Box>
 
       <Box m={'10px'} border={'1px solid'} borderColor={'gray.600'}>
-        {operationList.map(
-          ({ id, operationType, operationStatus, status, errorMsg }: ScOperation) => (
-            <Box key={id} my={'15px'} p={'5px'} bg={'gray.300'}>
-              <Flex>
-                <Box flex={0.2}>{id}</Box>
-                <Box flex={0.2}>{operationType}</Box>
-                <Box flex={0.2}>{operationStatus}</Box>
-                <Box flex={0.2}>{status}</Box>
-                <Box flex={0.2}>{errorMsg}</Box>
-              </Flex>
-            </Box>
-          ),
-        )}
+        {operationList.map(({ id, opeEntryPoint, opeStep, status, errorMsg }: ScOpePayload) => (
+          <Box key={id} my={'15px'} p={'5px'} bg={'gray.300'}>
+            <Flex>
+              <Box flex={0.2}>{id}</Box>
+              <Box flex={0.2}>{opeEntryPoint}</Box>
+              <Box flex={0.2}>{opeStep}</Box>
+              <Box flex={0.2}>{status}</Box>
+              <Box flex={0.2}>{errorMsg}</Box>
+            </Flex>
+          </Box>
+        ))}
       </Box>
     </>
   )

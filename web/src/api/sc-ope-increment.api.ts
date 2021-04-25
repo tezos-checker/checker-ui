@@ -1,7 +1,10 @@
 import { SC_ADDRESS, tezos } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
-export const OpIncrementExecute = (valueIn = 0, amount = 0): Promise<TransactionWalletOperation> =>
+export const scOpeIncrementTransfert = (
+  valueIn = 0,
+  amount = 0,
+): Promise<TransactionWalletOperation> =>
   tezos.wallet
     // eslint-disable-next-line
     // @ts-ignore
@@ -17,7 +20,7 @@ export const OpIncrementExecute = (valueIn = 0, amount = 0): Promise<Transaction
     })
     .send()
 
-export const OpIncrementWaitConfirmation = (
+export const scOpeIncrementConfirmation = (
   op: TransactionWalletOperation,
   numberOfConfirmation = 1,
 ): Promise<any> => op.confirmation(numberOfConfirmation)
