@@ -2,7 +2,7 @@ import { loadWallet, RequestStatus } from '@api'
 import { errorToast, successToast } from '@shared/ui'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
-import { catchError, filter, map, mergeMap } from 'rxjs/operators'
+import { catchError, filter, map, mergeMap, timeout } from 'rxjs/operators'
 import { WalletPayload } from './wallet-state.type'
 
 const actionType = 'wallet/loadWallet'
@@ -11,6 +11,7 @@ const createAction = (payload: WalletPayload) => ({ type: actionType, payload })
 
 export const fetchStorageRequest = (x: WalletPayload) =>
   from(loadWallet()).pipe(
+    timeout(30000),
     map((address: string) => {
       if (address) {
         successToast('Wallet', 'Wallet connected')
