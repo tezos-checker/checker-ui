@@ -7,18 +7,15 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import checkerTheme from './theme/theme'
-import { ConnectedNetwork } from './_old_/state/connected.context'
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={checkerTheme}>
-      <ConnectedNetwork>
-        <BrowserRouter>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </BrowserRouter>
-      </ConnectedNetwork>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root'),

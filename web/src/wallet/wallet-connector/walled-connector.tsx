@@ -4,7 +4,7 @@ import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useConnectedContext } from '../../_old_/state/connected.context'
 import WalledConnected from './wallet-connected'
-import WalledUploader from './wallet-uploader'
+import { WalledLoader } from './wallet-loader'
 
 export const WalletConnector: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -12,7 +12,7 @@ export const WalletConnector: FunctionComponent = () => {
   return (
     <Box m={'10px'} textAlign={'center'}>
       <h1>{t('wallet')}</h1>
-      {account ? <WalledConnected /> : <WalledUploader />}
+      {account ? <WalledConnected /> : <WalledLoader />}
     </Box>
   )
 }
