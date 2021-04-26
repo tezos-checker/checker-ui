@@ -4,7 +4,7 @@ import { ScOpeEntryPoint, ScOpeStep } from '../sc-ope-state.type'
 import { scOpeActions } from '../sc-ope.slice'
 import { ScOpeParamsIncrementTransfert } from './sc-ope-increment.type'
 
-export const dispatchScIncrement = (
+export const useDispatchScIncrement = (
   value: number,
   amount: number,
   nbConfirmation: number,

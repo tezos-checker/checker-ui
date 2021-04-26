@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { HomePageOld, HomePage, VirtualListExemplePage, StoreExemplePage } from '@pages'
+import { HomePage, HomePageOld, VirtualListExemplePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -19,13 +19,6 @@ const exempleRoutes = [
     menu: () => <Link to="/exemple/virtualized-list">Virtual list example (private)</Link>,
     component: () => <VirtualListExemplePage />,
     isPrivate: true,
-  },
-  {
-    path: '/exemple/store',
-    exact: true,
-    menu: () => <Link to="/exemple/store">Redux, Observable exemple</Link>,
-    component: () => <StoreExemplePage />,
-    isPrivate: false,
   },
 ]
 

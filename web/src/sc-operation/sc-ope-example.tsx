@@ -10,7 +10,7 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/react'
 import React, { FunctionComponent, useState } from 'react'
-import { dispatchScIncrement } from './state/sc-ope-increment/useDispatchScOpeIncrement'
+import { useDispatchScIncrement } from './state/sc-ope-increment/useDispatchScOpeIncrement'
 import { ScOpePayload } from './state/sc-ope-state.type'
 import { useOpeData } from './state/useScOpeData'
 
@@ -26,14 +26,14 @@ export const ScOperationExample: FunctionComponent = () => {
     setIncrementValue(0)
   }
 
+  const scIncrement = useDispatchScIncrement(incrementValue, amount, confirmation, resetForm)
+
   return (
     <>
       <Box m={'25px'}>
         <h2>Opérations</h2>
         <HStack>
-          <Button onClick={dispatchScIncrement(incrementValue, amount, confirmation, resetForm)}>
-            Increment
-          </Button>
+          <Button onClick={scIncrement}>Increment</Button>
         </HStack>
 
         <HStack>

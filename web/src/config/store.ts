@@ -1,10 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
-import { counterSlice } from '../example/counter/state/counter.slice'
-import { personSlice } from '../example/person/state/person.slice'
-import { postSlice } from '../example/post/state/post.slice'
-import { fetchPostEpic } from '../example/post/state/post/post-epic'
 import { scOpeIncrementEpic } from '../sc-operation/state/sc-ope-increment/sc-ope-increment-epic'
 import { scOpeSlice } from '../sc-operation/state/sc-ope.slice'
 import { loadStorageEpic } from '../sc-storage/state/sc-storage.epic'
@@ -16,12 +12,6 @@ const epicMiddleware = createEpicMiddleware()
 
 const checkerStore = configureStore({
   reducer: {
-    // TODO delete once the project has started
-    counter: counterSlice.reducer,
-    persons: personSlice.reducer,
-    posts: postSlice.reducer,
-
-    // PROJECT
     wallet: walletSlice.reducer,
     scOperations: scOpeSlice.reducer,
     scStorage: scStorageSlice.reducer,
@@ -37,6 +27,6 @@ export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-epicMiddleware.run(combineEpics(fetchPostEpic, loadWalletEpic, scOpeIncrementEpic, loadStorageEpic))
+epicMiddleware.run(combineEpics(loadWalletEpic, scOpeIncrementEpic, loadStorageEpic))
 
 export const store = checkerStore
