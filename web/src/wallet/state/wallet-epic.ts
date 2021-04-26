@@ -11,7 +11,7 @@ const createAction = (payload: WalletPayload) => ({ type: actionType, payload })
 
 export const fetchStorageRequest = (x: WalletPayload) =>
   from(loadWallet()).pipe(
-    timeout(30000),
+    timeout(60000), // fix safari issue, when we close the beacon pop-up
     map((address: string) => {
       if (address) {
         successToast('Wallet', 'Wallet connected')
