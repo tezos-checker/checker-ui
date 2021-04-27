@@ -1,4 +1,5 @@
 import { getStorage, RequestStatus } from '@api'
+import { isPendingRequest } from '@shared/utils'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
@@ -26,12 +27,10 @@ export const fetchStorageRequest = (x: ScStoragePayload) =>
     ),
   )
 
-const isRequestOnPending = (status: RequestStatus) => status === RequestStatus.pending
-
 export const loadStorageEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: any) => x.payload),
-    filter((x: ScStoragePayload) => isRequestOnPending(x.status)),
+    filter((x: ScStoragePayload) => isPendingRequest(x.status)),
     mergeMap((x: ScStoragePayload) => fetchStorageRequest(x)),
   )
