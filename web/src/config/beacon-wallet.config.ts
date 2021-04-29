@@ -1,5 +1,5 @@
 import { BeaconWallet } from '@taquito/beacon-wallet'
 
-export const wallet = new BeaconWallet({
+export const beaconWallet = new BeaconWallet({
   name: 'MyAwesomeDapp',
 })
