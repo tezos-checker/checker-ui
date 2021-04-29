@@ -8,13 +8,12 @@ class Tezos {
   private _wallet: Wallet
   /* eslint no-underscore-dangle: 0 */
 
-  private _smartContract: ContractAbstraction<Wallet> | null
+  private _smartContract: ContractAbstraction<Wallet> | undefined
 
   public constructor() {
     this.tezos = new TezosToolkit('https://api.tez.ie/rpc/edonet')
     //  this.tezos.setWalletProvider(this._beaconWallet)
     this._wallet = this.tezos.wallet
-    this._smartContract = null
     this.initialise()
   }
 
@@ -22,16 +21,12 @@ class Tezos {
     try {
       this._smartContract = await this.tezos.wallet.at(SC_ADDRESS)
     } catch (error) {
-      this._smartContract = null
+      console.error('Error while loading smart contract')
     }
   }
 
-  set smartContract(sc: any) {
-    this._smartContract = sc
-  }
-
-  get smartContract() {
-    return this._smartContract
+  get smartContract(): ContractAbstraction<Wallet> {
+    return this._smartContract as ContractAbstraction<Wallet>
   }
 
   get wallet() {
