@@ -21,7 +21,7 @@ export const useDispatchScIncrement = (
       scOpeActions.increment({
         id: `${Math.floor(Math.random() * 99)}_${new Date().getTime()}`,
         opeEntryPoint: ScOpeEntryPoint.increment,
-        opeStep: ScOpeStep.transfert,
+        opeStep: ScOpeStep.submit,
         status: RequestStatus.pending,
         errorMsg: '',
         opeParams,

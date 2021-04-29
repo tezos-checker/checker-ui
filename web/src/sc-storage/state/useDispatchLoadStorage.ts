@@ -8,7 +8,7 @@ export const useDispatchLoadStorage = () => {
   return () =>
     dispatch(
       scStorageActions.loadStorage({
-        id: '1',
+        id: 1,
         status: RequestStatus.pending,
         errMsg: '',
         content: null,

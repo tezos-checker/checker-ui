@@ -3,13 +3,13 @@ import { Box, Button, Spinner } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { useDispatchLoadWallet } from '../state/useDispatchLoadWallet'
 import { useWalletData } from '../state/useWalletData'
-import { WalletPayload } from '../state/wallet-state.type'
+import { WalletRowState } from '../state/wallet-state.type'
 
 export const WalledLoader: FunctionComponent = () => {
   const wallet = useWalletData()
   const loadWallet = useDispatchLoadWallet()
 
-  const Wallet: FunctionComponent<{ walletData: WalletPayload }> = ({ walletData }) => {
+  const Wallet: FunctionComponent<{ walletData: WalletRowState }> = ({ walletData }) => {
     const { status, errMsg, address } = walletData
     switch (status) {
       case RequestStatus.pending:

@@ -4,7 +4,7 @@ import { TransactionWalletOperation } from '@taquito/taquito'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
-import { scOpeIncrementTransfert } from '../../../api/sc-ope-increment.api'
+import { scOpeIncrementSubmit } from '../../../api/sc-ope-increment.api'
 import { ScOpeAction, ScOpePayload, ScOpeStep } from '../sc-ope-state.type'
 import {
   ScOpeParamsIncrementConfirmation,
@@ -17,10 +17,10 @@ const getAction = (payload: ScOpePayload): any => ({
 })
 
 // step 1 - execute transfert
-const exeOpeIncrementTransfert = (payload: ScOpePayload): Observable<ScOpePayload> => {
+const exeOpeIncrementSubmit = (payload: ScOpePayload): Observable<ScOpePayload> => {
   const { value, nbConfirmation } = payload.opeParams as ScOpeParamsIncrementTransfert
 
-  return from(scOpeIncrementTransfert(value, payload.amount)).pipe(
+  return from(scOpeIncrementSubmit(value, payload.amount)).pipe(
     map((operation: TransactionWalletOperation) => {
       const opeParams: ScOpeParamsIncrementConfirmation = {
         operation,
@@ -30,7 +30,7 @@ const exeOpeIncrementTransfert = (payload: ScOpePayload): Observable<ScOpePayloa
         ...payload,
         opeParams,
         // will execute the step 2 - confirmation
-        opeStep: ScOpeStep.confirme,
+        opeStep: ScOpeStep.confirm,
       })
     }),
     catchError((err) =>
@@ -58,9 +58,9 @@ const exeOpeIncrementConfimation = (payload: ScOpePayload) => {
 // We call a specific 'api' depending of the payload.opeStep value
 const getMethodToCall = (payload: ScOpePayload) => {
   switch (payload.opeStep) {
-    case ScOpeStep.transfert:
-      return exeOpeIncrementTransfert(payload)
-    case ScOpeStep.confirme:
+    case ScOpeStep.submit:
+      return exeOpeIncrementSubmit(payload)
+    case ScOpeStep.confirm:
       return exeOpeIncrementConfimation(payload)
     default:
       return of(getAction({ ...payload, status: RequestStatus.error, errorMsg: 'internal' }))

@@ -34,8 +34,8 @@ export enum ScOpeEntryPoint {
 }
 
 export enum ScOpeStep {
-  transfert = 'transfert',
-  confirme = 'confirme',
+  submit = 'submit',
+  confirm = 'confirm',
   confirmed = 'confirmed',
 }
 
