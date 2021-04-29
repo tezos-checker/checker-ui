@@ -1,10 +1,10 @@
-import { tezos, wallet } from '@config'
+import { beaconWallet, tezos } from '@config'
 
 export const loadWallet = async (): Promise<string> => {
   // eslint-disable-next-line
   // @ts-ignore
-  await wallet.requestPermissions({ network: { type: 'edonet' } })
-  const adress = await wallet.getPKH()
-  tezos.setWalletProvider(wallet)
+  await beaconWallet.requestPermissions({ network: { type: 'edonet' } })
+  const adress = await beaconWallet.getPKH()
+  tezos.walletProvider = beaconWallet
   return adress
 }

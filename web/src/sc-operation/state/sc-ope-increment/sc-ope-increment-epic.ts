@@ -1,13 +1,10 @@
-import { RequestStatus } from '@api'
+import { RequestStatus, scOpeConfirmation } from '@api'
 import { isPendingRequest } from '@shared/utils'
 import { TransactionWalletOperation } from '@taquito/taquito'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
-import {
-  scOpeIncrementConfirmation,
-  scOpeIncrementTransfert,
-} from '../../../api/sc-ope-increment.api'
+import { scOpeIncrementTransfert } from '../../../api/sc-ope-increment.api'
 import { ScOpeAction, ScOpePayload, ScOpeStep } from '../sc-ope-state.type'
 import {
   ScOpeParamsIncrementConfirmation,
@@ -45,7 +42,7 @@ const exeOpeIncrementTransfert = (payload: ScOpePayload): Observable<ScOpePayloa
 // step 2 - wait the transfert confirmation
 const exeOpeIncrementConfimation = (payload: ScOpePayload) => {
   const { operation, nbConfirmation } = payload.opeParams as ScOpeParamsIncrementConfirmation
-  return from(scOpeIncrementConfirmation(operation, nbConfirmation)).pipe(
+  return from(scOpeConfirmation(operation, nbConfirmation)).pipe(
     map((res: string) =>
       getAction({
         ...payload,
