@@ -7,7 +7,9 @@
       "@shared/utils": ["src/shared-utils/index.ts"],
       "@pages": ["src/pages/index.ts"],
       "@config": ["src/config/index.ts"],
-      "@api": ["src/api/index.ts"]
+      "@api": ["src/api/index.ts"],
+      "@auth": ["src/auth/index.ts"],
+      "@wallet": ["src/wallet/index.ts"]
     }
   }
 }

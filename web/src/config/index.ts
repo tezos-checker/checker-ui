@@ -1,3 +1,4 @@
+export * from '../shared-utils/tezos/tezos-utils'
 export * from './app-toast.config'
 export * from './app.constant'
 export * from './axios-config'

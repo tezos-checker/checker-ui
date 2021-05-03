@@ -58,7 +58,6 @@ const App: React.FC = () => {
           <PageBody />
         </Flex>
       </GridItem>
-      <GridItem sx={style.footer}>FOOTER</GridItem>
     </Grid>
   )
 }

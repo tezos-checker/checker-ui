@@ -11,7 +11,7 @@ export const useDispatchLoadWallet = () => {
         id: 1,
         status: RequestStatus.pending,
         errMsg: '',
-        address: '',
+        address: undefined,
       }),
     )
 }

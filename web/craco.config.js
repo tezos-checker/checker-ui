@@ -9,6 +9,8 @@ module.exports = {
       '@pages': path.resolve(__dirname, 'src/pages/index.ts'),
       '@config': path.resolve(__dirname, 'src/config/index.ts'),
       '@api': path.resolve(__dirname, 'src/api/index.ts'),
+      '@auth': path.resolve(__dirname, 'src/auth/index.ts'),
+      '@wallet': path.resolve(__dirname, 'src/wallet/index.ts'),
     },
   },
 }
