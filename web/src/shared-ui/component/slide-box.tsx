@@ -9,12 +9,7 @@ type Props = {
 export const SlideBox: FunctionComponent<Props> = ({ isOpen, children, onClickOutSideMenu }) =>
   isOpen ? (
     <Box bg={'rgba(0, 0, 0, 0.1)'} position={'fixed'} top={0} left={0} w={'100vw'} h={'100vh'}>
-      <Slide
-        direction="right"
-        in={isOpen}
-        style={{ zIndex: 10 }}
-        onAnimationEndCapture={() => alert('sqdsqd')}
-      >
+      <Slide direction="right" in={isOpen} style={{ zIndex: 10 }}>
         <Flex>
           <Box flex={1} onClick={onClickOutSideMenu}></Box>
           <Box w={'auto'} h={'100vh'} color="white" bg="teal.500">
