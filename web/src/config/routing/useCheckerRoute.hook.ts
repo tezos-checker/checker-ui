@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { useConnectedContext } from '../../_old_/state/connected.context'
-import { checkerRoutes } from './checker-routes'
+import { useWalletData } from '@wallet'
+import { userConnectedRoutes, userDisconnectedRoutes } from './checker-routes'
 
 export const useCheckerRoute = () => {
-  const { account } = useConnectedContext()
+  const { address } = useWalletData()
   return {
-    checkerRoutes: account ? checkerRoutes : checkerRoutes.filter((x) => !x.isPrivate),
+    checkerRoutes: address ? userConnectedRoutes : userDisconnectedRoutes,
   }
 }

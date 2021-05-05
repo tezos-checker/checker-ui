@@ -1,17 +1,23 @@
 /* eslint-disable */
 import { VStack } from '@chakra-ui/layout'
+import { useWalletData } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { CheckerRoute } from '../../config/routing/checker-routes'
 import { useCheckerRoute } from '../../config/routing/useCheckerRoute.hook'
 
 export const PageMenu: FunctionComponent = () => {
-  const { checkerRoutes } = useCheckerRoute()
+  const walletData = useWalletData()
 
-  return (
-    <VStack>
-      {checkerRoutes.map((route: CheckerRoute, index: number) => (
-        <route.menu key={route.path} />
-      ))}
-    </VStack>
-  )
+  const UserMenu: FunctionComponent = () => {
+    const { checkerRoutes } = useCheckerRoute()
+    return (
+      <VStack>
+        {checkerRoutes.map((route: CheckerRoute, index: number) => (
+          <route.menu key={route.path} />
+        ))}
+      </VStack>
+    )
+  }
+
+  return walletData.address ? <UserMenu /> : null
 }

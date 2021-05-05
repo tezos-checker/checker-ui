@@ -2,7 +2,6 @@ import { InMemorySigner } from '@taquito/signer'
 import { TezosToolkit } from '@taquito/taquito'
 import { baseConfig } from '../config/constants'
 import TezosSingleton from '../services/tezos-singleton.class'
-
 import { Account } from '../utils/types'
 
 const useTaquito = (account: Maybe<Account>): TezosToolkit => {

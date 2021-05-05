@@ -7,10 +7,12 @@ import {
   useMultiStyleConfig,
   useToast,
 } from '@chakra-ui/react'
+import { store } from '@config'
 import { PageBody, PageHeader, PageMenu } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
+import { Unsubscribe } from 'redux'
 import { appToastObservable, AppToastType } from './config/app-toast.config'
 import './i18n'
 
@@ -29,7 +31,21 @@ const App: React.FC = () => {
         })
       },
     })
-    return () => appToastObservable.unsubscribe()
+
+    const storeUnsubscribe: Unsubscribe = store.subscribe(() => {
+      // save the full state
+      //  saveState(store.getState())
+      /*  save partial state
+      saveState({
+        scStorage: store.getState().scStorage,
+      })
+      */
+    })
+
+    return () => {
+      appToastObservable.unsubscribe()
+      storeUnsubscribe()
+    }
   }, [])
 
   useEffect(() => {
@@ -58,7 +74,6 @@ const App: React.FC = () => {
           <PageBody />
         </Flex>
       </GridItem>
-      <GridItem sx={style.footer}>FOOTER</GridItem>
     </Grid>
   )
 }
