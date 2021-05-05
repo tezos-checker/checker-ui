@@ -109,7 +109,7 @@
 
 ```
 export const loadPostReducer = (state: EntityPostState) => {
-  state.requestStatus = RequestStatus.loading
+  state.requestStatus = RequestStatus.pending
 }
 ```
 

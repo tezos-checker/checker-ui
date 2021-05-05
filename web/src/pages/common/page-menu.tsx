@@ -10,7 +10,7 @@ export const PageMenu: FunctionComponent = () => {
   return (
     <VStack>
       {checkerRoutes.map((route: CheckerRoute, index: number) => (
-        <route.menu />
+        <route.menu key={route.path} />
       ))}
     </VStack>
   )
