@@ -1,0 +1,93 @@
+{
+  "prim": "Pair",
+  "args": [
+    {
+      "prim": "Pair",
+      "args": [
+        [
+          {
+            "prim": "Elt",
+            "args": [
+              {
+                "prim": "Pair",
+                "args": [{ "string": "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" }, { "int": "0" }]
+              },
+              { "int": "100000000" }
+            ]
+          },
+          {
+            "prim": "Elt",
+            "args": [
+              {
+                "prim": "Pair",
+                "args": [{ "string": "tz1bxhQxuHaWKNrGzBEnwes7L5neKUxkvDvi" }, { "int": "0" }]
+              },
+              { "int": "100000000" }
+            ]
+          },
+          {
+            "prim": "Elt",
+            "args": [
+              {
+                "prim": "Pair",
+                "args": [{ "string": "tz1gjaF81ZRRvdzjobyfVNsAeSC6PScjfQwN" }, { "int": "1" }]
+              },
+              { "int": "424242" }
+            ]
+          }
+        ],
+        [
+          {
+            "prim": "Elt",
+            "args": [
+              {
+                "prim": "Pair",
+                "args": [
+                  { "string": "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" },
+                  { "string": "tz1bxhQxuHaWKNrGzBEnwes7L5neKUxkvDvi" },
+                  { "int": "0" }
+                ]
+              },
+              { "prim": "Unit" }
+            ]
+          }
+        ]
+      ]
+    },
+    [
+      {
+        "prim": "Elt",
+        "args": [
+          { "int": "0" },
+          {
+            "prim": "Pair",
+            "args": [
+              { "int": "0" },
+              [
+                { "prim": "Elt", "args": [{ "string": "token 0 encore" }, { "bytes": "8170" }] },
+                { "prim": "Elt", "args": [{ "string": "token 0 gros" }, { "bytes": "7070" }] }
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "prim": "Elt",
+        "args": [
+          { "int": "1" },
+          {
+            "prim": "Pair",
+            "args": [
+              { "int": "1" },
+              [{ "prim": "Elt", "args": [{ "string": "token 1 fieu" }, { "bytes": "4242" }] }]
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      { "prim": "Elt", "args": [{ "int": "0" }, { "int": "7810000000000" }] },
+      { "prim": "Elt", "args": [{ "int": "1" }, { "int": "6900000000000" }] }
+    ]
+  ]
+}

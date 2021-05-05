@@ -2,19 +2,18 @@ import { tezos } from '@config'
 import { ContractAbstraction, OriginationWalletOperation, Wallet } from '@taquito/taquito'
 
 // eslint-disable-next-line
-const genericMultisigJSONfile = require('./sc-increment-michelson.json')
+const contractMichelson = require('./sc-contract-michelson.json')
 
-export const scDeployContractSubmit = (): Promise<OriginationWalletOperation> => {
-  debugger // eslint-disable-line no-debugger
-  console.log(genericMultisigJSONfile)
+// eslint-disable-next-line
+const contractStorage = require('./sc-contract-storage.json')
 
-  return tezos.wallet
+export const scDeployContractSubmit = (): Promise<OriginationWalletOperation> =>
+  tezos.wallet
     .originate({
-      code: genericMultisigJSONfile,
-      storage: {},
+      code: contractMichelson,
+      init: contractStorage,
     })
     .send()
-}
 
 export const scDeployContractConfirm = async (ope: {
   contract: () => Promise<ContractAbstraction<Wallet>>

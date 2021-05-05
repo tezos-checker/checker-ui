@@ -12,6 +12,7 @@ export const HomePage: FunctionComponent = () => {
 
   return (
     <Box>
+      <ScDeployContractExample />
       <Button onClick={onToggle}>Open right menu</Button>
       <WalletConnector />
       <br />
@@ -24,8 +25,6 @@ export const HomePage: FunctionComponent = () => {
       <SlideBox isOpen={isOpen} onClickOutSideMenu={onToggle}>
         <Box w={'30vw'}>TEST</Box>
       </SlideBox>
-
-      <ScDeployContractExample />
     </Box>
   )
 }

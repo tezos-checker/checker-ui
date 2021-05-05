@@ -31,13 +31,15 @@ const submitContractRequest = (
   from(scDeployContractSubmit()).pipe(
     map((res: OriginationWalletOperation) => {
       if (res) {
+        // eslint-disable-next-line
+        debugger
         return {
-          type: actionType,
+          type: 'deployContract/confirm',
           payload: {
             ...rowState,
             opeStep: ScOperationStep.confirm,
             originationWalletOperation: {
-              contract: res.contract,
+              contract: () => res.contract(),
             },
           },
         }
