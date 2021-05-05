@@ -7,11 +7,13 @@ import {
   useMultiStyleConfig,
   useToast,
 } from '@chakra-ui/react'
+import { store } from '@config'
 import { PageBody, PageHeader, PageMenu } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
 import { appToastObservable, AppToastType } from './config/app-toast.config'
+import { saveState } from './config/store/store-persist.util'
 import './i18n'
 
 const App: React.FC = () => {
@@ -29,6 +31,18 @@ const App: React.FC = () => {
         })
       },
     })
+
+    store.subscribe(() => {
+      // save the full state
+      saveState(store.getState())
+
+      /*  save partial state
+      saveState({
+        scStorage: store.getState().scStorage,
+      })
+      */
+    })
+
     return () => appToastObservable.unsubscribe()
   }, [])
 
