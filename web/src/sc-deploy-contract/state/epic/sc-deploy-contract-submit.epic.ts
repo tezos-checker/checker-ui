@@ -1,5 +1,4 @@
-import { RequestStatus } from '@api'
-import { AbstractAction, ScOperationStep } from '@config'
+import { AbstractAction, RequestStatus, ScOperationStep } from '@config'
 import { isPendingRequest } from '@shared/utils'
 import { OriginationWalletOperation } from '@taquito/taquito'
 import { ofType } from 'redux-observable'
@@ -19,8 +18,8 @@ const createErrorAction = (
     id,
     status: RequestStatus.error,
     opeStep: ScOperationStep.submit,
-    wallet: undefined,
-    originationWalletOperation: undefined,
+    walletAddress: null,
+    originationWalletOperation: null,
     errMsg,
   },
 })
@@ -32,15 +31,12 @@ const submitContractRequest = (
     map((res: OriginationWalletOperation) => {
       if (res) {
         // eslint-disable-next-line
-        debugger
         return {
           type: 'deployContract/confirm',
           payload: {
             ...rowState,
             opeStep: ScOperationStep.confirm,
-            originationWalletOperation: {
-              contract: () => res.contract(),
-            },
+            originationWalletOperation: res,
           },
         }
       }

@@ -13,7 +13,7 @@ import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
 import { Unsubscribe } from 'redux'
-import { appToastObservable, AppToastType } from './config/app-toast.config'
+import { appToastObservable, AppToastType } from './config/toast/app-toast.config'
 import './i18n'
 
 const App: React.FC = () => {

@@ -1,5 +1,4 @@
-import { RequestStatus } from '@api'
-import { useAppDispatch } from '@config'
+import { RequestStatus, useAppDispatch } from '@config'
 import { walletActions } from './wallet.slice'
 
 export const useDispatchLoadWallet = () => {

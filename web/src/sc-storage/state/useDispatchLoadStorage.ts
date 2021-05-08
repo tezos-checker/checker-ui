@@ -1,5 +1,4 @@
-import { RequestStatus } from '@api'
-import { useAppDispatch } from '@config'
+import { RequestStatus, useAppDispatch } from '@config'
 import { scStorageActions } from './sc-storage.slice'
 
 export const useDispatchLoadStorage = () => {

@@ -1,5 +1,3 @@
 export * from './post.api'
-export * from './request-status.enum'
-export * from './sc-ope-common.api'
 export * from './storage.api'
 export * from './wallet.api'

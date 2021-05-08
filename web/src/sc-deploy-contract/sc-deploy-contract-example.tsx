@@ -19,11 +19,11 @@ export const ScDeployContractExample: FunctionComponent = () => {
 
       <Box m={'10px'} border={'1px solid'} borderColor={'gray.600'}>
         {deployContractList.map(
-          ({ id, wallet, opeStep, status, errMsg }: ScDeployContractRowState) => (
+          ({ id, walletAddress, opeStep, status, errMsg }: ScDeployContractRowState) => (
             <Box key={id} my={'15px'} p={'5px'} bg={'gray.300'}>
               <Flex>
                 <Box flex={0.2}>{id}</Box>
-                <Box flex={0.2}>{wallet ? wallet.address : ''}</Box>
+                <Box flex={0.2}>{walletAddress || ''}</Box>
                 <Box flex={0.2}>{opeStep}</Box>
                 <Box flex={0.2}>{status}</Box>
                 <Box flex={0.2}>{errMsg}</Box>

@@ -1,5 +1,5 @@
-import { RequestStatus } from '@api'
 import { Box, Button, Spinner } from '@chakra-ui/react'
+import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
 import { ScStorageRowState } from './state/sc-storage.type'
 import { useDispatchLoadStorage } from './state/useDispatchLoadStorage'

@@ -15,9 +15,6 @@ export const scDeployContractSubmit = (): Promise<OriginationWalletOperation> =>
     })
     .send()
 
-export const scDeployContractConfirm = async (ope: {
-  contract: () => Promise<ContractAbstraction<Wallet>>
-}): Promise<ContractAbstraction<Wallet>> => {
-  const contract = await ope.contract()
-  return contract
-}
+export const scDeployContractConfirm = (
+  ope: OriginationWalletOperation,
+): Promise<ContractAbstraction<Wallet>> => ope.contract()

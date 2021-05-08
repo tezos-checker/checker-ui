@@ -5,7 +5,10 @@ import { ScDeployContractRowState } from './sc-deploy-contract.type'
 export const scDeployContractAdapter = createEntityAdapter<ScDeployContractRowState>()
 export const scDeployContractSlice = createSlice({
   name: 'deployContract',
-  initialState: scDeployContractAdapter.getInitialState(),
+  initialState: {
+    ids: [],
+    entities: {},
+  },
   reducers: {
     submit: scDeployContractAdapter.upsertOne,
     confirm: scDeployContractAdapter.upsertOne,

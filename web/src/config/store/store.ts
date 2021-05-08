@@ -3,7 +3,8 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { scDeployContractConfirmEpic } from '../../sc-deploy-contract/state/epic/sc-deploy-contract-confirm.epic'
 import { scDeployContractSubmitEpic } from '../../sc-deploy-contract/state/epic/sc-deploy-contract-submit.epic'
 import { scDeployContractSlice } from '../../sc-deploy-contract/state/sc-deploy-contract.slice'
-import { scOpeIncrementEpic } from '../../sc-operation/state/sc-ope-increment/sc-ope-increment-epic'
+import { scOpeIncrementConfirmEpic } from '../../sc-operation/sc-ope-increment/sc-ope-increment-confirm.epic'
+import { scOpeIncrementSubmitEpic } from '../../sc-operation/sc-ope-increment/sc-ope-increment-submit.epic'
 import { scOpeSlice } from '../../sc-operation/state/sc-ope.slice'
 import { loadStorageEpic } from '../../sc-storage/state/sc-storage.epic'
 import { scStorageSlice } from '../../sc-storage/state/sc-storage.slice'
@@ -27,10 +28,11 @@ const checkerStore = configureStore({
 epicMiddleware.run(
   combineEpics(
     loadWalletEpic,
-    scOpeIncrementEpic,
     loadStorageEpic,
     scDeployContractSubmitEpic,
     scDeployContractConfirmEpic,
+    scOpeIncrementSubmitEpic,
+    scOpeIncrementConfirmEpic,
   ),
 )
 

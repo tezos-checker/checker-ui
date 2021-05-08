@@ -1,15 +1,11 @@
-import { RequestStatus } from '@api'
-import { AbstractAction, ScOperationStep } from '@config'
+import { AbstractAction, RequestStatus, ScOperationStep } from '@config'
 import { isPendingRequest } from '@shared/utils'
 import { ContractAbstraction, Wallet } from '@taquito/taquito'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { scDeployContractConfirm } from '../../config/sc-deploy-contract.api'
-import {
-  ScDeployContractOperationPayload,
-  ScDeployContractRowState,
-} from '../sc-deploy-contract.type'
+import { ScDeployContractRowState } from '../sc-deploy-contract.type'
 
 const actionType = 'deployContract/confirm'
 
@@ -22,20 +18,20 @@ const createErrorAction = (
     id,
     status: RequestStatus.error,
     opeStep: ScOperationStep.confirm,
-    wallet: undefined,
-    originationWalletOperation: undefined,
+    walletAddress: null,
+    originationWalletOperation: null,
     errMsg,
   },
 })
 
 const confirmContractRequest = (
   rowState: ScDeployContractRowState,
-): Observable<AbstractAction<ScDeployContractRowState>> =>
-  from(
-    scDeployContractConfirm(
-      rowState.originationWalletOperation as ScDeployContractOperationPayload,
-    ),
-  ).pipe(
+): Observable<AbstractAction<ScDeployContractRowState>> => {
+  if (!rowState.originationWalletOperation) {
+    return of(createErrorAction(rowState.id, 'Internal error'))
+  }
+
+  return from(scDeployContractConfirm(rowState.originationWalletOperation)).pipe(
     map((res: ContractAbstraction<Wallet>) => {
       if (res) {
         return {
@@ -44,7 +40,7 @@ const confirmContractRequest = (
             ...rowState,
             opeStep: ScOperationStep.confirmed,
             status: RequestStatus.success,
-            wallet: { address: res.address },
+            walletAddress: res.address,
           },
         }
       }
@@ -52,6 +48,7 @@ const confirmContractRequest = (
     }),
     catchError((err) => of(createErrorAction(rowState.id, err.message))),
   )
+}
 
 export const scDeployContractConfirmEpic = (action$: any) =>
   action$.pipe(

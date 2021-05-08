@@ -1,5 +1,4 @@
-import { RequestStatus } from '@api'
-import { RootState } from '@config'
+import { RequestStatus, RootState } from '@config'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { ScStorageRowState } from './sc-storage.type'
 

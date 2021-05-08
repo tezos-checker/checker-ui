@@ -1,5 +1,4 @@
-import { RequestStatus } from '@api'
-import { ScOperationStep, useAppDispatch } from '@config'
+import { RequestStatus, ScOperationStep, useAppDispatch } from '@config'
 import { scStorageActions } from './sc-deploy-contract.slice'
 
 export const useDispatchDeployContract = () => {
@@ -12,8 +11,8 @@ export const useDispatchDeployContract = () => {
         status: RequestStatus.pending,
         errMsg: '',
         opeStep: ScOperationStep.submit,
-        originationWalletOperation: undefined,
-        wallet: undefined,
+        originationWalletOperation: null,
+        walletAddress: null,
       }),
     )
 }

@@ -1,4 +1,5 @@
-import { loadWallet, RequestStatus } from '@api'
+import { loadWallet } from '@api'
+import { RequestStatus } from '@config'
 import { errorToast, successToast } from '@shared/ui'
 import { isPendingRequest } from '@shared/utils'
 import { ofType } from 'redux-observable'

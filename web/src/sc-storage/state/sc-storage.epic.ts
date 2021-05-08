@@ -1,4 +1,5 @@
-import { getStorage, RequestStatus } from '@api'
+import { getStorage } from '@api'
+import { RequestStatus } from '@config'
 import { isPendingRequest } from '@shared/utils'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'

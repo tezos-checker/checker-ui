@@ -1,4 +1,4 @@
-import { RequestStatus } from '@api'
+import { RequestStatus } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 
 export type WalletRowState = {
