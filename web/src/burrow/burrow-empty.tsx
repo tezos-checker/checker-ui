@@ -4,7 +4,7 @@ import DeerSvg from '../assets/images/deer.svg'
 import FoxCreateBorrowSvg from '../assets/images/fox-create-burrow.svg'
 
 export const BurrowEmpty: FunctionComponent = () => (
-  <Box margin={'auto'} fontSize="3xl" width="300" mt="20vh">
+  <Box margin={'auto'} fontSize="3xl" p="10" mt="20vh">
     <Box textAlign="center">
       <Box as="span">Oh deer </Box>
       <Image src={DeerSvg} h={'60px'} display="inline-block" />
