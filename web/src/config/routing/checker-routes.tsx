@@ -2,6 +2,7 @@
 import { HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { NewBurrow } from '../../burrow/new-burrow/new-burrow'
 import { LoginPage } from '../../pages/login-page'
 
 export type CheckerRoute = {
@@ -11,7 +12,14 @@ export type CheckerRoute = {
   component: () => React.ReactElement
 }
 
+// order is imporant
 export const userConnectedRoutes: CheckerRoute[] = [
+  {
+    path: '/new-burrow',
+    exact: true,
+    menu: () => <Link to="/new-burrow">New Burrow</Link>,
+    component: () => <NewBurrow />,
+  },
   {
     path: '/',
     exact: false,
@@ -19,6 +27,8 @@ export const userConnectedRoutes: CheckerRoute[] = [
     component: () => <HomePage />,
   },
 ]
+
+// order is imporant
 export const userDisconnectedRoutes: CheckerRoute[] = [
   {
     path: '/',

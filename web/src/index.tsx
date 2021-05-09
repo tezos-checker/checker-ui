@@ -3,7 +3,7 @@ import { store } from '@config'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import checkerTheme from './theme/theme'
@@ -11,11 +11,11 @@ import checkerTheme from './theme/theme'
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={checkerTheme}>
-      <BrowserRouter>
+      <Router>
         <Provider store={store}>
           <App />
         </Provider>
-      </BrowserRouter>
+      </Router>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root'),
