@@ -1,3 +1,4 @@
+export * from './component/clipboard-copy'
 export * from './component/drop-zone'
 export * from './component/hamburger-menu-icon'
 export * from './component/slide-box'

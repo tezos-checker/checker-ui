@@ -1,7 +1,7 @@
 import { RequestStatus, useAppDispatch } from '@config'
-import { walletActions } from './wallet.slice'
+import { walletActions } from '../state/wallet.slice'
 
-export const useDispatchLoadWallet = () => {
+export const useConnectWallet = () => {
   const dispatch = useAppDispatch()
 
   return () =>
