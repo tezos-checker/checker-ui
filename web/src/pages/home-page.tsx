@@ -1,14 +1,4 @@
+import { Burrow } from '@burrow'
 import React, { FunctionComponent } from 'react'
-import { ScOperationExample } from '../sc-operation/sc-ope-example'
-import { MyStorage } from '../sc-storage/my-storage'
-import { WalletConnector } from '../wallet/wallet-connector/walled-connector'
 
-export const HomePage: FunctionComponent = () => (
-  <>
-    <WalletConnector />
-    <br />
-    <ScOperationExample />
-    <br />
-    <MyStorage />
-  </>
-)
+export const HomePage: FunctionComponent = () => <Burrow />

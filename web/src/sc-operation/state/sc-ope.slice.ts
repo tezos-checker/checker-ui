@@ -1,15 +1,17 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { ScOpePayload } from './sc-ope-state.type'
+import { ScOperationRowState } from './sc-ope-state.type'
 
-export const scOpeAdapter = createEntityAdapter<ScOpePayload>()
+export const scOpeAdapter = createEntityAdapter<ScOperationRowState>()
 
 export const scOpeSlice = createSlice({
   name: 'operation',
-  initialState: scOpeAdapter.getInitialState({
-    params: {},
-  }),
+  initialState: {
+    ids: [],
+    entities: {},
+  },
   reducers: {
-    increment: scOpeAdapter.upsertOne,
+    incrementSubmit: scOpeAdapter.upsertOne,
+    incrementConfirm: scOpeAdapter.upsertOne,
   },
 })
 

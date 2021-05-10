@@ -1,7 +1,7 @@
-import { RequestStatus } from '@api'
 import { Box, Button, Spinner } from '@chakra-ui/react'
+import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
-import { ScStoragePayload } from './state/sc-storage.type'
+import { ScStorageRowState } from './state/sc-storage.type'
 import { useDispatchLoadStorage } from './state/useDispatchLoadStorage'
 import { useStorageData } from './state/useStorageData'
 
@@ -9,7 +9,7 @@ export const MyStorage: FunctionComponent = () => {
   const storage = useStorageData()
   const loadStorage = useDispatchLoadStorage()
 
-  const Storage: FunctionComponent<{ storageData: ScStoragePayload }> = ({ storageData }) => {
+  const Storage: FunctionComponent<{ storageData: ScStorageRowState }> = ({ storageData }) => {
     const { errMsg, status, content } = storage
     switch (status) {
       case RequestStatus.pending:

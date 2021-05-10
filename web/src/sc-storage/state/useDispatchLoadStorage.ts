@@ -1,5 +1,4 @@
-import { RequestStatus } from '@api'
-import { useAppDispatch } from '@config'
+import { RequestStatus, useAppDispatch } from '@config'
 import { scStorageActions } from './sc-storage.slice'
 
 export const useDispatchLoadStorage = () => {
@@ -8,7 +7,7 @@ export const useDispatchLoadStorage = () => {
   return () =>
     dispatch(
       scStorageActions.loadStorage({
-        id: '1',
+        id: 1,
         status: RequestStatus.pending,
         errMsg: '',
         content: null,

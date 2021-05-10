@@ -6,6 +6,8 @@ import { useCheckerRoute } from '../../config/routing/useCheckerRoute.hook'
 export const PageBody: FunctionComponent = () => {
   const { checkerRoutes } = useCheckerRoute()
 
+  console.log(checkerRoutes)
+
   return (
     <Switch>
       {checkerRoutes.map((route, index: number) => {

@@ -1,16 +1,17 @@
-import { loadWallet, RequestStatus } from '@api'
+import { loadWallet } from '@api'
+import { RequestStatus } from '@config'
 import { errorToast, successToast } from '@shared/ui'
 import { isPendingRequest } from '@shared/utils'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, filter, map, mergeMap, timeout } from 'rxjs/operators'
-import { WalletPayload } from './wallet-state.type'
+import { WalletRowState } from './wallet-state.type'
 
 const actionType = 'wallet/loadWallet'
 
-const createAction = (payload: WalletPayload) => ({ type: actionType, payload })
+const createAction = (payload: WalletRowState) => ({ type: actionType, payload })
 
-export const fetchStorageRequest = (x: WalletPayload) =>
+export const fetchStorageRequest = (x: WalletRowState) =>
   from(loadWallet()).pipe(
     timeout(60000), // fix safari issue, when we close the beacon pop-up
     map((address: string) => {
@@ -43,6 +44,6 @@ export const loadWalletEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: any) => x.payload),
-    filter((x: WalletPayload) => isPendingRequest(x.status)),
-    mergeMap((x: WalletPayload) => fetchStorageRequest(x)),
+    filter((x: WalletRowState) => isPendingRequest(x.status)),
+    mergeMap((x: WalletRowState) => fetchStorageRequest(x)),
   )

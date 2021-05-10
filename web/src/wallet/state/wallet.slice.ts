@@ -1,13 +1,12 @@
-import { RequestStatus } from '@api'
-import { RootState } from '@config'
+import { RequestStatus, RootState } from '@config'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { WalletPayload } from './wallet-state.type'
+import { WalletRowState } from './wallet-state.type'
 
 const initialState = {
   ids: [1],
   entities: {
     1: {
-      id: '1',
+      id: 1,
       status: RequestStatus.idle,
       errMsg: '',
       address: undefined,
@@ -15,7 +14,7 @@ const initialState = {
   },
 }
 
-export const walletAdapter = createEntityAdapter<WalletPayload>()
+export const walletAdapter = createEntityAdapter<WalletRowState>()
 export const walletSlice = createSlice({
   name: 'wallet',
   initialState,

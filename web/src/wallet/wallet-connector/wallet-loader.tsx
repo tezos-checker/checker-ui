@@ -1,15 +1,15 @@
-import { RequestStatus } from '@api'
 import { Box, Button, Spinner } from '@chakra-ui/react'
+import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
-import { useDispatchLoadWallet } from '../state/useDispatchLoadWallet'
+import { useConnectWallet } from '../hooks/useConnectWallet'
 import { useWalletData } from '../state/useWalletData'
-import { WalletPayload } from '../state/wallet-state.type'
+import { WalletRowState } from '../state/wallet-state.type'
 
 export const WalledLoader: FunctionComponent = () => {
   const wallet = useWalletData()
-  const loadWallet = useDispatchLoadWallet()
+  const connectWallet = useConnectWallet()
 
-  const Wallet: FunctionComponent<{ walletData: WalletPayload }> = ({ walletData }) => {
+  const Wallet: FunctionComponent<{ walletData: WalletRowState }> = ({ walletData }) => {
     const { status, errMsg, address } = walletData
     switch (status) {
       case RequestStatus.pending:
@@ -28,7 +28,7 @@ export const WalledLoader: FunctionComponent = () => {
       <Box>
         <h2>Your wallet</h2>
         <Button
-          onClick={loadWallet}
+          onClick={connectWallet}
           disabled={wallet.status === RequestStatus.success}
           isLoading={wallet.status === RequestStatus.pending}
         >

@@ -1,7 +1,10 @@
-import { RequestStatus } from '@api'
+import { AbstractAction, RequestStatus, ScOperationStep } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
+import { BlockResponse } from '@taquito/rpc'
+import { TransactionWalletOperation } from '@taquito/taquito'
+import { ScOperationIncrementSubmitParams } from '../sc-ope-increment/sc-ope-increment.api'
 
-export enum ScOpeEntryPoint {
+export enum ScWalletOperation {
   increment = 'increment',
   decrement = 'decrement',
   activate_burrow = 'activate_burrow',
@@ -33,24 +36,18 @@ export enum ScOpeEntryPoint {
   sealContract = 'sealContract',
 }
 
-export enum ScOpeStep {
-  transfert = 'transfert',
-  confirme = 'confirme',
-  confirmed = 'confirmed',
-}
-
-export type ScOpePayload = {
+export type ScOperationRowState = {
   id: string
   status: RequestStatus
+  nbConfirmation: number
   errorMsg: string
-  amount: number
-  opeEntryPoint: ScOpeEntryPoint
-  opeStep: ScOpeStep
-  opeParams: any
-}
-export type ScOpeAction = {
-  type: string
-  payload: ScOpePayload
+  operationStep: ScOperationStep
+  operationName: ScWalletOperation
+  submitOperationParams: ScOperationIncrementSubmitParams
+  transactionWalletOperation: TransactionWalletOperation | null
+  blockResponse: BlockResponse | null
 }
 
-export type EntityOperationState = EntityState<ScOpePayload>
+export type ScOperationAction = AbstractAction<ScOperationRowState>
+
+export type EntityOperationState = EntityState<ScOperationRowState>

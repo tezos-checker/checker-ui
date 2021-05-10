@@ -1,13 +1,12 @@
-import { RequestStatus } from '@api'
-import { RootState } from '@config'
+import { RequestStatus, RootState } from '@config'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { ScStoragePayload } from './sc-storage.type'
+import { ScStorageRowState } from './sc-storage.type'
 
 const initialState = {
   ids: [1],
   entities: {
     1: {
-      id: '1',
+      id: 1,
       status: RequestStatus.idle,
       errMsg: '',
       content: null,
@@ -15,7 +14,7 @@ const initialState = {
   },
 }
 
-export const scStorageAdapter = createEntityAdapter<ScStoragePayload>()
+export const scStorageAdapter = createEntityAdapter<ScStorageRowState>()
 export const scStorageSlice = createSlice({
   name: 'storage',
   initialState,
