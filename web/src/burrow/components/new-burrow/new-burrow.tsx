@@ -4,6 +4,7 @@ import { Button, IconButton } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFormManager } from 'vdr-react-form-manager'
+import { useDispatchCreateBurrow } from '../../../sc-operation/sc-create-burrow/useDispatchScOpeCreateBurrow'
 import { NewBurrowChooseCheckerField } from './new-burrow-choose-check-field'
 import { NewBurrowDelegateField } from './new-burrow-delegate-field'
 import { NewBurrowDepositField } from './new-burrow-deposit-field'
@@ -11,6 +12,13 @@ import { burrowFormModel, inputChecker, inputDelegate, inputDeposit } from './ne
 
 export const NewBurrow: FunctionComponent = () => {
   const { handleFormChange, getInputProps } = useFormManager(burrowFormModel)
+
+  const resetForm = () => {
+    console.log('callBack...')
+  }
+
+  const scCreateBurrow = useDispatchCreateBurrow(resetForm)
+
   const history = useHistory()
 
   return (
@@ -33,7 +41,9 @@ export const NewBurrow: FunctionComponent = () => {
         <NewBurrowChooseCheckerField {...getInputProps(inputChecker)} />
         <NewBurrowDelegateField {...getInputProps(inputDelegate)} />
         <NewBurrowDepositField {...getInputProps(inputDeposit)} />
-        <Button mt="15px">Confirm</Button>
+        <Button mt="15px" onClick={scCreateBurrow}>
+          Confirm
+        </Button>
       </Box>
     </Box>
   )

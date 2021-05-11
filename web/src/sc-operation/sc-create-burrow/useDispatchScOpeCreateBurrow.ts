@@ -3,9 +3,9 @@ import { ScOperationRowState, ScWalletOperation } from '../state/sc-ope-state.ty
 import { scOpeActions } from '../state/sc-ope.slice'
 import { ScOpeCreateBurrowSubmitParams } from './sc-ope-create-burrow.api'
 
-export const useDispatchCreateBurrow = (value: number, amount: number, callBack: () => void) => {
+export const useDispatchCreateBurrow = (callBack: () => void) => {
   const dispatch = useAppDispatch()
-  const submitOperationParams: ScOpeCreateBurrowSubmitParams = {}
+  const submitOperationParams: ScOpeCreateBurrowSubmitParams = { bidon: true }
 
   const payload: ScOperationRowState = {
     id: `${Math.floor(Math.random() * 99)}_${new Date().getTime()}`,

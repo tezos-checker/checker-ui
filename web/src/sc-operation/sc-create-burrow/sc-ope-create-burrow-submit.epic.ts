@@ -6,12 +6,14 @@ import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { ScOperationAction, ScOperationRowState } from '../state/sc-ope-state.type'
 import { createOperationErrorAction } from '../state/sc-ope-state.utils'
-import { scOpeCreateBurrowSubmit } from './sc-ope-create-burrow.api'
+import { scOpeCreateBurrowSubmit, ScOpeCreateBurrowSubmitParams } from './sc-ope-create-burrow.api'
 
 const actionType = 'operation/createBurrowSubmit'
 
 const submitCreateBurrow = (rowState: ScOperationRowState): Observable<ScOperationAction> =>
-  from(scOpeCreateBurrowSubmit(rowState.submitOperationParams)).pipe(
+  from(
+    scOpeCreateBurrowSubmit(rowState.submitOperationParams as ScOpeCreateBurrowSubmitParams),
+  ).pipe(
     map((res: TransactionWalletOperation) => {
       if (res) {
         // eslint-disable-next-line

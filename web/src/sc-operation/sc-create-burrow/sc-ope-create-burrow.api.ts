@@ -1,9 +1,13 @@
 import { getContract } from '@shared/utils'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
-export type ScOpeCreateBurrowSubmitParams = {}
+export type ScOpeCreateBurrowSubmitParams = { bidon: boolean }
 
-export const scOpeCreateBurrowSubmit = async ({}: ScOpeCreateBurrowSubmitParams): Promise<TransactionWalletOperation> => {
+export const scOpeCreateBurrowSubmit = async ({
+  bidon,
+}: ScOpeCreateBurrowSubmitParams): Promise<TransactionWalletOperation> => {
   const contract = await getContract()
-  return contract.methods.create_burrow(1, 'None').send({ amount: 100 })
+  // eslint-disable-next-line
+  debugger
+  return contract.methods.create_burrow(1).send({ amount: 100 })
 }

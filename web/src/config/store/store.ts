@@ -4,6 +4,8 @@ import { burrowSlice } from '../../burrow/state/burrow.slice'
 import { scDeployContractConfirmEpic } from '../../sc-deploy-contract/state/epic/sc-deploy-contract-confirm.epic'
 import { scDeployContractSubmitEpic } from '../../sc-deploy-contract/state/epic/sc-deploy-contract-submit.epic'
 import { scDeployContractSlice } from '../../sc-deploy-contract/state/sc-deploy-contract.slice'
+import { scOpeCreateBurrowConfirmEpic } from '../../sc-operation/sc-create-burrow/sc-ope-create-burrow-confirm.epic'
+import { scOpeCreateBurrowSubmitEpic } from '../../sc-operation/sc-create-burrow/sc-ope-create-burrow-submit.epic'
 import { scOpeIncrementConfirmEpic } from '../../sc-operation/sc-ope-increment/sc-ope-increment-confirm.epic'
 import { scOpeIncrementSubmitEpic } from '../../sc-operation/sc-ope-increment/sc-ope-increment-submit.epic'
 import { scOpeSlice } from '../../sc-operation/state/sc-ope.slice'
@@ -35,6 +37,8 @@ epicMiddleware.run(
     scDeployContractConfirmEpic,
     scOpeIncrementSubmitEpic,
     scOpeIncrementConfirmEpic,
+    scOpeCreateBurrowSubmitEpic,
+    scOpeCreateBurrowConfirmEpic,
   ),
 )
 
