@@ -1,1 +1,1 @@
-export * from './burrow'
+export * from './components/burrow-list'

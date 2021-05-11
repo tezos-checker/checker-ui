@@ -13,6 +13,7 @@ export const burrowSlice = createSlice({
   },
   reducers: {
     updateBurrow: burrowAdapter.upsertOne,
+    removeBurrow: burrowAdapter.removeOne,
   },
 })
 
