@@ -17,7 +17,7 @@ export const NewBurrow: FunctionComponent = () => {
     console.log('callBack...')
   }
 
-  const scCreateBurrow = useDispatchCreateBurrow(resetForm)
+  const scCreateBurrow = useDispatchCreateBurrow(new Date().getTime().toString(), resetForm)
 
   const history = useHistory()
 

@@ -1,7 +1,9 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { ScOperationRowState } from './sc-ope-state.type'
 
-export const scOpeAdapter = createEntityAdapter<ScOperationRowState>()
+export const scOpeAdapter = createEntityAdapter<ScOperationRowState>({
+  selectId: (operation) => operation.operationId,
+})
 
 export const scOpeSlice = createSlice({
   name: 'operation',

@@ -5,6 +5,7 @@ import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
 import { Unsubscribe } from 'redux'
+import { saveState } from './config/store/store-persist.util'
 import { appToastObservable, AppToastType } from './config/toast/app-toast.config'
 import './i18n'
 
@@ -25,13 +26,9 @@ const App: React.FC = () => {
     })
 
     const storeUnsubscribe: Unsubscribe = store.subscribe(() => {
-      // save the full state
-      //  saveState(store.getState())
-      /*  save partial state
       saveState({
-        scStorage: store.getState().scStorage,
+        burrow: store.getState().burrow,
       })
-      */
     })
 
     return () => {
