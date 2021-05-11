@@ -138,7 +138,7 @@ steps:
       registry: https://docker.cogarius.com
       <<: *docker_creds
       dockerfile: ./docker/web/Dockerfile
-      tags: ["${DRONE_COMMIT_SHA:0:7}", "${DRONE_TAG}", "${DRONE_BRANCH}"]
+      tags: ["${DRONE_COMMIT_SHA:0:7}", "${DRONE_TAG}", "latest"]
       build_args:
         - NODE_ENV=production
     # The commands are executed inside the root directory of your git repository.
