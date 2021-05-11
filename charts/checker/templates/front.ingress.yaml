@@ -25,10 +25,11 @@ spec:
     - host: {{ include "checker.frontDomain" . }}
       http:
         paths:
-          - path: /
-            backend:
+          - backend:
               service:
                 name: {{ template "checker.fullname" $dot }}-front
                 port:
                   number: 80
+            path: /
+            pathType: ImplementationSpecific
 {{- end }}
