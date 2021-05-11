@@ -2,7 +2,7 @@
 import { HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { NewBurrow } from '../../burrow/new-burrow/new-burrow'
+import { NewBurrow } from '../../burrow/components/new-burrow/new-burrow'
 import { LoginPage } from '../../pages/login-page'
 
 export type CheckerRoute = {

@@ -6,19 +6,17 @@ import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { ScOperationAction, ScOperationRowState } from '../state/sc-ope-state.type'
 import { createOperationErrorAction } from '../state/sc-ope-state.utils'
-import { scOpeIncrementSubmit, ScOperationIncrementSubmitParams } from './sc-ope-increment.api'
+import { scOpeCreateBurrowSubmit } from './sc-ope-create-burrow.api'
 
-const actionType = 'operation/incrementSubmit'
+const actionType = 'operation/createBurrowSubmit'
 
-const submitIncrement = (rowState: ScOperationRowState): Observable<ScOperationAction> =>
-  from(
-    scOpeIncrementSubmit(rowState.submitOperationParams as ScOperationIncrementSubmitParams),
-  ).pipe(
+const submitCreateBurrow = (rowState: ScOperationRowState): Observable<ScOperationAction> =>
+  from(scOpeCreateBurrowSubmit(rowState.submitOperationParams)).pipe(
     map((res: TransactionWalletOperation) => {
       if (res) {
         // eslint-disable-next-line
         return {
-          type: 'operation/incrementConfirm',
+          type: 'operation/createBurrowConfirm',
           payload: {
             ...rowState,
             operationStep: ScOperationStep.confirm,
@@ -31,10 +29,10 @@ const submitIncrement = (rowState: ScOperationRowState): Observable<ScOperationA
     catchError((err) => of(createOperationErrorAction(actionType, rowState, err.message))),
   )
 
-export const scOpeIncrementSubmitEpic = (action$: any) =>
+export const scOpeCreateBurrowSubmitEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: ScOperationAction) => x.payload),
     filter((x: ScOperationRowState) => isPendingRequest(x.status)),
-    mergeMap((x: ScOperationRowState) => submitIncrement(x)),
+    mergeMap((x: ScOperationRowState) => submitCreateBurrow(x)),
   )

@@ -12,6 +12,8 @@ export const scOpeSlice = createSlice({
   reducers: {
     incrementSubmit: scOpeAdapter.upsertOne,
     incrementConfirm: scOpeAdapter.upsertOne,
+    createBurrowSubmit: scOpeAdapter.upsertOne,
+    createBurrowConfirm: scOpeAdapter.upsertOne,
   },
 })
 

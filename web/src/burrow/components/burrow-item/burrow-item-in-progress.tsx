@@ -1,6 +1,6 @@
 import { Box, Image, Progress } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
-import FoxJumpingGif from '../../assets/images/fox-jumping.gif'
+import FoxJumpingGif from '../../../assets/images/fox-jumping.gif'
 
 export const BurrowItemInProgress: FunctionComponent = () => (
   <Box border="1px solid" w="300px" m="10px" borderRadius="5px">

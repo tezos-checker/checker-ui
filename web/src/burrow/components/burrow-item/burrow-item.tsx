@@ -3,8 +3,8 @@ import { Box, Flex, IconButton, Image, useDisclosure, VStack } from '@chakra-ui/
 import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
-import FoxHeadSvg from '../../assets/images/fox-head.svg'
-import { BurrowActions } from '../burrow-actions/burrow-actions'
+import FoxHeadSvg from '../../../assets/images/fox-head.svg'
+import { BurrowActions } from '../../burrow-actions/burrow-actions'
 
 export const BurrowItem: FunctionComponent = () => {
   const { isOpen, onToggle } = useDisclosure()

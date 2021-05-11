@@ -1,13 +1,16 @@
 import { FormControl, FormLabel, Image, Input, InputGroup } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
-import TezosSvg from '../../assets/images/tez.svg'
+import { IFormInputProperties } from 'vdr-react-form-manager'
+import TezosSvg from '../../../assets/images/tez.svg'
 
-export const NewBurrowDepositField: FunctionComponent = () => (
+type Props = IFormInputProperties
+
+export const NewBurrowDepositField: FunctionComponent<Props> = ({ name, value }) => (
   <FormControl id="deposit" mt="15px">
     <FormLabel>Initial deposit (in tez)</FormLabel>
     <InputGroup>
       <Image src={TezosSvg} height="35px" bg="gray.200" />
-      <Input name="deposit" placeholder="Initial deposit (in tez)" />
+      <Input name={name} value={value} placeholder="Initial deposit (in tez)" />
     </InputGroup>
   </FormControl>
 )
