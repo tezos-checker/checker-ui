@@ -162,6 +162,7 @@ steps:
       release: checker
       namespace: checker-staging
       debug: true
+      force_upgrade: false
       kube_service_account: cicd
       kube_api_server: "https://94.130.97.84:6443"
       kube_token:

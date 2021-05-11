@@ -3,7 +3,7 @@
 {{- $ingressPath := .Values.front.ingress.path -}}
 
 {{- $dot := . }}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}-front
@@ -25,8 +25,11 @@ spec:
     - host: {{ include "checker.frontDomain" . }}
       http:
         paths:
-          - path: /
-            backend:
-              serviceName: {{ template "checker.fullname" $dot }}-front
-              servicePort: 80
+          - backend:
+              service:
+                name: {{ template "checker.fullname" $dot }}-front
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific
 {{- end }}
