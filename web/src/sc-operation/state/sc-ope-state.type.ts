@@ -3,6 +3,7 @@ import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
 import { TransactionWalletOperation } from '@taquito/taquito'
 import { ScOpeCreateBurrowSubmitParams } from '../sc-create-burrow/sc-ope-create-burrow.api'
+import { ScOpeDepositTezSubmitParams } from '../sc-deposit-tez/sc-ope-deposit-tez.api'
 
 export enum ScWalletOperation {
   increment = 'increment',
@@ -44,7 +45,7 @@ export type ScOperationRowState = {
   errorMsg: string
   operationStep: ScOperationStep
   operationName: ScWalletOperation
-  submitOperationParams: ScOpeCreateBurrowSubmitParams
+  submitOperationParams: ScOpeCreateBurrowSubmitParams | ScOpeDepositTezSubmitParams
   transactionWalletOperation: TransactionWalletOperation | null
   blockResponse: BlockResponse | null
 }

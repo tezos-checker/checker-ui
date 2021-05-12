@@ -7,6 +7,8 @@ import { scDeployContractSubmitEpic } from '../../sc-deploy-contract/state/epic/
 import { scDeployContractSlice } from '../../sc-deploy-contract/state/sc-deploy-contract.slice'
 import { scOpeCreateBurrowConfirmEpic } from '../../sc-operation/sc-create-burrow/sc-ope-create-burrow-confirm.epic'
 import { scOpeCreateBurrowSubmitEpic } from '../../sc-operation/sc-create-burrow/sc-ope-create-burrow-submit.epic'
+import { scOpeDepositTezConfirmEpic } from '../../sc-operation/sc-deposit-tez/sc-ope-deposit-tez-confirm.epic'
+import { scOpeDepositTezSubmitEpic } from '../../sc-operation/sc-deposit-tez/sc-ope-deposit-tez-submit.epic'
 import { scOpeSlice } from '../../sc-operation/state/sc-ope.slice'
 import { loadStorageEpic } from '../../sc-storage/state/sc-storage.epic'
 import { scStorageSlice } from '../../sc-storage/state/sc-storage.slice'
@@ -37,6 +39,8 @@ epicMiddleware.run(
 
     scOpeCreateBurrowSubmitEpic,
     scOpeCreateBurrowConfirmEpic,
+    scOpeDepositTezSubmitEpic,
+    scOpeDepositTezConfirmEpic,
     burrowEpic,
   ),
 )

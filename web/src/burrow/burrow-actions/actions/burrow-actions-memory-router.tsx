@@ -11,7 +11,7 @@ import { Box, Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { MemoryRouter, NavLink, Route } from 'react-router-dom'
 import { BurrowActionDelegate } from './burrow-action-delegate'
-import { BurrowActionDeposit } from './burrow-action-deposit'
+import { BurrowActionDepositTez } from './burrow-action-deposit-tez'
 import { BurrowActionEditDepositor } from './burrow-action-edit-depositor'
 import { BurrowActionLiquidate } from './burrow-action-liquidate'
 import { BurrowActionMint } from './burrow-action-mint'
@@ -22,7 +22,7 @@ const routesConfig = [
   {
     route: '/deposit',
     label: 'deposit',
-    component: BurrowActionDeposit,
+    component: BurrowActionDepositTez,
     icon: <AddIcon height="50px" />,
   },
   {
