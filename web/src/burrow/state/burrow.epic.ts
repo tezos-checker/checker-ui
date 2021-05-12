@@ -23,7 +23,12 @@ const createAction = ({
 
 export const burrowEpic = (action$: any) =>
   action$.pipe(
-    ofType('operation/createBurrowSubmit', 'operation/createBurrowConfirm'),
+    ofType(
+      'operation/createBurrowSubmit',
+      'operation/createBurrowConfirm',
+      'operation/depositTezSubmit',
+      'operation/depositTezConfirm',
+    ),
     map((x: ScOperationAction) => x.payload),
     map((x: ScOperationRowState) => createAction(x)),
   )

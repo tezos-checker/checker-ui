@@ -1,19 +1,84 @@
-import { DragHandleIcon } from '@chakra-ui/icons'
-import { Box, Flex, IconButton, Image, useDisclosure, VStack } from '@chakra-ui/react'
+import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
+import {
+  Box,
+  Flex,
+  IconButton,
+  Image,
+  Spinner,
+  useDisclosure,
+  useStyleConfig,
+  VStack,
+} from '@chakra-ui/react'
+import { RequestStatus } from '@config'
 import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../assets/images/fox-head.svg'
 import { BurrowActions } from '../../burrow-actions/burrow-actions'
 import { BurrowRowState } from '../../state/burrow-state.type'
+import { useDispatchUpdateBurrow } from '../../state/useDispatchUpdateBurrow'
 
 type Props = BurrowRowState
+
+const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
+  const style = useStyleConfig('ui/burrow-operation-info-box')
+  const { updateBurrow } = useDispatchUpdateBurrow()
+
+  const { status, operationName } = props
+
+  switch (status) {
+    case RequestStatus.error:
+      return (
+        <Flex sx={style} bg="red.100">
+          <Box as="span">
+            Operation <b>{operationName}</b> failed
+          </Box>
+          <IconButton
+            onClick={updateBurrow({ ...props, status: RequestStatus.idle })}
+            aria-label="close"
+            bg="red.500"
+            color="red.900"
+            size="xs"
+            icon={<CloseIcon />}
+          />
+        </Flex>
+      )
+    case RequestStatus.success:
+      return (
+        <Flex sx={style} bg="green.100">
+          <Box as="span">
+            Operation <b>{operationName}</b> succeeded
+          </Box>
+          <IconButton
+            onClick={updateBurrow({ ...props, status: RequestStatus.idle })}
+            aria-label="close"
+            bg="green.500"
+            color="green.900"
+            size="xs"
+            icon={<CloseIcon />}
+          />
+        </Flex>
+      )
+    case RequestStatus.pending:
+      return (
+        <Flex sx={style} position="absolute" bg="blue.200">
+          <Box as="span">
+            Operation <b>{operationName}</b> is pending
+          </Box>
+          <Spinner size="xs" />
+        </Flex>
+      )
+    default:
+      return null
+  }
+}
+
 export const BurrowItem: FunctionComponent<Props> = (props) => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
     <>
-      <Box border="1px solid" w="300px" m="10px" borderRadius="5px">
+      <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
         <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
           <Image src={FoxHeadSvg} h={'30px'} />
           <Box as="span" mx="10px">
@@ -24,6 +89,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
         <Box mx="10px" mt="15px" textAlign="center">
           CTEZ / KIT
         </Box>
+        <BurrowOperationInformation {...props} />
         <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
           <Box fontSize="3xl" fontWeight="extrabold">
             100
@@ -65,6 +131,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
           </VStack>
           <VStack flex="1" py="10px">
             <IconButton
+              isLoading={props.status === RequestStatus.pending}
               onClick={onToggle}
               aria-label="action"
               variant="ghost"
@@ -77,7 +144,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
         </Flex>
       </Box>
       <SlideBox isOpen={isOpen} onClickOutSideMenu={onToggle}>
-        <BurrowActions onCloseActions={onToggle} />
+        <BurrowActions {...props} onCloseActions={onToggle} />
       </SlideBox>
     </>
   )
