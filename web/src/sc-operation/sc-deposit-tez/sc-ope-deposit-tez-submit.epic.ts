@@ -11,7 +11,12 @@ import { scOpeDepositTezSubmit, ScOpeDepositTezSubmitParams } from './sc-ope-dep
 const actionType = 'operation/depositTezSubmit'
 
 const submitDepositTez = (rowState: ScOperationRowState): Observable<ScOperationAction> =>
-  from(scOpeDepositTezSubmit(rowState.submitOperationParams as ScOpeDepositTezSubmitParams)).pipe(
+  from(
+    scOpeDepositTezSubmit(
+      rowState.scAddress,
+      rowState.submitOperationParams as ScOpeDepositTezSubmitParams,
+    ),
+  ).pipe(
     map((res: TransactionWalletOperation) => {
       if (res) {
         // eslint-disable-next-line

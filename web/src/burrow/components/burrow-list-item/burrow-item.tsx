@@ -24,7 +24,7 @@ const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
   const style = useStyleConfig('ui/burrow-operation-info-box')
   const { updateBurrow } = useDispatchUpdateBurrow()
 
-  const { status, operationName } = props
+  const { status, operationName } = props.currentOperation
 
   switch (status) {
     case RequestStatus.error:
@@ -34,7 +34,10 @@ const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
             Operation <b>{operationName}</b> failed
           </Box>
           <IconButton
-            onClick={updateBurrow({ ...props, status: RequestStatus.idle })}
+            onClick={updateBurrow({
+              ...props,
+              currentOperation: { ...props.currentOperation, status: RequestStatus.idle },
+            })}
             aria-label="close"
             bg="red.500"
             color="red.900"
@@ -50,7 +53,10 @@ const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
             Operation <b>{operationName}</b> succeeded
           </Box>
           <IconButton
-            onClick={updateBurrow({ ...props, status: RequestStatus.idle })}
+            onClick={updateBurrow({
+              ...props,
+              currentOperation: { ...props.currentOperation, status: RequestStatus.idle },
+            })}
             aria-label="close"
             bg="green.500"
             color="green.900"
@@ -131,7 +137,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
           </VStack>
           <VStack flex="1" py="10px">
             <IconButton
-              isLoading={props.status === RequestStatus.pending}
+              isLoading={props.currentOperation.status === RequestStatus.pending}
               onClick={onToggle}
               aria-label="action"
               variant="ghost"

@@ -17,6 +17,6 @@ export const getLoadBurrowStorageAction = (
 export const getLoadBurrowStorageResultAction = (
   payload: BurrowLoadStorageResultActionPayload,
 ): BurrowLoadStorageResultAction => ({
-  type: 'burrow/updateBurrowStorage',
+  type: 'burrow/updateStorage',
   payload: payload,
 })

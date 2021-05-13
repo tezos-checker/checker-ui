@@ -22,7 +22,10 @@ const BurrowCreationOnPending: FunctionComponent<Props> = (props) => (
   </Box>
 )
 
-const BurrowCreationFailed: FunctionComponent<Props> = ({ burrowId, errorMsg }) => {
+const BurrowCreationFailed: FunctionComponent<Props> = ({
+  burrowId,
+  currentOperation: { errorMsg },
+}) => {
   const removeBurrow = useDispatchRemoveBurrow(burrowId)
   return (
     <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
@@ -51,7 +54,7 @@ const BurrowCreationFailed: FunctionComponent<Props> = ({ burrowId, errorMsg }) 
 }
 
 export const BurrowItemPendingCreation: FunctionComponent<Props> = (props) =>
-  props.status === RequestStatus.pending ? (
+  props.currentOperation.status === RequestStatus.pending ? (
     <BurrowCreationOnPending {...props} />
   ) : (
     <BurrowCreationFailed {...props} />

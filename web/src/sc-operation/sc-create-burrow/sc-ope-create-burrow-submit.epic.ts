@@ -12,7 +12,10 @@ const actionType = 'operation/createBurrowSubmit'
 
 const submitCreateBurrow = (rowState: ScOperationRowState): Observable<ScOperationAction> =>
   from(
-    scOpeCreateBurrowSubmit(rowState.submitOperationParams as ScOpeCreateBurrowSubmitParams),
+    scOpeCreateBurrowSubmit(
+      rowState.scAddress,
+      rowState.submitOperationParams as ScOpeCreateBurrowSubmitParams,
+    ),
   ).pipe(
     map((res: TransactionWalletOperation) => {
       if (res) {

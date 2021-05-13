@@ -3,7 +3,11 @@ import { ScOperationRowState, ScWalletOperation } from '../state/sc-ope-state.ty
 import { scOpeActions } from '../state/sc-ope.slice'
 import { ScOpeDepositTezSubmitParams } from './sc-ope-deposit-tez.api'
 
-export const useDispatchDepositTez = (burrowId: string, callBack: () => void) => {
+export const useDispatchDepositTez = (
+  burrowId: number,
+  scAddress: string,
+  callBack: () => void,
+) => {
   const dispatch = useAppDispatch()
 
   const executeDeposit = (tez: number) => {
@@ -11,6 +15,7 @@ export const useDispatchDepositTez = (burrowId: string, callBack: () => void) =>
 
     const payload: ScOperationRowState = {
       burrowId,
+      scAddress,
       operationId: `${Math.floor(Math.random() * 99)}_${new Date().getTime()}`,
       operationName: ScWalletOperation.deposit_tez,
       operationStep: ScOperationStep.submit,

@@ -8,8 +8,8 @@ export const burrowFormModel = {
   formInputs: {
     ...FormInputProperties.Builder(inputChecker)
       .addAvailableValue({
-        value: 'KT1MuXVJMwW6Dra1g9FZBdpDmk6KANResXD4',
-        label: 'KT1MuXVJMwW6Dra1g9FZBdpDmk6KANResXD4',
+        value: 'KT19BUeLeqaX5qqnq3XajCpXruyJ77aUPs74',
+        label: 'KT19BUeLeqaX5qqnq3XajCpXruyJ77aUPs74',
       })
       .build(),
     ...FormInputProperties.Builder(inputDelegate).build(),

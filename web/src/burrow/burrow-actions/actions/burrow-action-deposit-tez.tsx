@@ -4,8 +4,12 @@ import { useDispatchDepositTez } from '../../../sc-operation/sc-deposit-tez/useD
 import { BurrowRowState } from '../../state/burrow-state.type'
 
 type Props = BurrowRowState & { callBack: () => void }
-export const BurrowActionDepositTez: FunctionComponent<Props> = ({ burrowId, callBack }) => {
-  const { depositTez } = useDispatchDepositTez(burrowId, callBack)
+export const BurrowActionDepositTez: FunctionComponent<Props> = ({
+  burrowId,
+  scAddress,
+  callBack,
+}) => {
+  const { depositTez } = useDispatchDepositTez(burrowId, scAddress, callBack)
 
   return (
     <Box>

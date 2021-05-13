@@ -3,6 +3,6 @@ import { BurrowOperationAction, BurrowOperationActionPayload } from './burrow-op
 export const getUpdateBurrowOperationAction = (
   payload: BurrowOperationActionPayload,
 ): BurrowOperationAction => ({
-  type: 'burrow/updateBurrowOperation',
-  payload: payload,
+  type: 'burrow/updateOperation',
+  payload,
 })

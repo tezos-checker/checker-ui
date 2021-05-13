@@ -11,7 +11,7 @@ import { BurrowItemPendingCreation } from './burrow-list-item/burrow-item-pendin
 export const BurrowList: FunctionComponent = () => {
   const burrows: BurrowRowState[] = useBurrowData()
 
-  const isBurrowCreation = ({ operationName, status }: BurrowRowState) =>
+  const isBurrowCreation = ({ currentOperation: { operationName, status } }: BurrowRowState) =>
     operationName === ScWalletOperation.create_burrow &&
     (status === RequestStatus.pending || status === RequestStatus.error)
 

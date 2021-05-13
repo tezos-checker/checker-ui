@@ -6,11 +6,13 @@ import { ScOpeCreateBurrowSubmitParams } from './sc-ope-create-burrow.api'
 export const useDispatchCreateBurrow = (callBack: () => void) => {
   const dispatch = useAppDispatch()
 
-  const exeCreateBurrow = (burrowId: string) => {
-    const submitOperationParams: ScOpeCreateBurrowSubmitParams = { bidon: true }
-
+  const exeCreateBurrow = (
+    burrowId: number,
+    submitOperationParams: ScOpeCreateBurrowSubmitParams,
+  ) => {
     const payload: ScOperationRowState = {
       burrowId,
+      scAddress: submitOperationParams.scAddress,
       operationId: `${Math.floor(Math.random() * 99)}_${new Date().getTime()}`,
       operationName: ScWalletOperation.create_burrow,
       operationStep: ScOperationStep.submit,
@@ -26,6 +28,7 @@ export const useDispatchCreateBurrow = (callBack: () => void) => {
     callBack()
   }
   return {
-    createBurrow: (burrowId: string) => () => exeCreateBurrow(burrowId),
+    createBurrow: (burrowId: number, burrowParams: ScOpeCreateBurrowSubmitParams) => () =>
+      exeCreateBurrow(burrowId, burrowParams),
   }
 }
