@@ -13,13 +13,9 @@ import { burrowFormModel, inputChecker, inputDelegate, inputDeposit } from './ne
 export const NewBurrow: FunctionComponent = () => {
   const { handleFormChange, getInputProps } = useFormManager(burrowFormModel)
 
-  const resetForm = () => {
-    console.log('callBack...')
-  }
-
-  const scCreateBurrow = useDispatchCreateBurrow(new Date().getTime().toString(), resetForm)
-
   const history = useHistory()
+
+  const { createBurrow } = useDispatchCreateBurrow(() => history.push('/'))
 
   return (
     <Box w="500px" mx="auto" mt="15vh">
@@ -41,7 +37,10 @@ export const NewBurrow: FunctionComponent = () => {
         <NewBurrowChooseCheckerField {...getInputProps(inputChecker)} />
         <NewBurrowDelegateField {...getInputProps(inputDelegate)} />
         <NewBurrowDepositField {...getInputProps(inputDeposit)} />
-        <Button mt="15px" onClick={scCreateBurrow}>
+        <Button
+          mt="15px"
+          onClick={createBurrow(`${Math.floor(Math.random() * 99)}_${new Date().getTime()}`)}
+        >
           Confirm
         </Button>
       </Box>

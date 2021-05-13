@@ -9,5 +9,5 @@ export const scOpeCreateBurrowSubmit = async ({
   const contract = await getContract()
   // eslint-disable-next-line
   debugger
-  return contract.methods.create_burrow(1).send({ amount: 100 })
+  return contract.methods.create_burrow(2).send({ amount: 100 })
 }

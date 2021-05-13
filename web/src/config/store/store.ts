@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
-import { burrowEpic } from '../../burrow/state/burrow.epic'
 import { burrowSlice } from '../../burrow/state/burrow.slice'
+import { burrowOperationEpic } from '../../burrow/state/epic/burrow-operation.epic/burrow-operation.epic'
 import { scDeployContractConfirmEpic } from '../../sc-deploy-contract/state/epic/sc-deploy-contract-confirm.epic'
 import { scDeployContractSubmitEpic } from '../../sc-deploy-contract/state/epic/sc-deploy-contract-submit.epic'
 import { scDeployContractSlice } from '../../sc-deploy-contract/state/sc-deploy-contract.slice'
@@ -41,7 +41,7 @@ epicMiddleware.run(
     scOpeCreateBurrowConfirmEpic,
     scOpeDepositTezSubmitEpic,
     scOpeDepositTezConfirmEpic,
-    burrowEpic,
+    burrowOperationEpic,
   ),
 )
 

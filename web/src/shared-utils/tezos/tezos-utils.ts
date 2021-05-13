@@ -1,3 +1,3 @@
-import { SC_ADDRESS, tezos } from '@config'
+import { tezos } from '@config'
 
-export const getContract = () => tezos.wallet.at(SC_ADDRESS)
+export const getContract = (scAddress: string) => tezos.wallet.at(scAddress)

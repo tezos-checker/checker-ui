@@ -14,6 +14,9 @@ export const burrowSlice = createSlice({
   reducers: {
     updateBurrow: burrowAdapter.upsertOne,
     removeBurrow: burrowAdapter.removeOne,
+    loadBurrowStorage: burrowAdapter.removeOne, // to do create reducer
+    updateBurrowStorage: burrowAdapter.removeOne, // to do create reducer
+    updateBurrowOperation: burrowAdapter.upsertOne, // to do create reducer
   },
 })
 

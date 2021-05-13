@@ -6,8 +6,6 @@ import { ScOpeCreateBurrowSubmitParams } from '../sc-create-burrow/sc-ope-create
 import { ScOpeDepositTezSubmitParams } from '../sc-deposit-tez/sc-ope-deposit-tez.api'
 
 export enum ScWalletOperation {
-  increment = 'increment',
-  decrement = 'decrement',
   activate_burrow = 'activate_burrow',
   add_liquidity = 'add_liquidity',
   burn_kit = 'burn_kit',
@@ -39,7 +37,8 @@ export enum ScWalletOperation {
 
 export type ScOperationRowState = {
   operationId: string
-  burrowId: string
+  scAddress: string
+  burrowId: number
   status: RequestStatus
   nbConfirmation: number
   errorMsg: string
