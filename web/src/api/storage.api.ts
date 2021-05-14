@@ -1,8 +1,8 @@
 import { getContract } from '@config'
 
 export const getStorage = async (
-  burrowId: string,
-  walletPublickKey: string,
+  burrowId: number,
+  walletAddress: string,
   scAddress: string,
 ): Promise<any> => {
   // eslint-disable-next-line
@@ -11,7 +11,7 @@ export const getStorage = async (
   // eslint-disable-next-line
   debugger
   return (storage as any)[1].sealed.burrows.get({
-    0: 'tz1KkfyXMdRtgTPnKCS7ANDPduEq82RxLGNV', // address
-    1: 51,
+    0: walletAddress,
+    1: burrowId,
   })
 }

@@ -1,3 +1,4 @@
+import { BurrowOpeRowState, getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -14,38 +15,16 @@ import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../assets/images/fox-head.svg'
-import { BurrowActions } from '../../burrow-actions/burrow-actions'
 import { BurrowRowState } from '../../state/burrow-state.type'
-import { useDispatchUpdateBurrow } from '../../state/useDispatchUpdateBurrow'
+import { BurrowActionsBox } from '../burrow-actions-box/burrow-actions-box'
 
-type Props = BurrowRowState
-
-const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
+const BurrowOperationInformation: FunctionComponent<BurrowOpeRowState> = (burrowOpe) => {
   const style = useStyleConfig('ui/burrow-operation-info-box')
-  const { updateBurrow } = useDispatchUpdateBurrow()
+  const { clearBurrowOpeMessage } = useBurrowOpeDispatcher()
 
-  const { status, operationName } = props.currentOperation
+  const { status, operationName } = burrowOpe
 
   switch (status) {
-    case RequestStatus.error:
-      return (
-        <Flex sx={style} bg="red.100">
-          <Box as="span">
-            Operation <b>{operationName}</b> failed
-          </Box>
-          <IconButton
-            onClick={updateBurrow({
-              ...props,
-              currentOperation: { ...props.currentOperation, status: RequestStatus.idle },
-            })}
-            aria-label="close"
-            bg="red.500"
-            color="red.900"
-            size="xs"
-            icon={<CloseIcon />}
-          />
-        </Flex>
-      )
     case RequestStatus.success:
       return (
         <Flex sx={style} bg="green.100">
@@ -53,10 +32,7 @@ const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
             Operation <b>{operationName}</b> succeeded
           </Box>
           <IconButton
-            onClick={updateBurrow({
-              ...props,
-              currentOperation: { ...props.currentOperation, status: RequestStatus.idle },
-            })}
+            onClick={clearBurrowOpeMessage(burrowOpe)}
             aria-label="close"
             bg="green.500"
             color="green.900"
@@ -74,13 +50,30 @@ const BurrowOperationInformation: FunctionComponent<Props> = (props) => {
           <Spinner size="xs" />
         </Flex>
       )
+    case RequestStatus.error:
+      return (
+        <Flex sx={style} bg="red.100">
+          <Box as="span">
+            Operation <b>{operationName}</b> failed
+          </Box>
+          <IconButton
+            onClick={clearBurrowOpeMessage(burrowOpe)}
+            aria-label="close"
+            bg="red.500"
+            color="red.900"
+            size="xs"
+            icon={<CloseIcon />}
+          />
+        </Flex>
+      )
     default:
       return null
   }
 }
 
-export const BurrowItem: FunctionComponent<Props> = (props) => {
+export const BurrowItem: FunctionComponent<BurrowRowState> = (props) => {
   const { isOpen, onToggle } = useDisclosure()
+  const burrowOperation = getBurrowOperation(props.burrowId)
 
   return (
     <>
@@ -95,7 +88,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
         <Box mx="10px" mt="15px" textAlign="center">
           CTEZ / KIT
         </Box>
-        <BurrowOperationInformation {...props} />
+        {burrowOperation ? <BurrowOperationInformation {...burrowOperation} /> : null}
         <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
           <Box fontSize="3xl" fontWeight="extrabold">
             100
@@ -137,7 +130,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
           </VStack>
           <VStack flex="1" py="10px">
             <IconButton
-              isLoading={props.currentOperation.status === RequestStatus.pending}
+              isLoading={burrowOperation?.status === RequestStatus.pending}
               onClick={onToggle}
               aria-label="action"
               variant="ghost"
@@ -150,7 +143,7 @@ export const BurrowItem: FunctionComponent<Props> = (props) => {
         </Flex>
       </Box>
       <SlideBox isOpen={isOpen} onClickOutSideMenu={onToggle}>
-        <BurrowActions {...props} onCloseActions={onToggle} />
+        <BurrowActionsBox {...props} onCloseActions={onToggle} />
       </SlideBox>
     </>
   )

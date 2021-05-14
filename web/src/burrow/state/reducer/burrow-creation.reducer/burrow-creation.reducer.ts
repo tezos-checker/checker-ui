@@ -1,5 +1,5 @@
 import { RequestStatus } from '@config'
-import { ScWalletOperation } from '../../../../sc-operation/state/sc-ope-state.type'
+import { BurrowOpeEnum } from '../../../../burrow-operation/state/burrow-ope-state.type'
 import { BurrowCreationAction } from '../../action/burrow-creation.action/burrow-creation-action.type'
 import { BurrowEntityAdapter, BurrowRowState, BurrowState } from '../../burrow-state.type'
 
@@ -8,8 +8,6 @@ export const burrowCreationReducer = (
   action: BurrowCreationAction,
   burrowAdapter: BurrowEntityAdapter,
 ): void => {
-  // eslint-disable-next-line
-  debugger
   const { burrowId, scAddress, status, errorMsg } = action.payload
 
   const burrow = {
@@ -17,7 +15,7 @@ export const burrowCreationReducer = (
     scAddress,
     currentOperation: {
       status,
-      operationName: ScWalletOperation.create_burrow,
+      operationName: BurrowOpeEnum.create_burrow,
       errorMsg,
     },
     storage: {

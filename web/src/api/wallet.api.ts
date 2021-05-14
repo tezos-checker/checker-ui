@@ -6,7 +6,6 @@ export const loadWallet = async (): Promise<string> => {
     // @ts-ignore
     network: { type: 'edonet' },
   })
-  console.log(await beaconWallet.client.getActiveAccount())
   const adress = await beaconWallet.getPKH()
   tezos.setWalletProvider(beaconWallet)
 
