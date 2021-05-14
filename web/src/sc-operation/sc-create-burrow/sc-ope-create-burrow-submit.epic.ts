@@ -13,6 +13,7 @@ const actionType = 'operation/createBurrowSubmit'
 const submitCreateBurrow = (rowState: ScOperationRowState): Observable<ScOperationAction> =>
   from(
     scOpeCreateBurrowSubmit(
+      rowState.burrowId,
       rowState.scAddress,
       rowState.submitOperationParams as ScOpeCreateBurrowSubmitParams,
     ),

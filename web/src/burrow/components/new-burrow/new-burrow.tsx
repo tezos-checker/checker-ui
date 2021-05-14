@@ -39,8 +39,7 @@ export const NewBurrow: FunctionComponent = () => {
         <NewBurrowDepositField {...getInputProps(inputDeposit)} />
         <Button
           mt="15px"
-          onClick={createBurrow(Math.floor(Math.random() * 99), {
-            scAddress: getInputProps(inputChecker).value,
+          onClick={createBurrow(Math.floor(Math.random() * 99), getInputProps(inputChecker).value, {
             delegate: getInputProps(inputDelegate).value,
             deposit: getInputProps(inputDeposit).value,
           })}

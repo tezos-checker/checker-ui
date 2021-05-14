@@ -6,6 +6,8 @@ export const burrowUpdateOperationReducer = (
   action: BurrowOperationAction,
   burrowAdapter: BurrowEntityAdapter,
 ): void => {
+  // eslint-disable-next-line
+  debugger
   const { burrowId, operationName, status, errorMsg } = action.payload
   const burrow = state.entities[burrowId]
   if (burrow) {

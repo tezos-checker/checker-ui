@@ -9,12 +9,7 @@ import { getUpdateBurrowOperationAction } from '../../action/burrow-operation.ac
 // update the burrow operation state //
 export const burrowOperationEpic = (action$: any) =>
   action$.pipe(
-    ofType(
-      'operation/createBurrowSubmit',
-      'operation/createBurrowConfirm',
-      'operation/depositTezSubmit',
-      'operation/depositTezConfirm',
-    ),
+    ofType('operation/depositTezSubmit', 'operation/depositTezConfirm'),
     map((x: ScOperationAction) => x.payload),
     map((x: ScOperationRowState) => getUpdateBurrowOperationAction(x)),
   )

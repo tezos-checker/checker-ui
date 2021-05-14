@@ -9,8 +9,8 @@ import {
   BurrowLoadStorageResultAction,
 } from '../../action/burrow-storage.action/burrow-storage-action.type'
 import {
-  getLoadBurrowStorageAction,
-  getLoadBurrowStorageResultAction,
+  getLoadStorageAction,
+  getUpdateStorageAction,
 } from '../../action/burrow-storage.action/burrow-storage-action.util'
 
 export const getScStorage = (
@@ -19,14 +19,14 @@ export const getScStorage = (
   from(getStorage(payload.scAddress)).pipe(
     map((storage: any) => {
       if (storage) {
-        return getLoadBurrowStorageResultAction({
+        return getUpdateStorageAction({
           status: RequestStatus.success,
           storage,
           errorMsg: '',
           ...payload,
         })
       }
-      return getLoadBurrowStorageResultAction({
+      return getUpdateStorageAction({
         status: RequestStatus.error,
         storage: null,
         errorMsg: 'Internal error',
@@ -35,7 +35,7 @@ export const getScStorage = (
     }),
     catchError((err) =>
       of(
-        getLoadBurrowStorageResultAction({
+        getUpdateStorageAction({
           status: RequestStatus.error,
           storage: null,
           errorMsg: err.message,
@@ -55,7 +55,7 @@ export const burrowTriggerLoadStorageEpic = (action$: any) =>
     map((x: ScOperationAction) => x.payload),
     filter((x: ScOperationRowState) => isACompletedOperation(x)),
     map((x: ScOperationRowState) =>
-      getLoadBurrowStorageAction({
+      getLoadStorageAction({
         burrowId: x.burrowId,
         scAddress: x.scAddress,
       }),

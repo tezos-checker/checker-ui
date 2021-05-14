@@ -12,8 +12,6 @@ export const scOpeSlice = createSlice({
     entities: {},
   },
   reducers: {
-    incrementSubmit: scOpeAdapter.upsertOne,
-    incrementConfirm: scOpeAdapter.upsertOne,
     createBurrowSubmit: scOpeAdapter.upsertOne,
     createBurrowConfirm: scOpeAdapter.upsertOne,
     depositTezSubmit: scOpeAdapter.upsertOne,

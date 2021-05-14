@@ -2,13 +2,13 @@ import { getStorage } from '@api'
 import { RequestStatus } from '@config'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
-import { catchError, map } from 'rxjs/operators'
+import { catchError, map, mergeMap } from 'rxjs/operators'
 import {
   BurrowLoadStorageAction,
   BurrowLoadStorageActionPayload,
   BurrowLoadStorageResultAction,
 } from '../../action/burrow-storage.action/burrow-storage-action.type'
-import { getLoadBurrowStorageResultAction } from '../../action/burrow-storage.action/burrow-storage-action.util'
+import { getUpdateStorageAction } from '../../action/burrow-storage.action/burrow-storage-action.util'
 
 export const getScStorage = (
   payload: BurrowLoadStorageActionPayload,
@@ -16,14 +16,14 @@ export const getScStorage = (
   from(getStorage(payload.scAddress)).pipe(
     map((storage: any) => {
       if (storage) {
-        return getLoadBurrowStorageResultAction({
+        return getUpdateStorageAction({
           status: RequestStatus.success,
           storage,
           errorMsg: '',
           ...payload,
         })
       }
-      return getLoadBurrowStorageResultAction({
+      return getUpdateStorageAction({
         status: RequestStatus.error,
         storage: null,
         errorMsg: 'Internal error',
@@ -32,7 +32,7 @@ export const getScStorage = (
     }),
     catchError((err) =>
       of(
-        getLoadBurrowStorageResultAction({
+        getUpdateStorageAction({
           status: RequestStatus.error,
           storage: null,
           errorMsg: err.message,
@@ -42,9 +42,9 @@ export const getScStorage = (
     ),
   )
 
-export const loadBurrowStorageEpic = (action$: any) =>
+export const burrowLoadStorageEpic = (action$: any) =>
   action$.pipe(
-    ofType('burrow/loadBurrowStorage'),
+    ofType('burrow/loadStorage'),
     map((x: BurrowLoadStorageAction) => x.payload),
-    map((x: BurrowLoadStorageActionPayload) => getScStorage(x)),
+    mergeMap((x: BurrowLoadStorageActionPayload) => getScStorage(x)),
   )

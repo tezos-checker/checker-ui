@@ -1,4 +1,3 @@
-import { RequestStatus } from '@config'
 import { BurrowLoadStorageAction } from '../../action/burrow-storage.action/burrow-storage-action.type'
 import { BurrowEntityAdapter, BurrowState } from '../../burrow-state.type'
 
@@ -7,10 +6,10 @@ export const burrowLoadStorageReducer = (
   action: BurrowLoadStorageAction,
   burrowAdapter: BurrowEntityAdapter,
 ): void => {
-  const { burrowId } = action.payload
+  /*  const { burrowId } = action.payload
   const burrow = state.entities[burrowId]
   if (burrow) {
     burrow.storage.status = RequestStatus.pending
-    burrowAdapter.upsertOne(state, burrow)
-  }
+    burrowAdapter.upsertOne(state, burrow) 
+  } */
 }

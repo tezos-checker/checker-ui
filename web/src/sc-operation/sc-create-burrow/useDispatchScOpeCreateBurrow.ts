@@ -8,11 +8,12 @@ export const useDispatchCreateBurrow = (callBack: () => void) => {
 
   const exeCreateBurrow = (
     burrowId: number,
+    scAddress: string,
     submitOperationParams: ScOpeCreateBurrowSubmitParams,
   ) => {
     const payload: ScOperationRowState = {
       burrowId,
-      scAddress: submitOperationParams.scAddress,
+      scAddress,
       operationId: `${Math.floor(Math.random() * 99)}_${new Date().getTime()}`,
       operationName: ScWalletOperation.create_burrow,
       operationStep: ScOperationStep.submit,
@@ -28,7 +29,10 @@ export const useDispatchCreateBurrow = (callBack: () => void) => {
     callBack()
   }
   return {
-    createBurrow: (burrowId: number, burrowParams: ScOpeCreateBurrowSubmitParams) => () =>
-      exeCreateBurrow(burrowId, burrowParams),
+    createBurrow: (
+      burrowId: number,
+      scAddress: string,
+      burrowParams: ScOpeCreateBurrowSubmitParams,
+    ) => () => exeCreateBurrow(burrowId, scAddress, burrowParams),
   }
 }
