@@ -1,3 +1,5 @@
+export * from './component/burrow-storage-info'
 export * from './state/burrow-storage.epics'
+export * from './state/burrow-storage.selector'
 export { burrowStorageReducer } from './state/burrow-storage.slice'
 export * from './state/useBurrowStorageDisptacher.hook'

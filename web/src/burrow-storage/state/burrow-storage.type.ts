@@ -12,9 +12,13 @@ export type BurrowStorage = {
   outstanding_kit: number
 }
 
+export type CheckerStorage = any & {
+  burrow: BurrowStorage
+}
+
 export type BurrowStorageRow = {
   burrowId: number
   status: RequestStatus
   errorMsg: string
-  storage: BurrowStorage | null
+  storage: CheckerStorage | null
 }

@@ -1,5 +1,10 @@
 import { combineEpics } from 'redux-observable'
-import { loadBurrowStorageEpic } from './burrow-storage.epic/burrow-load-storage.epic'
-import { triggerLoadBurrowStorageEpic } from './burrow-storage.epic/burrow-trigger-load-storage.epic'
+import { createBurrowStorageEpic } from './create-burrow-storage/create-burrow-storage.epic'
+import { loadBurrowStorageEpic } from './load-burrow-storage/load-burrow-storage.epic'
+import { triggerLoadBurrowStorageEpic } from './trigger-load-burrow-storage/trigger-load-burrow-storage.epic'
 
-export const burrowStorageEpics = combineEpics(loadBurrowStorageEpic, triggerLoadBurrowStorageEpic)
+export const burrowStorageEpics = combineEpics(
+  createBurrowStorageEpic,
+  loadBurrowStorageEpic,
+  triggerLoadBurrowStorageEpic,
+)

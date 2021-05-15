@@ -1,4 +1,5 @@
 import { BurrowOpeRowState, getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
+import { BurrowStorageInfo, getBurrowStorage } from '@burrow-storage'
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -74,9 +75,11 @@ const BurrowOperationInformation: FunctionComponent<BurrowOpeRowState> = (burrow
 export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
   const { isOpen, onToggle } = useDisclosure()
   const burrowOperation = getBurrowOperation(props.burrowId)
+  const burrowStorage = getBurrowStorage(props.burrowId)
 
   return (
     <>
+      <BurrowStorageInfo {...burrowStorage} />
       <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
         <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
           <Image src={FoxHeadSvg} h={'30px'} />

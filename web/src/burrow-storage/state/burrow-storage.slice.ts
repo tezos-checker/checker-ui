@@ -6,10 +6,6 @@ export const burrowStorageAdapter = createEntityAdapter<BurrowStorageRow>({
   selectId: (burrowStorage) => burrowStorage.burrowId,
 })
 
-export const burrowStorageSelectors = burrowStorageAdapter.getSelectors<RootState>(
-  (state) => state.burrow,
-)
-
 export const burrowStorageSlice = createSlice({
   name: 'burrowStorage',
   initialState: {
@@ -17,10 +13,16 @@ export const burrowStorageSlice = createSlice({
     entities: {},
   },
   reducers: {
-    updateBurrowStorage: burrowStorageAdapter.upsertOne,
+    createStorage: burrowStorageAdapter.addOne,
+    loadStorage: burrowStorageAdapter.upsertOne,
+    updateStorage: burrowStorageAdapter.upsertOne,
     deleteBurrowStorage: burrowStorageAdapter.removeOne,
   },
 })
+
+export const { selectById: getStorageForBurrow } = burrowStorageAdapter.getSelectors(
+  (state) => (state as RootState).burrowOperation,
+)
 
 export const burrowStorageActions = burrowStorageSlice.actions
 
