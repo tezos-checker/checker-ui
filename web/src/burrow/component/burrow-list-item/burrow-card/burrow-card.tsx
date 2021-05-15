@@ -1,5 +1,4 @@
 import { BurrowOpeRowState, getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
-import { BurrowStorageValues, getBurrowStorage } from '@burrow-storage'
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -14,6 +13,7 @@ import {
 import { RequestStatus } from '@config'
 import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
+import { BurrowStorageValues, getBurrowStorage } from '@storage'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
 import { BurrowRowState } from '../../../state/burrow-state.type'

@@ -13,7 +13,7 @@ module.exports = {
       '@wallet': path.resolve(__dirname, 'src/wallet/index.ts'),
       '@burrow': path.resolve(__dirname, 'src/burrow/index.ts'),
       '@burrow-operation': path.resolve(__dirname, 'src/burrow-operation/index.ts'),
-      '@burrow-storage': path.resolve(__dirname, 'src/burrow-storage/index.ts'),
+      '@storage': path.resolve(__dirname, 'src/storage/index.ts'),
     },
   },
 }

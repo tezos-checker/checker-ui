@@ -1,7 +1,7 @@
 import { BurrowRowState } from '@burrow'
 import { useBurrowOpeDispatcher } from '@burrow-operation'
-import { useStorageDispatcher } from '@burrow-storage'
 import { useAppDispatch } from '@config'
+import { useStorageDispatcher } from '@storage'
 import { burrowActions } from './burrow.slice'
 
 export const useBurrowDispatcher = () => {
