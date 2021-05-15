@@ -1,7 +1,7 @@
 import { getContract } from '@config'
-import { CheckerStorage } from '../state/burrow-storage.type'
+import { CheckerStorage } from '../state/storage-state.type'
 
-export const loadBurrowStorageRequest = async (
+export const loadStorageRequest = async (
   burrowId: number,
   walletAddress: string,
   scAddress: string,

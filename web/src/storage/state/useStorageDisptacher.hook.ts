@@ -1,19 +1,19 @@
 import { RequestStatus, useAppDispatch } from '@config'
-import { burrowStorageActions } from './burrow-storage.slice'
-import { BurrowStorageRow } from './burrow-storage.type'
+import { BurrowStorageRow } from './storage-state.type'
+import { storageActions } from './storage.slice'
 
 export const useStorageDispatcher = () => {
   const dispatch = useAppDispatch()
 
   return {
-    loadStorage: (burrowStorage: BurrowStorageRow) => () =>
+    loadStorage: (storage: BurrowStorageRow) => () =>
       dispatch(
-        burrowStorageActions.loadStorage({
-          ...burrowStorage,
+        storageActions.loadStorage({
+          ...storage,
           status: RequestStatus.pending,
         }),
       ),
     deleteBurrowStorage: (burrowId: number) => () =>
-      dispatch(burrowStorageActions.deleteBurrowStorage(burrowId)),
+      dispatch(storageActions.deleteBurrowStorage(burrowId)),
   }
 }

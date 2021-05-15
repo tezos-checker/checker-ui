@@ -1,7 +1,7 @@
 import { burrowEpics, burrowReducer } from '@burrow'
 import { burrowOpeEpics, burrowOpeReducers } from '@burrow-operation'
 import { configureStore } from '@reduxjs/toolkit'
-import { burrowStorageEpics, burrowStorageReducer } from '@storage'
+import { storageEpics, storageReducer } from '@storage'
 import { walletEpics, walletReducer } from '@wallet'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { loadState } from './store-persist.util'
@@ -14,7 +14,7 @@ const checkerStore = configureStore({
     wallet: walletReducer,
     burrow: burrowReducer,
     burrowOperation: burrowOpeReducers,
-    burrowStorage: burrowStorageReducer,
+    storage: storageReducer,
   },
   middleware: [epicMiddleware],
 })
@@ -25,7 +25,7 @@ epicMiddleware.run(
 
     burrowEpics,
     burrowOpeEpics,
-    burrowStorageEpics,
+    storageEpics,
   ),
 )
 

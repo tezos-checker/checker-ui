@@ -1,31 +1,31 @@
-import { loadBurrowStorageRequest } from '@api'
+import { loadStorageRequest } from '@api'
 import { BurrowOpeAction, BurrowOpeRowState } from '@burrow-operation'
 import { RequestStatus } from '@config'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
-import { BurrowStorage, BurrowStorageRow } from '../burrow-storage.type'
-import { BurrowLoadStorageResultAction } from '../load-burrow-storage/load-burrow-storage.type'
-import { getUpdateStorageAction } from '../update-burrow-storage/update-burrow-storage.util'
-import { getCreateBurrowStorageAction } from './create-burrow-action.util'
+import { LoadStorageResultAction } from '../load-storage/load-storage.type'
+import { BurrowStorage, BurrowStorageRow } from '../storage-state.type'
+import { getUpdateStorageAction } from '../update-storage/update-storage.util'
+import { getCreateStorageAction } from './create-storage-action.util'
 
 export const getScStorage = ({
-  burrowStorageRow,
+  storageRow,
   walletAddress,
   scAddress,
-}: LoadBurrowStorageRequestParams): Observable<BurrowLoadStorageResultAction> =>
-  from(loadBurrowStorageRequest(burrowStorageRow.burrowId, walletAddress, scAddress)).pipe(
+}: LoadBurrowStorageRequestParams): Observable<LoadStorageResultAction> =>
+  from(loadStorageRequest(storageRow.burrowId, walletAddress, scAddress)).pipe(
     map((storage: BurrowStorage) => {
       if (storage) {
         return getUpdateStorageAction({
-          ...burrowStorageRow,
+          ...storageRow,
           status: RequestStatus.success,
           storage,
           errorMsg: '',
         })
       }
       return getUpdateStorageAction({
-        ...burrowStorageRow,
+        ...storageRow,
         status: RequestStatus.error,
         errorMsg: 'Internal error',
         storage: null,
@@ -34,7 +34,7 @@ export const getScStorage = ({
     catchError((err) =>
       of(
         getUpdateStorageAction({
-          ...burrowStorageRow,
+          ...storageRow,
           status: RequestStatus.error,
           storage: null,
           errorMsg: err.message,
@@ -44,19 +44,19 @@ export const getScStorage = ({
   )
 
 type LoadBurrowStorageRequestParams = {
-  burrowStorageRow: BurrowStorageRow
+  storageRow: BurrowStorageRow
   walletAddress: string
   scAddress: string
 }
 
-export const createBurrowStorageEpic = (action$: any) =>
+export const createStorageEpic = (action$: any) =>
   action$.pipe(
     ofType('burrowOpe/createBurrowSubmit'),
     map((x: BurrowOpeAction) => x.payload),
     filter((payload: BurrowOpeRowState) => payload.status === RequestStatus.pending),
     mergeMap((payload: BurrowOpeRowState) =>
       of(
-        getCreateBurrowStorageAction({
+        getCreateStorageAction({
           burrowId: payload.burrowId,
           status: RequestStatus.idle,
           errorMsg: '',

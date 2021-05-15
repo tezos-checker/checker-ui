@@ -1,29 +1,29 @@
-import { loadBurrowStorageRequest } from '@api'
+import { loadStorageRequest } from '@api'
 import { AbstractAction, RequestStatus, RootState } from '@config'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators'
-import { BurrowStorage, BurrowStorageRow } from '../burrow-storage.type'
-import { getUpdateStorageAction } from '../update-burrow-storage/update-burrow-storage.util'
-import { BurrowLoadStorageResultAction } from './load-burrow-storage.type'
+import { BurrowStorage, BurrowStorageRow } from '../storage-state.type'
+import { getUpdateStorageAction } from '../update-storage/update-storage.util'
+import { LoadStorageResultAction } from './load-storage.type'
 
 export const getScStorage = ({
-  burrowStorageRow,
+  storageRow,
   walletAddress,
   scAddress,
-}: LoadBurrowStorageRequestParams): Observable<BurrowLoadStorageResultAction> =>
-  from(loadBurrowStorageRequest(burrowStorageRow.burrowId, walletAddress, scAddress)).pipe(
+}: LoadBurrowStorageRequestParams): Observable<LoadStorageResultAction> =>
+  from(loadStorageRequest(storageRow.burrowId, walletAddress, scAddress)).pipe(
     map((storage: BurrowStorage) => {
       if (storage) {
         return getUpdateStorageAction({
-          ...burrowStorageRow,
+          ...storageRow,
           status: RequestStatus.success,
           storage,
           errorMsg: '',
         })
       }
       return getUpdateStorageAction({
-        ...burrowStorageRow,
+        ...storageRow,
         status: RequestStatus.error,
         errorMsg: 'Internal error',
         storage: null,
@@ -32,7 +32,7 @@ export const getScStorage = ({
     catchError((err) =>
       of(
         getUpdateStorageAction({
-          ...burrowStorageRow,
+          ...storageRow,
           status: RequestStatus.error,
           storage: null,
           errorMsg: err.message,
@@ -42,17 +42,17 @@ export const getScStorage = ({
   )
 
 type LoadBurrowStorageRequestParams = {
-  burrowStorageRow: BurrowStorageRow
+  storageRow: BurrowStorageRow
   walletAddress: string
   scAddress: string
 }
 
-export const loadBurrowStorageEpic = (
+export const loadStorageEpic = (
   action$: Observable<AbstractAction<BurrowStorageRow>>,
   state$: Observable<RootState>,
 ) =>
   action$.pipe(
-    ofType('burrowStorage/loadStorage'),
+    ofType('storage/loadStorage'),
     withLatestFrom(state$),
     map(([x, state]) => {
       const { burrowId } = x.payload
@@ -62,7 +62,7 @@ export const loadBurrowStorageEpic = (
       } = state
 
       return {
-        burrowStorageRow: x.payload,
+        storageRow: x.payload,
         walletAddress: walletEntities['1'].address || '',
         // eslint-disable-next-line
         // @ts-ignore

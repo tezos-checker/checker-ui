@@ -1,22 +1,22 @@
 import { Box, Spinner, Table, Td, Tr } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
-import { BurrowStorageRow } from '../state/burrow-storage.type'
-import { BurrowStorageErrorInfoBox } from './burrow-storage-error-info-box'
+import { BurrowStorageRow } from '../state/storage-state.type'
+import { StorageErrorInfoBox } from './storage-error-info-box'
 
 type Props = {
-  burrowStorageRow?: BurrowStorageRow
+  storageRow?: BurrowStorageRow
 }
 
-export const BurrowStorageValues: FunctionComponent<Props> = ({ burrowStorageRow }) => {
-  if (!burrowStorageRow) {
+export const BurrowStorageValues: FunctionComponent<Props> = ({ storageRow }) => {
+  if (!storageRow) {
     return <Box>no storage</Box>
   }
 
   const {
     status,
     storage: { burrow },
-  } = burrowStorageRow
+  } = storageRow
 
   if (status === RequestStatus.pending) {
     return <Spinner />
@@ -24,7 +24,7 @@ export const BurrowStorageValues: FunctionComponent<Props> = ({ burrowStorageRow
 
   return (
     <>
-      <BurrowStorageErrorInfoBox burrowStorageRow={burrowStorageRow} />
+      <StorageErrorInfoBox storageRow={storageRow} />
       <Table>
         {Object.keys(burrow).map((x, i) => (
           <>

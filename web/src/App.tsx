@@ -29,7 +29,7 @@ const App: React.FC = () => {
       saveState({
         burrow: store.getState().burrow,
         burrowOperation: store.getState().burrowOperation,
-        burrowStorage: store.getState().burrowStorage,
+        storage: store.getState().storage,
       })
     })
 
