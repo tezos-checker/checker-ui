@@ -1,8 +1,8 @@
 import { RootState } from '@config'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { BurrowStorageRow } from './storage-state.type'
+import { StorageRow } from './storage-state.type'
 
-export const storageAdapter = createEntityAdapter<BurrowStorageRow>({
+export const storageAdapter = createEntityAdapter<StorageRow>({
   selectId: (storage) => storage.burrowId,
 })
 

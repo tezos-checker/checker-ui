@@ -1,4 +1,4 @@
 import { AbstractAction } from '@config'
-import { BurrowStorageRow } from '../storage-state.type'
+import { StorageRow } from '../storage-state.type'
 
-export type CreateStorageAction = AbstractAction<BurrowStorageRow>
+export type CreateStorageAction = AbstractAction<StorageRow>

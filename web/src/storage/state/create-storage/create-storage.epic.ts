@@ -5,7 +5,7 @@ import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { LoadStorageResultAction } from '../load-storage/load-storage.type'
-import { BurrowStorage, BurrowStorageRow } from '../storage-state.type'
+import { BurrowStorage, StorageRow } from '../storage-state.type'
 import { getUpdateStorageAction } from '../update-storage/update-storage.util'
 import { getCreateStorageAction } from './create-storage-action.util'
 
@@ -44,7 +44,7 @@ export const getScStorage = ({
   )
 
 type LoadBurrowStorageRequestParams = {
-  storageRow: BurrowStorageRow
+  storageRow: StorageRow
   walletAddress: string
   scAddress: string
 }

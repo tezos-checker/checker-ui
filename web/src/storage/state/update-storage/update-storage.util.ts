@@ -1,8 +1,7 @@
 import { LoadStorageResultAction } from '../load-storage/load-storage.type'
-import { BurrowStorageRow } from '../storage-state.type'
+import { StorageRow } from '../storage-state.type'
 
-// burrow storage result ( success or error )
-export const getUpdateStorageAction = (payload: BurrowStorageRow): LoadStorageResultAction => ({
+export const getUpdateStorageAction = (payload: StorageRow): LoadStorageResultAction => ({
   type: 'storage/updateStorage',
   payload,
 })

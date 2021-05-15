@@ -1,12 +1,12 @@
 import { RequestStatus, useAppDispatch } from '@config'
-import { BurrowStorageRow } from './storage-state.type'
+import { StorageRow } from './storage-state.type'
 import { storageActions } from './storage.slice'
 
 export const useStorageDispatcher = () => {
   const dispatch = useAppDispatch()
 
   return {
-    loadStorage: (storage: BurrowStorageRow) => () =>
+    loadStorage: (storage: StorageRow) => () =>
       dispatch(
         storageActions.loadStorage({
           ...storage,

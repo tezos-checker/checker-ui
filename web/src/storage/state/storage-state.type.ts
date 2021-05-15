@@ -26,12 +26,12 @@ export type CheckerStorageParameters = {
   target: number
 }
 
-export type CheckerStorage = any & {
+export type CheckerStorage = {
   burrow: BurrowStorage
   parameters: CheckerStorageParameters
 }
 
-export type BurrowStorageRow = {
+export type StorageRow = {
   burrowId: number
   status: RequestStatus
   errorMsg: string

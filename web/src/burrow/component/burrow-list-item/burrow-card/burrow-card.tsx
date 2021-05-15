@@ -13,7 +13,7 @@ import {
 import { RequestStatus } from '@config'
 import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
-import { BurrowStorageValues, getStorage } from '@storage'
+import { getStorage, StorageBurrowValues } from '@storage'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
 import { BurrowRowState } from '../../../state/burrow-state.type'
@@ -79,7 +79,7 @@ export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
 
   return (
     <>
-      <BurrowStorageValues storageRow={storage} />
+      <StorageBurrowValues storageRow={storage} />
       <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
         <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
           <Image src={FoxHeadSvg} h={'30px'} />

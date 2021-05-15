@@ -1,7 +1,7 @@
-import { BurrowStorageRow } from '../storage-state.type'
+import { StorageRow } from '../storage-state.type'
 import { LoadStorageResultAction } from './load-storage.type'
 
-export const getLoadStorageAction = (payload: BurrowStorageRow): LoadStorageResultAction => ({
+export const getLoadStorageAction = (payload: StorageRow): LoadStorageResultAction => ({
   type: 'storage/loadStorage',
   payload,
 })

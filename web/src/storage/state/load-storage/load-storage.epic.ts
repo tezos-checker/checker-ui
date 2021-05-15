@@ -3,7 +3,7 @@ import { AbstractAction, RequestStatus, RootState } from '@config'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators'
-import { BurrowStorage, BurrowStorageRow } from '../storage-state.type'
+import { BurrowStorage, StorageRow } from '../storage-state.type'
 import { getUpdateStorageAction } from '../update-storage/update-storage.util'
 import { LoadStorageResultAction } from './load-storage.type'
 
@@ -42,13 +42,13 @@ export const getScStorage = ({
   )
 
 type LoadBurrowStorageRequestParams = {
-  storageRow: BurrowStorageRow
+  storageRow: StorageRow
   walletAddress: string
   scAddress: string
 }
 
 export const loadStorageEpic = (
-  action$: Observable<AbstractAction<BurrowStorageRow>>,
+  action$: Observable<AbstractAction<StorageRow>>,
   state$: Observable<RootState>,
 ) =>
   action$.pipe(
