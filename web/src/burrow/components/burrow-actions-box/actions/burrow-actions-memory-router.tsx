@@ -1,4 +1,13 @@
 import {
+  BurrowOpeDelegateForm,
+  BurrowOpeDepositTezForm,
+  BurrowOpeEditDepositorForm,
+  BurrowOpeLiquidateForm,
+  BurrowOpeMintForm,
+  BurrowOpeRepayForm,
+  BurrowOpeWithdrawForm,
+} from '@burrow-operation'
+import {
   AddIcon,
   ArrowRightIcon,
   EditIcon,
@@ -11,13 +20,6 @@ import { Box, Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { MemoryRouter, NavLink, Route } from 'react-router-dom'
 import { BurrowRowState } from 'src/burrow/state/burrow-state.type'
-import { BurrowActionDelegate } from './burrow-action-delegate'
-import { BurrowActionDepositTez } from './burrow-action-deposit-tez'
-import { BurrowActionEditDepositor } from './burrow-action-edit-depositor'
-import { BurrowActionLiquidate } from './burrow-action-liquidate'
-import { BurrowActionMint } from './burrow-action-mint'
-import { BurrowActionRepay } from './burrow-action-repay'
-import { BurrowActionWithdraw } from './burrow-action-withdraw'
 
 type Props = BurrowRowState & {
   onCloseActions: () => void
@@ -31,7 +33,7 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: (props: Props) => (
-      <BurrowActionDepositTez {...props} callBack={props.onCloseActions} />
+      <BurrowOpeDepositTezForm {...props} callBack={props.onCloseActions} />
     ),
   },
   {
@@ -40,7 +42,7 @@ const routesConfig = [
     icon: <ArrowRightIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowActionWithdraw />,
+    getComponent: (props: Props) => <BurrowOpeWithdrawForm />,
   },
   {
     route: '/mint',
@@ -48,7 +50,7 @@ const routesConfig = [
     icon: <LinkIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowActionMint />,
+    getComponent: (props: Props) => <BurrowOpeMintForm />,
   },
   {
     route: '/repay',
@@ -56,7 +58,7 @@ const routesConfig = [
     icon: <RepeatIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowActionRepay />,
+    getComponent: (props: Props) => <BurrowOpeRepayForm />,
   },
   {
     route: '/delegate',
@@ -64,7 +66,7 @@ const routesConfig = [
     icon: <SunIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowActionDelegate />,
+    getComponent: (props: Props) => <BurrowOpeDelegateForm />,
   },
   {
     route: '/liquidate',
@@ -72,7 +74,7 @@ const routesConfig = [
     icon: <ExternalLinkIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowActionLiquidate />,
+    getComponent: (props: Props) => <BurrowOpeLiquidateForm />,
   },
   {
     route: '/editdepositor',
@@ -80,11 +82,11 @@ const routesConfig = [
     icon: <EditIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowActionEditDepositor />,
+    getComponent: (props: Props) => <BurrowOpeEditDepositorForm />,
   },
 ]
 
-export const BurrowActionsMemoryRouter: FunctionComponent<Props> = (props) => (
+export const BurrowOperationsMemoryRouter: FunctionComponent<Props> = (props) => (
   <MemoryRouter initialEntries={routesConfig.map((x) => x.route)} initialIndex={0}>
     <Flex h="70px" border="1px solid" my="15px">
       {routesConfig.map((x) => (
@@ -113,4 +115,4 @@ export const BurrowActionsMemoryRouter: FunctionComponent<Props> = (props) => (
   </MemoryRouter>
 )
 
-BurrowActionsMemoryRouter.displayName = 'BurrowActionsMemoryRouter'
+BurrowOperationsMemoryRouter.displayName = 'BurrowOperationsMemoryRouter'

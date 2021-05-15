@@ -4,7 +4,7 @@ import { IFormInputProperties } from 'vdr-react-form-manager'
 
 type Props = IFormInputProperties
 
-export const NewBurrowChooseCheckerField: FunctionComponent<Props> = ({
+export const CreateBurrowChooseCheckerField: FunctionComponent<Props> = ({
   name,
   value,
   availableValues,

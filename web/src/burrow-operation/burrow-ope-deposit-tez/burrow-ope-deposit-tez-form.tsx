@@ -1,10 +1,10 @@
 import { Box, Button } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
-import { useDispatchBurrowOpeDepositTez } from '../../../../burrow-operation/burrow-ope-deposit-tez/useDispatchBurrowOpeDepositTez'
-import { BurrowRowState } from '../../../state/burrow-state.type'
+import { BurrowRowState } from '../../burrow/state/burrow-state.type'
+import { useDispatchBurrowOpeDepositTez } from './useDispatchBurrowOpeDepositTez'
 
 type Props = BurrowRowState & { callBack: () => void }
-export const BurrowActionDepositTez: FunctionComponent<Props> = ({
+export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
   burrowId,
   scAddress,
   callBack,

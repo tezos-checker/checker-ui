@@ -4,7 +4,7 @@ export const inputChecker = 'checker'
 export const inputDelegate = 'delegate'
 export const inputDeposit = 'deposit'
 
-export const burrowFormModel = {
+export const createBurrowFormModel = {
   formInputs: {
     ...FormInputProperties.Builder(inputChecker)
       .addAvailableValue({

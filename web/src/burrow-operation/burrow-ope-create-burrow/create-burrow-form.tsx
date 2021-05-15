@@ -4,14 +4,19 @@ import { Button, IconButton } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFormManager } from 'vdr-react-form-manager'
-import { useDispatchBurrowOpeCreateBurrow } from '../../../burrow-operation/burrow-ope-create-burrow/useDispatchBurrowOpeCreateBurrow'
-import { NewBurrowChooseCheckerField } from './new-burrow-choose-check-field'
-import { NewBurrowDelegateField } from './new-burrow-delegate-field'
-import { NewBurrowDepositField } from './new-burrow-deposit-field'
-import { burrowFormModel, inputChecker, inputDelegate, inputDeposit } from './new-burrow.model'
+import { CreateBurrowChooseCheckerField } from './component/create-burrow-choose-check-field'
+import { CreateBurrowDelegateField } from './component/create-burrow-delegate-field'
+import { CreateBurrowDepositField } from './component/create-burrow-deposit-field'
+import {
+  createBurrowFormModel,
+  inputChecker,
+  inputDelegate,
+  inputDeposit,
+} from './component/create-burrow.model'
+import { useDispatchBurrowOpeCreateBurrow } from './useDispatchBurrowOpeCreateBurrow'
 
-export const NewBurrow: FunctionComponent = () => {
-  const { handleFormChange, getInputProps } = useFormManager(burrowFormModel)
+export const CreateBurrowForm: FunctionComponent = () => {
+  const { handleFormChange, getInputProps } = useFormManager(createBurrowFormModel)
 
   const history = useHistory()
 
@@ -34,9 +39,9 @@ export const NewBurrow: FunctionComponent = () => {
         p="20px"
       >
         <Box fontSize="3xl">New Burrow</Box>
-        <NewBurrowChooseCheckerField {...getInputProps(inputChecker)} />
-        <NewBurrowDelegateField {...getInputProps(inputDelegate)} />
-        <NewBurrowDepositField {...getInputProps(inputDeposit)} />
+        <CreateBurrowChooseCheckerField {...getInputProps(inputChecker)} />
+        <CreateBurrowDelegateField {...getInputProps(inputDelegate)} />
+        <CreateBurrowDepositField {...getInputProps(inputDeposit)} />
         <Button
           mt="15px"
           onClick={createBurrow(Math.floor(Math.random() * 99), getInputProps(inputChecker).value, {
