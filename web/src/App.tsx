@@ -28,6 +28,8 @@ const App: React.FC = () => {
     const storeUnsubscribe: Unsubscribe = store.subscribe(() => {
       saveState({
         burrow: store.getState().burrow,
+        burrowOperation: store.getState().burrowOperation,
+        burrowStorage: store.getState().burrowStorage,
       })
     })
 
