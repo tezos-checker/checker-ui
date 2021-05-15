@@ -8,15 +8,15 @@ import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { createOperationErrorAction } from '../state/burrow-ope-state.utils'
 import {
-  burrowOpeCreateBurrowSubmit,
   BurrowOpeCreateBurrowSubmitParams,
+  burrowOpeCreateBurrowSubmitRequest,
 } from './burrow-ope-create-burrow.api'
 
 const actionType = 'burrowOpe/createBurrowSubmit'
 
 const submitCreateBurrow = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
   from(
-    burrowOpeCreateBurrowSubmit(
+    burrowOpeCreateBurrowSubmitRequest(
       rowState.burrowId,
       rowState.scAddress,
       rowState.submitOperationParams as BurrowOpeCreateBurrowSubmitParams,
@@ -39,7 +39,7 @@ const submitCreateBurrow = (rowState: BurrowOpeRowState): Observable<BurrowOpeAc
     catchError((err) => of(createOperationErrorAction(actionType, rowState, err.message))),
   )
 
-const burrowOpeCreateBurrowSubmitEpic = (action$: any) =>
+const burrowOpeCreateBurrowSubmitRequestEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
@@ -52,6 +52,6 @@ export const scOpeCreateBurrowConfirmEpic = createBurrowOpeConfirmEpic(
 )
 
 export const burrowOpeCreateBurrowEpics = combineEpics(
-  burrowOpeCreateBurrowSubmitEpic,
+  burrowOpeCreateBurrowSubmitRequestEpic,
   scOpeCreateBurrowConfirmEpic,
 )

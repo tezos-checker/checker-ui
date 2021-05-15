@@ -8,15 +8,15 @@ import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { createOperationErrorAction } from '../state/burrow-ope-state.utils'
 import {
-  burrowOpeDepositTezSubmit,
   BurrowOpeDepositTezSubmitParams,
+  burrowOpeDepositTezSubmitRequest,
 } from './burrow-ope-deposit-tez.api'
 
 const actionType = 'burrowOpe/depositTezSubmit'
 
 const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
   from(
-    burrowOpeDepositTezSubmit(
+    burrowOpeDepositTezSubmitRequest(
       rowState.scAddress,
       rowState.submitOperationParams as BurrowOpeDepositTezSubmitParams,
     ),
@@ -38,7 +38,7 @@ const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeActi
     catchError((err) => of(createOperationErrorAction(actionType, rowState, err.message))),
   )
 
-const burrowOpeDepositTezSubmitEpic = (action$: any) =>
+const burrowOpeDepositTezSubmitRequestEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
@@ -49,6 +49,6 @@ const burrowOpeDepositTezSubmitEpic = (action$: any) =>
 const scOpeDepositTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/depositTezConfirm')
 
 export const burrowOpeDepositTezEpics = combineEpics(
-  burrowOpeDepositTezSubmitEpic,
+  burrowOpeDepositTezSubmitRequestEpic,
   scOpeDepositTezConfirmEpic,
 )

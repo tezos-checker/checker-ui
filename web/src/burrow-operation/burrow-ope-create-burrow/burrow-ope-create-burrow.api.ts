@@ -6,7 +6,7 @@ export type BurrowOpeCreateBurrowSubmitParams = {
   deposit: number
 }
 
-export const burrowOpeCreateBurrowSubmit = async (
+export const burrowOpeCreateBurrowSubmitRequest = async (
   burrowId: number,
   scAddress: string,
   { delegate, deposit }: BurrowOpeCreateBurrowSubmitParams,

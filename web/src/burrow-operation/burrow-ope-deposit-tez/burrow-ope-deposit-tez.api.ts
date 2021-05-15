@@ -3,7 +3,7 @@ import { TransactionWalletOperation } from '@taquito/taquito'
 
 export type BurrowOpeDepositTezSubmitParams = { tez: number }
 
-export const burrowOpeDepositTezSubmit = async (
+export const burrowOpeDepositTezSubmitRequest = async (
   scAddress: string,
   { tez }: BurrowOpeDepositTezSubmitParams,
 ): Promise<TransactionWalletOperation> => {

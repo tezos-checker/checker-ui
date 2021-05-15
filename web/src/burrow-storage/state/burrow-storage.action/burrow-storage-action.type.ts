@@ -1,13 +1,13 @@
 import { AbstractAction } from '@config'
-import { BurrowRowStorage } from '../burrow-storage-state.type'
+import { BurrowStorageRow } from '../burrow-storage.type'
 
 // Load burrow storage
-export type BurrowLoadStorageActionPayload = {
+export type BurrowLoadStoragePayload = {
   burrowId: number
   scAddress: string
 }
-export type BurrowLoadStorageAction = AbstractAction<BurrowLoadStorageActionPayload>
+export type BurrowLoadStorageAction = AbstractAction<BurrowLoadStoragePayload>
 
 // Load burrow storage
-export type BurrowLoadStorageResultActionPayload = BurrowRowStorage & BurrowLoadStorageActionPayload
-export type BurrowLoadStorageResultAction = AbstractAction<BurrowLoadStorageResultActionPayload>
+export type BurrowLoadStorageResultPayload = BurrowStorageRow & BurrowLoadStoragePayload
+export type BurrowLoadStorageResultAction = AbstractAction<BurrowLoadStorageResultPayload>

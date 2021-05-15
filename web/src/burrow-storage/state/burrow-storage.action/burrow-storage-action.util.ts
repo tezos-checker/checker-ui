@@ -1,13 +1,13 @@
 import {
   BurrowLoadStorageAction,
-  BurrowLoadStorageActionPayload,
+  BurrowLoadStoragePayload,
   BurrowLoadStorageResultAction,
-  BurrowLoadStorageResultActionPayload,
+  BurrowLoadStorageResultPayload,
 } from './burrow-storage-action.type'
 
 // Load burrow storage
 export const getLoadStorageAction = (
-  payload: BurrowLoadStorageActionPayload,
+  payload: BurrowLoadStoragePayload,
 ): BurrowLoadStorageAction => ({
   type: 'burrow/loadStorage',
   payload,
@@ -15,7 +15,7 @@ export const getLoadStorageAction = (
 
 // burrow storage result ( success or error )
 export const getUpdateStorageAction = (
-  payload: BurrowLoadStorageResultActionPayload,
+  payload: BurrowLoadStorageResultPayload,
 ): BurrowLoadStorageResultAction => ({
   type: 'burrow/updateStorage',
   payload,
