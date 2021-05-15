@@ -2,7 +2,7 @@ import { BurrowOpeAction, BurrowOpeRowState } from '@burrow-operation'
 import { combineEpics, ofType } from 'redux-observable'
 import { of } from 'rxjs'
 import { map, mergeMap } from 'rxjs/operators'
-import { getCreateBurrowAction } from '../action/burrow-creation.action/burrow-creation-action.util'
+import { getCreateBurrowAction } from './create-burrow-action.util'
 
 const createBurrowEpic = (action$: any) =>
   action$.pipe(

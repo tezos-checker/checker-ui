@@ -10,10 +10,10 @@ const isACompletedOperation = (x: BurrowOpeRowState) => x.status === RequestStat
 // Put here all the burrow operations that should perform a storage refresh
 export const triggerLoadBurrowStorageEpic = (action$: any, state$: any) =>
   action$.pipe(
-    ofType('operation/createBurrowConfirm', 'operation/depositTezConfirm'),
+    ofType('burrowOpe/createBurrowConfirm', 'burrowOpe/depositTezConfirm'),
     withLatestFrom(state$),
     filter(([x, state]) => isACompletedOperation(x.payload)),
-    mergeMap(([payload, state]) =>
-      of(getLoadStorageAction(state.burrowStorage.entities[payload.burrowId])),
+    mergeMap(([x, state]) =>
+      of(getLoadStorageAction(state.burrowStorage.entities[x.payload.burrowId])),
     ),
   )
