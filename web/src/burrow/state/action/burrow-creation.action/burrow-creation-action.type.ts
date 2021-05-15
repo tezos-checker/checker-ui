@@ -1,9 +1,8 @@
 import { BurrowOpeRowState } from '@burrow-operation'
 import { AbstractAction } from '@config'
 
-export type BurrowCreationActionPayload = Pick<
-  BurrowOpeRowState,
-  'burrowId' | 'scAddress' | 'status' | 'errorMsg'
->
+export type CreateBurrowPayload = Pick<BurrowOpeRowState, 'burrowId' | 'scAddress'>
 
-export type BurrowCreationAction = AbstractAction<BurrowCreationActionPayload>
+export type CreationBurrowAction = AbstractAction<CreateBurrowPayload>
+
+export type DeleteBurrowAction = AbstractAction<number>

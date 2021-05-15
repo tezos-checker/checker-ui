@@ -1,11 +1,11 @@
+import { BurrowOpeRowState } from '@burrow-operation'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Box, IconButton, Image, Progress } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
-import { BurrowOpeRowState } from 'src/burrow-operation/state/burrow-ope-state.type'
-import FoxJumpingGif from '../../../assets/images/fox-jumping.gif'
-import OopsGif from '../../../assets/images/oops.gif'
-import { useDispatchRemoveBurrow } from '../../state/useDispatchRemoveBurrow'
+import FoxJumpingGif from '../../../../assets/images/fox-jumping.gif'
+import OopsGif from '../../../../assets/images/oops.gif'
+import { useBurrowDispatcher } from '../../../state/useBurrowDispatcher.hook'
 
 const BurrowCreationOnPending: FunctionComponent<BurrowOpeRowState> = (props) => (
   <Box border="1px solid" w="300px" m="10px" borderRadius="5px">
@@ -21,11 +21,11 @@ const BurrowCreationOnPending: FunctionComponent<BurrowOpeRowState> = (props) =>
 )
 
 const BurrowCreationFailed: FunctionComponent<BurrowOpeRowState> = ({ burrowId, errorMsg }) => {
-  const removeBurrow = useDispatchRemoveBurrow(burrowId)
+  const { deleteBurrow } = useBurrowDispatcher()
   return (
     <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
       <IconButton
-        onClick={removeBurrow}
+        onClick={deleteBurrow(burrowId)}
         position="absolute"
         m={'5px '}
         top={0}
@@ -48,7 +48,7 @@ const BurrowCreationFailed: FunctionComponent<BurrowOpeRowState> = ({ burrowId, 
   )
 }
 
-export const BurrowCreationInfoBox: FunctionComponent<BurrowOpeRowState> = (burrowOperation) =>
+export const BurrowCreationStatusCard: FunctionComponent<BurrowOpeRowState> = (burrowOperation) =>
   burrowOperation.status === RequestStatus.pending ? (
     <BurrowCreationOnPending {...burrowOperation} />
   ) : (

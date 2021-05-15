@@ -13,5 +13,8 @@ export const useBurrowOpeDispatcher = () => {
           status: RequestStatus.idle,
         }),
       ),
+
+    deleteBurrowOperation: (burrowId: number) => () =>
+      dispatch(burrowOpeActions.deleteBurrowOpe(burrowId)),
   }
 }

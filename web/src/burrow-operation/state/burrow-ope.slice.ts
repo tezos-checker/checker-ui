@@ -18,6 +18,7 @@ export const burrowOpeSlice = createSlice({
     depositTezSubmit: burrowOpeAdapter.upsertOne,
     depositTezConfirm: burrowOpeAdapter.upsertOne,
     clearBurrowOpeMessage: burrowOpeAdapter.upsertOne,
+    deleteBurrowOpe: burrowOpeAdapter.removeOne,
   },
 })
 

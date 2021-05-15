@@ -2,6 +2,7 @@ import { BurrowOpeRowState, getBurrowOperation, useBurrowOpeDispatcher } from '@
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
 import {
   Box,
+  Button,
   Flex,
   IconButton,
   Image,
@@ -14,9 +15,10 @@ import { RequestStatus } from '@config'
 import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
-import FoxHeadSvg from '../../../assets/images/fox-head.svg'
-import { BurrowRowState } from '../../state/burrow-state.type'
-import { BurrowActionsBox } from '../burrow-actions-box/burrow-actions-box'
+import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
+import { BurrowRowState } from '../../../state/burrow-state.type'
+import { useBurrowDispatcher } from '../../../state/useBurrowDispatcher.hook'
+import { BurrowActionsBox } from '../../burrow-actions-box/burrow-actions-box'
 
 const BurrowOperationInformation: FunctionComponent<BurrowOpeRowState> = (burrowOpe) => {
   const style = useStyleConfig('ui/burrow-operation-info-box')
@@ -71,12 +73,14 @@ const BurrowOperationInformation: FunctionComponent<BurrowOpeRowState> = (burrow
   }
 }
 
-export const BurrowItem: FunctionComponent<BurrowRowState> = (props) => {
+export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
   const { isOpen, onToggle } = useDisclosure()
   const burrowOperation = getBurrowOperation(props.burrowId)
+  const { deleteBurrow } = useBurrowDispatcher()
 
   return (
     <>
+      <Button onClick={deleteBurrow(props.burrowId)}>DELETE</Button>
       <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
         <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
           <Image src={FoxHeadSvg} h={'30px'} />

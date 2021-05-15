@@ -4,7 +4,7 @@ import { burrowOpeCreateBurrowEpics } from '../../burrow-operation/burrow-ope-cr
 import { burrowOpeDepositTezEpics } from '../../burrow-operation/burrow-ope-deposit-tez/burrow-deposit-tez.epics'
 import { burrowOpeSlice } from '../../burrow-operation/state/burrow-ope.slice'
 import { burrowSlice } from '../../burrow/state/burrow.slice'
-import { burrowCreationEpic } from '../../burrow/state/epic/burrow-creation.epic/burrow-creation.epic'
+import { createBurrowEpics } from '../../burrow/state/epic/create-burrow.epics'
 import { loadWalletEpic } from '../../wallet/state/wallet-epic'
 import { walletSlice } from '../../wallet/state/wallet.slice'
 import { loadState } from './store-persist.util'
@@ -25,7 +25,7 @@ epicMiddleware.run(
   combineEpics(
     loadWalletEpic,
 
-    burrowCreationEpic,
+    createBurrowEpics,
     burrowOpeDepositTezEpics,
     burrowOpeCreateBurrowEpics,
   ),
