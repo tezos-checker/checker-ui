@@ -2,7 +2,7 @@ import { RequestStatus, useAppDispatch } from '@config'
 import { burrowStorageActions } from './burrow-storage.slice'
 import { BurrowStorageRow } from './burrow-storage.type'
 
-export const useBurrowStorageDispatcher = () => {
+export const useStorageDispatcher = () => {
   const dispatch = useAppDispatch()
 
   return {

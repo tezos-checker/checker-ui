@@ -21,7 +21,7 @@ export const burrowStorageSlice = createSlice({
 })
 
 export const { selectById: getStorageForBurrow } = burrowStorageAdapter.getSelectors(
-  (state) => (state as RootState).burrowOperation,
+  (state) => (state as RootState).burrowStorage,
 )
 
 export const burrowStorageActions = burrowStorageSlice.actions
