@@ -27,3 +27,5 @@ export const { selectById: getOpeForBurrow } = burrowOpeAdapter.getSelectors(
 )
 
 export const burrowOpeActions = burrowOpeSlice.actions
+
+export const burrowOpeReducers = burrowOpeSlice.reducer

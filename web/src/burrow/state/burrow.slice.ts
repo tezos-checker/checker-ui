@@ -24,3 +24,5 @@ export const burrowSlice = createSlice({
 })
 
 export const burrowActions = burrowSlice.actions
+
+export const burrowReducer = burrowSlice.reducer

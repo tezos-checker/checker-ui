@@ -5,7 +5,7 @@ import { isPendingRequest } from '@shared/utils'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, filter, map, mergeMap, timeout } from 'rxjs/operators'
-import { WalletRowState } from './wallet-state.type'
+import { WalletRowState } from '../wallet-state.type'
 
 const actionType = 'wallet/loadWallet'
 
