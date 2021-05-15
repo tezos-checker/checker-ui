@@ -1,81 +1,24 @@
-import { BurrowOpeRowState, getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
-import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Flex,
-  IconButton,
-  Image,
-  Spinner,
-  useDisclosure,
-  useStyleConfig,
-  VStack,
-} from '@chakra-ui/react'
+import { getBurrowOperation } from '@burrow-operation'
+import { DragHandleIcon } from '@chakra-ui/icons'
+import { Box, Flex, IconButton, Image, useDisclosure, VStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ClipboardCopy, SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import { getStorage, StorageBurrowValues } from '@storage'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
-import { BurrowRowState } from '../../../state/burrow-state.type'
-import { BurrowActionsBox } from '../../burrow-actions-box/burrow-actions-box'
+import { BurrowRowState } from '../../../../state/burrow-state.type'
+import { BurrowActionsBox } from '../../../burrow-actions-box/burrow-actions-box'
+import { BurrowOperationInformation } from './burrow-card-operation-info'
 
-const BurrowOperationInformation: FunctionComponent<BurrowOpeRowState> = (burrowOpe) => {
-  const style = useStyleConfig('ui/burrow-operation-info-box')
-  const { clearBurrowOpeMessage } = useBurrowOpeDispatcher()
-
-  const { status, operationName } = burrowOpe
-
-  switch (status) {
-    case RequestStatus.success:
-      return (
-        <Flex sx={style} bg="green.100">
-          <Box as="span">
-            Operation <b>{operationName}</b> succeeded
-          </Box>
-          <IconButton
-            onClick={clearBurrowOpeMessage(burrowOpe)}
-            aria-label="close"
-            bg="green.500"
-            color="green.900"
-            size="xs"
-            icon={<CloseIcon />}
-          />
-        </Flex>
-      )
-    case RequestStatus.pending:
-      return (
-        <Flex sx={style} position="absolute" bg="blue.200">
-          <Box as="span">
-            Operation <b>{operationName}</b> is pending
-          </Box>
-          <Spinner size="xs" />
-        </Flex>
-      )
-    case RequestStatus.error:
-      return (
-        <Flex sx={style} bg="red.100">
-          <Box as="span">
-            Operation <b>{operationName}</b> failed
-          </Box>
-          <IconButton
-            onClick={clearBurrowOpeMessage(burrowOpe)}
-            aria-label="close"
-            bg="red.500"
-            color="red.900"
-            size="xs"
-            icon={<CloseIcon />}
-          />
-        </Flex>
-      )
-    default:
-      return null
-  }
+type Props = {
+  burrowRowState: BurrowRowState
 }
 
-export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
+export const BurrowCardResume: FunctionComponent<Props> = ({ burrowRowState }) => {
   const { isOpen, onToggle } = useDisclosure()
-  const burrowOperation = getBurrowOperation(props.burrowId)
-  const storage = getStorage(props.burrowId)
+  const burrowOperation = getBurrowOperation(burrowRowState.burrowId)
+  const storage = getStorage(burrowRowState.burrowId)
 
   return (
     <>
@@ -84,14 +27,14 @@ export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
         <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
           <Image src={FoxHeadSvg} h={'30px'} />
           <Box as="span" mx="10px">
-            {truncateStringInTheMiddle(props.scAddress)}
+            {truncateStringInTheMiddle(burrowRowState.scAddress)}
           </Box>
-          <ClipboardCopy text={props.scAddress} />
+          <ClipboardCopy text={burrowRowState.scAddress} />
         </Flex>
         <Box mx="10px" mt="15px" textAlign="center">
           CTEZ / KIT
         </Box>
-        {burrowOperation ? <BurrowOperationInformation {...burrowOperation} /> : null}
+        <BurrowOperationInformation burrowOpeRowState={burrowOperation} />
         <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
           <Box fontSize="3xl" fontWeight="extrabold">
             100
@@ -146,7 +89,7 @@ export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
         </Flex>
       </Box>
       <SlideBox isOpen={isOpen} onClickOutSideMenu={onToggle}>
-        <BurrowActionsBox burrowRowState={props} onCloseActions={onToggle} />
+        <BurrowActionsBox burrowRowState={burrowRowState} onCloseActions={onToggle} />
       </SlideBox>
     </>
   )

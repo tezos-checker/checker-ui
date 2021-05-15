@@ -3,7 +3,7 @@ import { AbstractAction, RequestStatus, RootState } from '@config'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators'
-import { BurrowStorage, StorageRow } from '../storage-state.type'
+import { CheckerStorage, StorageRow } from '../storage-state.type'
 import { getUpdateStorageAction } from '../update-storage/update-storage.util'
 import { LoadStorageResultAction } from './load-storage.type'
 
@@ -13,7 +13,7 @@ export const getScStorage = ({
   scAddress,
 }: LoadBurrowStorageRequestParams): Observable<LoadStorageResultAction> =>
   from(loadStorageRequest(storageRow.burrowId, walletAddress, scAddress)).pipe(
-    map((storage: BurrowStorage) => {
+    map((storage: CheckerStorage) => {
       if (storage) {
         return getUpdateStorageAction({
           ...storageRow,
@@ -26,7 +26,6 @@ export const getScStorage = ({
         ...storageRow,
         status: RequestStatus.error,
         errorMsg: 'Internal error',
-        storage: null,
       })
     }),
     catchError((err) =>
@@ -34,7 +33,6 @@ export const getScStorage = ({
         getUpdateStorageAction({
           ...storageRow,
           status: RequestStatus.error,
-          storage: null,
           errorMsg: err.message,
         }),
       ),

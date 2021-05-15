@@ -35,5 +35,5 @@ export type StorageRow = {
   burrowId: number
   status: RequestStatus
   errorMsg: string
-  storage: CheckerStorage | null
+  storage: CheckerStorage
 }

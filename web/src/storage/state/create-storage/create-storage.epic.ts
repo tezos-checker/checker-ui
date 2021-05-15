@@ -5,7 +5,7 @@ import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { LoadStorageResultAction } from '../load-storage/load-storage.type'
-import { BurrowStorage, StorageRow } from '../storage-state.type'
+import { CheckerStorage, StorageRow } from '../storage-state.type'
 import { getUpdateStorageAction } from '../update-storage/update-storage.util'
 import { getCreateStorageAction } from './create-storage-action.util'
 
@@ -15,7 +15,7 @@ export const getScStorage = ({
   scAddress,
 }: LoadBurrowStorageRequestParams): Observable<LoadStorageResultAction> =>
   from(loadStorageRequest(storageRow.burrowId, walletAddress, scAddress)).pipe(
-    map((storage: BurrowStorage) => {
+    map((storage: CheckerStorage) => {
       if (storage) {
         return getUpdateStorageAction({
           ...storageRow,
@@ -28,7 +28,6 @@ export const getScStorage = ({
         ...storageRow,
         status: RequestStatus.error,
         errorMsg: 'Internal error',
-        storage: null,
       })
     }),
     catchError((err) =>
@@ -36,7 +35,6 @@ export const getScStorage = ({
         getUpdateStorageAction({
           ...storageRow,
           status: RequestStatus.error,
-          storage: null,
           errorMsg: err.message,
         }),
       ),
@@ -54,14 +52,5 @@ export const createStorageEpic = (action$: any) =>
     ofType('burrowOpe/createBurrowSubmit'),
     map((x: BurrowOpeAction) => x.payload),
     filter((payload: BurrowOpeRowState) => payload.status === RequestStatus.pending),
-    mergeMap((payload: BurrowOpeRowState) =>
-      of(
-        getCreateStorageAction({
-          burrowId: payload.burrowId,
-          status: RequestStatus.idle,
-          errorMsg: '',
-          storage: null,
-        }),
-      ),
-    ),
+    mergeMap((payload: BurrowOpeRowState) => of(getCreateStorageAction(payload.burrowId))),
   )

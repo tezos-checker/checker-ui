@@ -32,7 +32,7 @@ export const StorageBurrowValues: FunctionComponent<Props> = ({ storageRow }) =>
               <Td bg="gray.100">{x}</Td>
             </Tr>
             <Tr key={`${x}${i}`}>
-              <Td>{burrow[x] || ''}</Td>
+              <Td>{(burrow as any)[x] || ''}</Td>
             </Tr>
           </>
         ))}

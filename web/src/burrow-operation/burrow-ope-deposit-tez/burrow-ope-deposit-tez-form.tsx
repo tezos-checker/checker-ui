@@ -3,10 +3,13 @@ import React, { FunctionComponent } from 'react'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
 import { useDispatchBurrowOpeDepositTez } from './useDispatchBurrowOpeDepositTez'
 
-type Props = BurrowRowState & { callBack: () => void }
+type Props = {
+  burrowRowState: BurrowRowState
+  callBack: () => void
+}
+
 export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
-  burrowId,
-  scAddress,
+  burrowRowState: { burrowId, scAddress },
   callBack,
 }) => {
   const { depositTez } = useDispatchBurrowOpeDepositTez(burrowId, scAddress, callBack)

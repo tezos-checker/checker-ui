@@ -21,7 +21,8 @@ import React, { FunctionComponent } from 'react'
 import { MemoryRouter, NavLink, Route } from 'react-router-dom'
 import { BurrowRowState } from 'src/burrow/state/burrow-state.type'
 
-type Props = BurrowRowState & {
+type Props = {
+  burrowRowState: BurrowRowState
   onCloseActions: () => void
 }
 

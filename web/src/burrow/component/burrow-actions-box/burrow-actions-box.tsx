@@ -5,11 +5,12 @@ import React, { FunctionComponent } from 'react'
 import { BurrowRowState } from '../../state/burrow-state.type'
 import { BurrowOperationsMemoryRouter } from './burrow-actions-memory-router'
 
-type Props = BurrowRowState & {
+type Props = {
+  burrowRowState: BurrowRowState
   onCloseActions: () => void
 }
 
-export const BurrowActionsBox: FunctionComponent<Props> = (props) => (
+export const BurrowActionsBox: FunctionComponent<Props> = ({ onCloseActions, burrowRowState }) => (
   <Box w="600px" mx="auto" mt="5vh" p="20px">
     <Flex
       justifyContent="space-between"
@@ -18,11 +19,11 @@ export const BurrowActionsBox: FunctionComponent<Props> = (props) => (
       borderColor="gray.200"
     >
       <Box fontSize="3xl">Actions</Box>
-      <CloseButton onClick={props.onCloseActions} size="lg" />
+      <CloseButton onClick={onCloseActions} size="lg" />
     </Flex>
     <Box textAlign="center" mt="10px">
       Burrow - xxxx - {truncateStringInTheMiddle('testtesttesttesttest')}
     </Box>
-    <BurrowOperationsMemoryRouter {...props} />
+    <BurrowOperationsMemoryRouter onCloseActions={onCloseActions} burrowRowState={burrowRowState} />
   </Box>
 )
