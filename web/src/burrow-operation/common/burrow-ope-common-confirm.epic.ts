@@ -6,14 +6,14 @@ import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { BurrowOpeAction } from '../state/burrow-ope-state.type'
 import { createOperationErrorAction } from '../state/burrow-ope-state.utils'
-import { scOpeConfirmation } from './burrow-ope-common.api'
+import { burrowOpeConfirmRequest } from './burrow-ope-common.api'
 
 const confirmMethod = ({ type, payload }: BurrowOpeAction): Observable<BurrowOpeAction> => {
   if (!payload.transactionWalletOperation) {
     return of(createOperationErrorAction(type, payload, 'Internal error'))
   }
 
-  return from(scOpeConfirmation(payload.transactionWalletOperation)).pipe(
+  return from(burrowOpeConfirmRequest(payload.transactionWalletOperation)).pipe(
     map((blockResponse: BlockResponse) => {
       if (blockResponse) {
         // eslint-disable-next-line
@@ -33,7 +33,7 @@ const confirmMethod = ({ type, payload }: BurrowOpeAction): Observable<BurrowOpe
   )
 }
 
-export const createConfirmMethodForAction = (actionType: string) => (action$: any) =>
+export const createBurrowOpeConfirmEpic = (actionType: string) => (action$: any) =>
   action$.pipe(
     ofType(actionType),
     filter((x: BurrowOpeAction) => isPendingRequest(x.payload.status)),

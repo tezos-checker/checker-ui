@@ -1,7 +1,7 @@
 import { BlockResponse } from '@taquito/rpc'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
-export const scOpeConfirmation = async (
+export const burrowOpeConfirmRequest = async (
   op: TransactionWalletOperation,
   numberOfConfirmation = 1,
 ): Promise<BlockResponse> => {

@@ -4,7 +4,7 @@ import { TransactionWalletOperation } from '@taquito/taquito'
 import { combineEpics, ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
-import { createConfirmMethodForAction } from '../config/burrow-ope-common-confirm.epic'
+import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.epic'
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { createOperationErrorAction } from '../state/burrow-ope-state.utils'
 import {
@@ -47,7 +47,7 @@ const burrowOpeCreateBurrowSubmitEpic = (action$: any) =>
     mergeMap((x: BurrowOpeRowState) => submitCreateBurrow(x)),
   )
 
-export const scOpeCreateBurrowConfirmEpic = createConfirmMethodForAction(
+export const scOpeCreateBurrowConfirmEpic = createBurrowOpeConfirmEpic(
   'burrowOpe/createBurrowConfirm',
 )
 
