@@ -3,7 +3,7 @@ import { CloseButton, Flex } from '@chakra-ui/react'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
 import { BurrowRowState } from '../../state/burrow-state.type'
-import { BurrowOperationsMemoryRouter } from './actions/burrow-actions-memory-router'
+import { BurrowOperationsMemoryRouter } from './burrow-actions-memory-router'
 
 type Props = BurrowRowState & {
   onCloseActions: () => void
