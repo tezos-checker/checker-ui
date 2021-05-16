@@ -1,153 +1,55 @@
-import { BurrowOpeRowState, getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
-import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Flex,
-  IconButton,
-  Image,
-  Spinner,
-  useDisclosure,
-  useStyleConfig,
-  VStack,
-} from '@chakra-ui/react'
-import { RequestStatus } from '@config'
-import { ClipboardCopy, SlideBox } from '@shared/ui'
+import { getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
+import { Box, Button, Flex, Image } from '@chakra-ui/react'
+import { ClipboardCopy } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
-import { getStorage, StorageBurrowValues } from '@storage'
+import { getStorage } from '@storage'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
 import { BurrowRowState } from '../../../state/burrow-state.type'
-import { BurrowActionsBox } from '../../burrow-actions-box/burrow-actions-box'
+import { useBurrowDispatcher } from '../../../state/useBurrowDispatcher.hook'
+import { BurrowOperationInformation } from './burrow-card-resume/burrow-card-operation-info'
+import { CardItemMemoryRouter } from './burrow-card-tab-router'
 
-const BurrowOperationInformation: FunctionComponent<BurrowOpeRowState> = (burrowOpe) => {
-  const style = useStyleConfig('ui/burrow-operation-info-box')
-  const { clearBurrowOpeMessage } = useBurrowOpeDispatcher()
-
-  const { status, operationName } = burrowOpe
-
-  switch (status) {
-    case RequestStatus.success:
-      return (
-        <Flex sx={style} bg="green.100">
-          <Box as="span">
-            Operation <b>{operationName}</b> succeeded
-          </Box>
-          <IconButton
-            onClick={clearBurrowOpeMessage(burrowOpe)}
-            aria-label="close"
-            bg="green.500"
-            color="green.900"
-            size="xs"
-            icon={<CloseIcon />}
-          />
-        </Flex>
-      )
-    case RequestStatus.pending:
-      return (
-        <Flex sx={style} position="absolute" bg="blue.200">
-          <Box as="span">
-            Operation <b>{operationName}</b> is pending
-          </Box>
-          <Spinner size="xs" />
-        </Flex>
-      )
-    case RequestStatus.error:
-      return (
-        <Flex sx={style} bg="red.100">
-          <Box as="span">
-            Operation <b>{operationName}</b> failed
-          </Box>
-          <IconButton
-            onClick={clearBurrowOpeMessage(burrowOpe)}
-            aria-label="close"
-            bg="red.500"
-            color="red.900"
-            size="xs"
-            icon={<CloseIcon />}
-          />
-        </Flex>
-      )
-    default:
-      return null
-  }
+type Props = {
+  burrowRowState: BurrowRowState
 }
 
-export const BurrowCard: FunctionComponent<BurrowRowState> = (props) => {
-  const { isOpen, onToggle } = useDisclosure()
-  const burrowOperation = getBurrowOperation(props.burrowId)
-  const storage = getStorage(props.burrowId)
+export const BurrowCard: FunctionComponent<Props> = ({ burrowRowState }) => {
+  const storage = getStorage(burrowRowState.burrowId)
+  const burrowOperation = getBurrowOperation(burrowRowState.burrowId)
+  const { deleteBurrow } = useBurrowDispatcher()
+  const { deleteBurrowOperation } = useBurrowOpeDispatcher()
 
   return (
-    <>
-      <StorageBurrowValues storageRow={storage} />
-      <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
-        <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
-          <Image src={FoxHeadSvg} h={'30px'} />
-          <Box as="span" mx="10px">
-            {truncateStringInTheMiddle(props.scAddress)}
-          </Box>
-          <ClipboardCopy text={props.scAddress} />
-        </Flex>
-        <Box mx="10px" mt="15px" textAlign="center">
-          CTEZ / KIT
+    <Flex
+      border="1px solid"
+      w="350px"
+      height="400px"
+      m="10px"
+      borderRadius="5px"
+      position="relative"
+      flexDirection="column"
+    >
+      <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
+        <Image src={FoxHeadSvg} h={'30px'} />
+        <Box as="span" mx="10px">
+          {truncateStringInTheMiddle(burrowRowState.scAddress)}
         </Box>
-        {burrowOperation ? <BurrowOperationInformation {...burrowOperation} /> : null}
-        <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
-          <Box fontSize="3xl" fontWeight="extrabold">
-            100
-          </Box>
-          <Box fontSize="9px">BURROW BALANCE</Box>
-        </Box>
-        <Box mx="10px" mt="15px" textAlign="center">
-          <Box as="span" mr="10px" fontWeight="extrabold">
-            Digger
-          </Box>
-          {truncateStringInTheMiddle('testtesttesttesttest')}
-        </Box>
-        <Flex borderTop="1px solid" borderColor="gray.200" mt="15px">
-          <VStack flex="1" py="10px">
-            <Box fontSize="2xl" fontWeight="extrabold" p="0">
-              1
-            </Box>
+        <ClipboardCopy text={burrowRowState.scAddress} />
+      </Flex>
+      <Flex flex="1" overflow={'auto'} flexDirection="column">
+        <BurrowOperationInformation burrowOpeRowState={burrowOperation} />
 
-            <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
-              OUTSTANDING CTEZ
-            </Box>
-          </VStack>
-          <VStack
-            py="10px"
-            flex="1"
-            borderLeft="1px solid"
-            borderRight="1px solid"
-            borderColor="gray.200"
-          >
-            <Box fontSize="2xl" fontWeight="extrabold">
-              0,00
-              <Box as="span" fontSize="12px" fontWeight="normal">
-                %
-              </Box>
-            </Box>
-            <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
-              CURRENT UTILIZATION
-            </Box>
-          </VStack>
-          <VStack flex="1" py="10px">
-            <IconButton
-              isLoading={burrowOperation?.status === RequestStatus.pending}
-              onClick={onToggle}
-              aria-label="action"
-              variant="ghost"
-              icon={<DragHandleIcon size="xl" />}
-            />
-            <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
-              ACTION
-            </Box>
-          </VStack>
-        </Flex>
-      </Box>
-      <SlideBox isOpen={isOpen} onClickOutSideMenu={onToggle}>
-        <BurrowActionsBox burrowRowState={props} onCloseActions={onToggle} />
-      </SlideBox>
-    </>
+        <CardItemMemoryRouter
+          burrowRowState={burrowRowState}
+          storage={storage}
+          burrowOperation={burrowOperation}
+        />
+        <Button onClick={deleteBurrow(burrowRowState.burrowId)}>DELETE BURROW</Button>
+        {burrowOperation ? (
+          <Button onClick={deleteBurrowOperation(burrowOperation.burrowId)}>DELETE OPE</Button>
+        ) : null}
+      </Flex>
+    </Flex>
   )
 }

@@ -11,7 +11,7 @@ export const useDispatchBurrowOpeDepositTez = (
   const dispatch = useAppDispatch()
 
   const executeDeposit = (tez: number) => {
-    const submitOperationParams: BurrowOpeDepositTezSubmitParams = { tez }
+    const submitOperationParams: BurrowOpeDepositTezSubmitParams = { burrowId, tez }
 
     const payload: BurrowOpeRowState = {
       burrowId,

@@ -15,6 +15,6 @@ export const BurrowListItemCard: FunctionComponent<BurrowRowState> = (burrow) =>
   return isBurrowCreation(burrowOperation) ? (
     <BurrowCreationStatusCard key={burrow.burrowId} {...(burrowOperation as BurrowOpeRowState)} />
   ) : (
-    <BurrowCard key={burrow.burrowId} {...burrow} />
+    <BurrowCard key={burrow.burrowId} burrowRowState={burrow} />
   )
 }

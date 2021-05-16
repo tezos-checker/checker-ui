@@ -2,7 +2,7 @@ import { RequestStatus } from '@config'
 import { CheckerStorage } from '../storage-state.type'
 import { CreateStorageAction } from './create-storage.type'
 
-const getEmptyStorage = (): CheckerStorage => ({
+export const getEmptyStorage = (): CheckerStorage => ({
   burrow: {
     active: false,
     address: '',
