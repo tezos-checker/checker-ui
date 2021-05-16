@@ -12,7 +12,8 @@
       "@wallet": ["src/wallet/index.ts"],
       "@burrow": ["src/burrow/index.ts"],
       "@burrow-operation": ["src/burrow-operation/index.ts"],
-      "@storage": ["src/storage/index.ts"]
+      "@storage": ["src/storage/index.ts"],
+      "@form": ["src/form/index.ts"]
     }
   }
 }

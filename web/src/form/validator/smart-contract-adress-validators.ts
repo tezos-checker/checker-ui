@@ -3,7 +3,7 @@
 
 import { IFormInputValidator } from 'vdr-react-form-manager'
 
-class CheckerAddressValidator implements IFormInputValidator {
+class SmartContractAddressValidator implements IFormInputValidator {
   validate(value: any): string | null {
     if (!value || !value.startsWith('KT1')) {
       return 'Input checker'
@@ -13,4 +13,4 @@ class CheckerAddressValidator implements IFormInputValidator {
   }
 }
 
-export const getCheckerAddressValidator = () => new CheckerAddressValidator()
+export const getSmartContractAddressValidator = () => new SmartContractAddressValidator()

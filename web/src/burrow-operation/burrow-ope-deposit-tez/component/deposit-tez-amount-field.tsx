@@ -5,12 +5,12 @@ import TezosSvg from '../../../assets/images/tez.svg'
 
 type Props = IFormInputProperties
 
-export const CreateBurrowDepositField: FunctionComponent<Props> = ({ name, value }) => (
+export const DepositTezAmountField: FunctionComponent<Props> = ({ name, value }) => (
   <FormControl id="deposit" mt="15px">
-    <FormLabel>Initial deposit (in tez)</FormLabel>
+    <FormLabel>Amount (in tez)</FormLabel>
     <InputGroup>
       <Image src={TezosSvg} height="35px" bg="gray.200" />
-      <Input name={name} value={value} type="number" placeholder="Initial deposit (in tez)" />
+      <Input name={name} value={value} type="number" placeholder="Amount (in tez)" />
     </InputGroup>
   </FormControl>
 )
