@@ -30,6 +30,6 @@ export const useDispatchBurrowOpeDepositTez = (
   }
 
   return {
-    depositTez: (tez: number) => () => executeDeposit(tez),
+    depositTez: (tez: number) => executeDeposit(tez),
   }
 }

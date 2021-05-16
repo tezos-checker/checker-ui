@@ -26,7 +26,7 @@ export const BurrowOperationInformation: FunctionComponent<Props> = ({ burrowOpe
             Operation <b>{operationName}</b> succeeded
           </Box>
           <IconButton
-            onClick={clearBurrowOpeMessage(burrowOpeRowState)}
+            onClick={() => clearBurrowOpeMessage(burrowOpeRowState)}
             aria-label="close"
             bg="green.500"
             color="green.900"
@@ -51,7 +51,7 @@ export const BurrowOperationInformation: FunctionComponent<Props> = ({ burrowOpe
             Operation <b>{operationName}</b> failed
           </Box>
           <IconButton
-            onClick={clearBurrowOpeMessage(burrowOpeRowState)}
+            onClick={() => clearBurrowOpeMessage(burrowOpeRowState)}
             aria-label="close"
             bg="red.500"
             color="red.900"

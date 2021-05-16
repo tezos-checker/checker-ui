@@ -32,6 +32,6 @@ export const useDispatchBurrowOpeCreateBurrow = (callBack: () => void) => {
       burrowId: number,
       scAddress: string,
       burrowParams: BurrowOpeCreateBurrowSubmitParams,
-    ) => () => exeCreateBurrow(burrowId, scAddress, burrowParams),
+    ) => exeCreateBurrow(burrowId, scAddress, burrowParams),
   }
 }

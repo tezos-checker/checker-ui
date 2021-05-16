@@ -6,14 +6,14 @@ export const useStorageDispatcher = () => {
   const dispatch = useAppDispatch()
 
   return {
-    loadStorage: (storage: StorageRow) => () =>
+    loadStorage: (storage: StorageRow) =>
       dispatch(
         storageActions.loadStorage({
           ...storage,
           status: RequestStatus.pending,
         }),
       ),
-    deleteBurrowStorage: (burrowId: number) => () =>
+    deleteBurrowStorage: (burrowId: number) =>
       dispatch(storageActions.deleteBurrowStorage(burrowId)),
   }
 }

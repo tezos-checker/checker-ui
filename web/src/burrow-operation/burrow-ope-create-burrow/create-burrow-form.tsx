@@ -44,10 +44,12 @@ export const CreateBurrowForm: FunctionComponent = () => {
         <CreateBurrowDepositField {...getInputProps(inputDeposit)} />
         <Button
           mt="15px"
-          onClick={createBurrow(Math.floor(Math.random() * 99), getInputProps(inputChecker).value, {
-            delegate: getInputProps(inputDelegate).value,
-            deposit: getInputProps(inputDeposit).value,
-          })}
+          onClick={() =>
+            createBurrow(Math.floor(Math.random() * 99), getInputProps(inputChecker).value, {
+              delegate: getInputProps(inputDelegate).value,
+              deposit: getInputProps(inputDeposit).value,
+            })
+          }
         >
           Confirm
         </Button>

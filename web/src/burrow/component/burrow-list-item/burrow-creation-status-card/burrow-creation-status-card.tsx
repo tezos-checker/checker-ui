@@ -25,7 +25,7 @@ const BurrowCreationFailed: FunctionComponent<BurrowOpeRowState> = ({ burrowId, 
   return (
     <Box border="1px solid" w="300px" m="10px" borderRadius="5px" position="relative">
       <IconButton
-        onClick={deleteBurrow(burrowId)}
+        onClick={() => deleteBurrow(burrowId)}
         position="absolute"
         m={'5px '}
         top={0}

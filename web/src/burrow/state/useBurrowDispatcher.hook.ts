@@ -10,11 +10,11 @@ export const useBurrowDispatcher = () => {
   const { deleteBurrowStorage } = useStorageDispatcher()
 
   return {
-    updateBurrow: (burrow: BurrowRowState) => () => dispatch(burrowActions.updateBurrow(burrow)),
-    deleteBurrow: (burrowId: number) => () => {
+    updateBurrow: (burrow: BurrowRowState) => dispatch(burrowActions.updateBurrow(burrow)),
+    deleteBurrow: (burrowId: number) => {
       dispatch(burrowActions.deleteBurrow(burrowId))
-      deleteBurrowOperation(burrowId)()
-      deleteBurrowStorage(burrowId)()
+      deleteBurrowOperation(burrowId)
+      deleteBurrowStorage(burrowId)
     },
   }
 }

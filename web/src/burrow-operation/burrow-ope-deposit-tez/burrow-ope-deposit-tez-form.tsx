@@ -17,7 +17,7 @@ export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
   return (
     <Box>
       Deposit Component
-      <Button onClick={depositTez(1)}>test Deposit</Button>
+      <Button onClick={() => depositTez(1)}>test Deposit</Button>
     </Box>
   )
 }
