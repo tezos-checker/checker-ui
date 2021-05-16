@@ -15,7 +15,7 @@ export const BurrowList: FunctionComponent = () => {
   return (
     <Flex flexWrap={'wrap'}>
       {burrows.map((burrow: BurrowRowState) => (
-        <BurrowListItemCard key={burrow.burrowId} {...burrow} />
+        <BurrowListItemCard key={burrow.burrowId} burrow={burrow} />
       ))}
     </Flex>
   )

@@ -22,7 +22,7 @@ import { MemoryRouter, NavLink, Route } from 'react-router-dom'
 import { BurrowRowState } from 'src/burrow/state/burrow-state.type'
 
 type Props = {
-  burrowRowState: BurrowRowState
+  burrow: BurrowRowState
   onCloseActions: () => void
 }
 
@@ -33,8 +33,8 @@ const routesConfig = [
     icon: <AddIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => (
-      <BurrowOpeDepositTezForm {...props} callBack={props.onCloseActions} />
+    getComponent: ({ burrow, onCloseActions }: Props) => (
+      <BurrowOpeDepositTezForm burrow={burrow} callBack={onCloseActions} />
     ),
   },
   {

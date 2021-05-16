@@ -1,24 +1,21 @@
-import { getBurrowOperation, useBurrowOpeDispatcher } from '@burrow-operation'
-import { Box, Button, Flex, Image } from '@chakra-ui/react'
+import { getBurrowOperation } from '@burrow-operation'
+import { Box, Flex, Image } from '@chakra-ui/react'
 import { ClipboardCopy } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
 import { getStorage } from '@storage'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
 import { BurrowRowState } from '../../../state/burrow-state.type'
-import { useBurrowDispatcher } from '../../../state/useBurrowDispatcher.hook'
 import { BurrowOperationInformation } from './burrow-card-resume/burrow-card-operation-info'
 import { CardItemMemoryRouter } from './burrow-card-tab-router'
 
 type Props = {
-  burrowRowState: BurrowRowState
+  burrow: BurrowRowState
 }
 
-export const BurrowCard: FunctionComponent<Props> = ({ burrowRowState }) => {
-  const storage = getStorage(burrowRowState.burrowId)
-  const burrowOperation = getBurrowOperation(burrowRowState.burrowId)
-  const { deleteBurrow } = useBurrowDispatcher()
-  const { deleteBurrowOperation } = useBurrowOpeDispatcher()
+export const BurrowCard: FunctionComponent<Props> = ({ burrow }) => {
+  const storage = getStorage(burrow.burrowId)
+  const burrowOperation = getBurrowOperation(burrow.burrowId)
 
   return (
     <Flex
@@ -33,22 +30,13 @@ export const BurrowCard: FunctionComponent<Props> = ({ burrowRowState }) => {
       <Flex alignItems="center" justifyContent="center" bg="gray.600" color="white" p="5px">
         <Image src={FoxHeadSvg} h={'30px'} />
         <Box as="span" mx="10px">
-          {truncateStringInTheMiddle(burrowRowState.scAddress)}
+          {truncateStringInTheMiddle(burrow.scAddress)}
         </Box>
-        <ClipboardCopy text={burrowRowState.scAddress} />
+        <ClipboardCopy text={burrow.scAddress} />
       </Flex>
       <Flex flex="1" overflow={'auto'} flexDirection="column">
         <BurrowOperationInformation burrowOpeRowState={burrowOperation} />
-
-        <CardItemMemoryRouter
-          burrowRowState={burrowRowState}
-          storage={storage}
-          burrowOperation={burrowOperation}
-        />
-        <Button onClick={deleteBurrow(burrowRowState.burrowId)}>DELETE BURROW</Button>
-        {burrowOperation ? (
-          <Button onClick={deleteBurrowOperation(burrowOperation.burrowId)}>DELETE OPE</Button>
-        ) : null}
+        <CardItemMemoryRouter burrow={burrow} storage={storage} burrowOperation={burrowOperation} />
       </Flex>
     </Flex>
   )

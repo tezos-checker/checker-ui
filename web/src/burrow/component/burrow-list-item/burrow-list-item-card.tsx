@@ -10,11 +10,14 @@ const isBurrowCreation = (burrowOperation?: BurrowOpeRowState) =>
   (burrowOperation?.status === RequestStatus.pending ||
     burrowOperation?.status === RequestStatus.error)
 
-export const BurrowListItemCard: FunctionComponent<BurrowRowState> = (burrow) => {
+type Props = {
+  burrow: BurrowRowState
+}
+export const BurrowListItemCard: FunctionComponent<Props> = ({ burrow }) => {
   const burrowOperation = getBurrowOperation(burrow.burrowId)
   return isBurrowCreation(burrowOperation) ? (
     <BurrowCreationStatusCard key={burrow.burrowId} {...(burrowOperation as BurrowOpeRowState)} />
   ) : (
-    <BurrowCard key={burrow.burrowId} burrowRowState={burrow} />
+    <BurrowCard key={burrow.burrowId} burrow={burrow} />
   )
 }

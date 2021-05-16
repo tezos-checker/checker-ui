@@ -28,7 +28,7 @@ export const StorageBurrowValues: FunctionComponent<Props> = ({ burrowId }) => {
   const storageValue = Object.entries(burrow)
 
   return (
-    <Box fontSize="12px">
+    <Box fontSize="12px" overflowY="auto">
       <StorageErrorInfoBox burrowId={burrowId} storageRow={storageRow} />
 
       {storageValue.map((x, i) => (

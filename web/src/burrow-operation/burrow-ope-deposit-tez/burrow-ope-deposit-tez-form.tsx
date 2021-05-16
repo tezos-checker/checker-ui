@@ -4,12 +4,12 @@ import { BurrowRowState } from '../../burrow/state/burrow-state.type'
 import { useDispatchBurrowOpeDepositTez } from './useDispatchBurrowOpeDepositTez'
 
 type Props = {
-  burrowRowState: BurrowRowState
+  burrow: BurrowRowState
   callBack: () => void
 }
 
 export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
-  burrowRowState: { burrowId, scAddress },
+  burrow: { burrowId, scAddress },
   callBack,
 }) => {
   const { depositTez } = useDispatchBurrowOpeDepositTez(burrowId, scAddress, callBack)

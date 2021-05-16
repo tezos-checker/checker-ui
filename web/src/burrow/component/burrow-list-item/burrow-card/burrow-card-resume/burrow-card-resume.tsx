@@ -10,13 +10,13 @@ import { BurrowRowState } from '../../../../state/burrow-state.type'
 import { BurrowActionsBox } from '../../../burrow-actions-box/burrow-actions-box'
 
 type Props = {
-  burrowRowState: BurrowRowState
+  burrow: BurrowRowState
   storage?: StorageRow
   burrowOperation?: BurrowOpeRowState
 }
 
 export const BurrowCardResume: FunctionComponent<Props> = ({
-  burrowRowState,
+  burrow,
   storage,
   burrowOperation,
 }) => {
@@ -41,7 +41,7 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
           {truncateStringInTheMiddle(`${storage?.storage.burrow.address || ''}`)}
         </Box>
       </Box>
-      <Flex borderTop="1px solid" borderColor="gray.200" mt="15px">
+      <Flex borderTop="1px solid" borderColor="gray.200" mt="15px" alignItems="flex-end">
         <VStack flex="1" py="10px">
           <Box fontSize="2xl" fontWeight="extrabold" p="0">
             1
@@ -58,7 +58,7 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
           borderRight="1px solid"
           borderColor="gray.200"
         >
-          <Box fontSize="2xl" fontWeight="extrabold">
+          <Box fontSize="2xl" fontWeight="extrabold" p="2px">
             0,00
             <Box as="span" fontSize="12px" fontWeight="normal">
               %
@@ -76,14 +76,21 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
             variant="ghost"
             icon={<DragHandleIcon size="xl" />}
           />
-          <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
+          <Box
+            m="0"
+            position="relative"
+            as="span"
+            fontSize="9px"
+            fontWeight="normal"
+            textAlign="center"
+          >
             ACTION
           </Box>
         </VStack>
       </Flex>
 
       <SlideBox isOpen={isOpen} onClickOutSideMenu={onToggle}>
-        <BurrowActionsBox burrowRowState={burrowRowState} onCloseActions={onToggle} />
+        <BurrowActionsBox burrow={burrow} onCloseActions={onToggle} />
       </SlideBox>
     </>
   )

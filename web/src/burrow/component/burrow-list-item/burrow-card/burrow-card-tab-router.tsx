@@ -8,7 +8,7 @@ import { StorageRow } from 'src/storage/state/storage-state.type'
 import { BurrowCardResume } from './burrow-card-resume/burrow-card-resume'
 
 type Props = {
-  burrowRowState: BurrowRowState
+  burrow: BurrowRowState
   storage?: StorageRow
   burrowOperation?: BurrowOpeRowState
 }
@@ -19,12 +19,8 @@ const routesConfig = [
     label: 'Resume',
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => (
-      <BurrowCardResume
-        burrowRowState={props.burrowRowState}
-        storage={props.storage}
-        burrowOperation={props.burrowOperation}
-      />
+    getComponent: ({ burrow, burrowOperation, storage }: Props) => (
+      <BurrowCardResume burrow={burrow} storage={storage} burrowOperation={burrowOperation} />
     ),
   },
   {
@@ -33,7 +29,7 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: (props: Props) => (
-      <StorageBurrowValues storageRow={props.storage} burrowId={props.burrowRowState.burrowId} />
+      <StorageBurrowValues storageRow={props.storage} burrowId={props.burrow.burrowId} />
     ),
   },
   {
@@ -42,10 +38,7 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: (props: Props) => (
-      <StorageParametersValues
-        storageRow={props.storage}
-        burrowId={props.burrowRowState.burrowId}
-      />
+      <StorageParametersValues storageRow={props.storage} burrowId={props.burrow.burrowId} />
     ),
   },
 ]
