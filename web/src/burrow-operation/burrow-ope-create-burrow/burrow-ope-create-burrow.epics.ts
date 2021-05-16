@@ -30,7 +30,9 @@ const submitCreateBurrow = (rowState: BurrowOpeRowState): Observable<BurrowOpeAc
           payload: {
             ...rowState,
             operationStep: ScOperationStep.confirm,
-            transactionWalletOperation: res,
+            transactionWalletOperation: {
+              confirmOperation: (nbConfirmation: number) => res.confirmation(nbConfirmation),
+            },
           },
         }
       }

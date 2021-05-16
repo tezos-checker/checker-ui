@@ -29,7 +29,9 @@ const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeActi
           payload: {
             ...rowState,
             operationStep: ScOperationStep.confirm,
-            transactionWalletOperation: res,
+            transactionWalletOperation: {
+              confirmOperation: (nbConfirmation: number) => res.confirmation(nbConfirmation),
+            },
           },
         }
       }

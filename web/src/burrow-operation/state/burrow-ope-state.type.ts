@@ -1,7 +1,6 @@
 import { AbstractAction, RequestStatus, ScOperationStep } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
-import { TransactionWalletOperation } from '@taquito/taquito'
 import { BurrowOpeCreateBurrowSubmitParams } from '../burrow-ope-create-burrow/burrow-ope-create-burrow.api'
 import { BurrowOpeDepositTezSubmitParams } from '../burrow-ope-deposit-tez/burrow-ope-deposit-tez.api'
 
@@ -34,6 +33,18 @@ export enum BurrowOpeEnum {
   deployFunction = 'deployFunction',
   sealContract = 'sealContract',
 }
+export type TransactionOperationParams = {
+  confirmOperation: (
+    nbConfirmation: number,
+  ) => Promise<{
+    block: BlockResponse
+    expectedConfirmation: number
+    currentConfirmation: number
+    completed: boolean
+    isInCurrentBranch: () => Promise<boolean>
+  }>
+  // TransactionWalletOperation | null
+}
 
 export type BurrowOpeRowState = {
   burrowId: number
@@ -44,7 +55,7 @@ export type BurrowOpeRowState = {
   operationStep: ScOperationStep
   operationName: BurrowOpeEnum
   submitOperationParams: BurrowOpeCreateBurrowSubmitParams | BurrowOpeDepositTezSubmitParams
-  transactionWalletOperation: TransactionWalletOperation | null
+  transactionWalletOperation: TransactionOperationParams | null
   blockResponse: BlockResponse | null
 }
 
