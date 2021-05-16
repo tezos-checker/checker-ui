@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/layout'
 import { CloseButton, Flex } from '@chakra-ui/react'
-import { truncateStringInTheMiddle } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
 import { BurrowRowState } from '../../state/burrow-state.type'
 import { BurrowOperationsMemoryRouter } from './burrow-actions-memory-router'
@@ -22,7 +21,7 @@ export const BurrowActionsBox: FunctionComponent<Props> = ({ onCloseActions, bur
       <CloseButton onClick={onCloseActions} size="lg" />
     </Flex>
     <Box textAlign="center" mt="10px">
-      Burrow - xxxx - {truncateStringInTheMiddle('testtesttesttesttest')}
+      Burrow - {burrow.scAddress}
     </Box>
     <BurrowOperationsMemoryRouter onCloseActions={onCloseActions} burrow={burrow} />
   </Box>
