@@ -28,18 +28,14 @@ const routesConfig = [
     label: 'Burrow',
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => (
-      <StorageBurrowValues storageRow={props.storage} burrowId={props.burrow.burrowId} />
-    ),
+    getComponent: (props: Props) => <StorageBurrowValues burrowId={props.burrow.burrowId} />,
   },
   {
     route: '/checker',
     label: 'checker',
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => (
-      <StorageParametersValues storageRow={props.storage} burrowId={props.burrow.burrowId} />
-    ),
+    getComponent: (props: Props) => <StorageParametersValues burrowId={props.burrow.burrowId} />,
   },
 ]
 

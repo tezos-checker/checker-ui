@@ -1,34 +1,27 @@
 import { Box, Flex, Spinner } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
+import { getStorage } from '@storage'
 import React, { FunctionComponent } from 'react'
-import { StorageRow } from '../state/storage-state.type'
 import { StorageErrorInfoBox } from './storage-error-info-box'
 
 type Props = {
   burrowId: number
-  storageRow?: StorageRow
 }
 
-export const StorageParametersValues: FunctionComponent<Props> = ({ burrowId, storageRow }) => {
-  if (!storageRow) {
-    return <StorageErrorInfoBox burrowId={burrowId} storageRow={storageRow} />
-  }
+export const StorageParametersValues: FunctionComponent<Props> = ({ burrowId }) => {
+  const storage = getStorage(burrowId)
 
-  const {
-    status,
-    storage: { parameters },
-  } = storageRow
-
-  if (status === RequestStatus.pending) {
+  if (storage && storage.status === RequestStatus.pending) {
     return <Spinner />
   }
-  const storageValue = Object.entries(parameters)
+
+  const storageValues = Object.entries(storage?.storage?.parameters || [])
 
   return (
-    <Box fontSize="12px" overflowY="auto">
-      <StorageErrorInfoBox burrowId={burrowId} storageRow={storageRow} />
+    <Box fontSize="12px" overflowY="auto" m="2px">
+      <StorageErrorInfoBox burrowId={burrowId} storage={storage} storageToCheck="checkerStorage" />
 
-      {storageValue.map((x, i) => (
+      {storageValues.map((x, i) => (
         <Flex
           key={x[0]}
           bg={i % 2 === 0 ? 'gray.200' : 'white'}

@@ -1,47 +1,45 @@
 import { RepeatIcon } from '@chakra-ui/icons'
 import { Box, IconButton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import React, { FunctionComponent, useEffect } from 'react'
-import { getEmptyStorage } from '../state/create-storage/create-storage-action.util'
+import { isInvalidStorageBurrow, isInvalidStorageParameters } from '@shared/utils'
+import React, { FunctionComponent } from 'react'
 import { StorageRow } from '../state/storage-state.type'
 import { useStorageDispatcher } from '../state/useStorageDisptacher.hook'
+import { InvalidBurrowStorageErrorBox } from './storage-burrow.error/invalid-burrow-storage-error-box'
+import { InvalidCheckerStorageErrorBox } from './storage-burrow.error/invalid-checker-storage-error-box'
+import { NoStorageErrorBox } from './storage-burrow.error/no-storage-error-box'
 
 type Props = {
   burrowId: number
-  storageRow?: StorageRow
+  storage?: StorageRow
+  storageToCheck: 'burrowStorage' | 'checkerStorage'
 }
 
-export const StorageErrorInfoBox: FunctionComponent<Props> = ({ burrowId, storageRow }) => {
+export const StorageErrorInfoBox: FunctionComponent<Props> = ({
+  burrowId,
+  storage,
+  storageToCheck,
+}) => {
   const { loadStorage } = useStorageDispatcher()
 
-  useEffect(() => {
-    if (!storageRow) {
-      loadStorage({
-        burrowId,
-        status: RequestStatus.idle,
-        storage: getEmptyStorage(),
-        errorMsg: '',
-      })
-    }
-  }, [])
-
-  if (!storageRow) {
-    return <Box>no storage </Box>
+  if (!storage) {
+    return <NoStorageErrorBox burrowId={burrowId} />
   }
 
-  const { status } = storageRow
-
-  if (status !== RequestStatus.error) {
-    return null
+  if (storageToCheck === 'burrowStorage' && isInvalidStorageBurrow(storage)) {
+    return <InvalidBurrowStorageErrorBox storage={storage} />
   }
-  return (
+
+  if (storageToCheck === 'checkerStorage' && isInvalidStorageParameters(storage)) {
+    return <InvalidCheckerStorageErrorBox storage={storage} />
+  }
+
+  const { status } = storage
+
+  return status === RequestStatus.error ? (
     <Box>
       An error occured. Storage is not up to date. Reload storage
-      <IconButton
-        onClick={() => loadStorage(storageRow)}
-        aria-label="refresh"
-        icon={<RepeatIcon />}
-      />
+      <IconButton onClick={() => loadStorage(storage)} aria-label="refresh" icon={<RepeatIcon />} />
     </Box>
-  )
+  ) : null
 }

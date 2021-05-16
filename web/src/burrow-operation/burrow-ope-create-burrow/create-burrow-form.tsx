@@ -16,7 +16,13 @@ import {
 import { useDispatchBurrowOpeCreateBurrow } from './useDispatchBurrowOpeCreateBurrow'
 
 export const CreateBurrowForm: FunctionComponent = () => {
-  const { handleFormChange, getInputProps } = useFormManager(createBurrowFormModel)
+  const {
+    handleFormChange,
+    getInputProps,
+    formProperties: { isFormValid },
+  } = useFormManager(createBurrowFormModel)
+
+  console.log(isFormValid, 'isFormValid')
 
   const history = useHistory()
 
@@ -43,6 +49,7 @@ export const CreateBurrowForm: FunctionComponent = () => {
         <CreateBurrowDelegateField {...getInputProps(inputDelegate)} />
         <CreateBurrowDepositField {...getInputProps(inputDeposit)} />
         <Button
+          disabled={!isFormValid}
           mt="15px"
           onClick={() =>
             createBurrow(Math.floor(Math.random() * 99), getInputProps(inputChecker).value, {
