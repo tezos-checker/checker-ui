@@ -1,6 +1,6 @@
 import { BurrowOpeRowState } from '@burrow-operation'
 import { DragHandleIcon } from '@chakra-ui/icons'
-import { Box, Flex, IconButton, useDisclosure, VStack } from '@chakra-ui/react'
+import { Box, Flex, IconButton, Spinner, useDisclosure, VStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { SlideBox } from '@shared/ui'
 import { truncateStringInTheMiddle, tzFormatter } from '@shared/utils'
@@ -22,6 +22,9 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
 }) => {
   const { isOpen, onToggle } = useDisclosure()
 
+  const isLoading =
+    storage?.status === RequestStatus.pending || burrowOperation?.status === RequestStatus.pending
+
   return (
     <>
       <Box mx="10px" mt="15px" textAlign="center">
@@ -30,7 +33,11 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
       <Box flex="1" alignItems="center" mt="25px">
         <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
           <Box fontSize="3xl" fontWeight="extrabold">
-            {`${tzFormatter(storage?.storage.burrow.collateral || 0, 'tz')}`}
+            {storage?.status === RequestStatus.pending ? (
+              <Spinner />
+            ) : (
+              `${tzFormatter(storage?.storage.burrow.collateral || 0, 'tz')}`
+            )}
           </Box>
           <Box fontSize="9px">BURROW BALANCE</Box>
         </Box>
@@ -70,7 +77,7 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
         </VStack>
         <VStack flex="1" py="10px">
           <IconButton
-            isLoading={burrowOperation?.status === RequestStatus.pending}
+            isLoading={isLoading}
             onClick={onToggle}
             aria-label="action"
             variant="ghost"

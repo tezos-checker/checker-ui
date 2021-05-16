@@ -5,8 +5,8 @@ const BurrowOperationInfoBox: ThemeComponents = {
     baseStyle: {
       w: '100%',
       position: 'absolute',
-      top: '50px',
-      padding: '5px',
+      top: '89px',
+      padding: '10px',
       fontSize: '12px',
       textAlign: 'center',
       justifyContent: 'space-between',
