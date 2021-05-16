@@ -1,18 +1,20 @@
-import { Box, Flex, IconButton, useMultiStyleConfig, useToast } from '@chakra-ui/react'
+import { Box, Flex, IconButton, useToast } from '@chakra-ui/react'
 import { store } from '@config'
 import { PageBody, PageHeader } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
 import { Unsubscribe } from 'redux'
+import { useInitializeStore } from './config/store/initialize-store.hooks'
+import { saveState } from './config/store/store-persist.util'
 import { appToastObservable, AppToastType } from './config/toast/app-toast.config'
 import './i18n'
 
 const App: React.FC = () => {
   const { isMobOrTabletScreen } = useScreenBreakPoint()
   const [isMenuOpen, setIsMenuOpen] = useState(!isMobOrTabletScreen)
-  const style = useMultiStyleConfig('ui/page', { isMenuOpen })
   const toast = useToast()
+  useInitializeStore(store.getState())
 
   useEffect(() => {
     appToastObservable.subscribe({
@@ -25,13 +27,11 @@ const App: React.FC = () => {
     })
 
     const storeUnsubscribe: Unsubscribe = store.subscribe(() => {
-      // save the full state
-      //  saveState(store.getState())
-      /*  save partial state
       saveState({
-        scStorage: store.getState().scStorage,
+        burrow: store.getState().burrow,
+        burrowOperation: store.getState().burrowOperation,
+        storage: store.getState().storage,
       })
-      */
     })
 
     return () => {

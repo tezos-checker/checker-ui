@@ -1,8 +1,8 @@
 /* eslint-disable */
+import { CreateBurrowForm } from '@burrow-operation'
 import { HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { NewBurrow } from '../../burrow/new-burrow/new-burrow'
 import { LoginPage } from '../../pages/login-page'
 
 export type CheckerRoute = {
@@ -18,7 +18,7 @@ export const userConnectedRoutes: CheckerRoute[] = [
     path: '/new-burrow',
     exact: true,
     menu: () => <Link to="/new-burrow">New Burrow</Link>,
-    component: () => <NewBurrow />,
+    component: () => <CreateBurrowForm />,
   },
   {
     path: '/',

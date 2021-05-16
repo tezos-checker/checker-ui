@@ -58,6 +58,7 @@
     "redux-observable": "^1.2.0",
     "rxjs": "^6.6.7",
     "use-async-memo": "^1.2.2",
+    "vdr-react-form-manager": "^1.1.2",
     "websocket-extensions": "0.1.4"
   },
   "devDependencies": {

@@ -12944,6 +12944,11 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
+vdr-react-form-manager@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vdr-react-form-manager/-/vdr-react-form-manager-1.1.2.tgz#f226b1980aa00727164b93c9c716d1806efea515"
+  integrity sha512-Kj6RcXFAz4qggr2OyCj9QFscOgobq0jURGiCo1XXzG2gM1VaCfFlq12jC4WoY0k8sG8RCDz/JY9iowtOqDwniQ==
+
 vendors@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"

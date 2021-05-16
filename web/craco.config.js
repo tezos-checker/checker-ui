@@ -12,6 +12,9 @@ module.exports = {
       '@auth': path.resolve(__dirname, 'src/auth/index.ts'),
       '@wallet': path.resolve(__dirname, 'src/wallet/index.ts'),
       '@burrow': path.resolve(__dirname, 'src/burrow/index.ts'),
+      '@burrow-operation': path.resolve(__dirname, 'src/burrow-operation/index.ts'),
+      '@storage': path.resolve(__dirname, 'src/storage/index.ts'),
+      '@form': path.resolve(__dirname, 'src/form/index.ts'),
     },
   },
 }
