@@ -1,8 +1,8 @@
-import { getBurrowOperation } from '@burrow-operation'
+import { useGetBurrowOperation } from '@burrow-operation'
 import { Box, Flex, Image } from '@chakra-ui/react'
 import { ClipboardCopy } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
-import { getStorage } from '@storage'
+import { useGetBurrowStorage } from '@storage'
 import React, { FunctionComponent } from 'react'
 import FoxHeadSvg from '../../../../assets/images/fox-head.svg'
 import { BurrowRowState } from '../../../state/burrow-state.type'
@@ -14,8 +14,8 @@ type Props = {
 }
 
 export const BurrowCard: FunctionComponent<Props> = ({ burrow }) => {
-  const storage = getStorage(burrow.burrowId)
-  const burrowOperation = getBurrowOperation(burrow.burrowId)
+  const storage = useGetBurrowStorage(burrow.burrowId)
+  const burrowOperation = useGetBurrowOperation(burrow.burrowId)
 
   return (
     <Flex

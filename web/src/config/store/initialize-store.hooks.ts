@@ -4,14 +4,14 @@ import { BurrowOpeRowState, useBurrowOpeDispatcher } from '@burrow-operation'
 import { RequestStatus, RootState } from '@config'
 import { Update } from '@reduxjs/toolkit'
 import { useStorageDispatcher } from '@storage'
-import { useWalletData } from '@wallet'
+import { useGetWallet } from '@wallet'
 import { useEffect } from 'react'
 import { StorageRow } from '../../storage/state/storage-state.type'
 
 export const useInitializeStore = (state: RootState) => {
   const { resetPendingBurrowOperation } = useBurrowOpeDispatcher()
   const { loadStorage } = useStorageDispatcher()
-  const { address } = useWalletData()
+  const { address } = useGetWallet()
 
   /* if the user quit checker while an operetion is pending, the next connection to checker we reset the operation status */
   const resetBurrowOpeOnPending = () => {

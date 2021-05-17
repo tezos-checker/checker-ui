@@ -12,12 +12,12 @@ import {
 } from '@chakra-ui/react'
 import { ClipboardCopy } from '@shared/ui'
 import { truncateStringInTheMiddle } from '@shared/utils'
-import { useDisconnectWallet, useWalletData } from '@wallet'
+import { useDisconnectWallet, useGetWallet } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import FoxSvg from '../assets/images/fox.svg'
 
 export const UserAvatarPopOver: FunctionComponent = () => {
-  const { address } = useWalletData()
+  const { address } = useGetWallet()
   const disconnectWallet = useDisconnectWallet()
 
   return (

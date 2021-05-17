@@ -1,4 +1,4 @@
-import { BurrowOpeEnum, BurrowOpeRowState, getBurrowOperation } from '@burrow-operation'
+import { BurrowOpeEnum, BurrowOpeRowState, useGetBurrowOperation } from '@burrow-operation'
 import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
 import { BurrowRowState } from '../../state/burrow-state.type'
@@ -14,7 +14,7 @@ type Props = {
   burrow: BurrowRowState
 }
 export const BurrowListItemCard: FunctionComponent<Props> = ({ burrow }) => {
-  const burrowOperation = getBurrowOperation(burrow.burrowId)
+  const burrowOperation = useGetBurrowOperation(burrow.burrowId)
   return isBurrowCreation(burrowOperation) ? (
     <BurrowCreationStatusCard key={burrow.burrowId} {...(burrowOperation as BurrowOpeRowState)} />
   ) : (
