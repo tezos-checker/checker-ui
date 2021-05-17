@@ -19,6 +19,10 @@ COPY web/package.json /usr/src/app/package.json
 COPY web/yarn.lock /usr/src/app/yarn.lock
 RUN yarn install --frozen-lockfile --silent
 COPY web/craco.config.js /usr/src/app/craco.config.js
+COPY web/.eslintrc.js /usr/src/app/.eslintrc.js
+COPY web/.eslintignore /usr/src/app/.eslintignore
+COPY web/.prettierrc /usr/src/app/.prettierrc
+COPY web/.prettierignore /usr/src/app/.prettierignore
 COPY web/public /usr/src/app/public
 COPY web/src /usr/src/app/src
 COPY web/tsconfig* /usr/src/app/
