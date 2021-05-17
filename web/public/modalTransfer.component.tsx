@@ -52,7 +52,12 @@ export const ModalAllow = (props: Props) => {
   const hasAddressError = address ? !isAddressValid(address) : false
 
   const disableButtonSubmit =
-    !amount || (amount && amount.isZero()) || !address || !allowance.isZero() || loadingTransferTransaction || hasAddressError
+    !amount ||
+    (amount && amount.isZero()) ||
+    !address ||
+    !allowance.isZero() ||
+    loadingTransferTransaction ||
+    hasAddressError
 
   const disableButtonCancel = loadingTransferTransaction
 
@@ -76,19 +81,19 @@ export const ModalAllow = (props: Props) => {
           <span className="text-grey is-horizontal-align">
             Allowance: &nbsp;{' '}
             {tokenInformation &&
-            allowance &&
-            tokenAmountInUnitsWithSymbol(
-              allowance,
-              tokenInformation.decimals,
-              tokenInformation.symbol,
-            )}
+              allowance &&
+              tokenAmountInUnitsWithSymbol(
+                allowance,
+                tokenInformation.decimals,
+                tokenInformation.symbol,
+              )}
           </span>
         </div>
         <div className="row" style={{ marginTop: '30px' }}>
           <div className="is-center">
             <BigNumberInput
               decimals={(tokenInformation && tokenInformation.decimals.toNumber()) || 18}
-              onChange={newValue =>
+              onChange={(newValue) =>
                 newValue ? setAmount(new BigNumber(newValue)) : setAmount(null)
               }
               value={amount ? amount.toString() : ''}
@@ -108,11 +113,11 @@ export const ModalAllow = (props: Props) => {
           <span className="text-grey is-horizontal-align">
             Max amount allowed: &nbsp;{' '}
             {tokenInformation &&
-            tokenAmountInUnitsWithSymbol(
-              balance,
-              tokenInformation.decimals,
-              tokenInformation.symbol,
-            )}
+              tokenAmountInUnitsWithSymbol(
+                balance,
+                tokenInformation.decimals,
+                tokenInformation.symbol,
+              )}
           </span>
         </div>
         <footer className="row is-right" style={{ marginTop: '30px' }}>
