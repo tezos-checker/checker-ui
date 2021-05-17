@@ -10,13 +10,15 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.eslint.json',
   },
-  plugins: ['react', '@typescript-eslint', 'prettier', 'import'],
+  plugins: ['react', '@typescript-eslint', 'prettier', 'import', 'react-hooks'],
   env: {
     es6: true,
     node: true,
     browser: true,
   },
   rules: {
+    'react-hooks/rules-of-hooks': 'error', // Vérifie les règles des Hooks
+    'react-hooks/exhaustive-deps': 'warn', // Vérifie les tableaux de dépendances
     'no-debugger': 'off',
     'no-underscore-dangle': ['error', { allow: ['_type'] }],
     'prettier/prettier': 'error',
