@@ -37,7 +37,11 @@ export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
       <Box fontSize="2xl">Deposit</Box>
       <DepositTezAmountField {...getInputProps(inputDeposit)} />
       <Box textAlign="right">
-        <Button disabled={!isFormValid} mt="15px" onClick={() => depositTez(getInputProps(inputDeposit).value)}>
+        <Button
+          disabled={!isFormValid}
+          mt="15px"
+          onClick={() => depositTez(getInputProps(inputDeposit).value)}
+        >
           Deposit
         </Button>
       </Box>
