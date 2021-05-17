@@ -17,6 +17,7 @@ module.exports = {
     browser: true,
   },
   rules: {
+    'no-debugger': 'off',
     'no-underscore-dangle': ['error', { allow: ['_type'] }],
     'prettier/prettier': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',

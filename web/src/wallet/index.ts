@@ -1,4 +1,6 @@
 export * from './hooks/useConnectWallet'
 export * from './hooks/useDisconnectWallet'
 export * from './state/useWalletData'
+export * from './state/wallet.epics'
+export { walletReducer } from './state/wallet.slice'
 export * from './wallet-connector/walled-connector'

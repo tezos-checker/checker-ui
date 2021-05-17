@@ -25,3 +25,4 @@ export const walletSlice = createSlice({
 
 export const walletActions = walletSlice.actions
 export const walletSelectors = walletAdapter.getSelectors<RootState>((state) => state.wallet)
+export const walletReducer = walletSlice.reducer

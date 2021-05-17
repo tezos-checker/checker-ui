@@ -8,5 +8,7 @@
 !web/Caddyfile
 !web/package.json
 !web/craco.config.js
+!web/.eslint*
+!web/.prettier*
 !web/tsconfig*.json
 !web/yarn.lock
