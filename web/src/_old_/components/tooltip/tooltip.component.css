@@ -1,8 +1,8 @@
 .extraClass {
-    font-size: 14px !important;
-    pointer-events: auto !important;
+  font-size: 14px !important;
+  pointer-events: auto !important;
 }
 .extraClass:hover {
-    visibility: visible !important;
-    opacity: 1 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
