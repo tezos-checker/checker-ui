@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { useWalletData } from '@wallet'
+import { useGetWallet } from '@wallet'
 import { userConnectedRoutes, userDisconnectedRoutes } from './checker-routes'
 
 export const useCheckerRoute = () => {
-  const { address } = useWalletData()
+  const { address } = useGetWallet()
   return {
     checkerRoutes: address ? userConnectedRoutes : userDisconnectedRoutes,
   }

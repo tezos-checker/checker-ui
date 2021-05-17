@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Image } from '@chakra-ui/react'
-import { useWalletData } from '@wallet'
+import { useGetWallet } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { useHistory } from 'react-router-dom'
 import FoxCreateBorrowSvg from '../../assets/images/fox-create-burrow.svg'
@@ -8,7 +8,7 @@ import TezosSvg from '../../assets/images/tez.svg'
 import { UserAvatarPopOver } from '../../header/user-avatar-popover'
 
 export const PageHeader: React.FC = ({ children }) => {
-  const { address } = useWalletData()
+  const { address } = useGetWallet()
   const history = useHistory()
 
   const UserHeader: FunctionComponent = () => (

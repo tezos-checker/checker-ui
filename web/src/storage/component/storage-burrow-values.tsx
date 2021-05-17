@@ -1,6 +1,6 @@
 import { Box, Flex, Spinner } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import { getStorage } from '@storage'
+import { useGetBurrowStorage } from '@storage'
 import React, { FunctionComponent } from 'react'
 import { StorageErrorInfoBox } from './storage-error-info-box'
 
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const StorageBurrowValues: FunctionComponent<Props> = ({ burrowId }) => {
-  const storage = getStorage(burrowId)
+  const storage = useGetBurrowStorage(burrowId)
 
   if (storage && storage.status === RequestStatus.pending) {
     return <Spinner />

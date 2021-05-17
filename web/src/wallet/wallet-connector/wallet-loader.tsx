@@ -2,11 +2,11 @@ import { Box, Button, Spinner } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
 import { useConnectWallet } from '../hooks/useConnectWallet'
-import { useWalletData } from '../state/useWalletData'
+import { useGetWallet } from '../state/useGetWalletSelector.hook'
 import { WalletRowState } from '../state/wallet-state.type'
 
 export const WalledLoader: FunctionComponent = () => {
-  const wallet = useWalletData()
+  const wallet = useGetWallet()
   const connectWallet = useConnectWallet()
 
   const Wallet: FunctionComponent<{ walletData: WalletRowState }> = ({ walletData }) => {

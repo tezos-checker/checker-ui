@@ -5,4 +5,4 @@ import { walletSelectors } from './wallet.slice'
 
 const walletSelector = () => walletSelectors.selectById(store.getState(), 1)
 
-export const useWalletData = () => useSelector(walletSelector) as WalletRowState
+export const useGetWallet = () => useSelector(walletSelector) as WalletRowState
