@@ -8,6 +8,7 @@ import {
   isInvalidStorageBurrow,
   truncateStringInTheMiddle,
   tzFormatter,
+  TzFormatterType,
 } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
 import { StorageRow } from '../../../../../storage/state/storage-state.type'
@@ -58,7 +59,10 @@ const CardStorageColateral: FunctionComponent<PropsCardStorageColateral> = ({
         <>
           <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
             <Box fontSize="3xl" fontWeight="extrabold">
-              {`${tzFormatter(storage?.storage.burrow.collateral || 0, 'tz')}`}
+              {`${tzFormatter(
+                storage?.storage.burrow.collateral || 0,
+                TzFormatterType.mutez_to_tz,
+              )} ꜩ`}
             </Box>
             <Box fontSize="9px">BURROW BALANCE</Box>
           </Box>

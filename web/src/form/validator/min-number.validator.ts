@@ -1,17 +1,19 @@
 /*  eslint class-methods-use-this: "off"  */
 /*  eslint-env es6  */
 
+import BigNumber from 'bignumber.js'
 import { IFormInputValidator } from 'vdr-react-form-manager'
 
 class MinNumberValidator implements IFormInputValidator {
-  private minNumber: number
+  private minNumber: BigNumber
 
-  constructor(minNumber: number) {
+  constructor(minNumber: BigNumber) {
     this.minNumber = minNumber
   }
 
   validate(value: any): string | null {
-    if (Number.isNaN(value) || value < this.minNumber) {
+    const num = new BigNumber(value)
+    if (num.isNaN() || num.isLessThan(this.minNumber)) {
       return `Invalid number or number is less than ${this.minNumber}`
     }
     //  no error
@@ -19,4 +21,4 @@ class MinNumberValidator implements IFormInputValidator {
   }
 }
 
-export const getMinNumberValidator = (minNumber: number) => new MinNumberValidator(minNumber)
+export const getMinNumberValidator = (minNumber: BigNumber) => new MinNumberValidator(minNumber)

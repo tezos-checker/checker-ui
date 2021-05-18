@@ -7,7 +7,9 @@ export const loadStorageRequest = async (
   scAddress: string,
 ): Promise<CheckerStorage> => {
   const contract = await getContract(scAddress)
+  debugger
   const storage: any = await contract.storage()
+
   const checkerStorage: CheckerStorage = {
     burrow: await storage[1].sealed.burrows.get({
       0: walletAddress,
