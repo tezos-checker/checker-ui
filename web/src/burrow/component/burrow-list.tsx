@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react'
+import { useGetWallet } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { BurrowRowState } from '../state/burrow-state.type'
 import { useGetAllBurrows } from '../state/useGetAllBurrowsSelector.hook'
@@ -7,14 +8,17 @@ import { BurrowListItemCard } from './burrow-list-item/burrow-list-item-card'
 
 export const BurrowList: FunctionComponent = () => {
   const burrows: BurrowRowState[] = useGetAllBurrows()
+  const { address } = useGetWallet()
 
-  if (!burrows.length) {
+  const walletBurrows = burrows.filter((burrow) => burrow.walletAddress === address)
+
+  if (!walletBurrows.length) {
     return <BurrowListEmpty />
   }
 
   return (
     <Flex flexWrap={'wrap'}>
-      {burrows.map((burrow: BurrowRowState) => (
+      {walletBurrows.map((burrow: BurrowRowState) => (
         <BurrowListItemCard key={burrow.burrowId} burrow={burrow} />
       ))}
     </Flex>
