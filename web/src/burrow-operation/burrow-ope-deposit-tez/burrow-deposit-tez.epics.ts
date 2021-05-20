@@ -48,6 +48,7 @@ const burrowOpeDepositTezSubmitRequestEpic = (action$: any) =>
     mergeMap((x: BurrowOpeRowState) => submitDepositTez(x)),
   )
 
+// epic factory in order an epic based on the action type
 const scOpeDepositTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/depositTezConfirm')
 
 export const burrowOpeDepositTezEpics = combineEpics(
