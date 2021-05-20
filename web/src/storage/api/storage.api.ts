@@ -7,7 +7,7 @@ export const loadStorageRequest = async (
   scAddress: string,
 ): Promise<CheckerStorage> => {
   const contract = await getContract(scAddress)
-  debugger
+
   const storage: any = await contract.storage()
 
   const checkerStorage: CheckerStorage = {
