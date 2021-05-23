@@ -1,6 +1,6 @@
 import { Box, Button } from '@chakra-ui/react'
 import { useGetBurrowStorage } from '@storage'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
 import { getBurrowOpeMintKitFormModel, tezToMint } from './component/burrow-ope-mint.model'
@@ -17,11 +17,13 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
   callBack,
 }) => {
   const storage = useGetBurrowStorage(burrowId)
+
+  const formModel = useMemo(() => getBurrowOpeMintKitFormModel(storage), [storage])
   const {
     handleFormChange,
     getInputProps,
     formProperties: { isFormValid },
-  } = useFormManager(getBurrowOpeMintKitFormModel(storage))
+  } = useFormManager(formModel)
   const { mint } = useDispatchBurrowOpeMint(burrowId, scAddress, callBack)
 
   return (
