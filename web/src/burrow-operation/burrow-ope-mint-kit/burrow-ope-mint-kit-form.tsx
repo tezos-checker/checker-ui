@@ -1,8 +1,10 @@
 import { Box, Button } from '@chakra-ui/react'
 import { useGetBurrowStorage } from '@storage'
 import React, { FunctionComponent, useMemo } from 'react'
+import { StorageRow } from 'src/storage/state/storage-state.type'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
+import { getMintAmounts } from './burrow-ope-mint-kit.util'
 import { getBurrowOpeMintKitFormModel, tezToMint } from './component/burrow-ope-mint.model'
 import { MintAmountField } from './component/mint-tez-amount-field'
 import { useDispatchBurrowOpeMint } from './useDispatchBurrowOpeMintKit'
@@ -17,8 +19,9 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
   callBack,
 }) => {
   const storage = useGetBurrowStorage(burrowId)
+  const { maxAmount } = getMintAmounts(storage as StorageRow)
 
-  const formModel = useMemo(() => getBurrowOpeMintKitFormModel(storage), [storage])
+  const formModel = useMemo(() => getBurrowOpeMintKitFormModel(maxAmount), [maxAmount])
   const {
     handleFormChange,
     getInputProps,
