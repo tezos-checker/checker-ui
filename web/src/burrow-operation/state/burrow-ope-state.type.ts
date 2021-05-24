@@ -43,8 +43,9 @@ export type TransactionOperationParams = {
     completed: boolean
     isInCurrentBranch: () => Promise<boolean>
   }>
-  // TransactionWalletOperation | null
 }
+
+export type BurrowOpeAmountSubmitParams = { amount: number; burrowId: number }
 
 export type BurrowOpeRowState = {
   burrowId: number
@@ -54,7 +55,10 @@ export type BurrowOpeRowState = {
   errorMsg: string
   operationStep: ScOperationStep
   operationName: BurrowOpeEnum
-  submitOperationParams: BurrowOpeCreateBurrowSubmitParams | BurrowOpeDepositTezSubmitParams
+  submitOperationParams:
+    | BurrowOpeCreateBurrowSubmitParams
+    | BurrowOpeDepositTezSubmitParams
+    | BurrowOpeAmountSubmitParams
   transactionWalletOperation: TransactionOperationParams | null
   blockResponse: BlockResponse | null
 }

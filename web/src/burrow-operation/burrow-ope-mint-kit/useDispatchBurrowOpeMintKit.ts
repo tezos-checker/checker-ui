@@ -1,22 +1,25 @@
 import { RequestStatus, ScOperationStep, useAppDispatch } from '@config'
-import { BurrowOpeEnum, BurrowOpeRowState } from '../state/burrow-ope-state.type'
+import {
+  BurrowOpeAmountSubmitParams,
+  BurrowOpeEnum,
+  BurrowOpeRowState,
+} from '../state/burrow-ope-state.type'
 import { burrowOpeActions } from '../state/burrow-ope.slice'
-import { BurrowOpeDepositTezSubmitParams } from './burrow-ope-deposit-tez.api'
 
-export const useDispatchBurrowOpeDepositTez = (
+export const useDispatchBurrowOpeMint = (
   burrowId: number,
   scAddress: string,
   callBack: () => void,
 ) => {
   const dispatch = useAppDispatch()
 
-  const executeDeposit = (tez: number) => {
-    const submitOperationParams: BurrowOpeDepositTezSubmitParams = { burrowId, tez }
+  const executeMint = (amount: number) => {
+    const submitOperationParams: BurrowOpeAmountSubmitParams = { burrowId, amount }
 
     const payload: BurrowOpeRowState = {
       burrowId,
       scAddress,
-      operationName: BurrowOpeEnum.deposit_tez,
+      operationName: BurrowOpeEnum.mint_kit,
       operationStep: ScOperationStep.submit,
       status: RequestStatus.pending,
       errorMsg: '',
@@ -25,12 +28,11 @@ export const useDispatchBurrowOpeDepositTez = (
       transactionWalletOperation: null,
       blockResponse: null,
     }
-
-    dispatch(burrowOpeActions.depositTezSubmit(payload))
+    dispatch(burrowOpeActions.mintKitSubmit(payload))
     callBack()
   }
 
   return {
-    depositTez: (tez: number) => executeDeposit(tez),
+    mint: (tez: number) => executeMint(tez),
   }
 }

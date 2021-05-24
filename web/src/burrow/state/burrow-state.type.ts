@@ -8,6 +8,7 @@ type WritableDraft<T> = {
 export type BurrowRowState = {
   burrowId: number
   scAddress: string
+  walletAddress: string
 }
 
 export type BurrowEntitySelector = EntitySelectors<BurrowRowState, RootState>

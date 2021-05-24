@@ -3,7 +3,7 @@ import {
   BurrowOpeDepositTezForm,
   BurrowOpeEditDepositorForm,
   BurrowOpeLiquidateForm,
-  BurrowOpeMintForm,
+  BurrowOpeMintKitForm,
   BurrowOpeRepayForm,
   BurrowOpeWithdrawForm,
 } from '@burrow-operation'
@@ -51,7 +51,9 @@ const routesConfig = [
     icon: <LinkIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowOpeMintForm />,
+    getComponent: ({ burrow, onCloseActions }: Props) => (
+      <BurrowOpeMintKitForm burrow={burrow} callBack={onCloseActions} />
+    ),
   },
   {
     route: '/repay',

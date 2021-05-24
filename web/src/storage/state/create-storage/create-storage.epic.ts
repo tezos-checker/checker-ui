@@ -1,11 +1,11 @@
-import { loadStorageRequest } from '@api'
+import { loadStorageRequest, LoadStorageResp } from '@api'
 import { BurrowOpeAction, BurrowOpeRowState } from '@burrow-operation'
 import { RequestStatus } from '@config'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { LoadStorageResultAction } from '../load-storage/load-storage.type'
-import { CheckerStorage, StorageRow } from '../storage-state.type'
+import { StorageRow } from '../storage-state.type'
 import { getUpdateStorageAction } from '../update-storage/update-storage.util'
 import { getCreateStorageAction } from './create-storage-action.util'
 
@@ -15,12 +15,13 @@ export const getScStorage = ({
   scAddress,
 }: LoadBurrowStorageRequestParams): Observable<LoadStorageResultAction> =>
   from(loadStorageRequest(storageRow.burrowId, walletAddress, scAddress)).pipe(
-    map((storage: CheckerStorage) => {
-      if (storage) {
+    map((res: LoadStorageResp) => {
+      if (res) {
         return getUpdateStorageAction({
           ...storageRow,
           status: RequestStatus.success,
-          storage,
+          burrowStorage: res.burrowStorage,
+          checkerStorage: res.checkerStorage,
           errorMsg: '',
         })
       }
