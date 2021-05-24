@@ -1,4 +1,5 @@
 import { Box, Button } from '@chakra-ui/react'
+import { tzFormatter, TzFormatterType } from '@config'
 import { useGetStorage } from '@storage'
 import React, { FunctionComponent, useMemo } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
@@ -19,6 +20,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
   callBack,
 }) => {
   const { burrowStorage } = useGetStorage(burrowId) as StorageRow
+  console.log(burrowStorage)
   const maxAmount = getMaxAmountToMint(burrowStorage)
   const formModel = useMemo(() => getBurrowOpeMintKitFormModel(maxAmount), [maxAmount])
   const {
@@ -39,6 +41,12 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
     >
       <Box fontSize="2xl">Mint</Box>
       <MintAmountField {...getInputProps(tezToMint)} />
+      <Box fontSize="xs" textAlign="right">
+        {tzFormatter(burrowStorage.collateral, TzFormatterType.mutez_to_tz).toString()}
+        {' collateral'}- {burrowStorage.outstanding_kit.toString()}
+        {' outstanding kit'} = <b>{maxAmount.toString()}</b>
+        {' mintable Tez'}
+      </Box>
       <Box textAlign="right">
         <Button
           disabled={!isFormValid}
@@ -47,9 +55,6 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
         >
           Mint
         </Button>
-      </Box>
-      <Box>
-        {burrowStorage.collateral} - {burrowStorage.outstanding_kit} = {maxAmount.toString()}
       </Box>
     </Box>
   )

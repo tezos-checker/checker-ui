@@ -2,7 +2,7 @@ import { BurrowOpeRowState } from '@burrow-operation'
 import { DragHandleIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, IconButton, Spinner, useDisclosure, VStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import { SlideBox } from '@shared/ui'
+import { LoadingBox, SlideBox } from '@shared/ui'
 import {
   isInvalidStorage,
   isInvalidStorageBurrow,
@@ -100,9 +100,11 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
       </Box>
       <Flex borderTop="1px solid" borderColor="gray.200" mt="15px" alignItems="flex-end">
         <VStack flex="1" py="10px">
-          <Box fontSize="2xl" fontWeight="extrabold" p="0">
-            1
-          </Box>
+          <LoadingBox status={storage?.status || RequestStatus.idle}>
+            <Box fontSize="2xl" fontWeight="extrabold" p="0">
+              {storage?.burrowStorage.outstanding_kit.toString()}
+            </Box>
+          </LoadingBox>
 
           <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
             OUTSTANDING CTEZ
