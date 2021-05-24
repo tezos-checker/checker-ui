@@ -2,7 +2,10 @@ import { RepeatIcon } from '@chakra-ui/icons'
 import { Box, IconButton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
-import { getEmptyStorage } from '../../state/create-storage/create-storage-action.util'
+import {
+  EmptyBurrowStorage,
+  EmptyCheckerStorage,
+} from '../../state/create-storage/create-storage-action.util'
 import { useStorageDispatcher } from '../../state/useStorageDisptacher.hook'
 
 type Props = {
@@ -20,7 +23,8 @@ export const NoStorageErrorBox: FunctionComponent<Props> = ({ burrowId }) => {
           loadStorage({
             burrowId,
             status: RequestStatus.idle,
-            storage: getEmptyStorage(),
+            burrowStorage: EmptyBurrowStorage,
+            checkerStorage: EmptyCheckerStorage,
             errorMsg: '',
           })
         }

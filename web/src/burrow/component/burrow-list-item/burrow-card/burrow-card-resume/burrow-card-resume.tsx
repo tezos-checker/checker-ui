@@ -60,7 +60,7 @@ const CardStorageColateral: FunctionComponent<PropsCardStorageColateral> = ({
           <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
             <Box fontSize="3xl" fontWeight="extrabold">
               {`${tzFormatter(
-                storage?.storage.burrow.collateral || 0,
+                storage?.burrowStorage.collateral || 0,
                 TzFormatterType.mutez_to_tz,
               )} ꜩ`}
             </Box>
@@ -70,7 +70,7 @@ const CardStorageColateral: FunctionComponent<PropsCardStorageColateral> = ({
             <Box as="span" mr="10px" fontWeight="extrabold">
               Digger
             </Box>
-            {truncateStringInTheMiddle(`${storage?.storage.burrow.address || ''}`)}
+            {truncateStringInTheMiddle(`${storage?.burrowStorage.address || ''}`)}
           </Box>
         </>
       )

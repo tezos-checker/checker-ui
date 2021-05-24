@@ -1,21 +1,28 @@
 import { getContract } from '@config'
-import { CheckerStorage } from '../state/storage-state.type'
+import { BurrowStorage, CheckerStorage } from '../state/storage-state.type'
+
+export type LoadStorageResp = {
+  burrowStorage: BurrowStorage
+  checkerStorage: CheckerStorage
+}
 
 export const loadStorageRequest = async (
   burrowId: number,
   walletAddress: string,
   scAddress: string,
-): Promise<CheckerStorage> => {
+): Promise<LoadStorageResp> => {
   const contract = await getContract(scAddress)
-
   const storage: any = await contract.storage()
 
-  const checkerStorage: CheckerStorage = {
-    burrow: await storage[1].sealed.burrows.get({
-      0: walletAddress,
-      1: burrowId,
-    }),
-    parameters: storage[1].sealed.parameters,
+  const burrowStorage = await storage[1].sealed.burrows.get({
+    0: walletAddress,
+    1: burrowId,
+  })
+
+  const checkerStorage = storage[1].sealed.parameters
+
+  return {
+    burrowStorage,
+    checkerStorage,
   }
-  return checkerStorage
 }

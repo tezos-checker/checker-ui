@@ -12,7 +12,7 @@ export type BurrowStorage = {
   outstanding_kit: number
 }
 
-export type CheckerStorageParameters = {
+export type CheckerStorage = {
   burrow_fee_index: number
   circulating_kit: number
   drift: number
@@ -26,14 +26,10 @@ export type CheckerStorageParameters = {
   target: number
 }
 
-export type CheckerStorage = {
-  burrow: BurrowStorage
-  parameters: CheckerStorageParameters
-}
-
 export type StorageRow = {
   burrowId: number
   status: RequestStatus
   errorMsg: string
-  storage: CheckerStorage
+  burrowStorage: BurrowStorage
+  checkerStorage: CheckerStorage
 }
