@@ -1,5 +1,5 @@
 import { Box, Button } from '@chakra-ui/react'
-import { tzFormatter, TzFormatterType } from '@config'
+import { TzFormatMutezToTz } from '@config'
 import { useGetStorage } from '@storage'
 import React, { FunctionComponent, useMemo } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
@@ -42,7 +42,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       <Box fontSize="2xl">Mint</Box>
       <MintAmountField {...getInputProps(tezToMint)} />
       <Box fontSize="xs" textAlign="right">
-        {tzFormatter(burrowStorage.collateral, TzFormatterType.mutez_to_tz).toString()}
+        {TzFormatMutezToTz(burrowStorage.collateral).toString()}
         {' collateral'}- {burrowStorage.outstanding_kit.toString()}
         {' outstanding kit'} = <b>{maxAmount.toString()}</b>
         {' mintable Tez'}
