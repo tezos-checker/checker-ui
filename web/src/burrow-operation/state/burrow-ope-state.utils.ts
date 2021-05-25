@@ -1,6 +1,13 @@
 import { AbstractAction, BurrowOpeStep, RequestStatus } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
-import { BurrowOpeName, BurrowOpeRowState, BurrowOpeSubmitParams } from './burrow-ope-state.type'
+import { from, Observable, of } from 'rxjs'
+import { catchError, map } from 'rxjs/operators'
+import {
+  BurrowOpeAction,
+  BurrowOpeName,
+  BurrowOpeRowState,
+  BurrowOpeSubmitParams,
+} from './burrow-ope-state.type'
 
 export const createBurrowOpeErrorAction = (
   actionType: string,
@@ -33,25 +40,30 @@ export const createBurrowOpeSubmitPayload = (
   blockResponse: null,
 })
 
-export const createBurrowOpeConfirmAction = (
-  burrowOpeSubmitActionType: string,
-  burrowOpeSubmitRes: TransactionWalletOperation,
-  burrowOpeConfirmActionType: string,
+export const burrowOpeHandleSubmitRequest = (
+  request: Promise<TransactionWalletOperation>,
+  submitActionType: string,
+  confirmActionType: string,
   burrowOpeRowState: BurrowOpeRowState,
-): AbstractAction<BurrowOpeRowState> => {
-  if (burrowOpeSubmitRes) {
-    // eslint-disable-next-line
-    return {
-      type: burrowOpeConfirmActionType,
-      payload: {
-        ...burrowOpeRowState,
-        operationStep: BurrowOpeStep.confirm,
-        transactionWalletOperation: {
-          confirmOperation: (nbConfirmation: number) =>
-            burrowOpeSubmitRes.confirmation(nbConfirmation),
-        },
-      },
-    }
-  }
-  return createBurrowOpeErrorAction(burrowOpeSubmitActionType, burrowOpeRowState, 'Internal error')
-}
+): Observable<BurrowOpeAction> =>
+  from(request).pipe(
+    map((res: TransactionWalletOperation) => {
+      if (res) {
+        // eslint-disable-next-line
+        return {
+          type: confirmActionType,
+          payload: {
+            ...burrowOpeRowState,
+            operationStep: BurrowOpeStep.confirm,
+            transactionWalletOperation: {
+              confirmOperation: (nbConfirmation: number) => res.confirmation(nbConfirmation),
+            },
+          },
+        }
+      }
+      return createBurrowOpeErrorAction(submitActionType, burrowOpeRowState, 'Internal error')
+    }),
+    catchError((err) =>
+      of(createBurrowOpeErrorAction(submitActionType, burrowOpeRowState, err.message)),
+    ),
+  )
