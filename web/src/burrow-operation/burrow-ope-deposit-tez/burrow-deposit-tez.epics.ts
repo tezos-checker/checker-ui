@@ -21,7 +21,7 @@ const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeActi
     rowState,
   )
 
-const burrowOpeDepositTezSubmitRequestEpic = (action$: any) =>
+const burrowOpeDepositTezSubmitEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
@@ -30,9 +30,9 @@ const burrowOpeDepositTezSubmitRequestEpic = (action$: any) =>
   )
 
 // epic factory in order an epic based on the action type
-const scOpeDepositTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/depositTezConfirm')
+const burrowOpeDepositTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/depositTezConfirm')
 
 export const burrowOpeDepositTezEpics = combineEpics(
-  burrowOpeDepositTezSubmitRequestEpic,
-  scOpeDepositTezConfirmEpic,
+  burrowOpeDepositTezSubmitEpic,
+  burrowOpeDepositTezConfirmEpic,
 )

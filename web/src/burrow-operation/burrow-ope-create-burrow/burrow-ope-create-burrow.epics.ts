@@ -24,7 +24,7 @@ const submitCreateBurrow = (rowState: BurrowOpeRowState): Observable<BurrowOpeAc
     rowState,
   )
 
-const burrowOpeCreateBurrowSubmitRequestEpic = (action$: any) =>
+const burrowOpeCreateBurrowSubmitEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
@@ -32,11 +32,11 @@ const burrowOpeCreateBurrowSubmitRequestEpic = (action$: any) =>
     mergeMap((x: BurrowOpeRowState) => submitCreateBurrow(x)),
   )
 
-export const scOpeCreateBurrowConfirmEpic = createBurrowOpeConfirmEpic(
+export const burrowOpeCreateBurrowConfirmEpic = createBurrowOpeConfirmEpic(
   'burrowOpe/createBurrowConfirm',
 )
 
 export const burrowOpeCreateBurrowEpics = combineEpics(
-  burrowOpeCreateBurrowSubmitRequestEpic,
-  scOpeCreateBurrowConfirmEpic,
+  burrowOpeCreateBurrowSubmitEpic,
+  burrowOpeCreateBurrowConfirmEpic,
 )
