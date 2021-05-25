@@ -1,9 +1,6 @@
-import { RequestStatus, ScOperationStep, useAppDispatch } from '@config'
-import {
-  BurrowOpeAmountSubmitParams,
-  BurrowOpeEnum,
-  BurrowOpeRowState,
-} from '../state/burrow-ope-state.type'
+import { useAppDispatch } from '@config'
+import { BurrowOpeName, BurrowOpeRowState } from '../state/burrow-ope-state.type'
+import { createBurrowOpeSubmitPayload } from '../state/burrow-ope-state.utils'
 import { burrowOpeActions } from '../state/burrow-ope.slice'
 
 export const useDispatchBurrowOpeMint = (
@@ -13,21 +10,14 @@ export const useDispatchBurrowOpeMint = (
 ) => {
   const dispatch = useAppDispatch()
 
-  const executeMint = (amount: number) => {
-    const submitOperationParams: BurrowOpeAmountSubmitParams = { burrowId, amount }
-
-    const payload: BurrowOpeRowState = {
+  const executeMint = (tez: number) => {
+    const payload: BurrowOpeRowState = createBurrowOpeSubmitPayload(
       burrowId,
       scAddress,
-      operationName: BurrowOpeEnum.mint_kit,
-      operationStep: ScOperationStep.submit,
-      status: RequestStatus.pending,
-      errorMsg: '',
-      submitOperationParams,
-      nbConfirmation: 1,
-      transactionWalletOperation: null,
-      blockResponse: null,
-    }
+      BurrowOpeName.mint_kit,
+      tez,
+    )
+
     dispatch(burrowOpeActions.mintKitSubmit(payload))
     callBack()
   }
