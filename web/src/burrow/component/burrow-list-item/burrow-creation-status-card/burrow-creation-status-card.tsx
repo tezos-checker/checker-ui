@@ -1,7 +1,7 @@
 import { BurrowOpeRowState, useBurrowOpeDispatcher, useGetBurrowOperation } from '@burrow-operation'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Box, IconButton, Image, Progress } from '@chakra-ui/react'
-import { RequestStatus, ScOperationStep } from '@config'
+import { BurrowOpeStep, RequestStatus } from '@config'
 import React, { FunctionComponent } from 'react'
 import FoxJumpingGif from '../../../../assets/images/fox-jumping.gif'
 import OopsGif from '../../../../assets/images/oops.gif'
@@ -30,7 +30,7 @@ const BurrowCreationFailed: FunctionComponent<BurrowOpeRowState> = ({ burrowId, 
     reason while we whill show the burrow card 
   */
   const onCloseCard = () => {
-    if (burrowOperation && burrowOperation?.operationStep === ScOperationStep.confirm) {
+    if (burrowOperation && burrowOperation?.operationStep === BurrowOpeStep.confirm) {
       clearBurrowOpeMessage(burrowOperation)
     } else {
       deleteBurrow(burrowId)

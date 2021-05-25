@@ -1,10 +1,9 @@
-import { AbstractAction, RequestStatus, ScOperationStep } from '@config'
+import { AbstractAction, BurrowOpeStep, RequestStatus } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
 import { BurrowOpeCreateBurrowSubmitParams } from '../burrow-ope-create-burrow/burrow-ope-create-burrow.api'
-import { BurrowOpeDepositTezSubmitParams } from '../burrow-ope-deposit-tez/burrow-ope-deposit-tez.api'
 
-export enum BurrowOpeEnum {
+export enum BurrowOpeName {
   activate_burrow = 'activate_burrow',
   add_liquidity = 'add_liquidity',
   burn_kit = 'burn_kit',
@@ -45,7 +44,7 @@ export type TransactionOperationParams = {
   }>
 }
 
-export type BurrowOpeAmountSubmitParams = { amount: number; burrowId: number }
+export type BurrowOpeSubmitParams = BurrowOpeCreateBurrowSubmitParams | number
 
 export type BurrowOpeRowState = {
   burrowId: number
@@ -53,12 +52,9 @@ export type BurrowOpeRowState = {
   status: RequestStatus
   nbConfirmation: number
   errorMsg: string
-  operationStep: ScOperationStep
-  operationName: BurrowOpeEnum
-  submitOperationParams:
-    | BurrowOpeCreateBurrowSubmitParams
-    | BurrowOpeDepositTezSubmitParams
-    | BurrowOpeAmountSubmitParams
+  operationStep: BurrowOpeStep
+  operationName: BurrowOpeName
+  operationSubmitParams: BurrowOpeSubmitParams
   transactionWalletOperation: TransactionOperationParams | null
   blockResponse: BlockResponse | null
 }

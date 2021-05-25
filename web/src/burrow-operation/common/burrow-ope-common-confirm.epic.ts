@@ -1,16 +1,16 @@
-import { RequestStatus, ScOperationStep } from '@config'
+import { BurrowOpeStep, RequestStatus } from '@config'
 import { isPendingRequest } from '@shared/utils'
 import { BlockResponse } from '@taquito/rpc'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'
 import { BurrowOpeAction } from '../state/burrow-ope-state.type'
-import { createOperationErrorAction } from '../state/burrow-ope-state.utils'
+import { createBurrowOpeErrorAction } from '../state/burrow-ope-state.utils'
 import { burrowOpeConfirmRequest } from './burrow-ope-common.api'
 
 const confirmMethod = ({ type, payload }: BurrowOpeAction): Observable<BurrowOpeAction> => {
   if (!payload.transactionWalletOperation) {
-    return of(createOperationErrorAction(type, payload, 'Internal error'))
+    return of(createBurrowOpeErrorAction(type, payload, 'Internal error'))
   }
 
   return from(burrowOpeConfirmRequest(payload.transactionWalletOperation)).pipe(
@@ -21,15 +21,15 @@ const confirmMethod = ({ type, payload }: BurrowOpeAction): Observable<BurrowOpe
           type,
           payload: {
             ...payload,
-            operationStep: ScOperationStep.confirmed,
+            operationStep: BurrowOpeStep.confirmed,
             status: RequestStatus.success,
             blockResponse,
           },
         }
       }
-      return createOperationErrorAction(type, payload, 'Internal error')
+      return createBurrowOpeErrorAction(type, payload, 'Internal error')
     }),
-    catchError((err) => of(createOperationErrorAction(type, payload, err.message))),
+    catchError((err) => of(createBurrowOpeErrorAction(type, payload, err.message))),
   )
 }
 
