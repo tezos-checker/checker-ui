@@ -1,5 +1,6 @@
-import { RequestStatus, ScOperationStep, useAppDispatch } from '@config'
-import { BurrowOpeEnum, BurrowOpeRowState } from '../state/burrow-ope-state.type'
+import { useAppDispatch } from '@config'
+import { BurrowOpeName, BurrowOpeRowState } from '../state/burrow-ope-state.type'
+import { createBurrowOpeSubmitPayload } from '../state/burrow-ope-state.utils'
 import { burrowOpeActions } from '../state/burrow-ope.slice'
 import { BurrowOpeCreateBurrowSubmitParams } from './burrow-ope-create-burrow.api'
 
@@ -9,20 +10,14 @@ export const useDispatchBurrowOpeCreateBurrow = (callBack: () => void) => {
   const exeCreateBurrow = (
     burrowId: number,
     scAddress: string,
-    submitOperationParams: BurrowOpeCreateBurrowSubmitParams,
+    operationSubmitParams: BurrowOpeCreateBurrowSubmitParams,
   ) => {
-    const payload: BurrowOpeRowState = {
+    const payload: BurrowOpeRowState = createBurrowOpeSubmitPayload(
       burrowId,
       scAddress,
-      operationName: BurrowOpeEnum.create_burrow,
-      operationStep: ScOperationStep.submit,
-      status: RequestStatus.pending,
-      errorMsg: '',
-      submitOperationParams,
-      nbConfirmation: 1,
-      transactionWalletOperation: null,
-      blockResponse: null,
-    }
+      BurrowOpeName.create_burrow,
+      operationSubmitParams,
+    )
 
     dispatch(burrowOpeActions.createBurrowSubmit(payload))
     callBack()

@@ -1,13 +1,11 @@
 import { getContract } from '@shared/utils'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
-export type BurrowOpeDepositTezSubmitParams = { tez: number; burrowId: number }
-
-export const burrowOpeDepositTezSubmitRequest = async (
+export const burrowOpeMintKitSubmitRequest = async (
   scAddress: string,
   burrowId: number,
   amount: number,
 ): Promise<TransactionWalletOperation> => {
   const contract = await getContract(scAddress)
-  return contract.methods.deposit_tez(burrowId).send({ amount })
+  return contract.methods.mint_kit(burrowId, amount).send()
 }

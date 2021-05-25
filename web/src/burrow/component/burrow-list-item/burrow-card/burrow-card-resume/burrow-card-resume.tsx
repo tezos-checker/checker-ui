@@ -2,12 +2,12 @@ import { BurrowOpeRowState } from '@burrow-operation'
 import { DragHandleIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, IconButton, Spinner, useDisclosure, VStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import { SlideBox } from '@shared/ui'
+import { LoadingBox, SlideBox } from '@shared/ui'
 import {
   isInvalidStorage,
   isInvalidStorageBurrow,
   truncateStringInTheMiddle,
-  tzFormatter,
+  TzFormatMutezToTz,
 } from '@shared/utils'
 import React, { FunctionComponent } from 'react'
 import { StorageRow } from '../../../../../storage/state/storage-state.type'
@@ -58,7 +58,7 @@ const CardStorageColateral: FunctionComponent<PropsCardStorageColateral> = ({
         <>
           <Box mx="10px" mt="15px" py="5px" textAlign="center" bg="gray.200" borderRadius="10px">
             <Box fontSize="3xl" fontWeight="extrabold">
-              {`${tzFormatter(storage?.storage.burrow.collateral || 0, 'tz')}`}
+              {`${TzFormatMutezToTz(storage?.burrowStorage.collateral || 0)} ꜩ`}
             </Box>
             <Box fontSize="9px">BURROW BALANCE</Box>
           </Box>
@@ -66,7 +66,7 @@ const CardStorageColateral: FunctionComponent<PropsCardStorageColateral> = ({
             <Box as="span" mr="10px" fontWeight="extrabold">
               Digger
             </Box>
-            {truncateStringInTheMiddle(`${storage?.storage.burrow.address || ''}`)}
+            {truncateStringInTheMiddle(`${storage?.burrowStorage.address || ''}`)}
           </Box>
         </>
       )
@@ -96,9 +96,11 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
       </Box>
       <Flex borderTop="1px solid" borderColor="gray.200" mt="15px" alignItems="flex-end">
         <VStack flex="1" py="10px">
-          <Box fontSize="2xl" fontWeight="extrabold" p="0">
-            1
-          </Box>
+          <LoadingBox status={storage?.status || RequestStatus.idle}>
+            <Box fontSize="2xl" fontWeight="extrabold" p="0">
+              {storage?.burrowStorage.outstanding_kit.toString()}
+            </Box>
+          </LoadingBox>
 
           <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
             OUTSTANDING CTEZ

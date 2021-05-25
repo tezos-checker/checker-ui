@@ -1,12 +1,10 @@
-import { ScOperationStep } from '@config'
 import { isPendingRequest } from '@shared/utils'
-import { TransactionWalletOperation } from '@taquito/taquito'
 import { combineEpics, ofType } from 'redux-observable'
-import { from, Observable, of } from 'rxjs'
-import { catchError, filter, map, mergeMap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { filter, map, mergeMap } from 'rxjs/operators'
 import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.epic'
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
-import { createOperationErrorAction } from '../state/burrow-ope-state.utils'
+import { burrowOpeHandleSubmitRequest } from '../state/burrow-ope-state.utils'
 import {
   BurrowOpeCreateBurrowSubmitParams,
   burrowOpeCreateBurrowSubmitRequest,
@@ -15,30 +13,15 @@ import {
 const actionType = 'burrowOpe/createBurrowSubmit'
 
 const submitCreateBurrow = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
-  from(
+  burrowOpeHandleSubmitRequest(
     burrowOpeCreateBurrowSubmitRequest(
       rowState.burrowId,
       rowState.scAddress,
-      rowState.submitOperationParams as BurrowOpeCreateBurrowSubmitParams,
+      rowState.operationSubmitParams as BurrowOpeCreateBurrowSubmitParams,
     ),
-  ).pipe(
-    map((res: TransactionWalletOperation) => {
-      if (res) {
-        // eslint-disable-next-line
-        return {
-          type: 'burrowOpe/createBurrowConfirm',
-          payload: {
-            ...rowState,
-            operationStep: ScOperationStep.confirm,
-            transactionWalletOperation: {
-              confirmOperation: (nbConfirmation: number) => res.confirmation(nbConfirmation),
-            },
-          },
-        }
-      }
-      return createOperationErrorAction(actionType, rowState, 'Internal error')
-    }),
-    catchError((err) => of(createOperationErrorAction(actionType, rowState, err.message))),
+    'burrowOpe/createBurrowSubmit',
+    'burrowOpe/createBurrowConfirm',
+    rowState,
   )
 
 const burrowOpeCreateBurrowSubmitRequestEpic = (action$: any) =>

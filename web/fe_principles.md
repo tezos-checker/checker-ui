@@ -105,7 +105,7 @@
 
 #### /!\ redux-toolkit adapatater
 
-- when we use the redux-toolkit adapatater, the reducer MUST NOT return a new state but has the change the properties of the state like state.x = ...
+- when we use the redux-toolkit adapater, the reducer MUST NOT return a new state but has the change the properties of the state like state.x = ...
 
 ```
 export const loadPostReducer = (state: EntityPostState) => {
@@ -113,7 +113,7 @@ export const loadPostReducer = (state: EntityPostState) => {
 }
 ```
 
-naming convention: id we work with an adaptater the type name has to be Entity[...]State
+naming convention: id we work with an adapter the type name has to be Entity[...]State
 
 ```
 export type EntityPostState = EntityState<Post> & {

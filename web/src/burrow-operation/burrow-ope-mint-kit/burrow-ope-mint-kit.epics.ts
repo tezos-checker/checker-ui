@@ -5,23 +5,23 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.epic'
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { burrowOpeHandleSubmitRequest } from '../state/burrow-ope-state.utils'
-import { burrowOpeDepositTezSubmitRequest } from './burrow-ope-deposit-tez.api'
+import { burrowOpeMintKitSubmitRequest } from './burrow-ope-mint-kit.api'
 
-const actionType = 'burrowOpe/depositTezSubmit'
+const actionType = 'burrowOpe/mintKitSubmit'
 
 const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
   burrowOpeHandleSubmitRequest(
-    burrowOpeDepositTezSubmitRequest(
+    burrowOpeMintKitSubmitRequest(
       rowState.scAddress,
       rowState.burrowId,
       rowState.operationSubmitParams as number,
     ),
-    'burrowOpe/depositTezSubmit',
-    'burrowOpe/depositTezConfirm',
+    'burrowOpe/mintKitSubmit',
+    'burrowOpe/mintKitConfirm',
     rowState,
   )
 
-const burrowOpeDepositTezSubmitRequestEpic = (action$: any) =>
+const burrowOpeMintKitSubmitRequestEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
@@ -29,10 +29,9 @@ const burrowOpeDepositTezSubmitRequestEpic = (action$: any) =>
     mergeMap((x: BurrowOpeRowState) => submitDepositTez(x)),
   )
 
-// epic factory in order an epic based on the action type
-const scOpeDepositTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/depositTezConfirm')
+const burrowOpeMintKitConfirmRequestEpic = createBurrowOpeConfirmEpic('burrowOpe/mintKitConfirm')
 
-export const burrowOpeDepositTezEpics = combineEpics(
-  burrowOpeDepositTezSubmitRequestEpic,
-  scOpeDepositTezConfirmEpic,
+export const burrowOpeMintKitEpics = combineEpics(
+  burrowOpeMintKitSubmitRequestEpic,
+  burrowOpeMintKitConfirmRequestEpic,
 )

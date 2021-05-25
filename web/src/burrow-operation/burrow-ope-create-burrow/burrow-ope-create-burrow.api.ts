@@ -11,6 +11,7 @@ export const burrowOpeCreateBurrowSubmitRequest = async (
   scAddress: string,
   { delegate, deposit }: BurrowOpeCreateBurrowSubmitParams,
 ): Promise<TransactionWalletOperation> => {
+  debugger
   const contract = await getContract(scAddress)
   return contract.methods.create_burrow(burrowId).send({ amount: deposit })
 }
