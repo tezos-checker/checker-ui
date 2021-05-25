@@ -1,30 +1,24 @@
 import { isPendingRequest } from '@shared/utils'
-import { TransactionWalletOperation } from '@taquito/taquito'
 import { combineEpics, ofType } from 'redux-observable'
-import { from, Observable, of } from 'rxjs'
-import { catchError, filter, map, mergeMap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { filter, map, mergeMap } from 'rxjs/operators'
 import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.epic'
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
-import {
-  createBurrowOpeConfirmAction,
-  createBurrowOpeErrorAction,
-} from '../state/burrow-ope-state.utils'
+import { burrowOpeHandleSubmitRequest } from '../state/burrow-ope-state.utils'
 import { burrowOpeMintKitSubmitRequest } from './burrow-ope-mint-kit.api'
 
 const actionType = 'burrowOpe/mintKitSubmit'
 
 const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
-  from(
+  burrowOpeHandleSubmitRequest(
     burrowOpeMintKitSubmitRequest(
       rowState.scAddress,
       rowState.burrowId,
       rowState.operationSubmitParams as number,
     ),
-  ).pipe(
-    map((res: TransactionWalletOperation) =>
-      createBurrowOpeConfirmAction(actionType, res, 'burrowOpe/mintKitConfirm', rowState),
-    ),
-    catchError((err) => of(createBurrowOpeErrorAction(actionType, rowState, err.message))),
+    'burrowOpe/mintKitSubmit',
+    'burrowOpe/mintKitConfirm',
+    rowState,
   )
 
 const burrowOpeMintKitSubmitRequestEpic = (action$: any) =>
