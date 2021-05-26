@@ -1,33 +1,34 @@
 import { Box, Button } from '@chakra-ui/react'
-import { TzFormatMutezToTz } from '@config'
 import { useGetStorage } from '@storage'
 import React, { FunctionComponent, useMemo } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
-import { getMaxAmountToMint } from './burrow-ope-mint-kit.util'
-import { getBurrowOpeMintKitFormModel, tezToMint } from './component/burrow-ope-mint.model'
-import { MintAmountField } from './component/mint-tez-amount-field'
-import { useDispatchBurrowOpeMint } from './useDispatchBurrowOpeMintKit'
+import { BurnKitAmountField } from './component/burn-kit-amount-field'
+import { amoutToBurn, getBurrowOpeBurnKitFormModel } from './component/burrow-ope-burn-kit.model'
+import { useDispatchBurrowOpeBurnKit } from './useDispatchBurrowOpeBurnKit'
 
 type Props = {
   burrow: BurrowRowState
   callBack: () => void
 }
 
-export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
+export const BurrowOpeBurnKitForm: FunctionComponent<Props> = ({
   burrow: { burrowId, scAddress },
   callBack,
 }) => {
   const { burrowStorage } = useGetStorage(burrowId) as StorageRow
-  const maxAmount = getMaxAmountToMint(burrowStorage)
-  const formModel = useMemo(() => getBurrowOpeMintKitFormModel(maxAmount), [maxAmount])
+
+  const formModel = useMemo(() => getBurrowOpeBurnKitFormModel(burrowStorage.outstanding_kit), [
+    burrowStorage.outstanding_kit,
+  ])
+
+  const { burnKit } = useDispatchBurrowOpeBurnKit(burrowId, scAddress, callBack)
   const {
     handleFormChange,
     getInputProps,
     formProperties: { isFormValid },
   } = useFormManager(formModel)
-  const { mint } = useDispatchBurrowOpeMint(burrowId, scAddress, callBack)
 
   return (
     <Box
@@ -38,21 +39,18 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       borderColor="gray.200"
       p="20px"
     >
-      <Box fontSize="2xl">Mint</Box>
-      <MintAmountField {...getInputProps(tezToMint)} />
+      <Box fontSize="2xl">Deposit</Box>
+      <BurnKitAmountField {...getInputProps(amoutToBurn)} />
       <Box fontSize="xs" textAlign="right">
-        {TzFormatMutezToTz(burrowStorage.collateral).toString()}
-        {' collateral'}- {burrowStorage.outstanding_kit.toString()}
-        {' outstanding kit'} = <b>{maxAmount.toString()}</b>
-        {' mintable Tez'}
+        {'Max amount to burn'} = <b>{burrowStorage.outstanding_kit.toString()}</b>
       </Box>
       <Box textAlign="right">
         <Button
           disabled={!isFormValid}
           mt="15px"
-          onClick={() => mint(getInputProps(tezToMint).value)}
+          onClick={() => burnKit(getInputProps(amoutToBurn).value)}
         >
-          Mint
+          Burn Kit
         </Button>
       </Box>
     </Box>

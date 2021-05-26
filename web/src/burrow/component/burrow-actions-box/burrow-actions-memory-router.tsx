@@ -1,4 +1,5 @@
 import {
+  BurrowOpeBurnKitForm,
   BurrowOpeDelegateForm,
   BurrowOpeDepositTezForm,
   BurrowOpeEditDepositorForm,
@@ -86,6 +87,16 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: (props: Props) => <BurrowOpeEditDepositorForm />,
+  },
+  {
+    route: '/burnkit',
+    label: 'Burn Kit',
+    icon: <LinkIcon height="50px" />,
+
+    // eslint-disable-next-line react/display-name
+    getComponent: ({ burrow, onCloseActions }: Props) => (
+      <BurrowOpeBurnKitForm burrow={burrow} callBack={onCloseActions} />
+    ),
   },
 ]
 

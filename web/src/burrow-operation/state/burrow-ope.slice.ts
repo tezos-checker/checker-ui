@@ -19,6 +19,8 @@ export const burrowOpeSlice = createSlice({
     depositTezConfirm: burrowOpeAdapter.upsertOne,
     mintKitSubmit: burrowOpeAdapter.upsertOne,
     mintKitConfirm: burrowOpeAdapter.upsertOne,
+    burnKitSubmit: burrowOpeAdapter.upsertOne,
+    burnKitConfirm: burrowOpeAdapter.upsertOne,
     clearBurrowOpeMessage: burrowOpeAdapter.upsertOne,
     deleteBurrowOpe: burrowOpeAdapter.removeOne,
     resetPendingBurrowOpe: burrowOpeAdapter.updateMany,
