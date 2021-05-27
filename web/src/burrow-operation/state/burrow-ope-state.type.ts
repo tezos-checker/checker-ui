@@ -1,6 +1,7 @@
 import { AbstractAction, BurrowOpeStep, RequestStatus } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
+import { BurrowOpeBuyKitSubmitParams } from '../burrow-ope-buy-kit/burrow-ope-buy-kit.api'
 import { BurrowOpeCreateBurrowSubmitParams } from '../burrow-ope-create-burrow/burrow-ope-create-burrow.api'
 
 export enum BurrowOpeName {
@@ -44,7 +45,10 @@ export type TransactionOperationParams = {
   }>
 }
 
-export type BurrowOpeSubmitParams = BurrowOpeCreateBurrowSubmitParams | number
+export type BurrowOpeSubmitParams =
+  | BurrowOpeCreateBurrowSubmitParams
+  | number
+  | BurrowOpeBuyKitSubmitParams
 
 export type BurrowOpeRowState = {
   burrowId: number
