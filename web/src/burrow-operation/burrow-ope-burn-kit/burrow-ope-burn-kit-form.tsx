@@ -39,10 +39,11 @@ export const BurrowOpeBurnKitForm: FunctionComponent<Props> = ({
       borderColor="gray.200"
       p="20px"
     >
-      <Box fontSize="2xl">Deposit</Box>
+      <Box fontSize="2xl">Burn Kits</Box>
       <BurnKitAmountField {...getInputProps(amoutToBurn)} />
       <Box fontSize="xs" textAlign="right">
-        {'Max amount to burn'} = <b>{burrowStorage.outstanding_kit.toString()}</b>
+        {'Max '} <b>{burrowStorage.outstanding_kit.toString()}</b>
+        {' kits can be burnt'}
       </Box>
       <Box textAlign="right">
         <Button
@@ -50,7 +51,7 @@ export const BurrowOpeBurnKitForm: FunctionComponent<Props> = ({
           mt="15px"
           onClick={() => burnKit(getInputProps(amoutToBurn).value)}
         >
-          Burn Kit
+          Burn Kits
         </Button>
       </Box>
     </Box>

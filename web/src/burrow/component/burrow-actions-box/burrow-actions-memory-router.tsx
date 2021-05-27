@@ -2,7 +2,6 @@ import {
   BurrowOpeBurnKitForm,
   BurrowOpeDelegateForm,
   BurrowOpeDepositTezForm,
-  BurrowOpeEditDepositorForm,
   BurrowOpeLiquidateForm,
   BurrowOpeMintKitForm,
   BurrowOpeRepayForm,
@@ -11,7 +10,6 @@ import {
 import {
   AddIcon,
   ArrowRightIcon,
-  EditIcon,
   ExternalLinkIcon,
   LinkIcon,
   RepeatIcon,
@@ -80,17 +78,10 @@ const routesConfig = [
     // eslint-disable-next-line react/display-name
     getComponent: (props: Props) => <BurrowOpeLiquidateForm />,
   },
-  {
-    route: '/editdepositor',
-    label: 'edit depositor',
-    icon: <EditIcon height="50px" />,
 
-    // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowOpeEditDepositorForm />,
-  },
   {
     route: '/burnkit',
-    label: 'Burn Kit',
+    label: 'Burn Kits',
     icon: <LinkIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
