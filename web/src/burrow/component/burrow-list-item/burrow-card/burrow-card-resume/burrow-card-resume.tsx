@@ -103,7 +103,7 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
           </LoadingBox>
 
           <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
-            OUTSTANDING CTEZ
+            KIT
           </Box>
         </VStack>
         <VStack
