@@ -4,7 +4,7 @@ export const loadWallet = async (): Promise<string> => {
   await beaconWallet.requestPermissions({
     // eslint-disable-next-line
     // @ts-ignore
-    network: { type: 'edonet' },
+    network: { type: 'florencenet' },
   })
   const adress = await beaconWallet.getPKH()
   tezos.setWalletProvider(beaconWallet)

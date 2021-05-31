@@ -10,8 +10,8 @@ export const createBurrowFormModel = {
   formInputs: {
     ...FormInputProperties.Builder(inputChecker)
       .addAvailableValue({
-        value: 'KT19BUeLeqaX5qqnq3XajCpXruyJ77aUPs74',
-        label: 'KT19BUeLeqaX5qqnq3XajCpXruyJ77aUPs74',
+        value: 'KT1RcMG4wUJapxbfkgNkTEgi3pg24vHbADqo',
+        label: 'KT1RcMG4wUJapxbfkgNkTEgi3pg24vHbADqo',
       })
       .addValidators([getSmartContractAddressValidator()])
 

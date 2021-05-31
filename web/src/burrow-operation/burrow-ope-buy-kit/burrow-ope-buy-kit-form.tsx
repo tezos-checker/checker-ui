@@ -47,7 +47,7 @@ export const BurrowOpeBuyKitForm: FunctionComponent<Props> = ({
       borderColor="gray.200"
       p="20px"
     >
-      <Box fontSize="2xl">Burn Kits</Box>
+      <Box fontSize="2xl">Buy Kits</Box>
       <BuyKitAmountField {...getInputProps(amount)} />
       <BuyKitMinAmountField {...getInputProps(minAmount)} />
       <BuyKitDeadlineField {...getInputProps(deadLine)} onDateChange={updateDate} />

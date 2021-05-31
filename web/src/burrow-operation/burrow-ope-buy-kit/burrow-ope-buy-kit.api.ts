@@ -15,5 +15,5 @@ export const burrowOpeBuyKitSubmitRequest = async (
 ): Promise<TransactionWalletOperation> => {
   const contract = await getContract(scAddress)
   debugger
-  return contract.methods.buy_kit(amount, minAmount, deadLine.getTime()).send()
+  return contract.methods.buy_kit(2, 1, '1627656480').send()
 }

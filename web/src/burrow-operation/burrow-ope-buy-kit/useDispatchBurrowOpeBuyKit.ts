@@ -1,4 +1,5 @@
 import { useAppDispatch } from '@config'
+import { TzFormatTzToMutez } from '@shared/utils'
 import { BurrowOpeName, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { createBurrowOpeSubmitPayload } from '../state/burrow-ope-state.utils'
 import { burrowOpeActions } from '../state/burrow-ope.slice'
@@ -15,7 +16,7 @@ export const useDispatchBurrowOpeBuyKit = (
       burrowId,
       scAddress,
       BurrowOpeName.buy_kit,
-      { amount, minAmount, deadLine },
+      { amount: TzFormatTzToMutez(amount).toNumber(), minAmount, deadLine },
     )
 
     dispatch(burrowOpeActions.buyKitSubmit(payload))
