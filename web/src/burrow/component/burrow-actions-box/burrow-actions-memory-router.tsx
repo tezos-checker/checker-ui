@@ -1,5 +1,6 @@
 import {
   BurrowOpeBurnKitForm,
+  BurrowOpeBuyKitForm,
   BurrowOpeDelegateForm,
   BurrowOpeDepositTezForm,
   BurrowOpeLiquidateForm,
@@ -87,6 +88,16 @@ const routesConfig = [
     // eslint-disable-next-line react/display-name
     getComponent: ({ burrow, onCloseActions }: Props) => (
       <BurrowOpeBurnKitForm burrow={burrow} callBack={onCloseActions} />
+    ),
+  },
+  {
+    route: '/buynkit',
+    label: 'Buy Kits',
+    icon: <LinkIcon height="50px" />,
+
+    // eslint-disable-next-line react/display-name
+    getComponent: ({ burrow, onCloseActions }: Props) => (
+      <BurrowOpeBuyKitForm burrow={burrow} callBack={onCloseActions} />
     ),
   },
 ]

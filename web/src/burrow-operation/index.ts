@@ -1,4 +1,5 @@
 export * from './burrow-ope-burn-kit/burrow-ope-burn-kit-form'
+export * from './burrow-ope-buy-kit/burrow-ope-buy-kit-form'
 export * from './burrow-ope-create-burrow/create-burrow-form'
 export * from './burrow-ope-delegate/burrow-ope-delegate-form'
 export * from './burrow-ope-deposit-tez/burrow-ope-deposit-tez-form'
