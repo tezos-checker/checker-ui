@@ -4,6 +4,10 @@ import { Box, Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { MemoryRouter, NavLink, Route } from 'react-router-dom'
 
+type Props = {
+  onCloseActions: () => void
+}
+
 const routesConfig = [
   {
     route: '/buykit',
@@ -11,11 +15,11 @@ const routesConfig = [
     icon: <LinkIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: () => <CfmmOpeBuyKitForm />,
+    getComponent: ({ onCloseActions }: Props) => <CfmmOpeBuyKitForm callBack={onCloseActions} />,
   },
 ]
 
-export const CfmmOperationsMemoryRouter: FunctionComponent = (props) => (
+export const CfmmOperationsMemoryRouter: FunctionComponent<Props> = (props) => (
   <MemoryRouter initialEntries={routesConfig.map((x) => x.route)} initialIndex={0}>
     <Flex h="70px" border="1px solid" my="15px">
       {routesConfig.map((x) => (

@@ -14,10 +14,14 @@ import {
 } from './component/cfmm-ope-buy-kit.model'
 import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
-export const CfmmOpeBuyKitForm: FunctionComponent = () => {
+type Props = {
+  callBack: () => void
+}
+
+export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ callBack }) => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
 
-  const { buyKit } = useDispatchCfmmOpeBuyKit(() => alert('ok'))
+  const { buyKit } = useDispatchCfmmOpeBuyKit(callBack)
   const {
     handleFormChange,
     getInputProps,

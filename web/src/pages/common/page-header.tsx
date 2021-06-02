@@ -2,6 +2,7 @@ import { Box, Button, Flex, Image } from '@chakra-ui/react'
 import { useGetWallet } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { useHistory } from 'react-router-dom'
+import FoxBurrowsSvg from '../../assets/images/fox-burrows.svg'
 import FoxCfmmSvg from '../../assets/images/fox-cfmm.svg'
 import FoxCreateBorrowSvg from '../../assets/images/fox-create-burrow.svg'
 import FoxTrackBurrowSvg from '../../assets/images/fox-track-burrow.svg'
@@ -16,9 +17,14 @@ export const PageHeader: React.FC = ({ children }) => {
     <Flex bg={'gray.700'} p={'10px'} justifyContent={'space-between'}>
       <Image src={TezosSvg} width={'40px'} height={'40px'} />
       <Box>
-        <Button onClick={() => history.push('/cfmm')} mx={'5'}>
+        <Button onClick={() => history.push('/')} mx={'5'}>
+          <Image src={FoxBurrowsSvg} height={'80%'} mr={'5'} />
+          Burrows
+        </Button>
+
+        <Button onClick={() => history.push('/cfmm')} mr={'5'}>
           <Image src={FoxCfmmSvg} height={'80%'} mr={'5'} />
-          Cfmm Actions
+          Cfmm
         </Button>
         <Button onClick={() => history.push('/new-burrow')}>
           <Image src={FoxCreateBorrowSvg} height={'100%'} mr={'5'} />

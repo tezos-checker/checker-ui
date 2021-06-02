@@ -3,7 +3,11 @@ import { Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { CfmmOperationsMemoryRouter } from './cfmm-actions-memory-router'
 
-export const CfmmActionsBox: FunctionComponent = () => (
+type Props = {
+  onCloseActions: () => void
+}
+
+export const CfmmActionsBox: FunctionComponent<Props> = ({ onCloseActions }) => (
   <Box w="600px" mx="auto" mt="5vh" p="20px">
     <Flex
       justifyContent="space-between"
@@ -14,6 +18,6 @@ export const CfmmActionsBox: FunctionComponent = () => (
       <Box fontSize="3xl">Cfmm actions</Box>
     </Flex>
 
-    <CfmmOperationsMemoryRouter />
+    <CfmmOperationsMemoryRouter onCloseActions={onCloseActions} />
   </Box>
 )
