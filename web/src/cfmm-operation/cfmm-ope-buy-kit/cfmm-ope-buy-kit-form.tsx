@@ -1,4 +1,5 @@
 import { Box, Button } from '@chakra-ui/react'
+import { CheckerSelectBoxField } from '@form'
 import React, { FunctionComponent, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BuyKitAmountField } from './component/buy-kit-amount-field'
@@ -6,15 +7,17 @@ import { BuyKitDeadlineField } from './component/buy-kit-deadline-field'
 import { BuyKitMinAmountField } from './component/buy-kit-min-amount-field'
 import {
   amount,
+  checkerAdress,
   deadLine,
   getCfmmOpeBuyKitFormModel,
   minAmount,
 } from './component/cfmm-ope-buy-kit.model'
+import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
 export const CfmmOpeBuyKitForm: FunctionComponent = () => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
 
-  //  const { buyKit } = useDispatchCfmmOpeBuyKit(burrowId, scAddress, callBack)
+  const { buyKit } = useDispatchCfmmOpeBuyKit(() => alert('ok'))
   const {
     handleFormChange,
     getInputProps,
@@ -34,11 +37,23 @@ export const CfmmOpeBuyKitForm: FunctionComponent = () => {
       p="20px"
     >
       <Box fontSize="2xl">Buy Kits</Box>
+      <CheckerSelectBoxField {...getInputProps(checkerAdress)} />
       <BuyKitAmountField {...getInputProps(amount)} />
       <BuyKitMinAmountField {...getInputProps(minAmount)} />
       <BuyKitDeadlineField {...getInputProps(deadLine)} onDateChange={updateDate} />
       <Box textAlign="right">
-        <Button disabled={!isFormValid} mt="15px" onClick={() => alert('ok')}>
+        <Button
+          disabled={!isFormValid}
+          mt="15px"
+          onClick={() =>
+            buyKit(
+              getInputProps(checkerAdress).value,
+              getInputProps(amount).value,
+              getInputProps(minAmount).value,
+              getInputProps(deadLine).value,
+            )
+          }
+        >
           Buy Kits
         </Button>
       </Box>

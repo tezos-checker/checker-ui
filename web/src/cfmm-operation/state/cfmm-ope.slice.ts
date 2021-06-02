@@ -19,9 +19,10 @@ export const cfmmOpeSlice = createSlice({
   },
 })
 
-export const { selectById: getOpeForCfmm } = cfmmOpeAdapter.getSelectors(
-  (state) => (state as RootState).cfmmOperation,
-)
+export const {
+  selectById: getOpeForCfmm,
+  selectAll: getCfmmOperationList,
+} = cfmmOpeAdapter.getSelectors((state) => (state as RootState).cfmmOperation)
 
 export const cfmmOpeActions = cfmmOpeSlice.actions
 

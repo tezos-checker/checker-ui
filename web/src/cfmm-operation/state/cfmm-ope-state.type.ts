@@ -1,6 +1,7 @@
 import { AbstractAction, OperationStep, RequestStatus } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
+import { CfmmOpeBuyKitSubmitParams } from '../cfmm-ope-buy-kit/cfmm-ope-buy-kit.api'
 
 export enum CfmmOpeName {
   buy_kit = 'buy_kit',
@@ -17,6 +18,8 @@ export type TransactionOperationParams = {
   }>
 }
 
+export type CfmmOpeSubmitParams = CfmmOpeBuyKitSubmitParams
+
 export type CfmmOpeRowState = {
   id: number
   scAddress: string
@@ -25,7 +28,7 @@ export type CfmmOpeRowState = {
   errorMsg: string
   operationStep: OperationStep
   operationName: CfmmOpeName
-  operationSubmitParams: any
+  operationSubmitParams: CfmmOpeSubmitParams
   transactionWalletOperation: TransactionOperationParams | null
   blockResponse: BlockResponse | null
 }
