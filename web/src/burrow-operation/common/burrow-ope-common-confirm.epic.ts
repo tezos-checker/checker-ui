@@ -1,4 +1,4 @@
-import { BurrowOpeStep, RequestStatus } from '@config'
+import { OperationStep, RequestStatus } from '@config'
 import { isPendingRequest } from '@shared/utils'
 import { BlockResponse } from '@taquito/rpc'
 import { ofType } from 'redux-observable'
@@ -21,7 +21,7 @@ const confirmMethod = ({ type, payload }: BurrowOpeAction): Observable<BurrowOpe
           type,
           payload: {
             ...payload,
-            operationStep: BurrowOpeStep.confirmed,
+            operationStep: OperationStep.confirmed,
             status: RequestStatus.success,
             blockResponse,
           },

@@ -3,17 +3,17 @@ import { TransactionWalletOperation } from '@taquito/taquito'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import {
-  BurrowOpeAction,
-  BurrowOpeName,
-  BurrowOpeRowState,
-  BurrowOpeSubmitParams,
-} from './burrow-ope-state.type'
+  CfmmOpeAction,
+  CfmmOpeName,
+  CfmmOpeRowState,
+  CfmmOpeSubmitParams,
+} from './cfmm-ope-state.type'
 
-export const createBurrowOpeErrorAction = (
+export const createCfmmOpeErrorAction = (
   actionType: string,
-  rowState: BurrowOpeRowState,
+  rowState: CfmmOpeRowState,
   errorMsg: string,
-): AbstractAction<BurrowOpeRowState> => ({
+): AbstractAction<CfmmOpeRowState> => ({
   type: actionType,
   payload: {
     ...rowState,
@@ -22,13 +22,12 @@ export const createBurrowOpeErrorAction = (
   },
 })
 
-export const createBurrowOpeSubmitPayload = (
-  burrowId: number,
+export const createCfmmOpeSubmitPayload = (
   scAddress: string,
-  operationName: BurrowOpeName,
-  operationSubmitParams: BurrowOpeSubmitParams,
-): BurrowOpeRowState => ({
-  burrowId,
+  operationName: CfmmOpeName,
+  operationSubmitParams: CfmmOpeSubmitParams,
+): CfmmOpeRowState => ({
+  id: new Date().getTime(),
   scAddress,
   operationName,
   operationStep: OperationStep.submit,
@@ -40,12 +39,12 @@ export const createBurrowOpeSubmitPayload = (
   blockResponse: null,
 })
 
-export const burrowOpeHandleSubmitRequest = (
+export const cfmmOpeHandleSubmitRequest = (
   request: Promise<TransactionWalletOperation>,
   submitActionType: string,
   confirmActionType: string,
-  burrowOpeRowState: BurrowOpeRowState,
-): Observable<BurrowOpeAction> =>
+  cfmmOpeRowState: CfmmOpeRowState,
+): Observable<CfmmOpeAction> =>
   from(request).pipe(
     map((res: TransactionWalletOperation) => {
       if (res) {
@@ -53,7 +52,7 @@ export const burrowOpeHandleSubmitRequest = (
         return {
           type: confirmActionType,
           payload: {
-            ...burrowOpeRowState,
+            ...cfmmOpeRowState,
             operationStep: OperationStep.confirm,
             transactionWalletOperation: {
               confirmOperation: (nbConfirmation: number) => res.confirmation(nbConfirmation),
@@ -61,9 +60,9 @@ export const burrowOpeHandleSubmitRequest = (
           },
         }
       }
-      return createBurrowOpeErrorAction(submitActionType, burrowOpeRowState, 'Internal error')
+      return createCfmmOpeErrorAction(submitActionType, cfmmOpeRowState, 'Internal error')
     }),
     catchError((err) =>
-      of(createBurrowOpeErrorAction(submitActionType, burrowOpeRowState, err.message)),
+      of(createCfmmOpeErrorAction(submitActionType, cfmmOpeRowState, err.message)),
     ),
   )

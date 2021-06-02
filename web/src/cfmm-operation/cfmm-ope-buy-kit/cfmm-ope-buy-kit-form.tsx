@@ -1,34 +1,27 @@
-import { BurrowRowState } from '@burrow'
 import { Box, Button } from '@chakra-ui/react'
-import { useGetStorage } from '@storage'
+import { CheckerSelectBoxField } from '@form'
 import React, { FunctionComponent, useMemo } from 'react'
-import { StorageRow } from 'src/storage/state/storage-state.type'
 import { useFormManager } from 'vdr-react-form-manager'
-import {
-  amount,
-  deadLine,
-  getBurrowOpeBuyKitFormModel,
-  minAmount,
-} from './component/burrow-ope-buy-kit.model'
 import { BuyKitAmountField } from './component/buy-kit-amount-field'
 import { BuyKitDeadlineField } from './component/buy-kit-deadline-field'
 import { BuyKitMinAmountField } from './component/buy-kit-min-amount-field'
-import { useDispatchBurrowOpeBuyKit } from './useDispatchBurrowOpeBuyKit'
+import {
+  amount,
+  checkerAdress,
+  deadLine,
+  getCfmmOpeBuyKitFormModel,
+  minAmount,
+} from './component/cfmm-ope-buy-kit.model'
+import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
 type Props = {
-  burrow: BurrowRowState
   callBack: () => void
 }
 
-export const BurrowOpeBuyKitForm: FunctionComponent<Props> = ({
-  burrow: { burrowId, scAddress },
-  callBack,
-}) => {
-  const { burrowStorage } = useGetStorage(burrowId) as StorageRow
+export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ callBack }) => {
+  const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
 
-  const formModel = useMemo(() => getBurrowOpeBuyKitFormModel(), [])
-
-  const { buyKit } = useDispatchBurrowOpeBuyKit(burrowId, scAddress, callBack)
+  const { buyKit } = useDispatchCfmmOpeBuyKit(callBack)
   const {
     handleFormChange,
     getInputProps,
@@ -48,6 +41,7 @@ export const BurrowOpeBuyKitForm: FunctionComponent<Props> = ({
       p="20px"
     >
       <Box fontSize="2xl">Buy Kits</Box>
+      <CheckerSelectBoxField {...getInputProps(checkerAdress)} />
       <BuyKitAmountField {...getInputProps(amount)} />
       <BuyKitMinAmountField {...getInputProps(minAmount)} />
       <BuyKitDeadlineField {...getInputProps(deadLine)} onDateChange={updateDate} />
@@ -57,6 +51,7 @@ export const BurrowOpeBuyKitForm: FunctionComponent<Props> = ({
           mt="15px"
           onClick={() =>
             buyKit(
+              getInputProps(checkerAdress).value,
               getInputProps(amount).value,
               getInputProps(minAmount).value,
               getInputProps(deadLine).value,

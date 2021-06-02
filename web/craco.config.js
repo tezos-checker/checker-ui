@@ -15,6 +15,7 @@ module.exports = {
       '@burrow-operation': path.resolve(__dirname, 'src/burrow-operation/index.ts'),
       '@storage': path.resolve(__dirname, 'src/storage/index.ts'),
       '@form': path.resolve(__dirname, 'src/form/index.ts'),
+      '@cfmm-operation': path.resolve(__dirname, 'src/cfmm-operation/index.ts'),
     },
   },
 }

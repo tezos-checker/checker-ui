@@ -11,7 +11,7 @@ export type AbstractAction<T> = {
   payload: T
 }
 
-export enum BurrowOpeStep {
+export enum OperationStep {
   submit = 'submit',
   confirm = 'confirm',
   confirmed = 'confirmed',
