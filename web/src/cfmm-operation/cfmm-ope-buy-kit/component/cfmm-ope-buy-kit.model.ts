@@ -5,7 +5,7 @@ export const amount = 'amount'
 export const minAmount = 'minAmount'
 export const deadLine = 'deadLine'
 
-export const getBurrowOpeBuyKitFormModel = (): IFormInitalState => {
+export const getCfmmOpeBuyKitFormModel = (): IFormInitalState => {
   const validators = []
 
   return {

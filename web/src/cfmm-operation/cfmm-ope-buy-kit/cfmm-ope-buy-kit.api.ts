@@ -7,7 +7,7 @@ export type BurrowOpeBuyKitSubmitParams = {
   deadLine: Date
 }
 
-export const burrowOpeBuyKitSubmitRequest = async (
+export const cfmmOpeBuyKitSubmitRequest = async (
   scAddress: string,
   amount: number,
   minAmount: number,

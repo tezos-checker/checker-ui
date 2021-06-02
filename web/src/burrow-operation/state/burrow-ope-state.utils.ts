@@ -1,4 +1,4 @@
-import { AbstractAction, BurrowOpeStep, RequestStatus } from '@config'
+import { AbstractAction, OperationStep, RequestStatus } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
@@ -31,7 +31,7 @@ export const createBurrowOpeSubmitPayload = (
   burrowId,
   scAddress,
   operationName,
-  operationStep: BurrowOpeStep.submit,
+  operationStep: OperationStep.submit,
   status: RequestStatus.pending,
   errorMsg: '',
   operationSubmitParams,
@@ -54,7 +54,7 @@ export const burrowOpeHandleSubmitRequest = (
           type: confirmActionType,
           payload: {
             ...burrowOpeRowState,
-            operationStep: BurrowOpeStep.confirm,
+            operationStep: OperationStep.confirm,
             transactionWalletOperation: {
               confirmOperation: (nbConfirmation: number) => res.confirmation(nbConfirmation),
             },

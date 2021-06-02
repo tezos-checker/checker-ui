@@ -1,5 +1,6 @@
 import { burrowEpics, burrowReducer } from '@burrow'
 import { burrowOpeEpics, burrowOpeReducers } from '@burrow-operation'
+import { cfmmOpeReducers } from '@cfmm-operation'
 import { configureStore } from '@reduxjs/toolkit'
 import { storageEpics, storageReducer } from '@storage'
 import { walletEpics, walletReducer } from '@wallet'
@@ -15,6 +16,7 @@ const checkerStore = configureStore({
     burrow: burrowReducer,
     burrowOperation: burrowOpeReducers,
     storage: storageReducer,
+    cfmmOperation: cfmmOpeReducers,
   },
   middleware: [epicMiddleware],
 })
