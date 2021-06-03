@@ -1,4 +1,5 @@
 import { useAppDispatch } from '@config'
+import { TzFormatTzToMutez } from '@shared/utils'
 import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
@@ -17,8 +18,8 @@ export const useDispatchCfmmOpeAddLiquidity = (callBack: () => void) => {
       checkerAdress,
       CfmmOpeName.add_liquidity,
       {
-        ctez,
-        kit,
+        ctez: TzFormatTzToMutez(ctez).toNumber(),
+        kit: TzFormatTzToMutez(kit).toNumber(),
         minTokens,
         deadLine,
       },
