@@ -1,10 +1,12 @@
 import { AbstractAction, OperationStep, RequestStatus } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
+import { CfmmOpeAddLiquiditySubmitParams } from '../cfmm-add-liquidity/cfmm-ope-add-liquidity.api'
 import { CfmmOpeBuyKitSubmitParams } from '../cfmm-ope-buy-kit/cfmm-ope-buy-kit.api'
 
 export enum CfmmOpeName {
   buy_kit = 'buy_kit',
+  add_liquidity = 'add_liquidity',
 }
 export type TransactionOperationParams = {
   confirmOperation: (
@@ -18,7 +20,7 @@ export type TransactionOperationParams = {
   }>
 }
 
-export type CfmmOpeSubmitParams = CfmmOpeBuyKitSubmitParams
+export type CfmmOpeSubmitParams = CfmmOpeBuyKitSubmitParams | CfmmOpeAddLiquiditySubmitParams
 
 export type CfmmOpeRowState = {
   id: number

@@ -14,5 +14,5 @@ export const cfmmOpeBuyKitSubmitRequest = async (
   deadLine: Date,
 ): Promise<TransactionWalletOperation> => {
   const contract = await getContract(scAddress)
-  return contract.methods.buy_kit(2, 1, '1627656480').send()
+  return contract.methods.buy_kit(amount, minAmount, deadLine).send()
 }

@@ -1,4 +1,4 @@
-import { getSmartContractAddressValidator } from '@form'
+import { getCheckerAvailableValues, getSmartContractAddressValidator } from '@form'
 import { addDaysToCurrentDate } from '@shared/utils'
 import { FormInputProperties, IFormInitalState } from 'vdr-react-form-manager'
 
@@ -13,10 +13,7 @@ export const getCfmmOpeBuyKitFormModel = (): IFormInitalState => {
   return {
     formInputs: {
       ...FormInputProperties.Builder(checkerAdress)
-        .addAvailableValue({
-          value: 'KT1RcMG4wUJapxbfkgNkTEgi3pg24vHbADqo',
-          label: 'KT1RcMG4wUJapxbfkgNkTEgi3pg24vHbADqo',
-        })
+        .addAvailableValueList(getCheckerAvailableValues())
         .addValidators([getSmartContractAddressValidator()])
         .build(),
       ...FormInputProperties.Builder(amount).build(),

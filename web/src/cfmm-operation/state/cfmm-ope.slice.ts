@@ -13,6 +13,8 @@ export const cfmmOpeSlice = createSlice({
   reducers: {
     buyKitSubmit: cfmmOpeAdapter.upsertOne,
     buyKitConfirm: cfmmOpeAdapter.upsertOne,
+    addLiquiditySubmit: cfmmOpeAdapter.upsertOne,
+    addLiquidityConfirm: cfmmOpeAdapter.upsertOne,
     clearCfmmOpeMessage: cfmmOpeAdapter.upsertOne,
     deleteCfmmOpe: cfmmOpeAdapter.removeOne,
     resetPendingCfmmOpe: cfmmOpeAdapter.updateMany,
