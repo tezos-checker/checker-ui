@@ -5,7 +5,7 @@ import {
   BurrowOpeLiquidateForm,
   BurrowOpeMintKitForm,
   BurrowOpeRepayForm,
-  BurrowOpeWithdrawForm,
+  BurrowOpeWithdrawTezForm
 } from '@burrow-operation'
 import {
   AddIcon,
@@ -13,7 +13,7 @@ import {
   ExternalLinkIcon,
   LinkIcon,
   RepeatIcon,
-  SunIcon,
+  SunIcon
 } from '@chakra-ui/icons'
 import { Box, Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
@@ -42,7 +42,9 @@ const routesConfig = [
     icon: <ArrowRightIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowOpeWithdrawForm />,
+    getComponent: ({ burrow, onCloseActions }: Props) => (
+      <BurrowOpeWithdrawTezForm burrow={burrow} callBack={onCloseActions} />
+    ),
   },
   {
     route: '/mint',
