@@ -16,6 +16,7 @@ export const burrowOpeSlice = createSlice({
     createBurrowSubmit: burrowOpeAdapter.upsertOne,
     createBurrowConfirm: burrowOpeAdapter.upsertOne,
     depositTezSubmit: burrowOpeAdapter.upsertOne,
+    withdrawTezSubmit: burrowOpeAdapter.upsertOne,
     depositTezConfirm: burrowOpeAdapter.upsertOne,
     mintKitSubmit: burrowOpeAdapter.upsertOne,
     mintKitConfirm: burrowOpeAdapter.upsertOne,

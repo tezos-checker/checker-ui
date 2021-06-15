@@ -34,7 +34,7 @@ export const BurrowOpeWithdrawTezForm: FunctionComponent<Props> = ({
       borderColor="gray.200"
       p="20px"
     >
-      <Box fontSize="2xl">Deposit</Box>
+      <Box fontSize="2xl">Withdraw</Box>
       <WithdrawTezAmountField {...getInputProps(inputWithdraw)} />
       <Box textAlign="right">
         <Button
@@ -42,7 +42,7 @@ export const BurrowOpeWithdrawTezForm: FunctionComponent<Props> = ({
           mt="15px"
           onClick={() => withdrawTez(getInputProps(inputWithdraw).value)}
         >
-          Deposit
+          Withdraw
         </Button>
       </Box>
     </Box>

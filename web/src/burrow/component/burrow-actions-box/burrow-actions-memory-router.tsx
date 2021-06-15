@@ -5,7 +5,7 @@ import {
   BurrowOpeLiquidateForm,
   BurrowOpeMintKitForm,
   BurrowOpeRepayForm,
-  BurrowOpeWithdrawTezForm
+  BurrowOpeWithdrawTezForm,
 } from '@burrow-operation'
 import {
   AddIcon,
@@ -13,7 +13,7 @@ import {
   ExternalLinkIcon,
   LinkIcon,
   RepeatIcon,
-  SunIcon
+  SunIcon,
 } from '@chakra-ui/icons'
 import { Box, Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
