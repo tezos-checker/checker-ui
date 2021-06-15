@@ -6,7 +6,9 @@ import { CfmmOpeBuyKitSubmitParams } from '../cfmm-ope-buy-kit/cfmm-ope-buy-kit.
 
 export enum CfmmOpeName {
   buy_kit = 'buy_kit',
+  sell_kit = 'sell_kit',
   add_liquidity = 'add_liquidity',
+  remove_liquidity = 'remove_liquidity',
 }
 export type TransactionOperationParams = {
   confirmOperation: (
