@@ -7,5 +7,5 @@ export const burrowOpeWithdrawTezSubmitRequest = async (
   amount: number,
 ): Promise<TransactionWalletOperation> => {
   const contract = await getContract(scAddress)
-  return contract.methods.withdraw_tez(burrowId).send({ amount })
+  return contract.methods.withdraw_tez(amount, burrowId).send()
 }
