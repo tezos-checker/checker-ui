@@ -10,6 +10,7 @@ export enum CfmmOpeName {
   add_liquidity = 'add_liquidity',
   remove_liquidity = 'remove_liquidity',
 }
+
 export type TransactionOperationParams = {
   confirmOperation: (
     nbConfirmation: number,
