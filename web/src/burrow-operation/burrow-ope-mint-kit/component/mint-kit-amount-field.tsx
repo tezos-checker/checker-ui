@@ -4,14 +4,14 @@ import { IFormInputProperties } from 'vdr-react-form-manager'
 
 type Props = IFormInputProperties
 
-export const MintAmountField: FunctionComponent<Props> = ({ name, value }) => (
+export const MintKitAmountField: FunctionComponent<Props> = ({ name, value }) => (
   <FormControl id="deposit" mt="15px">
-    <FormLabel>Amount (in tez)</FormLabel>
+    <FormLabel>Amount (in kit)</FormLabel>
     <InputGroup>
       <Box as="span" mt="10px" mr="5px">
         KIT
       </Box>
-      <Input name={name} value={value} type="number" placeholder="Amount (in tez)" />
+      <Input name={name} value={value} type="number" placeholder="Amount (in kit)" />
     </InputGroup>
   </FormControl>
 )
