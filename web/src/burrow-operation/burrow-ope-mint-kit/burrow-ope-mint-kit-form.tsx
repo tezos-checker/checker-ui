@@ -42,9 +42,9 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       <MintAmountField {...getInputProps(tezToMint)} />
       <Box fontSize="xs" textAlign="right">
         {TzFormatMutezToTz(burrowStorage.collateral).toString()}
-        {' collateral'}- {burrowStorage.outstanding_kit.toString()}
-        {' outstanding kit'} = <b>{maxAmount.toString()}</b>
-        {' mintable Tez'}
+        {' collateral'}- {TzFormatMutezToTz(burrowStorage.outstanding_kit).toString()}
+        {' outstanding kits'} = <b>{maxAmount.toString()}</b>
+        {' kits'}
       </Box>
       <Box textAlign="right">
         <Button

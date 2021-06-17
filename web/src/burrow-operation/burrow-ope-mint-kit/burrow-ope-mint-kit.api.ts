@@ -1,4 +1,4 @@
-import { getContract } from '@shared/utils'
+import { getContract, TzFormatTzToMutez } from '@shared/utils'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
 export const burrowOpeMintKitSubmitRequest = async (
@@ -7,5 +7,5 @@ export const burrowOpeMintKitSubmitRequest = async (
   amount: number,
 ): Promise<TransactionWalletOperation> => {
   const contract = await getContract(scAddress)
-  return contract.methods.mint_kit(burrowId, amount).send()
+  return contract.methods.mint_kit(burrowId, TzFormatTzToMutez(amount)).send()
 }

@@ -98,12 +98,12 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
         <VStack flex="1" py="10px">
           <LoadingBox status={storage?.status || RequestStatus.idle}>
             <Box fontSize="2xl" fontWeight="extrabold" p="0">
-              {storage?.burrowStorage.outstanding_kit.toString()}
+              {TzFormatMutezToTz(storage?.burrowStorage.outstanding_kit || 0).toString()}
             </Box>
           </LoadingBox>
 
           <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
-            OUTSTANDING CTEZ
+            KIT
           </Box>
         </VStack>
         <VStack

@@ -7,7 +7,7 @@ export const getMaxAmountToMint = (burrowStoage: BurrowStorage) => {
   const outstandingKitMutez = TzFormatTzToMutez(outstandingKit || 0)
 
   const maxAmount = TzFormatMutezToTz(
-    new BigNumber(collateral).plus(new BigNumber(outstandingKitMutez).negated()),
+    new BigNumber(collateral).plus(new BigNumber(TzFormatMutezToTz(outstandingKitMutez)).negated()),
   )
 
   return maxAmount

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { CreateBurrowForm } from '@burrow-operation'
-import { HomePage } from '@pages'
+import { CfmmPage, HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { LoginPage } from '../../pages/login-page'
@@ -14,6 +14,12 @@ export type CheckerRoute = {
 
 // order is imporant
 export const userConnectedRoutes: CheckerRoute[] = [
+  {
+    path: '/cfmm',
+    exact: true,
+    menu: () => <Link to="/cfmm">Cfmm actions</Link>,
+    component: () => <CfmmPage />,
+  },
   {
     path: '/new-burrow',
     exact: true,

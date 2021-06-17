@@ -13,7 +13,8 @@
       "@burrow": ["src/burrow/index.ts"],
       "@burrow-operation": ["src/burrow-operation/index.ts"],
       "@storage": ["src/storage/index.ts"],
-      "@form": ["src/form/index.ts"]
+      "@form": ["src/form/index.ts"],
+      "@cfmm-operation": ["src/cfmm-operation/index.ts"]
     }
   }
 }

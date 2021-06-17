@@ -2,16 +2,14 @@ import {
   BurrowOpeBurnKitForm,
   BurrowOpeDelegateForm,
   BurrowOpeDepositTezForm,
-  BurrowOpeEditDepositorForm,
   BurrowOpeLiquidateForm,
   BurrowOpeMintKitForm,
   BurrowOpeRepayForm,
-  BurrowOpeWithdrawForm,
+  BurrowOpeWithdrawTezForm,
 } from '@burrow-operation'
 import {
   AddIcon,
   ArrowRightIcon,
-  EditIcon,
   ExternalLinkIcon,
   LinkIcon,
   RepeatIcon,
@@ -44,7 +42,9 @@ const routesConfig = [
     icon: <ArrowRightIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowOpeWithdrawForm />,
+    getComponent: ({ burrow, onCloseActions }: Props) => (
+      <BurrowOpeWithdrawTezForm burrow={burrow} callBack={onCloseActions} />
+    ),
   },
   {
     route: '/mint',
@@ -80,17 +80,10 @@ const routesConfig = [
     // eslint-disable-next-line react/display-name
     getComponent: (props: Props) => <BurrowOpeLiquidateForm />,
   },
-  {
-    route: '/editdepositor',
-    label: 'edit depositor',
-    icon: <EditIcon height="50px" />,
 
-    // eslint-disable-next-line react/display-name
-    getComponent: (props: Props) => <BurrowOpeEditDepositorForm />,
-  },
   {
     route: '/burnkit',
-    label: 'Burn Kit',
+    label: 'Burn Kits',
     icon: <LinkIcon height="50px" />,
 
     // eslint-disable-next-line react/display-name
