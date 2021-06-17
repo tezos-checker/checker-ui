@@ -15,6 +15,7 @@ export const triggerLoadStorageEpic = (action$: any, state$: any) =>
       'burrowOpe/depositTezConfirm',
       'burrowOpe/mintKitConfirm',
       'burrowOpe/burnKitConfirm',
+      'burrowOpe/withdrawTezConfirm',
     ),
     withLatestFrom(state$),
     filter(([x, state]) => isACompletedOperation(x.payload)),
