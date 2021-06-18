@@ -15,6 +15,8 @@ export const cfmmOpeSlice = createSlice({
     buyKitConfirm: cfmmOpeAdapter.upsertOne,
     addLiquiditySubmit: cfmmOpeAdapter.upsertOne,
     addLiquidityConfirm: cfmmOpeAdapter.upsertOne,
+    removeLiquiditySubmit: cfmmOpeAdapter.upsertOne,
+    removeLiquidityConfirm: cfmmOpeAdapter.upsertOne,
     clearCfmmOpeMessage: cfmmOpeAdapter.upsertOne,
     deleteCfmmOpe: cfmmOpeAdapter.removeOne,
     resetPendingCfmmOpe: cfmmOpeAdapter.updateMany,
