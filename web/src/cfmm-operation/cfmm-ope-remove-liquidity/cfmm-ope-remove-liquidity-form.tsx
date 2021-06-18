@@ -42,7 +42,7 @@ export const CfmmOpeRemoveLiquidityForm: FunctionComponent<Props> = ({ callBack 
       borderColor="gray.200"
       p="20px"
     >
-      <Box fontSize="2xl">Buy Kits</Box>
+      <Box fontSize="2xl">Remove Liquidity</Box>
       <CheckerSelectBoxField {...getInputProps(checkerAdressField)} />
       <RemoveLiquidityKitField {...getInputProps(kitField)} />
       <RemoveLiquidityMinTezField {...getInputProps(minTezField)} />
