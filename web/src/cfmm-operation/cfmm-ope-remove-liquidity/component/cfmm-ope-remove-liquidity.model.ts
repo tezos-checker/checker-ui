@@ -8,7 +8,7 @@ export const minKitField = 'minKit'
 export const deadLineField = 'deadline'
 export const checkerAdressField = 'checkerAdress'
 
-export const getCfmmOpeAddLiquidityFormModel = (): IFormInitalState => {
+export const getCfmmOpeRemoveLiquidityFormModel = (): IFormInitalState => {
   const validators = []
 
   return {

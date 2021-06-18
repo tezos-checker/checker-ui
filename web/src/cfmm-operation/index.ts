@@ -5,4 +5,3 @@ export * from './component/cfmm-actions-box/cfmm-actions-box'
 export * from './component/cfmm-ope-list/cfmm-ope-list'
 export * from './state/cfmm-ope.epics'
 export { cfmmOpeReducers } from './state/cfmm-ope.slice'
-

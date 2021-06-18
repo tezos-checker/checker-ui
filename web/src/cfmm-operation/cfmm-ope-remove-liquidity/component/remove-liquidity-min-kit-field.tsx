@@ -9,7 +9,7 @@ export const RemoveLiquidityMinKitField: FunctionComponent<Props> = ({ name, val
     <FormLabel>minKit</FormLabel>
     <InputGroup>
       <Box as="span" mt="10px" mr="5px">
-      minKit
+        minKit
       </Box>
       <Input name={name} value={value} type="number" placeholder="minKit" />
     </InputGroup>

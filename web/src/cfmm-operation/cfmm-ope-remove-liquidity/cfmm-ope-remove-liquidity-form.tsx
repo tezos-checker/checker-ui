@@ -2,7 +2,14 @@ import { Box, Button } from '@chakra-ui/react'
 import { CheckerSelectBoxField } from '@form'
 import React, { FunctionComponent, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
-import { checkerAdressField, deadLineField, kitField, minKitField, minTezField } from './component/cfmm-ope-remove-liquidity.model'
+import {
+  checkerAdressField,
+  deadLineField,
+  getCfmmOpeRemoveLiquidityFormModel,
+  kitField,
+  minKitField,
+  minTezField,
+} from './component/cfmm-ope-remove-liquidity.model'
 import { RemoveLiquidityDeadlineField } from './component/remove-liquidity-deadline-field'
 import { RemoveLiquidityKitField } from './component/remove-liquidity-kit-field'
 import { RemoveLiquidityMinKitField } from './component/remove-liquidity-min-kit-field'
@@ -61,7 +68,3 @@ export const CfmmOpeRemoveLiquidityForm: FunctionComponent<Props> = ({ callBack 
     </Box>
   )
 }
-function getCfmmOpeRemoveLiquidityFormModel(): any {
-  throw new Error('Function not implemented.')
-}
-

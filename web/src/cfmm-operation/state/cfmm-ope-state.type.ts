@@ -24,7 +24,10 @@ export type TransactionOperationParams = {
   }>
 }
 
-export type CfmmOpeSubmitParams = CfmmOpeBuyKitSubmitParams | CfmmOpeAddLiquiditySubmitParams | CfmmOpeRemoveLiquiditySubmitParams
+export type CfmmOpeSubmitParams =
+  | CfmmOpeBuyKitSubmitParams
+  | CfmmOpeAddLiquiditySubmitParams
+  | CfmmOpeRemoveLiquiditySubmitParams
 
 export type CfmmOpeRowState = {
   id: number

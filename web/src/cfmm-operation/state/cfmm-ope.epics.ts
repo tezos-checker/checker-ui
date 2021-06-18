@@ -3,4 +3,8 @@ import { cfmmOpeAddLiquidityEpics } from '../cfmm-add-liquidity/cfmm-add-liquidi
 import { cfmmOpeBuyKitEpics } from '../cfmm-ope-buy-kit/cfmm-buy-kit.epics'
 import { cfmmOpeRemoveLiquidityEpics } from '../cfmm-ope-remove-liquidity/cfmm-remove-liquidity.epics'
 
-export const cfmmOpeEpics = combineEpics(cfmmOpeBuyKitEpics, cfmmOpeAddLiquidityEpics, cfmmOpeRemoveLiquidityEpics)
+export const cfmmOpeEpics = combineEpics(
+  cfmmOpeBuyKitEpics,
+  cfmmOpeAddLiquidityEpics,
+  cfmmOpeRemoveLiquidityEpics,
+)
