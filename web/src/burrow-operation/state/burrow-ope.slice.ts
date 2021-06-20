@@ -25,6 +25,8 @@ export const burrowOpeSlice = createSlice({
     burnKitConfirm: burrowOpeAdapter.upsertOne,
     buyKitSubmit: burrowOpeAdapter.upsertOne,
     buyKitConfirm: burrowOpeAdapter.upsertOne,
+    sellKitSubmit: burrowOpeAdapter.upsertOne,
+    sellKitConfirm: burrowOpeAdapter.upsertOne,
     clearBurrowOpeMessage: burrowOpeAdapter.upsertOne,
     deleteBurrowOpe: burrowOpeAdapter.removeOne,
     resetPendingBurrowOpe: burrowOpeAdapter.updateMany,

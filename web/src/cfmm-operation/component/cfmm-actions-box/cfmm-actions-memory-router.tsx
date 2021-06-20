@@ -1,7 +1,7 @@
 import {
   CfmmOpeAddLiquidityForm,
   CfmmOpeBuyKitForm,
-  CfmmOpeRemoveLiquidityForm,
+  CfmmOpeRemoveLiquidityForm
 } from '@cfmm-operation'
 import { LinkIcon } from '@chakra-ui/icons'
 import { Box, Flex } from '@chakra-ui/react'
@@ -20,6 +20,14 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: ({ onCloseActions }: Props) => <CfmmOpeBuyKitForm callBack={onCloseActions} />,
+  },
+  {
+    route: '/sellkit',
+    label: 'Sell Kits',
+    icon: <LinkIcon height="50px" />,
+
+    // eslint-disable-next-line react/display-name
+    getComponent: ({ onCloseActions }: Props) => <CfmmOpeSellKitForm callBack={onCloseActions} />,
   },
   {
     route: '/addLiquidity',
