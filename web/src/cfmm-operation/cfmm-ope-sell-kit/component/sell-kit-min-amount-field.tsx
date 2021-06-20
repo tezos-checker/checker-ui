@@ -9,7 +9,7 @@ export const SellKitMinAmountField: FunctionComponent<Props> = ({ name, value })
     <FormLabel>Min Amount</FormLabel>
     <InputGroup>
       <Box as="span" mt="10px" mr="5px">
-        TEZ
+        Tez
       </Box>
       <Input name={name} value={value} type="number" placeholder="Min Amount" />
     </InputGroup>
