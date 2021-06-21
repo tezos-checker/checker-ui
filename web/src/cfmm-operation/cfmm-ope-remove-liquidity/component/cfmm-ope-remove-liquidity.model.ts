@@ -2,7 +2,7 @@ import { getCheckerAvailableValues, getSmartContractAddressValidator } from '@fo
 import { addDaysToCurrentDate } from '@shared/utils'
 import { FormInputProperties, IFormInitalState } from 'vdr-react-form-manager'
 
-export const kitField = 'kit'
+export const tokenField = 'token'
 export const minTezField = 'minTez'
 export const minKitField = 'minKit'
 export const deadLineField = 'deadline'
@@ -17,7 +17,7 @@ export const getCfmmOpeRemoveLiquidityFormModel = (): IFormInitalState => {
         .addAvailableValueList(getCheckerAvailableValues())
         .addValidators([getSmartContractAddressValidator()])
         .build(),
-      ...FormInputProperties.Builder(kitField).build(),
+      ...FormInputProperties.Builder(tokenField).build(),
       ...FormInputProperties.Builder(minTezField).build(),
       ...FormInputProperties.Builder(minKitField).build(),
       ...FormInputProperties.Builder(deadLineField).addValue(addDaysToCurrentDate(1)).build(),

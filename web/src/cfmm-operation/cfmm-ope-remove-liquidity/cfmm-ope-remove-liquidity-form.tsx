@@ -6,14 +6,14 @@ import {
   checkerAdressField,
   deadLineField,
   getCfmmOpeRemoveLiquidityFormModel,
-  kitField,
   minKitField,
   minTezField,
+  tokenField,
 } from './component/cfmm-ope-remove-liquidity.model'
 import { RemoveLiquidityDeadlineField } from './component/remove-liquidity-deadline-field'
-import { RemoveLiquidityKitField } from './component/remove-liquidity-kit-field'
 import { RemoveLiquidityMinKitField } from './component/remove-liquidity-min-kit-field'
 import { RemoveLiquidityMinTezField } from './component/remove-liquidity-min-tez-field'
+import { RemoveLiquidityTokenField } from './component/remove-liquidity-token-field'
 import { useDispatchCfmmOpeRemoveLiquidity } from './useDispatchCfmmOpeRemoveLiquidity'
 
 type Props = {
@@ -44,7 +44,7 @@ export const CfmmOpeRemoveLiquidityForm: FunctionComponent<Props> = ({ callBack 
     >
       <Box fontSize="2xl">Remove Liquidity</Box>
       <CheckerSelectBoxField {...getInputProps(checkerAdressField)} />
-      <RemoveLiquidityKitField {...getInputProps(kitField)} />
+      <RemoveLiquidityTokenField {...getInputProps(tokenField)} />
       <RemoveLiquidityMinTezField {...getInputProps(minTezField)} />
       <RemoveLiquidityMinKitField {...getInputProps(minKitField)} />
       <RemoveLiquidityDeadlineField {...getInputProps(deadLineField)} onDateChange={updateDate} />
@@ -55,7 +55,7 @@ export const CfmmOpeRemoveLiquidityForm: FunctionComponent<Props> = ({ callBack 
           onClick={() =>
             removeLiquidity(
               getInputProps(checkerAdressField).value,
-              getInputProps(kitField).value,
+              getInputProps(tokenField).value,
               getInputProps(minTezField).value,
               getInputProps(minKitField).value,
               getInputProps(deadLineField).value,
