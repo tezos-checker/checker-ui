@@ -3,6 +3,7 @@ import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
 import { CfmmOpeAddLiquiditySubmitParams } from '../cfmm-add-liquidity/cfmm-ope-add-liquidity.api'
 import { CfmmOpeBuyKitSubmitParams } from '../cfmm-ope-buy-kit/cfmm-ope-buy-kit.api'
+import { CfmmOpeRemoveLiquiditySubmitParams } from '../cfmm-ope-remove-liquidity/cfmm-ope-remove-liquidity.api'
 
 export enum CfmmOpeName {
   buy_kit = 'buy_kit',
@@ -23,7 +24,10 @@ export type TransactionOperationParams = {
   }>
 }
 
-export type CfmmOpeSubmitParams = CfmmOpeBuyKitSubmitParams | CfmmOpeAddLiquiditySubmitParams
+export type CfmmOpeSubmitParams =
+  | CfmmOpeBuyKitSubmitParams
+  | CfmmOpeAddLiquiditySubmitParams
+  | CfmmOpeRemoveLiquiditySubmitParams
 
 export type CfmmOpeRowState = {
   id: number

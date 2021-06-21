@@ -7,7 +7,7 @@ import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
 import { getMaxAmountToMint } from './burrow-ope-mint-kit.util'
 import { getBurrowOpeMintKitFormModel, tezToMint } from './component/burrow-ope-mint.model'
-import { MintAmountField } from './component/mint-tez-amount-field'
+import { MintKitAmountField } from './component/mint-kit-amount-field'
 import { useDispatchBurrowOpeMint } from './useDispatchBurrowOpeMintKit'
 
 type Props = {
@@ -39,7 +39,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       p="20px"
     >
       <Box fontSize="2xl">Mint</Box>
-      <MintAmountField {...getInputProps(tezToMint)} />
+      <MintKitAmountField {...getInputProps(tezToMint)} />
       <Box fontSize="xs" textAlign="right">
         {TzFormatMutezToTz(burrowStorage.collateral).toString()}
         {' collateral'}- {TzFormatMutezToTz(burrowStorage.outstanding_kit).toString()}
