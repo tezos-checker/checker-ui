@@ -7,8 +7,6 @@ export const tezos = new TezosToolkit('https://api.tez.ie/rpc/florencenet')
 
 tezos.setPackerProvider(new MichelCodecPacker())
 
-debugger
-
 // eslint-disable-next-line
 // @ts-ignore
 tezos.addExtension(new Tzip16Module())
