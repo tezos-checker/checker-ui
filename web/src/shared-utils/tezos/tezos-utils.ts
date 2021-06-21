@@ -1,5 +1,6 @@
 import { tezos } from '@config'
 import { errorToast } from '@shared/ui'
+import { tzip16 } from '@taquito/tzip16'
 import BigNumber from 'bignumber.js'
 
 export enum TzFormatterType {
@@ -53,7 +54,9 @@ export const TzFormatMtzToTz = (amount: string | number | BigNumber) =>
 export const TzFormatTzToMtz = (amount: string | number | BigNumber) =>
   tzFormatter(amount, TzFormatterType.tz_to_mtz)
 
-export const getContract = (scAddress: string) => tezos.wallet.at(scAddress)
+// eslint-disable-next-line
+// @ts-ignore
+export const getContract = (scAddress: string) => tezos.wallet.at(scAddress, tzip16)
 
 //  return `${tezos.format('mutez', 'tz', amount)} ꜩ`
 //  return `${tezos.format('mutez', 'mtz', amount)} mꜩ`

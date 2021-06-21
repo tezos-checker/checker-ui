@@ -2500,10 +2500,22 @@
   dependencies:
     xhr2-cookies "^1.1.0"
 
+"@taquito/http-utils@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/http-utils/-/http-utils-9.1.1.tgz#ebfe6984ff234266ab683ab269f9fb18a54f019b"
+  integrity sha512-d/E3eSk+OI+esybHaFhY3M13XHSf/SAgdQS62WQZuaDBvMSwLV7fnwVJryMmrXeIA9jc/arI5dJQ0egEMaR16A==
+  dependencies:
+    xhr2-cookies "^1.1.0"
+
 "@taquito/michel-codec@^8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-8.1.1.tgz#23ba8255215db72c60e0f52ff1616cf9830c6aa5"
   integrity sha512-Clp6LfFVxXuLIUTdMi0XK7lnPBhrj9p8XIismf1Gobg/nxqMCW5idWAprl4f3ickpOzlNLm8UHjCs4aUee1GiQ==
+
+"@taquito/michel-codec@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-9.1.1.tgz#a6cb31845caaffe7e7acdc2c1ea86ef561515fcd"
+  integrity sha512-aeXl5LORcEapoRH+3CzCIruo8P38uvyj/+/ApzkOX0ogh0sRuYxMKkNMUgcgAatduHCrNBwh665By/pYQ5BxzQ==
 
 "@taquito/michelson-encoder@^8.1.1":
   version "8.1.1"
@@ -2515,12 +2527,31 @@
     bignumber.js "^9.0.1"
     fast-json-stable-stringify "^2.1.0"
 
+"@taquito/michelson-encoder@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-9.1.1.tgz#abca32547d1187ba4d5a96c2cf86d32ddf5639d0"
+  integrity sha512-Y7vRgNyyqR6caq3jGbNdhr6ZhOBLxLxpesTQk5an/axNk8HJplNM64e2wbU9syNjjYI63xMyIi+gu2danwbHMQ==
+  dependencies:
+    "@taquito/rpc" "^9.1.1"
+    "@taquito/utils" "^9.1.1"
+    bignumber.js "^9.0.1"
+    fast-json-stable-stringify "^2.1.0"
+
 "@taquito/rpc@^8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-8.1.1.tgz#cdbf9d7ba24346034bf0f02ebf634e846801811a"
   integrity sha512-NS1aoVy+co5xCe41wM67PEMZHt88RtxpsGPvsYs0TO1sJN6JFgwkZYE/ZQULRHPb6JXNxY/KOCVnYahFM+a8pg==
   dependencies:
     "@taquito/http-utils" "^8.1.0"
+    bignumber.js "^9.0.1"
+    lodash "^4.17.20"
+
+"@taquito/rpc@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-9.1.1.tgz#a0cd55e92189bccb23105f13de328a576ee44c01"
+  integrity sha512-fjHirJNuuHMjSef/1iFrIbRjCAihJbliR0kK5RZXikBqlIzSTVHYNBbzJ+AgyEdOFQasDNVLGR1vcDkEr49gyg==
+  dependencies:
+    "@taquito/http-utils" "^9.1.1"
     bignumber.js "^9.0.1"
     lodash "^4.17.20"
 
@@ -2552,10 +2583,46 @@
     rx-sandbox "^1.0.3"
     rxjs "^6.6.3"
 
+"@taquito/taquito@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-9.1.1.tgz#04bb632e8eea8dad952896f4cf1f72211ed92e55"
+  integrity sha512-A89bXRPgYKYNMXa6PBxMrkmdtkxjM0bnBpW62Dz0gHVKdxj1fXLD/rPZFCwkm9soOVSfzIqJoKWDZ37NBTzc2g==
+  dependencies:
+    "@taquito/http-utils" "^9.1.1"
+    "@taquito/michel-codec" "^9.1.1"
+    "@taquito/michelson-encoder" "^9.1.1"
+    "@taquito/rpc" "^9.1.1"
+    "@taquito/utils" "^9.1.1"
+    bignumber.js "^9.0.1"
+    rx-sandbox "^1.0.3"
+    rxjs "^6.6.3"
+
+"@taquito/tzip16@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/tzip16/-/tzip16-9.1.1.tgz#d6c12b61c8f526b20fe7ec6142b2e8652fc2d459"
+  integrity sha512-fRygZjjSidJ0R5z6uGJHJReA1/GyBon1wLCL3scHn5tYTsdXCm/45UgjFcU9wic1JQ1PkWGkdZnQllbp1sOiOw==
+  dependencies:
+    "@taquito/http-utils" "^9.1.1"
+    "@taquito/michelson-encoder" "^9.1.1"
+    "@taquito/rpc" "^9.1.1"
+    "@taquito/taquito" "^9.1.1"
+    "@taquito/utils" "^9.1.1"
+    bignumber.js "^9.0.1"
+    crypto-js "^4.0.0"
+
 "@taquito/utils@^8.1.0", "@taquito/utils@^8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-8.1.1.tgz#b9fbc880308ad814ae15b4f3402fd40c4ecc7c23"
   integrity sha512-ZsHYxEZ+voTjnFZM/iQXeCDUSa2eH5n9PMSX0DNq85hN6S5Q0ZP/4CGznOf+RJj7p1GF2cbKf9wUJrOMFdN+0g==
+  dependencies:
+    blakejs "^1.1.0"
+    bs58check "^2.1.2"
+    buffer "^5.6.0"
+
+"@taquito/utils@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-9.1.1.tgz#1dadb0446a2a9c4f79a34b70c34951b0466b2b84"
+  integrity sha512-gScwhOEbgiQfTS9UibIzmWoGirb1dwBoqjgNIjvbPHc/k/uXu2ftVj3HTZPLe280j7VBxgbSRGz+fECjDkWNJA==
   dependencies:
     blakejs "^1.1.0"
     bs58check "^2.1.2"
@@ -4959,6 +5026,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.0.0.tgz#2904ab2677a9d042856a2ea2ef80de92e4a36dcc"
+  integrity sha512-bzHZN8Pn+gS7DQA6n+iUmBfl0hO5DJq++QP3U6uTucDtk/0iGpXd/Gg7CGR0p8tJhofJyaKoWBuJI4eAO00BBg==
 
 crypto-random-string@^1.0.0:
   version "1.0.0"
