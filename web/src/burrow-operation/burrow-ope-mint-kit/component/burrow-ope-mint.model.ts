@@ -1,16 +1,11 @@
-import { getMaxNumberValidator } from '@form'
-import BigNumber from 'bignumber.js'
 import { FormInputProperties, IFormInitalState } from 'vdr-react-form-manager'
 
 export const tezToMint = 'tezToMint'
 
-export const getBurrowOpeMintKitFormModel = (maxAmount: BigNumber): IFormInitalState => {
-  const validators = [getMaxNumberValidator(maxAmount)]
-
-  return {
+export const getBurrowOpeMintKitFormModel = (): IFormInitalState =>
+  ({
     formInputs: {
-      ...FormInputProperties.Builder(tezToMint).addValidators(validators).build(),
+      ...FormInputProperties.Builder(tezToMint).build(),
     },
     formValidators: [],
-  } as IFormInitalState
-}
+  } as IFormInitalState)
