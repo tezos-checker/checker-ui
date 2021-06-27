@@ -31,7 +31,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
   } = useFormManager(formModel)
 
   // if maxMintableKitsStatus is loading/error, we don't block the user
-  // the transaction will fail is kits are invalid
+  // the transaction will fail if kits are invalid
   // if maxMintableKitsStatus is success => we add the max amount validation
   useEffect(() => {
     if (maxMintableKitsStatus === RequestStatus.success) {
