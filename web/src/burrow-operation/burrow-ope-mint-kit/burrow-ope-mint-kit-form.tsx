@@ -1,11 +1,10 @@
+import { useBurrowMaxMintableKits } from '@burrow-matadata-operation'
 import { Box, Button } from '@chakra-ui/react'
-import { TzFormatMutezToTz } from '@config'
-import { useGetStorage } from '@storage'
-import React, { FunctionComponent, useMemo } from 'react'
-import { StorageRow } from 'src/storage/state/storage-state.type'
+import { RequestStatus } from '@config'
+import { getMaxNumberValidator } from '@form'
+import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
-import { getMaxAmountToMint } from './burrow-ope-mint-kit.util'
 import { getBurrowOpeMintKitFormModel, tezToMint } from './component/burrow-ope-mint.model'
 import { MintKitAmountField } from './component/mint-kit-amount-field'
 import { useDispatchBurrowOpeMint } from './useDispatchBurrowOpeMintKit'
@@ -19,14 +18,29 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
   burrow: { burrowId, scAddress },
   callBack,
 }) => {
-  const { burrowStorage } = useGetStorage(burrowId) as StorageRow
-  const maxAmount = getMaxAmountToMint(burrowStorage)
-  const formModel = useMemo(() => getBurrowOpeMintKitFormModel(maxAmount), [maxAmount])
+  const [{ maxMintableKits, status: maxMintableKitsStatus }, reload] = useBurrowMaxMintableKits(
+    scAddress,
+    burrowId,
+  )
+  const formModel = useMemo(() => getBurrowOpeMintKitFormModel(), [])
   const {
     handleFormChange,
     getInputProps,
     formProperties: { isFormValid },
+    updateInputs,
   } = useFormManager(formModel)
+
+  // if maxMintableKitsStatus is loading/error, we don't block the user
+  // the transaction will fail if kits are invalid
+  // if maxMintableKitsStatus is success => we add the max amount validation
+  useEffect(() => {
+    if (maxMintableKitsStatus === RequestStatus.success) {
+      updateInputs({ [tezToMint]: { validators: [getMaxNumberValidator(maxMintableKits)] } })
+    } else {
+      updateInputs({ [tezToMint]: { validators: [] } })
+    }
+  }, [maxMintableKits, maxMintableKitsStatus])
+
   const { mint } = useDispatchBurrowOpeMint(burrowId, scAddress, callBack)
 
   return (
@@ -41,10 +55,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       <Box fontSize="2xl">Mint</Box>
       <MintKitAmountField {...getInputProps(tezToMint)} />
       <Box fontSize="xs" textAlign="right">
-        {TzFormatMutezToTz(burrowStorage.collateral).toString()}
-        {' collateral'}- {TzFormatMutezToTz(burrowStorage.outstanding_kit).toString()}
-        {' outstanding kits'} = <b>{maxAmount.toString()}</b>
-        {' kits'}
+        {maxMintableKitsStatus === RequestStatus.success ? maxMintableKits.toString() : null}
       </Box>
       <Box textAlign="right">
         <Button
