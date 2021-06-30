@@ -1,4 +1,5 @@
-import { getContract, RequestStatus, TzFormatMutezToTz } from '@config'
+import { RequestStatus, tezos, TzFormatMutezToTz } from '@config'
+import { tzip16 } from '@taquito/tzip16'
 import { useGetWallet } from '@wallet'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
@@ -28,7 +29,9 @@ export const useBurrowMaxMintableKits = (
       }
 
       try {
-        const contract = await getContract(checkerScAdress)
+        // eslint-disable-next-line
+        // @ts-ignore
+        const contract = await tezos.contract.at(checkerScAdress, tzip16)
 
         // eslint-disable-next-line
         // @ts-ignore
