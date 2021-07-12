@@ -10,7 +10,10 @@ type Data = {
   status: RequestStatus
 }
 
-export const useBurrowMaxMintableKits = (checkerToken: string): [Data, () => void] => {
+export const useBurrowMaxMintableKits = (
+  checkerScAdress: string,
+  burrowId: number,
+): [Data, () => void] => {
   const { address: walletAdress } = useGetWallet()
 
   const [data, setData] = useState({
