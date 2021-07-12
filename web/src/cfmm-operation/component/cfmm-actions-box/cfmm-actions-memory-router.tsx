@@ -1,6 +1,5 @@
 import {
   CfmmOpeAddLiquidityForm,
-  CfmmOpeBuyKitForm,
   CfmmOpeRemoveLiquidityForm,
   CfmmOpeSellKitForm,
 } from '@cfmm-operation'
@@ -14,14 +13,6 @@ type Props = {
 }
 
 const routesConfig = [
-  {
-    route: '/buykit',
-    label: 'Buy Kits',
-    icon: <LinkIcon height="50px" />,
-
-    // eslint-disable-next-line react/display-name
-    getComponent: ({ onCloseActions }: Props) => <CfmmOpeBuyKitForm callBack={onCloseActions} />,
-  },
   {
     route: '/sellkit',
     label: 'Sell Kits',

@@ -4,7 +4,7 @@ import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 
-export const useDispatchCfmmOpeBuyKit = (callBack: () => void) => {
+export const useDispatchCfmmOpeBuyKit = () => {
   const dispatch = useAppDispatch()
 
   const executeBuyKit = (
@@ -24,7 +24,6 @@ export const useDispatchCfmmOpeBuyKit = (callBack: () => void) => {
     )
 
     dispatch(cfmmOpeActions.buyKitSubmit(payload))
-    callBack()
   }
 
   return {

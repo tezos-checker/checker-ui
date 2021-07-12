@@ -1,10 +1,9 @@
 import { Box, Button } from '@chakra-ui/react'
-import { CheckerSelectBoxField } from '@form'
-import React, { FunctionComponent, useMemo } from 'react'
+import { debounce } from 'lodash'
+import React, { FunctionComponent, useCallback, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BuyKitAmountField } from './component/buy-kit-amount-field'
 import { BuyKitDeadlineField } from './component/buy-kit-deadline-field'
-import { BuyKitMinAmountField } from './component/buy-kit-min-amount-field'
 import {
   amount,
   checkerAdress,
@@ -15,13 +14,13 @@ import {
 import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
 type Props = {
-  callBack: () => void
+  token: string
 }
 
-export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ callBack }) => {
+export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ token }) => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
 
-  const { buyKit } = useDispatchCfmmOpeBuyKit(callBack)
+  const { buyKit } = useDispatchCfmmOpeBuyKit()
   const {
     handleFormChange,
     getInputProps,
@@ -30,6 +29,11 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ callBack }) => {
   } = useFormManager(formModel)
 
   const updateDate = (date: Date) => updateInputs({ [deadLine]: { value: date } })
+
+  const debounceFn = useCallback(
+    debounce((e) => console.log(e), 500),
+    [],
+  )
 
   return (
     <Box
@@ -40,10 +44,13 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ callBack }) => {
       borderColor="gray.200"
       p="20px"
     >
-      <Box fontSize="2xl">Buy Kits</Box>
-      <CheckerSelectBoxField {...getInputProps(checkerAdress)} />
-      <BuyKitAmountField {...getInputProps(amount)} />
-      <BuyKitMinAmountField {...getInputProps(minAmount)} />
+      <BuyKitAmountField
+        {...getInputProps(amount)}
+        inputProps={{
+          onKeyUp: debounceFn,
+        }}
+      />
+
       <BuyKitDeadlineField {...getInputProps(deadLine)} onDateChange={updateDate} />
       <Box textAlign="right">
         <Button
