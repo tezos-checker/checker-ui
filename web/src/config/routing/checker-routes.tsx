@@ -3,7 +3,6 @@ import { CreateBurrowForm } from '@burrow-operation'
 import { CfmmPage, HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { LoginPage } from '../../pages/login-page'
 
 export type CheckerRoute = {
   path: string
@@ -40,6 +39,6 @@ export const userDisconnectedRoutes: CheckerRoute[] = [
     path: '/',
     exact: false,
     menu: () => <Link to="/">Login</Link>,
-    component: () => <LoginPage />,
+    component: () => <HomePage />,
   },
 ]

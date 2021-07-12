@@ -40,5 +40,5 @@ export const PageHeader: React.FC = ({ children }) => {
     </Flex>
   )
 
-  return address ? <UserHeader /> : null
+  return <UserHeader />
 }
