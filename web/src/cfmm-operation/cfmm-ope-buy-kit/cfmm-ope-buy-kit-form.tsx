@@ -18,15 +18,15 @@ import {
 import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
 type Props = {
-  token: string
+  address: string
 }
 
-export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ token }) => {
+export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
 
-  const [{ status, minKitExpected }, load] = useMetaViewBuyKitMinKitExpected(token)
+  const [{ status, minKitExpected }, load] = useMetaViewBuyKitMinKitExpected(address)
 
-  const { buyKit } = useDispatchCfmmOpeBuyKit(token)
+  const { buyKit } = useDispatchCfmmOpeBuyKit(address)
   const {
     handleFormChange,
     getInputProps,

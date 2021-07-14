@@ -6,10 +6,10 @@ import { CheckerOracleTokenInfo } from './checker-oracle-token-info.component'
 type Props = {
   title: string
   oracle: string
-  token: string
+  address: string
 }
 
-export const CheckerSelected: FunctionComponent<Props> = ({ title, oracle, token }) => (
+export const CheckerSelected: FunctionComponent<Props> = ({ title, oracle, address }) => (
   <Flex
     w="350px"
     height="400px"
@@ -21,7 +21,7 @@ export const CheckerSelected: FunctionComponent<Props> = ({ title, oracle, token
     <Heading as="h3" size="lg" textAlign="center">
       {title}
     </Heading>
-    <CheckerOracleTokenInfo oracle={oracle} token={token} />
+    <CheckerOracleTokenInfo oracle={oracle} address={address} />
 
     <Flex
       border="1px solid"
@@ -31,7 +31,7 @@ export const CheckerSelected: FunctionComponent<Props> = ({ title, oracle, token
       flexDirection="column"
       mt="15px"
     >
-      <CfmmOpeBuyKitForm token={token} />
+      <CfmmOpeBuyKitForm address={address} />
     </Flex>
   </Flex>
 )

@@ -4,10 +4,10 @@ import React, { FunctionComponent } from 'react'
 
 type Props = {
   oracle: string
-  token: string
+  address: string
 }
 
-export const CheckerOracleTokenInfo: FunctionComponent<Props> = ({ oracle, token }) => (
+export const CheckerOracleTokenInfo: FunctionComponent<Props> = ({ oracle, address }) => (
   <HStack justifyContent="space-between" width="100%" mt="20px" mb="40px">
     <VStack spacing={0} alignItems="flex-start" flex=".5">
       <Box>Oracle adress</Box>
@@ -15,7 +15,7 @@ export const CheckerOracleTokenInfo: FunctionComponent<Props> = ({ oracle, token
     </VStack>
     <VStack spacing={0} alignItems="flex-start" flex=".5">
       <Box>Token</Box>
-      <Box>{truncateStringInTheMiddle(token)}</Box>
+      <Box>{truncateStringInTheMiddle(address)}</Box>
     </VStack>
   </HStack>
 )

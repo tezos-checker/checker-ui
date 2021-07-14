@@ -1,15 +1,13 @@
 import { Button, Flex, Heading, HStack } from '@chakra-ui/react'
+import { Checker } from '@config'
 import React, { FunctionComponent } from 'react'
 import { CheckerOracleTokenInfo } from './checker-oracle-token-info.component'
 
 type Props = {
-  title: string
-  title2: string
-  oracle: string
-  token: string
+  checker: Checker
 }
 
-export const CheckerCard: FunctionComponent<Props> = ({ title, title2, oracle, token }) => (
+export const CheckerCard: FunctionComponent<Props> = ({ checker }) => (
   <Flex
     w="350px"
     height="400px"
@@ -19,7 +17,7 @@ export const CheckerCard: FunctionComponent<Props> = ({ title, title2, oracle, t
     flexDirection="column"
   >
     <Heading as="h3" size="lg" textAlign="center">
-      {title}
+      {checker.name}
     </Heading>
 
     <Flex
@@ -31,10 +29,10 @@ export const CheckerCard: FunctionComponent<Props> = ({ title, title2, oracle, t
       mt="15px"
     >
       <Heading as="h2" size="md" margin="auto">
-        {title2}
+        {checker.swapTitle}
       </Heading>
 
-      <CheckerOracleTokenInfo oracle={oracle} token={token} />
+      <CheckerOracleTokenInfo oracle={checker.oracle} address={checker.address} />
 
       <HStack justifyContent="space-between" width="100%">
         <Button>Buy / Sell</Button>
