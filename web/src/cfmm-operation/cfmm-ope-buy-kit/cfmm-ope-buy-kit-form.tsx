@@ -2,6 +2,7 @@ import { useMetaViewBuyKitMinKitExpected } from '@burrow-matadata-operation'
 import { Box, HStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ActionButton } from '@form'
+import { SlippageAndDeadLineSetting } from '@shared/ui'
 import BigNumber from 'bignumber.js'
 import { debounce } from 'lodash'
 import React, { FunctionComponent, useCallback, useMemo } from 'react'
@@ -82,6 +83,8 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ token }) => {
         >
           Buy Kits
         </ActionButton>
+
+        <SlippageAndDeadLineSetting splippage="0.10%" deadLine="20min" />
       </Box>
     </Box>
   )

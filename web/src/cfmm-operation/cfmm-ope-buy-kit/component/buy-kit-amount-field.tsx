@@ -11,7 +11,7 @@ export const BuyKitAmountField: FunctionComponent<Props> = ({ name, value, input
     <FormLabel>Amount</FormLabel>
     <InputGroup>
       <Box as="span" mt="10px" mr="5px">
-        Mutez
+        Tez
       </Box>
       <Input name={name} value={value} type="number" placeholder="Amount" {...inputProps} />
     </InputGroup>

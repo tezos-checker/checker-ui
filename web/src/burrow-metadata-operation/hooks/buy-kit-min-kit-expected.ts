@@ -1,4 +1,4 @@
-import { RequestStatus, tezos } from '@config'
+import { RequestStatus, tezos, TzFormatMutezToTz, TzFormatTzToMutez } from '@config'
 import { tzip16 } from '@taquito/tzip16'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
@@ -35,13 +35,14 @@ export const useMetaViewBuyKitMinKitExpected = (
         // @ts-ignore
         const metadataViews = await contract.tzip16().metadataViews()
         debugger
+        console.log(data.ctez, TzFormatTzToMutez(data.ctez).toNumber())
         const minKitExpected = await metadataViews
           .buy_kit_min_kit_expected()
-          .executeView(data.ctez.toNumber())
+          .executeView(TzFormatTzToMutez(data.ctez).toNumber())
 
         setData({
           ctez: data.ctez,
-          minKitExpected: new BigNumber(minKitExpected),
+          minKitExpected: TzFormatMutezToTz(minKitExpected),
           status: RequestStatus.success,
         })
       } catch (error) {
