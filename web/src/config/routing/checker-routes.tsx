@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { CreateBurrowForm } from '@burrow-operation'
-import { CfmmPage, HomePage } from '@pages'
+import { BuySellPage, CfmmPage, HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -13,6 +13,12 @@ export type CheckerRoute = {
 
 // order is imporant
 export const userConnectedRoutes: CheckerRoute[] = [
+  {
+    path: '/checker/:address/cfmm/buysell',
+    exact: false,
+    menu: () => <Link to="/">Buy / Sell</Link>,
+    component: () => <BuySellPage />,
+  },
   {
     path: '/cfmm',
     exact: true,

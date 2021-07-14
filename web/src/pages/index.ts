@@ -1,4 +1,5 @@
 export * from './cfmm-page'
+export * from './checker/cfmm/buy-sell-page'
 export * from './common/page-body'
 export * from './common/page-header'
 export * from './common/page-menu'
