@@ -1,6 +1,7 @@
 import { Button, Flex, Heading, HStack } from '@chakra-ui/react'
 import { Checker } from '@config'
 import React, { FunctionComponent } from 'react'
+import { Link } from 'react-router-dom'
 import { CheckerOracleTokenInfo } from './checker-oracle-token-info.component'
 
 type Props = {
@@ -35,7 +36,9 @@ export const CheckerCard: FunctionComponent<Props> = ({ checker }) => (
       <CheckerOracleTokenInfo oracle={checker.oracle} address={checker.address} />
 
       <HStack justifyContent="space-between" width="100%">
-        <Button>Buy / Sell</Button>
+        <Link to={`/checker/${checker.address}/cfmm/buysell`}>
+          <Button>Buy / Sell</Button>
+        </Link>
         <Button>Pool</Button>
         <Button>Mint</Button>
       </HStack>
