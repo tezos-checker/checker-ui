@@ -24,6 +24,7 @@ export const CheckerCfmmBuySell: FunctionComponent<Props> = ({ checker }) => (
       <CheckerOracleTokenInfo oracle={checker.oracle} address={checker.address} />
 
       <Flex
+        bg="gray.300"
         border="1px solid"
         alignItems="center"
         justifyContent="center"

@@ -1,20 +1,13 @@
 import { Button } from '@chakra-ui/react'
+import { ActionButtonProps } from '@form'
 import React, { FunctionComponent } from 'react'
 
-type Props = {
-  label: string
-  isDisabled: boolean
-  isLoading: boolean
-  onClick: () => void
-}
-
-export const UserConnectedActionButton: FunctionComponent<Props> = ({
+export const UserConnectedActionButton: FunctionComponent<ActionButtonProps> = ({
   label,
-  isDisabled,
-  isLoading,
   onClick,
+  ...rest
 }) => (
-  <Button mt="15px" disabled={isDisabled} isLoading={isLoading} onClick={onClick}>
+  <Button {...rest} onClick={onClick}>
     {label}
   </Button>
 )

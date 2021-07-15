@@ -1,30 +1,31 @@
 import { useMetaViewBuyKitMinKitExpected } from '@burrow-matadata-operation'
-import { Box, HStack } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ActionButton } from '@form'
-import { SlippageAndDeadLineSetting } from '@shared/ui'
+import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
 import BigNumber from 'bignumber.js'
-import { debounce } from 'lodash'
-import React, { FunctionComponent, useCallback, useMemo } from 'react'
+import React, { FunctionComponent, useEffect, useMemo } from 'react'
+import { Subject } from 'rxjs'
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BuyKitAmountField } from './component/buy-kit-amount-field'
-import { BuyKitDeadlineField } from './component/buy-kit-deadline-field'
 import {
   amount,
   deadLine,
   getCfmmOpeBuyKitFormModel,
+  getMinOneMutezValidator,
   minAmount,
 } from './component/cfmm-ope-buy-kit.model'
+import { MinKitExpectedField } from './component/min-kit-expected-field'
 import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
 type Props = {
   address: string
 }
+const amountChanged: Subject<string> = new Subject<string>()
 
 export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
-
-  const [{ status, minKitExpected }, load] = useMetaViewBuyKitMinKitExpected(address)
 
   const { buyKit } = useDispatchCfmmOpeBuyKit(address)
   const {
@@ -33,59 +34,57 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
     updateInputs,
     formProperties: { isFormValid },
   } = useFormManager(formModel)
-
-  const updateDate = (date: Date) => updateInputs({ [deadLine]: { value: date } })
-
-  // as we use useCallback we can not use getInputProps(amount).value
-  const amountDebounceFn = useCallback(
-    debounce((e) => {
-      load(new BigNumber(e.target.value))
-    }, 500),
-    [],
+  const [{ status }, load] = useMetaViewBuyKitMinKitExpected(address, (minKitExpected) =>
+    updateInputs({ [minAmount]: { value: minKitExpected.toString() } }),
   )
 
+  useEffect(() => {
+    const observer = amountChanged
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        map((i: string) => new BigNumber(i)),
+        filter((x: BigNumber) => getMinOneMutezValidator().validate(x) === null),
+      )
+      .subscribe((model: BigNumber) => load(new BigNumber(model)))
+    return () => observer.unsubscribe()
+  }, [])
+
   return (
-    <Box
-      onChange={handleFormChange}
-      as="form"
-      w="100%"
-      border="1px solid"
-      borderColor="gray.200"
-      p="20px"
-    >
+    <Box onChange={handleFormChange} as="form" w="100%">
       <BuyKitAmountField
         {...getInputProps(amount)}
         inputProps={{
-          onKeyUp: amountDebounceFn,
+          onKeyDown: () => {
+            updateInputs({ [minAmount]: { value: 0 } })
+          },
+          onKeyUp: (e) => {
+            amountChanged.next(e.currentTarget.value)
+          },
         }}
       />
 
-      <HStack justifyContent="space-between">
-        <Box as="span">Min kit expected</Box>
-        <Box as="span" fontWeight="bold">
-          {minKitExpected.toString()} {status}
-        </Box>
-      </HStack>
+      <LoadingBox status={status}>
+        <MinKitExpectedField {...getInputProps(minAmount)} />
+      </LoadingBox>
 
-      <BuyKitDeadlineField {...getInputProps(deadLine)} onDateChange={updateDate} />
-      <Box textAlign="right">
-        <ActionButton
-          label="buy kits"
-          isDisabled={!isFormValid || status === RequestStatus.error}
-          isLoading={status === RequestStatus.pending}
-          onClick={() =>
-            buyKit(
-              getInputProps(amount).value,
-              getInputProps(minAmount).value,
-              getInputProps(deadLine).value,
-            )
-          }
-        >
-          Buy Kits
-        </ActionButton>
+      <ActionButton
+        colorScheme="blue"
+        mt="70px"
+        mb="20px"
+        w="100%"
+        label="SWAP"
+        isDisabled={!isFormValid || status === RequestStatus.error}
+        onClick={() =>
+          buyKit(
+            getInputProps(amount).value,
+            getInputProps(minAmount).value,
+            getInputProps(deadLine).value,
+          )
+        }
+      />
 
-        <SlippageAndDeadLineSetting splippage="0.10%" deadLine="20min" />
-      </Box>
+      <SlippageAndDeadLineSetting splippage="0.10%" deadLine="20min" />
     </Box>
   )
 }

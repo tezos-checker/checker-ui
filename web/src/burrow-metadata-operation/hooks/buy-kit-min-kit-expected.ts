@@ -12,6 +12,7 @@ type Data = {
 
 export const useMetaViewBuyKitMinKitExpected = (
   checkerToken: string,
+  setter: (minKitExpected: BigNumber) => void,
 ): [Data, (ctez: BigNumber) => void] => {
   const [data, setData] = useState({
     ctez: zero,
@@ -34,20 +35,24 @@ export const useMetaViewBuyKitMinKitExpected = (
         // eslint-disable-next-line
         // @ts-ignore
         const metadataViews = await contract.tzip16().metadataViews()
-        debugger
-        console.log(data.ctez, TzFormatTzToMutez(data.ctez).toNumber())
-        const minKitExpected = await metadataViews
-          .buy_kit_min_kit_expected()
-          .executeView(TzFormatTzToMutez(data.ctez).toNumber())
+
+        const minKitExpected = TzFormatMutezToTz(
+          await metadataViews
+            .buy_kit_min_kit_expected()
+            .executeView(TzFormatTzToMutez(data.ctez).toNumber()),
+        )
 
         setData({
           ctez: data.ctez,
-          minKitExpected: TzFormatMutezToTz(minKitExpected),
+          minKitExpected,
           status: RequestStatus.success,
         })
+
+        setter(minKitExpected)
       } catch (error) {
         console.error(error)
         setData({ ctez: data.ctez, minKitExpected: zero, status: RequestStatus.error })
+        setter(zero)
       }
     }
 
