@@ -1,10 +1,12 @@
 import { useMetaViewBuyKitMinKitExpected } from '@burrow-matadata-operation'
-import { Box } from '@chakra-ui/react'
+import { ArrowUpDownIcon } from '@chakra-ui/icons'
+import { Box, IconButton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ActionButton } from '@form'
 import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
+import { NavLink } from 'react-router-dom'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
@@ -63,6 +65,21 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
           },
         }}
       />
+      <Box position="relative">
+        <NavLink to="/sell">
+          <IconButton
+            position="absolute"
+            zIndex="1"
+            aria-label="switch"
+            size="sm"
+            borderRadius="full"
+            right="10px"
+            top="-8px"
+            colorScheme="blue"
+            icon={<ArrowUpDownIcon />}
+          />
+        </NavLink>
+      </Box>
 
       <LoadingBox status={status}>
         <MinKitExpectedField {...getInputProps(minAmount)} />

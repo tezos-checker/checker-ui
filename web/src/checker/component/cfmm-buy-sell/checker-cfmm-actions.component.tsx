@@ -1,14 +1,14 @@
-import { CfmmOpeBuyKitForm } from '@burrow-operation'
 import { Box, Flex, Heading } from '@chakra-ui/react'
 import { Checker } from '@config'
 import React, { FunctionComponent } from 'react'
 import { CheckerOracleTokenInfo } from '../checker-oracle-token-info.component'
+import { CheckerCfmmActionsMemoryRouter } from './checker-cfmm-actions-memory-router'
 
 type Props = {
   checker: Checker
 }
 
-export const CheckerCfmmBuySell: FunctionComponent<Props> = ({ checker }) => (
+export const CheckerCfmmActions: FunctionComponent<Props> = ({ checker }) => (
   <Box>
     <Flex
       w="350px"
@@ -32,7 +32,7 @@ export const CheckerCfmmBuySell: FunctionComponent<Props> = ({ checker }) => (
         flexDirection="column"
         mt="15px"
       >
-        <CfmmOpeBuyKitForm address={checker.address} />
+        <CheckerCfmmActionsMemoryRouter checker={checker} />
       </Flex>
     </Flex>
   </Box>
