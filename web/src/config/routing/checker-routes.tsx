@@ -1,6 +1,7 @@
 /* eslint-disable */
+import { BurrowList } from '@burrow'
 import { CreateBurrowForm } from '@burrow-operation'
-import { CfmmPage, CheckerCfmmActionsPage, HomePage } from '@pages'
+import { CfmmPage, CheckerCfmmOperationsPage, HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -17,7 +18,19 @@ export const userConnectedRoutes: CheckerRoute[] = [
     path: '/checker/:address/cfmm/actions',
     exact: true,
     menu: () => null,
-    component: () => <CheckerCfmmActionsPage />,
+    component: () => <CheckerCfmmOperationsPage />,
+  },
+  {
+    path: '/checker/:address/burrows',
+    exact: true,
+    menu: () => null,
+    component: () => <BurrowList />,
+  },
+  {
+    path: '/checker/:address/burrows/new',
+    exact: true,
+    menu: () => null,
+    component: () => <CreateBurrowForm />,
   },
   {
     path: '/cfmm',
@@ -25,12 +38,7 @@ export const userConnectedRoutes: CheckerRoute[] = [
     menu: () => <Link to="/cfmm">Cfmm actions</Link>,
     component: () => <CfmmPage />,
   },
-  {
-    path: '/new-burrow',
-    exact: true,
-    menu: () => <Link to="/new-burrow">New Burrow</Link>,
-    component: () => <CreateBurrowForm />,
-  },
+
   {
     path: '/',
     exact: false,

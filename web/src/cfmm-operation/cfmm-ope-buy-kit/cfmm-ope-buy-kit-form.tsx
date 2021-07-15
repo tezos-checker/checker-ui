@@ -4,9 +4,10 @@ import { Box, IconButton, Skeleton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ActionButton } from '@form'
 import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
+import { isNumberPressed } from '@shared/utils'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
@@ -24,11 +25,14 @@ import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
 
 type Props = {
   address: string
+  onClickSwitch: (tabIndex: number) => void
 }
 const amountChanged: Subject<string> = new Subject<string>()
 
-export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
+export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSwitch }) => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
+
+  const history = useHistory()
 
   const { buyKit } = useDispatchCfmmOpeBuyKit(address)
   const {
@@ -58,8 +62,11 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
       <BuyKitAmountField
         {...getInputProps(amount)}
         inputProps={{
-          onKeyDown: () => {
-            updateInputs({ [minExpected]: { value: 0 } })
+          onKeyDown: (e) => {
+            console.log(e.keyCode)
+            if (isNumberPressed(e.keyCode)) {
+              updateInputs({ [minExpected]: { value: 0 } })
+            }
           },
           onKeyUp: (e) => {
             amountChanged.next(e.currentTarget.value)
@@ -67,19 +74,18 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
         }}
       />
       <Box position="relative">
-        <NavLink to="/sell">
-          <IconButton
-            position="absolute"
-            zIndex="1"
-            aria-label="switch"
-            size="sm"
-            borderRadius="full"
-            right="10px"
-            top="-8px"
-            colorScheme="blue"
-            icon={<ArrowUpDownIcon />}
-          />
-        </NavLink>
+        <IconButton
+          onClick={() => onClickSwitch(1)}
+          position="absolute"
+          zIndex="1"
+          aria-label="switch"
+          size="sm"
+          borderRadius="full"
+          right="10px"
+          top="-8px"
+          colorScheme="blue"
+          icon={<ArrowUpDownIcon />}
+        />
       </Box>
 
       <LoadingBox
@@ -96,14 +102,15 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
         w="100%"
         label="SWAP"
         isDisabled={!isFormValid || status === RequestStatus.error}
-        onClick={() =>
+        onClick={() => {
           buyKit(
             getInputProps(amount).value,
             getInputProps(minExpected).value,
             getInputProps(deadLine).value,
             getInputProps(slippage).value,
           )
-        }
+          history.push('/')
+        }}
       />
 
       <SlippageAndDeadLineSetting

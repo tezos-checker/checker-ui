@@ -1,5 +1,5 @@
 export * from './cfmm-page'
-export * from './checker/cfmm/checker-cfmm-actions-page'
+export * from './checker/cfmm/checker-cfmm-operations-page'
 export * from './common/page-body'
 export * from './common/page-header'
 export * from './common/page-menu'

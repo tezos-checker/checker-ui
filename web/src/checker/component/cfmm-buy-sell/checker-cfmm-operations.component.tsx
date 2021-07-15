@@ -2,13 +2,13 @@ import { Box, Flex, Heading } from '@chakra-ui/react'
 import { Checker } from '@config'
 import React, { FunctionComponent } from 'react'
 import { CheckerOracleTokenInfo } from '../checker-oracle-token-info.component'
-import { CheckerCfmmActionsMemoryRouter } from './checker-cfmm-actions-memory-router'
+import { CheckerCfmmOperationsTab } from './checker-cfmm-operations-tab'
 
 type Props = {
   checker: Checker
 }
 
-export const CheckerCfmmActions: FunctionComponent<Props> = ({ checker }) => (
+export const CheckerCfmmOperations: FunctionComponent<Props> = ({ checker }) => (
   <Box>
     <Flex
       w="350px"
@@ -32,7 +32,7 @@ export const CheckerCfmmActions: FunctionComponent<Props> = ({ checker }) => (
         flexDirection="column"
         mt="15px"
       >
-        <CheckerCfmmActionsMemoryRouter checker={checker} />
+        <CheckerCfmmOperationsTab checker={checker} />
       </Flex>
     </Flex>
   </Box>
