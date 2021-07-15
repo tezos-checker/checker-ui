@@ -1,6 +1,6 @@
 import { useMetaViewBuyKitMinKitExpected } from '@burrow-matadata-operation'
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
-import { Box, IconButton } from '@chakra-ui/react'
+import { Box, IconButton, Skeleton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ActionButton } from '@form'
 import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
@@ -16,7 +16,8 @@ import {
   deadLine,
   getCfmmOpeBuyKitFormModel,
   getMinOneMutezValidator,
-  minAmount,
+  minExpected,
+  slippage,
 } from './component/cfmm-ope-buy-kit.model'
 import { MinKitExpectedField } from './component/min-kit-expected-field'
 import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
@@ -37,7 +38,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
     formProperties: { isFormValid },
   } = useFormManager(formModel)
   const [{ status }, load] = useMetaViewBuyKitMinKitExpected(address, (minKitExpected) =>
-    updateInputs({ [minAmount]: { value: minKitExpected.toString() } }),
+    updateInputs({ [minExpected]: { value: minKitExpected.toString() } }),
   )
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
         {...getInputProps(amount)}
         inputProps={{
           onKeyDown: () => {
-            updateInputs({ [minAmount]: { value: 0 } })
+            updateInputs({ [minExpected]: { value: 0 } })
           },
           onKeyUp: (e) => {
             amountChanged.next(e.currentTarget.value)
@@ -81,8 +82,11 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
         </NavLink>
       </Box>
 
-      <LoadingBox status={status}>
-        <MinKitExpectedField {...getInputProps(minAmount)} />
+      <LoadingBox
+        status={status}
+        loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
+      >
+        <MinKitExpectedField {...getInputProps(minExpected)} />
       </LoadingBox>
 
       <ActionButton
@@ -95,13 +99,17 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address }) => {
         onClick={() =>
           buyKit(
             getInputProps(amount).value,
-            getInputProps(minAmount).value,
+            getInputProps(minExpected).value,
             getInputProps(deadLine).value,
+            getInputProps(slippage).value,
           )
         }
       />
 
-      <SlippageAndDeadLineSetting splippage="0.10%" deadLine="20min" />
+      <SlippageAndDeadLineSetting
+        splippage={getInputProps(slippage).value}
+        deadLine={getInputProps(deadLine).value}
+      />
     </Box>
   )
 }

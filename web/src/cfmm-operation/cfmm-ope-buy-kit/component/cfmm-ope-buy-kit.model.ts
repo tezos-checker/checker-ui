@@ -3,9 +3,9 @@ import { getMinNumberValidator } from '@form'
 import { FormInputProperties, IFormInitalState } from 'vdr-react-form-manager'
 
 export const amount = 'amount'
-export const minAmount = 'minAmount'
+export const minExpected = 'minExpected'
 export const deadLine = 'deadLine'
-export const checkerAdress = 'checkerAdress'
+export const slippage = 'slippage'
 
 export const getMinOneMutezValidator = () => getMinNumberValidator(TzFormatMutezToTz(1))
 
@@ -13,10 +13,12 @@ export const getCfmmOpeBuyKitFormModel = (): IFormInitalState =>
   ({
     formInputs: {
       ...FormInputProperties.Builder(amount).addValidators([getMinOneMutezValidator()]).build(),
-      ...FormInputProperties.Builder(minAmount)
+      ...FormInputProperties.Builder(minExpected)
         .addValidators([getMinOneMutezValidator()])
         .addValue('0')
         .build(),
+      ...FormInputProperties.Builder(deadLine).addValue(20).build(),
+      ...FormInputProperties.Builder(slippage).addValue(0.01).build(),
     },
     formValidators: [],
   } as IFormInitalState)

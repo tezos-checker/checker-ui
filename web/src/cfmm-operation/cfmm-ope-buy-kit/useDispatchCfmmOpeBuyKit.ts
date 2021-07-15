@@ -7,14 +7,19 @@ import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 export const useDispatchCfmmOpeBuyKit = (checkerAdress: string) => {
   const dispatch = useAppDispatch()
 
-  const executeBuyKit = (amount: number, minAmount: number, deadLine: Date) => {
+  const executeBuyKit = (
+    amount: number,
+    minExpected: number,
+    deadLine: number,
+    slippage: number,
+  ) => {
     const payload: CfmmOpeRowState = createCfmmOpeSubmitPayload(
       checkerAdress,
       CfmmOpeName.buy_kit,
       {
-        amount: new BigNumber(TzFormatTzToMutez(amount)).toNumber(),
-        minAmount,
-        deadLine,
+        amount: TzFormatTzToMutez(amount).toNumber(),
+        minExpected: new BigNumber(minExpected - minExpected * slippage).toNumber(),
+        deadLine: new Date(new Date().getTime() + deadLine * 60000),
       },
     )
 
@@ -22,7 +27,7 @@ export const useDispatchCfmmOpeBuyKit = (checkerAdress: string) => {
   }
 
   return {
-    buyKit: (amount: number, minAmount: number, deadLine: Date) =>
-      executeBuyKit(amount, 1, deadLine),
+    buyKit: (amount: number, minExpected: number, deadLine: number, slippage: number) =>
+      executeBuyKit(amount, minExpected, deadLine, slippage),
   }
 }

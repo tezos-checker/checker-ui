@@ -44,13 +44,13 @@ export const SlippageAndDeadLineSetting: FunctionComponent<Props> = ({ splippage
     <Tr>
       <Td px="0">Slippage tolerance</Td>
       <Td px="0" textAlign="right">
-        {splippage}
+        {splippage} %
       </Td>
     </Tr>
     <Tr>
       <Td px="0">Transaction deadline</Td>
       <Td px="0" textAlign="right">
-        {deadLine}
+        {deadLine} min
       </Td>
     </Tr>
   </Table>

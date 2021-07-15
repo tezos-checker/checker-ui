@@ -3,16 +3,16 @@ import { TransactionWalletOperation } from '@taquito/taquito'
 
 export type CfmmOpeBuyKitSubmitParams = {
   amount: number
-  minAmount: number
+  minExpected: number
   deadLine: Date
 }
 
 export const cfmmOpeBuyKitSubmitRequest = async (
   scAddress: string,
   amount: number,
-  minAmount: number,
+  minExpected: number,
   deadLine: Date,
 ): Promise<TransactionWalletOperation> => {
   const contract = await getContract(scAddress)
-  return contract.methods.buy_kit(amount, minAmount, deadLine).send()
+  return contract.methods.buy_kit(amount, minExpected, deadLine).send()
 }
