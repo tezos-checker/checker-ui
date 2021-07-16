@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { CreateBurrowForm } from '@burrow-operation'
-import { CfmmPage, CheckerBurrowsPage, CheckerCfmmOperationsPage, HomePage } from '@pages'
+import { CfmmPage, CheckerBurrowsPage, CheckerSelectedPage, HomePage } from '@pages'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -17,7 +17,7 @@ export const checkerRoutes: CheckerRoute[] = [
     path: '/checker/:address/cfmm/actions',
     exact: true,
     menu: () => null,
-    component: () => <CheckerCfmmOperationsPage />,
+    component: () => <CheckerSelectedPage />,
   },
   {
     path: '/checker/:address/burrows',

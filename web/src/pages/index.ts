@@ -1,6 +1,6 @@
 export * from './cfmm-page'
 export * from './checker/burrows/checker-burrows-page'
-export * from './checker/cfmm/checker-cfmm-operations-page'
+export * from './checker/checker-selected-page'
 export * from './common/page-body'
 export * from './common/page-header'
 export * from './common/page-menu'

@@ -1,9 +1,9 @@
 import { BurrowList } from '@burrow'
 import React, { FunctionComponent } from 'react'
-import { UserConnectedPageWrapper } from '../../user-connected-page-wrapper'
+import { ValidatePageWrapper } from '../../wrapper/validate-page-wrapper'
 
 export const CheckerBurrowsPage: FunctionComponent = () => (
-  <UserConnectedPageWrapper>
+  <ValidatePageWrapper checkIsUserConnected checkIsValidChecker>
     <BurrowList />
-  </UserConnectedPageWrapper>
+  </ValidatePageWrapper>
 )
