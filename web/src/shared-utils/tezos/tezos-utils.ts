@@ -12,6 +12,7 @@ export enum TzFormatterType {
   tz_to_mtz = 'tz_to_mtz',
 }
 
+// tez = 'tz' - mutez = 'mutez' - mtz = 1000 mutez
 const tzFormatterMap: {
   [key: string]: { from: 'mutez' | 'tz' | 'mtz'; to: 'mutez' | 'tz' | 'mtz' }
 } = {

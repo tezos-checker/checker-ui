@@ -7,8 +7,8 @@ import { Update } from '@reduxjs/toolkit'
 import { useStorageDispatcher } from '@storage'
 import { useGetWallet } from '@wallet'
 import { useEffect } from 'react'
+import { StorageRow } from 'src/storage/state/storage-state.type'
 import { useGetAllBurrows } from '../../burrow/state/useGetAllBurrowsSelector.hook'
-import { StorageRow } from '../../storage/state/storage-state.type'
 
 export const useInitializeStore = (state: RootState) => {
   const { resetPendingBurrowOperation } = useBurrowOpeDispatcher()

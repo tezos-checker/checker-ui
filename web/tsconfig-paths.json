@@ -15,7 +15,8 @@
       "@storage": ["src/storage/index.ts"],
       "@form": ["src/form/index.ts"],
       "@cfmm-operation": ["src/cfmm-operation/index.ts"],
-      "@burrow-matadata-operation": ["src/burrow-metadata-operation/index.ts"]
+      "@burrow-matadata-operation": ["src/burrow-metadata-operation/index.ts"],
+      "@checker": ["src/checker/index.ts"]
     }
   }
 }
