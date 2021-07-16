@@ -1,10 +1,9 @@
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { Box } from '@chakra-ui/layout'
 import { Button, IconButton } from '@chakra-ui/react'
-import React, { FunctionComponent } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { FunctionComponent, useMemo } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import { useFormManager } from 'vdr-react-form-manager'
-import { CreateBurrowChooseCheckerField } from './component/create-burrow-choose-check-field'
 import { CreateBurrowDelegateField } from './component/create-burrow-delegate-field'
 import { CreateBurrowDepositField } from './component/create-burrow-deposit-field'
 import {
@@ -16,17 +15,23 @@ import {
 import { useDispatchBurrowOpeCreateBurrow } from './useDispatchBurrowOpeCreateBurrow'
 
 export const CreateBurrowForm: FunctionComponent = () => {
+  // eslint-disable-next-line
+  // @ts-ignore
+  const { address } = useParams()
+
+  const formModel = useMemo(() => createBurrowFormModel(address), [])
+
   const {
     handleFormChange,
     getInputProps,
     formProperties: { isFormValid },
-  } = useFormManager(createBurrowFormModel)
-
-  console.log(isFormValid, 'isFormValid')
+  } = useFormManager(formModel)
 
   const history = useHistory()
 
-  const { createBurrow } = useDispatchBurrowOpeCreateBurrow(() => history.push('/'))
+  const { createBurrow } = useDispatchBurrowOpeCreateBurrow(() =>
+    history.push(`/checker/${address}/burrows`),
+  )
 
   return (
     <Box w="500px" mx="auto" mt="15vh">
@@ -45,7 +50,7 @@ export const CreateBurrowForm: FunctionComponent = () => {
         p="20px"
       >
         <Box fontSize="3xl">New Burrow</Box>
-        <CreateBurrowChooseCheckerField {...getInputProps(inputChecker)} />
+        <Box>Address {getInputProps(inputChecker).value}</Box>
         <CreateBurrowDelegateField {...getInputProps(inputDelegate)} />
         <CreateBurrowDepositField {...getInputProps(inputDeposit)} />
         <Button

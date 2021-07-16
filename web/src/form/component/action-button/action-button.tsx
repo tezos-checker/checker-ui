@@ -13,6 +13,7 @@ export interface ActionButtonProps extends ButtonProps {
 export const ActionButton: FunctionComponent<ActionButtonProps> = (props) => {
   const walletData = useGetWallet()
   const initalWalletStatus = useMemo(() => walletData.status, [])
+  console.log('walletData', 'initalWalletStatus, ', initalWalletStatus, walletData)
 
   return initalWalletStatus === RequestStatus.success ? (
     <UserConnectedActionButton {...props} />

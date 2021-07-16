@@ -14,8 +14,10 @@ export const UserNotConnectedActionButton: FunctionComponent<ActionButtonProps> 
   const connectWallet = useConnectWallet()
 
   useEffect(() => {
+    console.log('aaa', walletData.status)
     if (walletData.status === RequestStatus.success) {
-      onClick()
+      // hack
+      setTimeout(() => onClick(), 500)
     }
   }, [walletData])
 

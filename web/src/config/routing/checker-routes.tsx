@@ -10,33 +10,38 @@ export type CheckerRoute = {
   exact: boolean
   menu: () => React.ReactElement | null
   component: () => React.ReactElement
+  isPrivate: boolean
 }
 
 // order is imporant
-export const userConnectedRoutes: CheckerRoute[] = [
+export const routes: CheckerRoute[] = [
   {
     path: '/checker/:address/cfmm/actions',
     exact: true,
     menu: () => null,
     component: () => <CheckerCfmmOperationsPage />,
+    isPrivate: false,
   },
   {
     path: '/checker/:address/burrows',
     exact: true,
     menu: () => null,
     component: () => <BurrowList />,
+    isPrivate: true,
   },
   {
     path: '/checker/:address/burrows/new',
     exact: true,
     menu: () => null,
     component: () => <CreateBurrowForm />,
+    isPrivate: true,
   },
   {
     path: '/cfmm',
     exact: true,
     menu: () => <Link to="/cfmm">Cfmm actions</Link>,
     component: () => <CfmmPage />,
+    isPrivate: false,
   },
 
   {
@@ -44,15 +49,6 @@ export const userConnectedRoutes: CheckerRoute[] = [
     exact: false,
     menu: () => <Link to="/">New Site</Link>,
     component: () => <HomePage />,
-  },
-]
-
-// order is imporant
-export const userDisconnectedRoutes: CheckerRoute[] = [
-  {
-    path: '/',
-    exact: false,
-    menu: () => <Link to="/">Login</Link>,
-    component: () => <HomePage />,
+    isPrivate: false,
   },
 ]
