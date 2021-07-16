@@ -72,6 +72,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSw
             amountChanged.next(e.currentTarget.value)
           },
         }}
+        address={address}
       />
       <Box position="relative">
         <IconButton
@@ -92,7 +93,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSw
         status={status}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
-        <MinKitExpectedField {...getInputProps(minExpected)} />
+        <MinKitExpectedField {...getInputProps(minExpected)} address={address} />
       </LoadingBox>
 
       <ActionButton

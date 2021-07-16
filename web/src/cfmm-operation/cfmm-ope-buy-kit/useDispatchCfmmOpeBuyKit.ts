@@ -1,5 +1,4 @@
 import { TzFormatTzToMutez, useAppDispatch } from '@config'
-import BigNumber from 'bignumber.js'
 import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
@@ -18,7 +17,9 @@ export const useDispatchCfmmOpeBuyKit = (checkerAdress: string) => {
       CfmmOpeName.buy_kit,
       {
         amount: TzFormatTzToMutez(amount).toNumber(),
-        minExpected: new BigNumber(minExpected - minExpected * slippage).toNumber(),
+        minExpected: TzFormatTzToMutez(minExpected - minExpected * slippage)
+          .integerValue()
+          .toNumber(),
         deadLine: new Date(new Date().getTime() + deadLine * 60000),
       },
     )
