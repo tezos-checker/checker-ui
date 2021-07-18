@@ -1,7 +1,7 @@
 import { useMetaViewBuyKitMinKitExpected } from '@burrow-matadata-operation'
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
 import { Box, IconButton, Skeleton } from '@chakra-ui/react'
-import { RequestStatus } from '@config'
+import { Checker, RequestStatus } from '@config'
 import { ActionButton } from '@form'
 import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
@@ -11,7 +11,6 @@ import { useHistory } from 'react-router-dom'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
-import { BuyKitAmountField } from './component/buy-kit-amount-field'
 import {
   amount,
   deadLine,
@@ -19,29 +18,31 @@ import {
   getMinOneMutezValidator,
   minExpected,
   slippage,
-} from './component/cfmm-ope-buy-kit.model'
-import { MinKitExpectedField } from './component/min-kit-expected-field'
-import { useDispatchCfmmOpeBuyKit } from './useDispatchCfmmOpeBuyKit'
+} from '../cfmm-ope-buy-kit.model'
+import { useDispatchCfmmOpeBuyKit } from '../useDispatchCfmmOpeBuyKit'
+import { BuyKitAmountField } from './buy-kit-amount-field'
+import { MinKitExpectedField } from './min-kit-expected-field'
 
 type Props = {
-  address: string
+  checker: Checker
   onClickSwitch: (tabIndex: number) => void
 }
 const amountChanged: Subject<string> = new Subject<string>()
 
-export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSwitch }) => {
+export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
   const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
 
   const history = useHistory()
 
-  const { buyKit } = useDispatchCfmmOpeBuyKit(address)
+  const { buyKit } = useDispatchCfmmOpeBuyKit(checker.address)
   const {
     handleFormChange,
     getInputProps,
     updateInputs,
     formProperties: { isFormValid },
   } = useFormManager(formModel)
-  const [{ status }, load] = useMetaViewBuyKitMinKitExpected(address, (minKitExpected) =>
+
+  const [{ status }, load] = useMetaViewBuyKitMinKitExpected(checker.address, (minKitExpected) =>
     updateInputs({ [minExpected]: { value: minKitExpected.toString() } }),
   )
 
@@ -63,7 +64,6 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSw
         {...getInputProps(amount)}
         inputProps={{
           onKeyDown: (e) => {
-            console.log(e.keyCode)
             if (isNumberPressed(e.keyCode)) {
               updateInputs({ [minExpected]: { value: 0 } })
             }
@@ -72,7 +72,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSw
             amountChanged.next(e.currentTarget.value)
           },
         }}
-        address={address}
+        symbol={checker.buyFromSymbol}
       />
       <Box position="relative">
         <IconButton
@@ -93,7 +93,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ address, onClickSw
         status={status}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
-        <MinKitExpectedField {...getInputProps(minExpected)} address={address} />
+        <MinKitExpectedField {...getInputProps(minExpected)} symbol={checker.buyToSymbol} />
       </LoadingBox>
 
       <ActionButton
