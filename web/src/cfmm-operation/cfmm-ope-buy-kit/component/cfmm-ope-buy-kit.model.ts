@@ -1,25 +1,24 @@
-import { getCheckerAvailableValues, getSmartContractAddressValidator } from '@form'
-import { addDaysToCurrentDate } from '@shared/utils'
+import { TzFormatMutezToTz } from '@config'
+import { getMinNumberValidator } from '@form'
 import { FormInputProperties, IFormInitalState } from 'vdr-react-form-manager'
 
 export const amount = 'amount'
-export const minAmount = 'minAmount'
+export const minExpected = 'minExpected'
 export const deadLine = 'deadLine'
-export const checkerAdress = 'checkerAdress'
+export const slippage = 'slippage'
 
-export const getCfmmOpeBuyKitFormModel = (): IFormInitalState => {
-  const validators = []
+export const getMinOneMutezValidator = () => getMinNumberValidator(TzFormatMutezToTz(1))
 
-  return {
+export const getCfmmOpeBuyKitFormModel = (): IFormInitalState =>
+  ({
     formInputs: {
-      ...FormInputProperties.Builder(checkerAdress)
-        .addAvailableValueList(getCheckerAvailableValues())
-        .addValidators([getSmartContractAddressValidator()])
+      ...FormInputProperties.Builder(amount).addValidators([getMinOneMutezValidator()]).build(),
+      ...FormInputProperties.Builder(minExpected)
+        .addValidators([getMinOneMutezValidator()])
+        .addValue('0')
         .build(),
-      ...FormInputProperties.Builder(amount).build(),
-      ...FormInputProperties.Builder(minAmount).build(),
-      ...FormInputProperties.Builder(deadLine).addValue(addDaysToCurrentDate(1)).build(),
+      ...FormInputProperties.Builder(deadLine).addValue(20).build(),
+      ...FormInputProperties.Builder(slippage).addValue(0.01).build(),
     },
     formValidators: [],
-  } as IFormInitalState
-}
+  } as IFormInitalState)

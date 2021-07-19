@@ -4,5 +4,3 @@
 
 // 'KT1RcMG4wUJapxbfkgNkTEgi3pg24vHbADqo' -> checker florencenet
 export const SC_BCD_URL = 'https://api.better-call.dev/v1/'
-
-export const checkerAdresses: string[] = ['KT1PPL3svzkumTQfq4aXm9LfPnocAMCYQN2w']

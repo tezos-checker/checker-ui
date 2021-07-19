@@ -1,34 +1,34 @@
-import { useAppDispatch } from '@config'
-import { TzFormatTzToMutez } from '@shared/utils'
+import { TzFormatTzToMutez, useAppDispatch } from '@config'
 import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 
-export const useDispatchCfmmOpeBuyKit = (callBack: () => void) => {
+export const useDispatchCfmmOpeBuyKit = (checkerAdress: string) => {
   const dispatch = useAppDispatch()
 
   const executeBuyKit = (
-    checkerAdress: string,
     amount: number,
-    minAmount: number,
-    deadLine: Date,
+    minExpected: number,
+    deadLine: number,
+    slippage: number,
   ) => {
     const payload: CfmmOpeRowState = createCfmmOpeSubmitPayload(
       checkerAdress,
       CfmmOpeName.buy_kit,
       {
         amount: TzFormatTzToMutez(amount).toNumber(),
-        minAmount,
-        deadLine,
+        minExpected: TzFormatTzToMutez(minExpected - minExpected * slippage)
+          .integerValue()
+          .toNumber(),
+        deadLine: new Date(new Date().getTime() + deadLine * 60000),
       },
     )
 
     dispatch(cfmmOpeActions.buyKitSubmit(payload))
-    callBack()
   }
 
   return {
-    buyKit: (checkerAdress: string, amount: number, minAmount: number, deadLine: Date) =>
-      executeBuyKit(checkerAdress, amount, minAmount, deadLine),
+    buyKit: (amount: number, minExpected: number, deadLine: number, slippage: number) =>
+      executeBuyKit(amount, minExpected, deadLine, slippage),
   }
 }

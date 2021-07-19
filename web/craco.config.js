@@ -20,6 +20,7 @@ module.exports = {
         __dirname,
         'src/burrow-metadata-operation/index.ts',
       ),
+      '@checker': path.resolve(__dirname, 'src/checker/index.ts'),
     },
   },
 }

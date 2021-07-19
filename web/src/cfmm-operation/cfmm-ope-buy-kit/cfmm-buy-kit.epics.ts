@@ -12,12 +12,12 @@ const actionType = 'cfmmOpe/buyKitSubmit'
 const submitBuyKit = (rowState: CfmmOpeRowState): Observable<CfmmOpeAction> => {
   const {
     amount,
-    minAmount,
+    minExpected,
     deadLine,
   } = rowState.operationSubmitParams as CfmmOpeBuyKitSubmitParams
 
   return cfmmOpeHandleSubmitRequest(
-    cfmmOpeBuyKitSubmitRequest(rowState.scAddress, amount, minAmount, deadLine),
+    cfmmOpeBuyKitSubmitRequest(rowState.scAddress, amount, minExpected, deadLine),
     'cfmmOpe/buyKitSubmit',
     'cfmmOpe/buyKitConfirm',
     rowState,
