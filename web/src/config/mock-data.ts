@@ -3,6 +3,8 @@ export type Checker = {
   oracle: string
   name: string
   swapTitle: string
+  buyFromSymbol: string
+  buyToSymbol: string
 }
 
 export const mockedCheckers: Checker[] = [
@@ -11,5 +13,7 @@ export const mockedCheckers: Checker[] = [
     oracle: 'oracle',
     name: 'KIT',
     swapTitle: 'KIT/TEZOS',
+    buyFromSymbol: 'KIT',
+    buyToSymbol: 'KTLQ',
   },
 ]
