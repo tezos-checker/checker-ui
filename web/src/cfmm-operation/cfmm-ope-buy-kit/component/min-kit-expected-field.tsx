@@ -1,16 +1,15 @@
-import { useMetaDataViewTokenMetaData } from '@burrow-matadata-operation'
 import { Box, FormControl, FormLabel, InputGroup, useMultiStyleConfig } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { IFormInputProperties } from 'vdr-react-form-manager'
 
 type Props = IFormInputProperties & {
-  address: string
+  symbol: string
 }
 
-export const MinKitExpectedField: FunctionComponent<Props> = ({ address, value }) => {
+export const MinKitExpectedField: FunctionComponent<Props> = ({ symbol, value }) => {
   const style = useMultiStyleConfig('ui/form-input-control', {})
 
-  const [{ symbol }] = useMetaDataViewTokenMetaData(address, 1)
+  //  const [{ symbol }] = useMetaDataViewTokenMetaData(address, 1)
 
   return (
     <FormControl sx={style.formControl} id="amount">

@@ -19,7 +19,7 @@ export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) 
       </TabList>
       <TabPanels>
         <TabPanel>
-          <CfmmOpeBuyKitForm address={checker.address} onClickSwitch={setTabIndex} />
+          <CfmmOpeBuyKitForm checker={checker} onClickSwitch={setTabIndex} />
         </TabPanel>
         <TabPanel>
           <p>Coming soon!</p>

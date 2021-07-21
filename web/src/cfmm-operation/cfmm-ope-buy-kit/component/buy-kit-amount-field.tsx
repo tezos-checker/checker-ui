@@ -1,4 +1,3 @@
-import { useMetaDataViewTokenMetaData } from '@burrow-matadata-operation'
 import {
   Box,
   FormControl,
@@ -13,18 +12,16 @@ import { IFormInputProperties } from 'vdr-react-form-manager'
 
 type Props = IFormInputProperties & {
   inputProps?: InputProps
-  address: string
+  symbol: string
 }
 
 export const BuyKitAmountField: FunctionComponent<Props> = ({
   name,
   value,
   inputProps,
-  address,
+  symbol,
 }) => {
   const style = useMultiStyleConfig('ui/form-input-control', {})
-
-  const [{ symbol }] = useMetaDataViewTokenMetaData(address, 0)
 
   return (
     <FormControl sx={style.formControl} id="amount">
