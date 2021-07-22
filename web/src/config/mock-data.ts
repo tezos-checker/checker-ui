@@ -13,7 +13,7 @@ export const mockedCheckers: Checker[] = [
     oracle: 'oracle',
     name: 'KIT',
     swapTitle: 'KIT/TEZOS',
-    buyFromSymbol: 'KIT',
-    buyToSymbol: 'KTLQ',
+    buyFromSymbol: 'CTEZ',
+    buyToSymbol: 'KIT',
   },
 ]
