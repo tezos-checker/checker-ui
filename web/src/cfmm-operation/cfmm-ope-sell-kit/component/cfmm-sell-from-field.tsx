@@ -15,7 +15,7 @@ type Props = IFormInputProperties & {
   symbol: string
 }
 
-export const BuyKitAmountField: FunctionComponent<Props> = ({
+export const CfmmSellFromField: FunctionComponent<Props> = ({
   name,
   value,
   inputProps,
@@ -32,7 +32,7 @@ export const BuyKitAmountField: FunctionComponent<Props> = ({
           name={name}
           value={value}
           type="number"
-          placeholder="ctez"
+          placeholder="kit"
           {...inputProps}
         />
         <Box as="span" sx={style.currency}>
