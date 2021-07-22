@@ -6,10 +6,8 @@ type Props = IFormInputProperties & {
   symbol: string
 }
 
-export const MinKitExpectedField: FunctionComponent<Props> = ({ symbol, value }) => {
+export const CfmmSellToField: FunctionComponent<Props> = ({ symbol, value }) => {
   const style = useMultiStyleConfig('ui/form-input-control', {})
-
-  //  const [{ symbol }] = useMetaDataViewTokenMetaData(address, 1)
 
   return (
     <FormControl sx={style.formControl} id="amount">

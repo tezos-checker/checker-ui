@@ -1,4 +1,5 @@
 import { CfmmOpeBuyKitForm } from '@burrow-operation'
+import { CfmmSellForm } from '@cfmm-operation'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { Checker } from '@config'
 import React, { FunctionComponent } from 'react'
@@ -22,7 +23,7 @@ export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) 
           <CfmmOpeBuyKitForm checker={checker} onClickSwitch={setTabIndex} />
         </TabPanel>
         <TabPanel>
-          <p>Coming soon!</p>
+          <CfmmSellForm checker={checker} onClickSwitch={setTabIndex} />
         </TabPanel>
         <TabPanel>
           <p>Coming soon!</p>
