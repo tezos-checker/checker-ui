@@ -14,7 +14,7 @@ export const getCfmmOpeBuyKitFormModel = (): IFormInitalState =>
     formInputs: {
       ...FormInputProperties.Builder(amount).addValidators([getMinOneMutezValidator()]).build(),
       ...FormInputProperties.Builder(minExpected)
-        .addValidators([getMinOneMutezValidator()])
+        // .addValidators([getMinOneMutezValidator()])
         .addValue('0')
         .build(),
       ...FormInputProperties.Builder(deadLine).addValue(20).build(),
