@@ -49,5 +49,5 @@ export const cfmmOpeBuyKitSubmitRequest = async (
   }
   */
 
-  return contractz.methods.XXXXXXbuy_kit(amount, minExpected, deadLine).send()
+  return contractz.methods.buy_kit(amount, minExpected, deadLine).send()
 }
