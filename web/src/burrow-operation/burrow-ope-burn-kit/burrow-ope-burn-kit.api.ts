@@ -1,4 +1,4 @@
-import { getContract } from '@shared/utils'
+import { getWalletContract } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
 export const burrowOpeBurnKitSubmitRequest = async (
@@ -6,6 +6,6 @@ export const burrowOpeBurnKitSubmitRequest = async (
   burrowId: number,
   amount: number,
 ): Promise<TransactionWalletOperation> => {
-  const contract = await getContract(scAddress)
+  const contract = await getWalletContract(scAddress)
   return contract.methods.burn_kit(burrowId, amount).send()
 }
