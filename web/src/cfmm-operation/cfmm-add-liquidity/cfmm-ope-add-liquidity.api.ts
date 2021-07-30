@@ -1,4 +1,4 @@
-import { getContract } from '@shared/utils'
+import { getWalletContract } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
 export type CfmmOpeAddLiquiditySubmitParams = {
@@ -15,6 +15,6 @@ export const cfmmOpeAddLiquiditySubmitRequest = async (
   minTokens: number,
   deadLine: Date,
 ): Promise<TransactionWalletOperation> => {
-  const contract = await getContract(scAddress)
+  const contract = await getWalletContract(scAddress)
   return contract.methods.add_liquidity(ctez, kit, minTokens, deadLine).send()
 }

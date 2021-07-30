@@ -1,5 +1,6 @@
 import { tezos } from '@config'
 import { errorToast } from '@shared/ui'
+import { ContractAbstraction, ContractProvider } from '@taquito/taquito'
 import { tzip16 } from '@taquito/tzip16'
 import BigNumber from 'bignumber.js'
 
@@ -57,7 +58,34 @@ export const TzFormatTzToMtz = (amount: string | number | BigNumber) =>
 
 // eslint-disable-next-line
 // @ts-ignore
-export const getContract = (scAddress: string) => tezos.wallet.at(scAddress, tzip16)
+export const getWalletContract = (scAddress: string) => tezos.wallet.at(scAddress, tzip16)
 
 //  return `${tezos.format('mutez', 'tz', amount)} ꜩ`
 //  return `${tezos.format('mutez', 'mtz', amount)} mꜩ`
+
+const getSwapContract = async (
+  swapContractAddress: string,
+): Promise<ContractAbstraction<ContractProvider>> => {
+  const swapContract = await tezos.contract.at(swapContractAddress)
+  return swapContract
+}
+
+export const getSwapAllowance = async (
+  swapContractAddress: string,
+  checkerAddress: string,
+  walletPKH: string,
+): Promise<BigNumber> => {
+  const swapContract = await getSwapContract(swapContractAddress)
+  const allowance = await swapContract.views.getAllowance(walletPKH, checkerAddress).read()
+  return allowance
+}
+
+export const getSwapBalance = async (
+  swapContractAddress: string,
+  walletPKH: string,
+): Promise<BigNumber> => {
+  const swapContract = await getSwapContract(swapContractAddress)
+
+  const balance = await swapContract.views.getBalance(walletPKH).read()
+  return balance
+}

@@ -1,6 +1,7 @@
 import { getSwapAddress } from '@checker'
-import { getContract } from '@shared/utils'
-import { TransactionWalletOperation } from '@taquito/taquito'
+import { tezos } from '@config'
+import { getSwapAllowance, getWalletContract, getWalletPKH } from '@shared/utils'
+import { TransactionWalletOperation, WalletOperation } from '@taquito/taquito'
 
 export type CfmmOpeBuyKitSubmitParams = {
   amount: number
@@ -13,41 +14,23 @@ export const cfmmOpeBuyKitSubmitRequest = async (
   amount: number,
   minExpected: number,
   deadLine: Date,
-): Promise<TransactionWalletOperation> => {
-  const contractz = await getContract(scAddress)
-  const swapAddress = await getSwapAddress(contractz)
+): Promise<TransactionWalletOperation | WalletOperation> => {
+  const checkerContract = await getWalletContract(scAddress)
+  const swapAddress = await getSwapAddress(checkerContract)
+  const walletPKH = await getWalletPKH()
 
-  //  const swapContract = await getContract(swapAddress)
+  const allowance = await getSwapAllowance(swapAddress, scAddress, walletPKH)
 
-  try {
-    debugger
-    const swapContract = await getContract(swapAddress)
+  if (allowance.isLessThan(amount)) {
+    const swapContract = await getWalletContract(swapAddress)
 
-    const swapStorage: any = await swapContract.storage()
+    const batch = tezos.wallet
+      .batch()
+      .withContractCall(swapContract.methods.approuve(scAddress, amount))
+      .withContractCall(checkerContract.methods.buy_kit(amount, minExpected, deadLine))
 
-    const balance = await swapStorage.tokens.get('tz1iTqjq1XtX1BVPP4YMiYJpbYM3HbmQxuGa')
-    console.log(balance)
-
-    const allowance = await swapStorage.allowances.get({
-      owner: 'tz1SmKiGedS7x4hwGqeU2q4eUTy4zaJfJFC3',
-      spender: 'KT1PPL3svzkumTQfq4aXm9LfPnocAMCYQN2w',
-    })
-
-    console.log(allowance)
-  } catch (error) {
-    console.log('error', error)
+    return batch.send()
   }
 
-  /*
-  try {
-    debugger
-    const aaa = await tezos.contract.at('KT1DKZZbMyFeXmZJT729tWPxN5i1kChX8obw')
-    const bbbb = await aaa.views.getBalance('tz1iTqjq1XtX1BVPP4YMiYJpbYM3HbmQxuGa').read()
-    console.log(bbbb)
-  } catch (error) {
-    console.log('error', error)
-  }
-  */
-
-  return contractz.methods.buy_kit(amount, minExpected, deadLine).send()
+  return checkerContract.methods.buy_kit(amount, minExpected, deadLine).send()
 }
