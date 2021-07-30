@@ -1,4 +1,4 @@
-import { getContract } from '@shared/utils'
+import { getWalletContract } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
 
 export type BurrowOpeCreateBurrowSubmitParams = {
@@ -12,6 +12,6 @@ export const burrowOpeCreateBurrowSubmitRequest = async (
   { delegate, deposit }: BurrowOpeCreateBurrowSubmitParams,
 ): Promise<TransactionWalletOperation> => {
   debugger
-  const contract = await getContract(scAddress)
+  const contract = await getWalletContract(scAddress)
   return contract.methods.create_burrow(burrowId).send({ amount: deposit })
 }

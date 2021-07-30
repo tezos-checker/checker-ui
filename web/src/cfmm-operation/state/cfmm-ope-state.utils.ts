@@ -1,5 +1,5 @@
 import { AbstractAction, OperationStep, RequestStatus } from '@config'
-import { TransactionWalletOperation } from '@taquito/taquito'
+import { TransactionWalletOperation, WalletOperation } from '@taquito/taquito'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import {
@@ -40,13 +40,13 @@ export const createCfmmOpeSubmitPayload = (
 })
 
 export const cfmmOpeHandleSubmitRequest = (
-  request: Promise<TransactionWalletOperation>,
+  request: Promise<TransactionWalletOperation | WalletOperation>,
   submitActionType: string,
   confirmActionType: string,
   cfmmOpeRowState: CfmmOpeRowState,
 ): Observable<CfmmOpeAction> =>
   from(request).pipe(
-    map((res: TransactionWalletOperation) => {
+    map((res: TransactionWalletOperation | WalletOperation) => {
       if (res) {
         // eslint-disable-next-line
         return {
