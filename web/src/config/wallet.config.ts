@@ -1,6 +1,11 @@
+import { BeaconWallet } from '@taquito/beacon-wallet'
 import { MichelCodecPacker, TezosToolkit } from '@taquito/taquito'
 import { TezBridgeSigner } from '@taquito/tezbridge-signer'
 import { Tzip16Module } from '@taquito/tzip16'
+
+export const beaconWallet = new BeaconWallet({
+  name: 'Checker',
+})
 
 export const tezos = new TezosToolkit('https://api.tez.ie/rpc/florencenet')
 tezos.setPackerProvider(new MichelCodecPacker())
