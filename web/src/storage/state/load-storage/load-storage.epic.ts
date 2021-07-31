@@ -1,5 +1,5 @@
-import { loadStorageRequest, LoadStorageResp } from '@api'
 import { AbstractAction, RequestStatus, RootState } from '@config'
+import { loadStorageRequest, LoadStorageResp } from '@storage'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators'
