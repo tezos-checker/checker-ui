@@ -15,6 +15,6 @@ tezos.setPackerProvider(new MichelCodecPacker())
 tezos.addExtension(new Tzip16Module())
 
 // if we use the same config, TezBridge will overribe beaconWallet
-export const tezosSigner = new TezosToolkit('https://api.tez.ie/rpc/florencenet')
-tezosSigner.setPackerProvider(new MichelCodecPacker())
-tezosSigner.setProvider({ signer: new TezBridgeSigner() })
+export const tezosWithSigner = new TezosToolkit('https://api.tez.ie/rpc/florencenet')
+tezosWithSigner.setPackerProvider(new MichelCodecPacker())
+tezosWithSigner.setProvider({ signer: new TezBridgeSigner() })

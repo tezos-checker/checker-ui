@@ -1,6 +1,5 @@
 export * from '../shared-utils/tezos/tezos-utils'
 export * from './api/request-status.enum'
-export * from './app.constant'
 export * from './mock-data'
 export * from './routing/checker-routes'
 export * from './routing/useRouteParams.hooks'
