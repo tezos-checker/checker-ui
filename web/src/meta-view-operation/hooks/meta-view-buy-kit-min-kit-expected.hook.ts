@@ -1,4 +1,5 @@
-import { RequestStatus, TzFormatMutezToTz, TzFormatTzToMutez } from '@config'
+import { RequestStatus } from '@config'
+import { TzFormatMutezToTz, TzFormatTzToMutez } from '@wallet'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
 import { getMetaDataViews } from '../utils/meta-data-operation.utils'

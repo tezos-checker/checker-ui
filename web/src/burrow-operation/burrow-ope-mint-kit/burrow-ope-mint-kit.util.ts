@@ -1,4 +1,4 @@
-import { TzFormatMutezToTz, TzFormatTzToMutez } from '@config'
+import { TzFormatMutezToTz, TzFormatTzToMutez } from '@wallet'
 import BigNumber from 'bignumber.js'
 import { BurrowStorage } from 'src/storage/state/storage-state.type'
 

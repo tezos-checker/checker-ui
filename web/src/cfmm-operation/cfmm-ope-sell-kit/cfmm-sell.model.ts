@@ -1,5 +1,5 @@
-import { TzFormatMutezToTz } from '@config'
 import { getMinNumberValidator } from '@form'
+import { TzFormatMutezToTz } from '@wallet'
 import { FormInputProperties, IFormInitalState } from 'vdr-react-form-manager'
 
 export const sellFrom = 'sellFrom'
