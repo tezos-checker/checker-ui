@@ -1,7 +1,7 @@
-import { RequestStatus, tezos, TzFormatMutezToTz, TzFormatTzToMutez } from '@config'
-import { tzip16 } from '@taquito/tzip16'
+import { RequestStatus, TzFormatMutezToTz, TzFormatTzToMutez } from '@config'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
+import { getMetaDataViews } from '../utils/meta-data-operation.utils'
 
 const zero = new BigNumber(0)
 type Data = {
@@ -28,13 +28,7 @@ export const useMetaViewBuyKitMinKitExpected = (
       }
 
       try {
-        // eslint-disable-next-line
-        // @ts-ignore
-        const contract = await tezos.contract.at(checkerToken, tzip16)
-
-        // eslint-disable-next-line
-        // @ts-ignore
-        const metadataViews = await contract.tzip16().metadataViews()
+        const metadataViews = await getMetaDataViews(checkerToken)
 
         const minKitExpected = TzFormatMutezToTz(
           await metadataViews

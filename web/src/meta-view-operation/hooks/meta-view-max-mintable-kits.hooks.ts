@@ -10,7 +10,7 @@ type Data = {
   status: RequestStatus
 }
 
-export const useBurrowMaxMintableKits = (
+export const useMetaViewMaxMintableKits = (
   checkerScAdress: string,
   burrowId: number,
 ): [Data, () => void] => {
