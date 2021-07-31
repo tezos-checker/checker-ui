@@ -1,6 +1,6 @@
 import { beaconWallet, tezos } from '@config'
 
-export const loadWallet = async (): Promise<string> => {
+export const connectWallet = async (): Promise<string> => {
   await beaconWallet.requestPermissions({
     // eslint-disable-next-line
     // @ts-ignore
