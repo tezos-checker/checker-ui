@@ -1,8 +1,8 @@
-import { RequestStatus, tezos } from '@config'
+import { RequestStatus } from '@config'
 import { mapBytesToString } from '@shared/utils'
-import { tzip16 } from '@taquito/tzip16'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
+import { getMetaDataViews } from '../utils/meta-data-operation.utils'
 
 const zero = new BigNumber(0)
 type Data = {
@@ -10,7 +10,7 @@ type Data = {
   status: RequestStatus
 }
 
-export const useMetaDataViewTokenMetaData = (
+export const useMetaViewTokenMetaData = (
   checkerToken: string,
   paramIndex: number,
 ): [Data, () => void] => {
@@ -27,13 +27,7 @@ export const useMetaDataViewTokenMetaData = (
       }
 
       try {
-        // eslint-disable-next-line
-        // @ts-ignore
-        const contract = await tezos.contract.at(checkerToken, tzip16)
-
-        // eslint-disable-next-line
-        // @ts-ignore
-        const metadataViews = await contract.tzip16().metadataViews()
+        const metadataViews = await getMetaDataViews(checkerToken)
 
         const tokenParam = await metadataViews.token_metadata().executeView(paramIndex)
 

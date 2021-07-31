@@ -1,4 +1,4 @@
-import { tezos } from '@config'
+import { tezos, tezosSigner } from '@config'
 import { errorToast } from '@shared/ui'
 import { ContractAbstraction, ContractProvider } from '@taquito/taquito'
 import { tzip16 } from '@taquito/tzip16'
@@ -66,7 +66,7 @@ export const getWalletContract = (scAddress: string) => tezos.wallet.at(scAddres
 const getSwapContract = async (
   swapContractAddress: string,
 ): Promise<ContractAbstraction<ContractProvider>> => {
-  const swapContract = await tezos.contract.at(swapContractAddress)
+  const swapContract = await tezosSigner.contract.at(swapContractAddress)
   return swapContract
 }
 

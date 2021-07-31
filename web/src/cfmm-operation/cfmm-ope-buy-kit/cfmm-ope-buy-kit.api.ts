@@ -26,7 +26,7 @@ export const cfmmOpeBuyKitSubmitRequest = async (
 
     const batch = tezos.wallet
       .batch()
-      .withContractCall(swapContract.methods.approuve(scAddress, amount))
+      .withContractCall(swapContract.methods.approve(scAddress, amount))
       .withContractCall(checkerContract.methods.buy_kit(amount, minExpected, deadLine))
 
     return batch.send()
