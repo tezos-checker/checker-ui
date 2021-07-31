@@ -1,4 +1,4 @@
-import { appNetwork, beaconWallet, tezos } from '@config'
+import { appNetwork, beaconWallet, tezos } from '../config/wallet.config'
 
 export const connectWallet = async (): Promise<string> => {
   await beaconWallet.requestPermissions({

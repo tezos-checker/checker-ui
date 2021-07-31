@@ -1,6 +1,6 @@
-import { RequestStatus, tezos } from '@config'
+import { RequestStatus } from '@config'
 import { tzip16 } from '@taquito/tzip16'
-import { TzFormatMutezToTz, useGetWallet } from '@wallet'
+import { tezos, TzFormatMutezToTz, useGetWallet } from '@wallet'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
 

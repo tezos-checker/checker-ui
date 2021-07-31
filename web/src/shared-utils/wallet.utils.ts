@@ -1,4 +1,4 @@
-import { beaconWallet } from '@config'
+import { beaconWallet } from '@wallet'
 
 export const isValidWalletAddress = (walletAddress?: string): boolean => Boolean(walletAddress)
 

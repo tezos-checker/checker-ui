@@ -1,5 +1,5 @@
-import { tezos } from '@config'
 import BigNumber from 'bignumber.js'
+import { tezos } from '../config/wallet.config'
 
 export enum TzFormatterType {
   mutez_to_tz = 'mutez_to_tz',

@@ -1,6 +1,6 @@
-import { tezosWithSigner } from '@config'
 import { ContractAbstraction, ContractProvider } from '@taquito/taquito'
 import BigNumber from 'bignumber.js'
+import { tezosWithSigner } from '../config/wallet.config'
 
 const getSwapContract = async (
   swapContractAddress: string,

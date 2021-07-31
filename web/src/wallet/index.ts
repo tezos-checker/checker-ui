@@ -1,3 +1,4 @@
+export * from './config/wallet.config'
 export * from './hooks/useConnectWallet'
 export * from './hooks/useDisconnectWallet'
 export * from './state/useGetWalletSelector.hook'
