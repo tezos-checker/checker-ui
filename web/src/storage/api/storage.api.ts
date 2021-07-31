@@ -1,4 +1,4 @@
-import { getWalletContract } from '@config'
+import { getWalletContract } from '@wallet'
 import { BurrowStorage, CheckerStorage } from '../state/storage-state.type'
 
 export type LoadStorageResp = {

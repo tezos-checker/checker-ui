@@ -1,5 +1,5 @@
-import { getWalletContract } from '@config'
 import { TransactionWalletOperation } from '@taquito/taquito'
+import { getWalletContract } from '@wallet'
 
 export const burrowOpeWithdrawTezSubmitRequest = async (
   scAddress: string,

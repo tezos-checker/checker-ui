@@ -1,8 +1,5 @@
-import { tezos, tezosSigner } from '@config'
-import { errorToast } from '@shared/ui'
-import { ContractAbstraction, ContractProvider } from '@taquito/taquito'
-import { tzip16 } from '@taquito/tzip16'
 import BigNumber from 'bignumber.js'
+import { tezos } from '../config/wallet.config'
 
 export enum TzFormatterType {
   mutez_to_tz = 'mutez_to_tz',
@@ -31,8 +28,7 @@ const tzFormatter = (
 ): BigNumber => {
   const bigNum = new BigNumber(amount)
   if (bigNum.isNaN()) {
-    errorToast('Tezos amount', `${amount} is not an number`)
-    return new BigNumber(0)
+    throw Error(`Tezos amount ${amount} is not an number`)
   }
   const { from, to } = tzFormatterMap[formatType]
   return new BigNumber(`${tezos.format(from, to, amount)}`)
@@ -55,37 +51,3 @@ export const TzFormatMtzToTz = (amount: string | number | BigNumber) =>
 
 export const TzFormatTzToMtz = (amount: string | number | BigNumber) =>
   tzFormatter(amount, TzFormatterType.tz_to_mtz)
-
-// eslint-disable-next-line
-// @ts-ignore
-export const getWalletContract = (scAddress: string) => tezos.wallet.at(scAddress, tzip16)
-
-//  return `${tezos.format('mutez', 'tz', amount)} ꜩ`
-//  return `${tezos.format('mutez', 'mtz', amount)} mꜩ`
-
-const getSwapContract = async (
-  swapContractAddress: string,
-): Promise<ContractAbstraction<ContractProvider>> => {
-  const swapContract = await tezosSigner.contract.at(swapContractAddress)
-  return swapContract
-}
-
-export const getSwapAllowance = async (
-  swapContractAddress: string,
-  checkerAddress: string,
-  walletPKH: string,
-): Promise<BigNumber> => {
-  const swapContract = await getSwapContract(swapContractAddress)
-  const allowance = await swapContract.views.getAllowance(walletPKH, checkerAddress).read()
-  return allowance
-}
-
-export const getSwapBalance = async (
-  swapContractAddress: string,
-  walletPKH: string,
-): Promise<BigNumber> => {
-  const swapContract = await getSwapContract(swapContractAddress)
-
-  const balance = await swapContract.views.getBalance(walletPKH).read()
-  return balance
-}

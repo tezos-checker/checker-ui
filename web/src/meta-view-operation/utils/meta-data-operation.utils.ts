@@ -1,5 +1,5 @@
-import { tezos } from '@config'
 import { tzip16 } from '@taquito/tzip16'
+import { tezos } from '@wallet'
 
 export const getMetaDataViews = async (checkerAddress: string): Promise<any> => {
   // eslint-disable-next-line

@@ -1,5 +1,5 @@
-import { getWalletContract, TzFormatTzToMutez } from '@shared/utils'
 import { TransactionWalletOperation } from '@taquito/taquito'
+import { getWalletContract, TzFormatTzToMutez } from '@wallet'
 
 export const burrowOpeMintKitSubmitRequest = async (
   scAddress: string,

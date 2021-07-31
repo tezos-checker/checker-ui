@@ -1,8 +1,7 @@
 import { Login } from '@auth'
 import { useRouteParams } from '@config'
 import { PageNotFound } from '@shared/ui'
-import { isValidWalletAddress } from '@shared/utils'
-import { useGetWallet } from '@wallet'
+import { isValidWalletAddress, useGetWallet } from '@wallet'
 import React, { FunctionComponent } from 'react'
 
 type Props = {

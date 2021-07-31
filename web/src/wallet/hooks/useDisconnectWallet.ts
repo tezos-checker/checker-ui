@@ -1,4 +1,5 @@
-import { beaconWallet, RequestStatus, useAppDispatch } from '@config'
+import { RequestStatus, useAppDispatch } from '@config'
+import { beaconWallet } from '@wallet'
 import { walletActions } from '../state/wallet.slice'
 
 export const useDisconnectWallet = () => {
