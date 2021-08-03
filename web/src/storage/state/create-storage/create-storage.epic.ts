@@ -1,6 +1,6 @@
-import { loadStorageRequest, LoadStorageResp } from '@api'
 import { BurrowOpeAction, BurrowOpeRowState } from '@burrow-operation'
 import { RequestStatus } from '@config'
+import { loadStorageRequest, LoadStorageResp } from '@storage'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, filter, map, mergeMap } from 'rxjs/operators'

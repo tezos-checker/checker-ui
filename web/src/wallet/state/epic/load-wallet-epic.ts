@@ -1,10 +1,10 @@
-import { loadWallet } from '@api'
 import { RequestStatus } from '@config'
 import { errorToast, successToast } from '@shared/ui'
 import { isPendingRequest } from '@shared/utils'
 import { ofType } from 'redux-observable'
 import { from, of } from 'rxjs'
 import { catchError, filter, map, mergeMap, timeout } from 'rxjs/operators'
+import { connectWallet } from '../../api/wallet.api'
 import { WalletRowState } from '../wallet-state.type'
 
 const actionType = 'wallet/loadWallet'
@@ -12,7 +12,7 @@ const actionType = 'wallet/loadWallet'
 const createAction = (payload: WalletRowState) => ({ type: actionType, payload })
 
 export const fetchStorageRequest = (x: WalletRowState) =>
-  from(loadWallet()).pipe(
+  from(connectWallet()).pipe(
     timeout(60000), // fix safari issue, when we close the beacon pop-up
     map((address: string) => {
       if (address) {

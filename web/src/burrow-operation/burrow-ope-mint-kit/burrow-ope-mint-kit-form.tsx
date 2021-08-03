@@ -1,7 +1,7 @@
-import { useBurrowMaxMintableKits } from '@burrow-matadata-operation'
 import { Box, Button } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { getMaxNumberValidator } from '@form'
+import { useMetaViewMaxMintableKits } from '@meta-view-operation'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
@@ -18,7 +18,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
   burrow: { burrowId, scAddress },
   callBack,
 }) => {
-  const [{ maxMintableKits, status: maxMintableKitsStatus }, reload] = useBurrowMaxMintableKits(
+  const [{ maxMintableKits, status: maxMintableKitsStatus }, reload] = useMetaViewMaxMintableKits(
     scAddress,
     burrowId,
   )

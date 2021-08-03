@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@config'
-import { TzFormatTzToMutez } from '@shared/utils'
+import { TzFormatTzToMutez } from '@wallet'
 import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'

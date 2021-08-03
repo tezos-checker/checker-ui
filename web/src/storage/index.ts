@@ -1,3 +1,4 @@
+export * from './api/storage.api'
 export * from './component/storage-burrow-values'
 export * from './component/storage-parameters-values'
 export * from './state/storage.epics'

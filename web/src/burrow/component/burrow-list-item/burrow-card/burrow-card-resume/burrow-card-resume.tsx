@@ -3,12 +3,8 @@ import { DragHandleIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, IconButton, Spinner, useDisclosure, VStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { LoadingBox, SlideBox } from '@shared/ui'
-import {
-  isInvalidStorage,
-  isInvalidStorageBurrow,
-  truncateStringInTheMiddle,
-  TzFormatMutezToTz,
-} from '@shared/utils'
+import { isInvalidStorage, isInvalidStorageBurrow, truncateStringInTheMiddle } from '@shared/utils'
+import { TzFormatMutezToTz } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { StorageRow } from '../../../../../storage/state/storage-state.type'
 import { BurrowRowState } from '../../../../state/burrow-state.type'
