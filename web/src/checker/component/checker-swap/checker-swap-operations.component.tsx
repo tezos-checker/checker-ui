@@ -2,10 +2,10 @@ import { Box, Flex, Heading } from '@chakra-ui/react'
 import { Checker, useRouteParams } from '@config'
 import { GoToHomeArrow } from '@shared/ui'
 import React, { FunctionComponent } from 'react'
-import { CheckerOracleTokenInfo } from '../checker-oracle-token-info.component'
-import { CheckerCfmmOperationsTab } from './checker-cfmm-operations-tab'
+import { CheckerOracleTokenInfo } from '../checker-card/checker-oracle-token-info.component'
+import { CheckerSwapOperationsTab } from './checker-swap-operations-tab'
 
-export const CheckerCfmmOperations: FunctionComponent = () => {
+export const CheckerSwapOperations: FunctionComponent = () => {
   // checker exists it as been validated by <ValidatePage />
   const checker = useRouteParams().checker as Checker
 
@@ -35,7 +35,7 @@ export const CheckerCfmmOperations: FunctionComponent = () => {
           flexDirection="column"
           mt="15px"
         >
-          <CheckerCfmmOperationsTab checker={checker} />
+          <CheckerSwapOperationsTab checker={checker} />
         </Flex>
       </Flex>
     </Box>

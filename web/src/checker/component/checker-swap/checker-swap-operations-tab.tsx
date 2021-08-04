@@ -8,7 +8,7 @@ type Props = {
   checker: Checker
 }
 
-export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) => {
+export const CheckerSwapOperationsTab: FunctionComponent<Props> = ({ checker }) => {
   const [tabIndex, setTabIndex] = React.useState(0)
 
   return (
