@@ -1,6 +1,6 @@
 export * from './config/wallet.config'
-export * from './hooks/useConnectWallet'
-export * from './hooks/useDisconnectWallet'
+export * from './hooks/useConnectWallet.hooks'
+export * from './hooks/useDisconnectWallet.hooks'
 export * from './state/useGetWalletSelector.hook'
 export * from './state/wallet.epics'
 export { walletReducer } from './state/wallet.slice'
