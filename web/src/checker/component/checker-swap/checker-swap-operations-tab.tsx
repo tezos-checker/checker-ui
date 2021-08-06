@@ -1,7 +1,7 @@
 import { CfmmOpeBuyKitForm } from '@burrow-operation'
-import { CfmmSellForm } from '@cfmm-operation'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { Checker } from '@config'
+import { CfmmSellForm } from '@swap-operation'
 import React, { FunctionComponent } from 'react'
 
 type Props = {
