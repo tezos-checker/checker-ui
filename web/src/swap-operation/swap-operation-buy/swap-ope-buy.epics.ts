@@ -5,7 +5,7 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 import { createCfmmOpeConfirmEpic } from '../common/cfmm-ope-common-confirm.epic'
 import { CfmmOpeAction, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { cfmmOpeHandleSubmitRequest } from '../state/cfmm-ope-state.utils'
-import { CfmmOpeBuyKitSubmitParams, cfmmOpeBuyKitSubmitRequest } from './cfmm-ope-buy-kit.api'
+import { CfmmOpeBuyKitSubmitParams, swapOpeBuySubmitRequest } from './swap-ope-buy-kit.api'
 
 const actionType = 'cfmmOpe/buyKitSubmit'
 
@@ -17,7 +17,7 @@ const submitBuyKit = (rowState: CfmmOpeRowState): Observable<CfmmOpeAction> => {
   } = rowState.operationSubmitParams as CfmmOpeBuyKitSubmitParams
 
   return cfmmOpeHandleSubmitRequest(
-    cfmmOpeBuyKitSubmitRequest(rowState.scAddress, amount, minExpected, deadLine),
+    swapOpeBuySubmitRequest(rowState.scAddress, amount, minExpected, deadLine),
     'cfmmOpe/buyKitSubmit',
     'cfmmOpe/buyKitConfirm',
     rowState,

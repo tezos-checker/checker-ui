@@ -8,7 +8,7 @@ export type CfmmOpeBuyKitSubmitParams = {
   deadLine: Date
 }
 
-export const cfmmOpeBuyKitSubmitRequest = async (
+export const swapOpeBuySubmitRequest = async (
   scAddress: string,
   amount: number,
   minExpected: number,

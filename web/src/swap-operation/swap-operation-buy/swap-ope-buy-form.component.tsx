@@ -11,17 +11,17 @@ import { useHistory } from 'react-router-dom'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
+import { Amount } from './form-fields/amount.component'
+import { SwapResult } from './form-fields/swap-result.component'
 import {
   amount,
   deadLine,
-  getCfmmOpeBuyKitFormModel,
   getMinOneMutezValidator,
+  getSwapOpeBuyFormModel,
   minExpected,
   slippage,
-} from '../cfmm-ope-buy-kit.model'
-import { useDispatchCfmmOpeBuyKit } from '../useDispatchCfmmOpeBuyKit'
-import { BuyKitAmountField } from './buy-kit-amount-field'
-import { MinKitExpectedField } from './min-kit-expected-field'
+} from './swap-ope-buy-kit.model'
+import { useDispatchCfmmOpeBuyKit } from './useDispatchSwapOpeBuy.hooks'
 
 type Props = {
   checker: Checker
@@ -29,8 +29,8 @@ type Props = {
 }
 const amountChanged: Subject<string> = new Subject<string>()
 
-export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
-  const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
+export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
+  const formModel = useMemo(() => getSwapOpeBuyFormModel(), [])
 
   const history = useHistory()
 
@@ -60,7 +60,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ checker, onClickSw
 
   return (
     <Box onChange={handleFormChange} as="form" w="100%">
-      <BuyKitAmountField
+      <Amount
         {...getInputProps(amount)}
         inputProps={{
           onKeyDown: (e) => {
@@ -93,7 +93,7 @@ export const CfmmOpeBuyKitForm: FunctionComponent<Props> = ({ checker, onClickSw
         status={status}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
-        <MinKitExpectedField {...getInputProps(minExpected)} symbol={checker.buyToSymbol} />
+        <SwapResult {...getInputProps(minExpected)} symbol={checker.buyToSymbol} />
       </LoadingBox>
 
       <ActionButton
