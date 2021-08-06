@@ -4,7 +4,7 @@ import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 
-export const useDispatchCfmmOpeSellKit = (checkerAdress: string) => {
+export const useDispatchSwapOpeSell = (checkerAdress: string) => {
   const dispatch = useAppDispatch()
 
   const executeSellKit = (
@@ -29,7 +29,7 @@ export const useDispatchCfmmOpeSellKit = (checkerAdress: string) => {
   }
 
   return {
-    sellKit: (amount: number, minAmount: number, deadLine: number, slippage: number) =>
+    dispatchSell: (amount: number, minAmount: number, deadLine: number, slippage: number) =>
       executeSellKit(amount, minAmount, deadLine, slippage),
   }
 }

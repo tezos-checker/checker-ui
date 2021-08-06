@@ -11,17 +11,17 @@ import { useHistory } from 'react-router-dom'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
+import { SellAmount } from './form-fields/sell-amount.component'
+import { SellSwapResult } from './form-fields/sell-swap-result.component'
 import {
   deadLine,
-  getCfmmOpeBuyKitFormModel,
   getMinOneMutezValidator,
+  getSwapOpeSellFormModel,
   sellFrom,
   sellTo,
   slippage,
-} from '../cfmm-sell.model'
-import { useDispatchCfmmOpeSellKit } from '../useDispatchCfmmOpeSellKit'
-import { CfmmSellFromField } from './cfmm-sell-from-field'
-import { CfmmSellToField } from './cfmm-sell-to-field'
+} from './swap-ope-sell.model'
+import { useDispatchSwapOpeSell } from './useDispatchSwapOpeSell.hooks'
 
 type Props = {
   checker: Checker
@@ -29,12 +29,12 @@ type Props = {
 }
 const amountChanged: Subject<string> = new Subject<string>()
 
-export const CfmmSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
-  const formModel = useMemo(() => getCfmmOpeBuyKitFormModel(), [])
+export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
+  const formModel = useMemo(() => getSwapOpeSellFormModel(), [])
 
   const history = useHistory()
 
-  const { sellKit } = useDispatchCfmmOpeSellKit(checker.address)
+  const { dispatchSell } = useDispatchSwapOpeSell(checker.address)
   const {
     handleFormChange,
     getInputProps,
@@ -60,7 +60,7 @@ export const CfmmSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch 
 
   return (
     <Box onChange={handleFormChange} as="form" w="100%">
-      <CfmmSellFromField
+      <SellAmount
         {...getInputProps(sellFrom)}
         inputProps={{
           onKeyDown: (e) => {
@@ -93,7 +93,7 @@ export const CfmmSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch 
         status={status}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
-        <CfmmSellToField {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
+        <SellSwapResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
       </LoadingBox>
 
       <ActionButton
@@ -104,7 +104,7 @@ export const CfmmSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch 
         label="SWAP"
         isDisabled={!isFormValid || status === RequestStatus.error}
         onClick={() => {
-          sellKit(
+          dispatchSell(
             getInputProps(sellFrom).value,
             getInputProps(sellTo).value,
             getInputProps(deadLine).value,

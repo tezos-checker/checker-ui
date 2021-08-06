@@ -9,7 +9,7 @@ export const slippage = 'slippage'
 
 export const getMinOneMutezValidator = () => getMinNumberValidator(TzFormatMutezToTz(1))
 
-export const getCfmmOpeBuyKitFormModel = (): IFormInitalState =>
+export const getSwapOpeSellFormModel = (): IFormInitalState =>
   ({
     formInputs: {
       ...FormInputProperties.Builder(sellFrom).addValidators([getMinOneMutezValidator()]).build(),
