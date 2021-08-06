@@ -11,8 +11,8 @@ import { useHistory } from 'react-router-dom'
 import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
-import { Amount } from './form-fields/amount.component'
-import { SwapResult } from './form-fields/swap-result.component'
+import { BuyAmount } from './form-fields/buy-amount.component'
+import { BuyResult } from './form-fields/buy-result.component'
 import {
   amount,
   deadLine,
@@ -60,7 +60,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
 
   return (
     <Box onChange={handleFormChange} as="form" w="100%">
-      <Amount
+      <BuyAmount
         {...getInputProps(amount)}
         inputProps={{
           onKeyDown: (e) => {
@@ -93,7 +93,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         status={status}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
-        <SwapResult {...getInputProps(minExpected)} symbol={checker.buyToSymbol} />
+        <BuyResult {...getInputProps(minExpected)} symbol={checker.buyToSymbol} />
       </LoadingBox>
 
       <ActionButton

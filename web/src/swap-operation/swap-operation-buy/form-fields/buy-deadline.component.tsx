@@ -14,7 +14,7 @@ type Props = IFormInputProperties & {
 const minDate = new Date()
 minDate.setDate(minDate.getDate() + 1)
 
-export const Deadline: FunctionComponent<Props> = (props) => {
+export const BuyDeadline: FunctionComponent<Props> = (props) => {
   // eslint-disable-next-line
   // @ts-ignore
   const ButtonDate = forwardRef(({ value, onClick }, ref) => (

@@ -6,7 +6,7 @@ type Props = IFormInputProperties & {
   symbol: string
 }
 
-export const SwapResult: FunctionComponent<Props> = ({ symbol, value }) => {
+export const BuyResult: FunctionComponent<Props> = ({ symbol, value }) => {
   const style = useMultiStyleConfig('ui/form-input-control', {})
 
   //  const [{ symbol }] = useMetaDataViewTokenMetaData(address, 1)

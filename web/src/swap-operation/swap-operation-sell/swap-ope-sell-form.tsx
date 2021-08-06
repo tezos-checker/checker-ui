@@ -12,7 +12,7 @@ import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
 import { SellAmount } from './form-fields/sell-amount.component'
-import { SellSwapResult } from './form-fields/sell-swap-result.component'
+import { SellResult } from './form-fields/sell-result.component'
 import {
   deadLine,
   getMinOneMutezValidator,
@@ -93,7 +93,7 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         status={status}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
-        <SellSwapResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
+        <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
       </LoadingBox>
 
       <ActionButton

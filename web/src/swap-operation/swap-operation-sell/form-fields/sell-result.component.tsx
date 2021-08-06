@@ -6,7 +6,7 @@ type Props = IFormInputProperties & {
   symbol: string
 }
 
-export const SellSwapResult: FunctionComponent<Props> = ({ symbol, value }) => {
+export const SellResult: FunctionComponent<Props> = ({ symbol, value }) => {
   const style = useMultiStyleConfig('ui/form-input-control', {})
 
   return (
