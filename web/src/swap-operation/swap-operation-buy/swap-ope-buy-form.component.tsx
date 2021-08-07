@@ -34,7 +34,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
 
   const history = useHistory()
 
-  const { buyKit } = useDispatchCfmmOpeBuyKit(checker.address)
+  const { dispatchBuy } = useDispatchCfmmOpeBuyKit(checker.address)
   const {
     handleFormChange,
     getInputProps,
@@ -104,7 +104,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         label="SWAP"
         isDisabled={!isFormValid || status === RequestStatus.error}
         onClick={() => {
-          buyKit(
+          dispatchBuy(
             getInputProps(amount).value,
             getInputProps(minExpected).value,
             getInputProps(deadLine).value,

@@ -7,12 +7,7 @@ import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 export const useDispatchSwapOpeSell = (checkerAdress: string) => {
   const dispatch = useAppDispatch()
 
-  const executeSellKit = (
-    amount: number,
-    minAmount: number,
-    deadLine: number,
-    slippage: number,
-  ) => {
+  const sell = (amount: number, minAmount: number, deadLine: number, slippage: number) => {
     const payload: CfmmOpeRowState = createCfmmOpeSubmitPayload(
       checkerAdress,
       CfmmOpeName.sell_kit,
@@ -30,6 +25,6 @@ export const useDispatchSwapOpeSell = (checkerAdress: string) => {
 
   return {
     dispatchSell: (amount: number, minAmount: number, deadLine: number, slippage: number) =>
-      executeSellKit(amount, minAmount, deadLine, slippage),
+      sell(amount, minAmount, deadLine, slippage),
   }
 }
