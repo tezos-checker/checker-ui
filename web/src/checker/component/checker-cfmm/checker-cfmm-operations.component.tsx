@@ -3,9 +3,9 @@ import { Checker, useRouteParams } from '@config'
 import { GoToHomeArrow } from '@shared/ui'
 import React, { FunctionComponent } from 'react'
 import { CheckerOracleTokenInfo } from '../checker-card/checker-oracle-token-info.component'
-import { CheckerSwapOperationsTab } from './checker-swap-operations-tab'
+import { CheckerCfmmOperationsTab } from './checker-cfmm-operations-tab'
 
-export const CheckerSwapOperations: FunctionComponent = () => {
+export const CheckerCfmmOperations: FunctionComponent = () => {
   // checker exists it as been validated by <ValidatePage />
   const checker = useRouteParams().checker as Checker
 
@@ -35,7 +35,7 @@ export const CheckerSwapOperations: FunctionComponent = () => {
           flexDirection="column"
           mt="15px"
         >
-          <CheckerSwapOperationsTab checker={checker} />
+          <CheckerCfmmOperationsTab checker={checker} />
         </Flex>
       </Flex>
     </Box>

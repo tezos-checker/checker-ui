@@ -39,7 +39,9 @@ export const CheckerCard: FunctionComponent<Props> = ({ checker }) => (
         <Link to={`/checker/${checker.address}/cfmm`}>
           <Button>Buy / Sell</Button>
         </Link>
-        <Button>Pool</Button>
+        <Link to={`/checker/${checker.address}/cfmm`}>
+          <Button>Pool</Button>
+        </Link>
 
         {/* FIXME => disable is user not logged */}
         <Link to={`/checker/${checker.address}/burrows`}>
