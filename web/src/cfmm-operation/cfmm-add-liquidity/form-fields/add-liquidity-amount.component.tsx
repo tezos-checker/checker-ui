@@ -32,7 +32,7 @@ export const AddLiquidityAmount: FunctionComponent<Props> = ({
           name={name}
           value={value}
           type="number"
-          placeholder="ctez"
+          placeholder={symbol}
           {...inputProps}
         />
         <Box as="span" sx={style.currency}>

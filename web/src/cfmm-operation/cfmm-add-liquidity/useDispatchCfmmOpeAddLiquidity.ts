@@ -9,7 +9,7 @@ export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
 
   const executeAddLiquidity = (
     amount: number,
-    maxResult: number,
+    maxExpected: number,
     minToken: number,
     deadLine: number,
   ) => {
@@ -18,7 +18,7 @@ export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
       CfmmOpeName.add_liquidity,
       {
         amount: TzFormatTzToMutez(amount).toNumber(),
-        maxResult: TzFormatTzToMutez(maxResult).toNumber(),
+        maxExpected: TzFormatTzToMutez(maxExpected).toNumber(),
         minToken: TzFormatTzToMutez(minToken).toNumber(),
         deadLine: new Date(new Date().getTime() + deadLine * 60000 * 240),
       },
@@ -28,7 +28,7 @@ export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
   }
 
   return {
-    addLiquidity: (amount: number, maxResult: number, minToken: number, deadLine: number) =>
-      executeAddLiquidity(amount, maxResult, minToken, deadLine),
+    addLiquidity: (amount: number, maxExpected: number, minToken: number, deadLine: number) =>
+      executeAddLiquidity(amount, maxExpected, minToken, deadLine),
   }
 }

@@ -15,13 +15,13 @@ const actionType = 'cfmmOpe/addLiquiditySubmit'
 const submitAddLiquidity = (rowState: CfmmOpeRowState): Observable<CfmmOpeAction> => {
   const {
     amount,
-    maxResult,
+    maxExpected,
     minToken,
     deadLine,
   } = rowState.operationSubmitParams as CfmmOpeAddLiquiditySubmitParams
 
   return cfmmOpeHandleSubmitRequest(
-    cfmmOpeAddLiquiditySubmitRequest(rowState.scAddress, amount, maxResult, minToken, deadLine),
+    cfmmOpeAddLiquiditySubmitRequest(rowState.scAddress, amount, maxExpected, minToken, deadLine),
     'cfmmOpe/addLiquiditySubmit',
     'cfmmOpe/addLiquidityConfirm',
     rowState,

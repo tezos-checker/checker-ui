@@ -13,13 +13,13 @@ import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
 import { deadLine, getMinOneMutezValidator } from '../swap-operation-buy/swap-ope-buy-kit.model'
-import { AddLiquidityAmount } from './component/add-liquidity-amount.component'
 import {
   amount,
   getCfmmOpeAddLiquidityFormModel,
-  maxResult,
+  maxExpected,
   minToken,
-} from './component/cfmm-ope-add-liquidity.model'
+} from './cfmm-ope-add-liquidity.model'
+import { AddLiquidityAmount } from './form-fields/add-liquidity-amount.component'
 import { useDispatchCfmmOpeAddLiquidity } from './useDispatchCfmmOpeAddLiquidity'
 
 type Props = {
@@ -44,8 +44,8 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
   const [
     { status: maxKitDeposedStatus },
     loadMaxResult,
-  ] = useMetaViewAddLiquidityMaxKitDeposed(checker.address, (resMaxResult) =>
-    updateInputs({ [maxResult]: { value: resMaxResult.toString() } }),
+  ] = useMetaViewAddLiquidityMaxKitDeposed(checker.address, (resMaxExpected) =>
+    updateInputs({ [maxExpected]: { value: resMaxExpected.toString() } }),
   )
 
   const [
@@ -77,28 +77,28 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         inputProps={{
           onKeyDown: (e) => {
             if (isNumberPressed(e.keyCode)) {
-              updateInputs({ [minToken]: { value: '' }, [maxResult]: { value: '' } })
+              updateInputs({ [minToken]: { value: '' }, [maxExpected]: { value: '' } })
             }
           },
           onKeyUp: (e) => {
             amountChanged.next(e.currentTarget.value)
           },
         }}
-        symbol={'tez'}
+        symbol={'CTEZ'}
       />
       <InputInfo
         status={maxKitDeposedStatus}
         label="Max result"
-        value={getInputProps(maxResult).value}
-        name={maxResult}
-        symbol="kit"
+        value={getInputProps(maxExpected).value}
+        name={maxExpected}
+        symbol="KIT"
       />
       <InputInfo
         status={minTokenStatus}
         label="Min token expected"
         name={minToken}
         value={getInputProps(minToken).value}
-        symbol="mulqt"
+        symbol="MULQT"
       />
 
       <ActionButton
@@ -111,7 +111,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         onClick={() => {
           addLiquidity(
             getInputProps(amount).value,
-            getInputProps(maxResult).value,
+            getInputProps(maxExpected).value,
             getInputProps(minToken).value,
             getInputProps(deadLine).value,
           )

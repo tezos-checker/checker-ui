@@ -3,7 +3,7 @@ import { getSwapAddress, getSwapAllowance, getWalletContract, getWalletPKH, tezo
 
 export type CfmmOpeAddLiquiditySubmitParams = {
   amount: number
-  maxResult: number
+  maxExpected: number
   minToken: number
   deadLine: Date
 }
@@ -11,7 +11,7 @@ export type CfmmOpeAddLiquiditySubmitParams = {
 export const cfmmOpeAddLiquiditySubmitRequest = async (
   scAddress: string,
   amount: number,
-  maxResult: number,
+  maxExpected: number,
   minToken: number,
   deadLine: Date,
 ): Promise<TransactionWalletOperation | WalletOperation> => {
@@ -28,11 +28,11 @@ export const cfmmOpeAddLiquiditySubmitRequest = async (
       .batch()
       .withContractCall(swapContract.methods.approve(scAddress, amount))
       .withContractCall(
-        checkerContract.methods.add_liquidity(amount, maxResult, minToken, deadLine),
+        checkerContract.methods.add_liquidity(amount, maxExpected, minToken, deadLine),
       )
 
     return batch.send()
   }
 
-  return checkerContract.methods.add_liquidity(amount, maxResult, minToken, deadLine).send()
+  return checkerContract.methods.add_liquidity(amount, maxExpected, minToken, deadLine).send()
 }
