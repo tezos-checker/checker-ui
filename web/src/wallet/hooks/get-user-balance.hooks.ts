@@ -19,7 +19,7 @@ export const useGetUserBalance = (
 ): [Data, (balance: BigNumber) => void] => {
   const [data, setData] = useState({
     balance: zero,
-    status: RequestStatus.pending,
+    status: RequestStatus.idle,
   })
 
   useEffect(() => {

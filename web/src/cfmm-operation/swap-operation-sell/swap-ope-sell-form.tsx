@@ -31,10 +31,6 @@ type Props = {
 const amountChanged: Subject<string> = new Subject<string>()
 
 export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
-  const [{ status: balanceStatus, balance: userBalance }] = useGetUserBalance(
-    checker.address,
-    (balance: BigNumber) => console.log(balance),
-  )
   const formModel = useMemo(() => getSwapOpeSellFormModel(), [])
 
   const history = useHistory()
@@ -47,9 +43,17 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
     formProperties: { isFormValid },
   } = useFormManager(formModel)
 
-  const [{ status }, load] = useMetaViewSellKitMinCtezExpected(checker.address, (minCtezExpected) =>
+  const [
+    { status: minKitExpectedStatus },
+    loadMinKitExpected,
+  ] = useMetaViewSellKitMinCtezExpected(checker.address, (minCtezExpected) =>
     updateInputs({ [sellTo]: { value: minCtezExpected.toString() } }),
   )
+
+  const [
+    { status: balanceStatus, balance: userBalance },
+    loadBalance,
+  ] = useGetUserBalance(checker.address, (balance: BigNumber) => console.log(balance))
 
   useEffect(() => {
     const observer = amountChanged
@@ -59,7 +63,15 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         map((i: string) => new BigNumber(i)),
         filter((x: BigNumber) => getMinOneMutezValidator().validate(x) === null),
       )
-      .subscribe((model: BigNumber) => load(new BigNumber(model)))
+      .subscribe((model: BigNumber) => {
+        const amount = new BigNumber(model)
+        loadMinKitExpected(amount)
+
+        // load balance
+        if (balanceStatus !== RequestStatus.success) {
+          loadBalance(amount)
+        }
+      })
     return () => observer.unsubscribe()
   }, [])
 
@@ -80,9 +92,9 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         symbol={checker.buyToSymbol}
       />
       {balanceStatus === RequestStatus.success ? (
-        <Box as="span">{userBalance.toNumber()}</Box>
+        <Box as="span">balance: {userBalance.toNumber()}</Box>
       ) : (
-        <Box as="span">{balanceStatus}</Box>
+        <Box as="span">balance </Box>
       )}
       <Box position="relative">
         <IconButton
@@ -100,7 +112,7 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
       </Box>
 
       <LoadingBox
-        status={status}
+        status={minKitExpectedStatus}
         loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
       >
         <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
@@ -112,7 +124,7 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         mb="20px"
         w="100%"
         label="SWAP"
-        isDisabled={!isFormValid || status === RequestStatus.error}
+        isDisabled={!isFormValid || minKitExpectedStatus === RequestStatus.error}
         onClick={() => {
           dispatchSell(
             getInputProps(sellFrom).value,
