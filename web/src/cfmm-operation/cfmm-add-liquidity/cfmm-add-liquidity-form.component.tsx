@@ -106,7 +106,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         mt="70px"
         mb="20px"
         w="100%"
-        label="SWAP"
+        label="Add liquidity"
         isDisabled={!isFormValid}
         onClick={() => {
           addLiquidity(

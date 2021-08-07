@@ -10,17 +10,17 @@ export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
   const executeAddLiquidity = (
     amount: number,
     maxResult: number,
-    minTokens: number,
+    minToken: number,
     deadLine: number,
   ) => {
     const payload: CfmmOpeRowState = createCfmmOpeSubmitPayload(
       checkerAddress,
       CfmmOpeName.add_liquidity,
       {
-        ctez: TzFormatTzToMutez(amount).toNumber(),
-        kit: TzFormatTzToMutez(maxResult).toNumber(),
-        minTokens: TzFormatTzToMutez(minTokens).toNumber(),
-        deadLine: new Date(new Date().getTime() + deadLine * 60000),
+        amount: TzFormatTzToMutez(amount).toNumber(),
+        maxResult: TzFormatTzToMutez(maxResult).toNumber(),
+        minToken: TzFormatTzToMutez(minToken).toNumber(),
+        deadLine: new Date(new Date().getTime() + deadLine * 60000 * 240),
       },
     )
 
@@ -28,7 +28,7 @@ export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
   }
 
   return {
-    addLiquidity: (amount: number, maxResult: number, minTokens: number, deadLine: number) =>
-      executeAddLiquidity(amount, maxResult, minTokens, deadLine),
+    addLiquidity: (amount: number, maxResult: number, minToken: number, deadLine: number) =>
+      executeAddLiquidity(amount, maxResult, minToken, deadLine),
   }
 }
