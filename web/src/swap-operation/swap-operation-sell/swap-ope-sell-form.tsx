@@ -5,6 +5,7 @@ import { ActionButton } from '@form'
 import { useMetaViewSellKitMinCtezExpected } from '@meta-view-operation'
 import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
+import { useGetUserBalance } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -30,6 +31,10 @@ type Props = {
 const amountChanged: Subject<string> = new Subject<string>()
 
 export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwitch }) => {
+  const [{ status: balanceStatus, balance: userBalance }] = useGetUserBalance(
+    checker.address,
+    (balance: BigNumber) => console.log(balance),
+  )
   const formModel = useMemo(() => getSwapOpeSellFormModel(), [])
 
   const history = useHistory()
@@ -74,6 +79,11 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         }}
         symbol={checker.buyToSymbol}
       />
+      {balanceStatus === RequestStatus.success ? (
+        <Box as="span">{userBalance.toNumber()}</Box>
+      ) : (
+        <Box as="span">{balanceStatus}</Box>
+      )}
       <Box position="relative">
         <IconButton
           onClick={() => onClickSwitch(0)}

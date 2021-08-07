@@ -1,6 +1,5 @@
-import { getSwapAddress } from '@checker'
 import { TransactionWalletOperation, WalletOperation } from '@taquito/taquito'
-import { getSwapAllowance, getWalletContract, getWalletPKH, tezos } from '@wallet'
+import { getSwapAddress, getSwapAllowance, getWalletContract, getWalletPKH, tezos } from '@wallet'
 
 export type CfmmOpeBuyKitSubmitParams = {
   amount: number
