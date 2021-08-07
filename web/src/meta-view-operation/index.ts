@@ -1,3 +1,5 @@
+export { useMetaViewAddLiquidityMaxKitDeposed } from './hooks/meta-view-add-liquidity-max-kit-deposed.hooks'
+export { useMetaViewAddLiquidityMinLqtMinted } from './hooks/meta-view-add-liquidity-min-lqt-minted.hooks'
 export { useMetaViewBuyKitMinKitExpected } from './hooks/meta-view-buy-kit-min-kit-expected.hooks'
 export { useMetaViewMaxMintableKits } from './hooks/meta-view-max-mintable-kits.hooks'
 export { useMetaViewSellKitMinCtezExpected } from './hooks/meta-view-sell-kit-min-ctez-expected.hooks'

@@ -1,7 +1,7 @@
 import { SwapOpeBuyForm } from '@burrow-operation'
+import { CfmmOpeAddLiquidityForm, SwapOpeSellForm } from '@cfmm-operation'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { Checker } from '@config'
-import { SwapOpeSellForm } from '@swap-operation'
 import React, { FunctionComponent } from 'react'
 
 type Props = {
@@ -26,7 +26,7 @@ export const CheckerSwapOperationsTab: FunctionComponent<Props> = ({ checker }) 
           <SwapOpeSellForm checker={checker} onClickSwitch={setTabIndex} />
         </TabPanel>
         <TabPanel>
-          <p>Coming soon!</p>
+          <CfmmOpeAddLiquidityForm checker={checker} />
         </TabPanel>
       </TabPanels>
     </Tabs>

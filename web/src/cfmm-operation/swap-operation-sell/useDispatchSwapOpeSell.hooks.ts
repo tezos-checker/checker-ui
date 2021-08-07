@@ -4,32 +4,27 @@ import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 
-export const useDispatchCfmmOpeBuyKit = (checkerAdress: string) => {
+export const useDispatchSwapOpeSell = (checkerAdress: string) => {
   const dispatch = useAppDispatch()
 
-  const executeBuyKit = (
-    amount: number,
-    minExpected: number,
-    deadLine: number,
-    slippage: number,
-  ) => {
+  const sell = (amount: number, minAmount: number, deadLine: number, slippage: number) => {
     const payload: CfmmOpeRowState = createCfmmOpeSubmitPayload(
       checkerAdress,
-      CfmmOpeName.buy_kit,
+      CfmmOpeName.sell_kit,
       {
         amount: TzFormatTzToMutez(amount).toNumber(),
-        minExpected: TzFormatTzToMutez(minExpected - minExpected * slippage)
+        minAmount: TzFormatTzToMutez(minAmount - minAmount * slippage)
           .integerValue()
           .toNumber(),
         deadLine: new Date(new Date().getTime() + deadLine * 60000),
       },
     )
 
-    dispatch(cfmmOpeActions.buyKitSubmit(payload))
+    dispatch(cfmmOpeActions.sellKitSubmit(payload))
   }
 
   return {
-    buyKit: (amount: number, minExpected: number, deadLine: number, slippage: number) =>
-      executeBuyKit(amount, minExpected, deadLine, slippage),
+    dispatchSell: (amount: number, minAmount: number, deadLine: number, slippage: number) =>
+      sell(amount, minAmount, deadLine, slippage),
   }
 }

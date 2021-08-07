@@ -1,9 +1,9 @@
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
-import { Box, IconButton, Skeleton } from '@chakra-ui/react'
+import { Box, IconButton } from '@chakra-ui/react'
 import { Checker, RequestStatus } from '@config'
-import { ActionButton } from '@form'
+import { ActionButton, InputInfo } from '@form'
 import { useMetaViewBuyKitMinKitExpected } from '@meta-view-operation'
-import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
+import { SlippageAndDeadLineSetting } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
@@ -12,7 +12,6 @@ import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BuyAmount } from './form-fields/buy-amount.component'
-import { BuyResult } from './form-fields/buy-result.component'
 import {
   amount,
   deadLine,
@@ -34,7 +33,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
 
   const history = useHistory()
 
-  const { buyKit } = useDispatchCfmmOpeBuyKit(checker.address)
+  const { dispatchBuy } = useDispatchCfmmOpeBuyKit(checker.address)
   const {
     handleFormChange,
     getInputProps,
@@ -65,7 +64,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         inputProps={{
           onKeyDown: (e) => {
             if (isNumberPressed(e.keyCode)) {
-              updateInputs({ [minExpected]: { value: 0 } })
+              updateInputs({ [minExpected]: { value: '' } })
             }
           },
           onKeyUp: (e) => {
@@ -89,12 +88,13 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         />
       </Box>
 
-      <LoadingBox
+      <InputInfo
         status={status}
-        loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
-      >
-        <BuyResult {...getInputProps(minExpected)} symbol={checker.buyToSymbol} />
-      </LoadingBox>
+        label="Min kit expected"
+        value={getInputProps(minExpected).value}
+        name={minExpected}
+        symbol={checker.buyToSymbol}
+      />
 
       <ActionButton
         colorScheme="blue"
@@ -104,7 +104,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         label="SWAP"
         isDisabled={!isFormValid || status === RequestStatus.error}
         onClick={() => {
-          buyKit(
+          dispatchBuy(
             getInputProps(amount).value,
             getInputProps(minExpected).value,
             getInputProps(deadLine).value,
