@@ -4,38 +4,31 @@ import { CfmmOpeName, CfmmOpeRowState } from '../state/cfmm-ope-state.type'
 import { createCfmmOpeSubmitPayload } from '../state/cfmm-ope-state.utils'
 import { cfmmOpeActions } from '../state/cfmm-ope.slice'
 
-export const useDispatchCfmmOpeAddLiquidity = (callBack: () => void) => {
+export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
   const dispatch = useAppDispatch()
 
   const executeAddLiquidity = (
-    checkerAdress: string,
-    ctez: number,
-    kit: number,
+    amount: number,
+    maxResult: number,
     minTokens: number,
-    deadLine: Date,
+    deadLine: number,
   ) => {
     const payload: CfmmOpeRowState = createCfmmOpeSubmitPayload(
-      checkerAdress,
+      checkerAddress,
       CfmmOpeName.add_liquidity,
       {
-        ctez: TzFormatTzToMutez(ctez).toNumber(),
-        kit: TzFormatTzToMutez(kit).toNumber(),
-        minTokens,
-        deadLine,
+        ctez: TzFormatTzToMutez(amount).toNumber(),
+        kit: TzFormatTzToMutez(maxResult).toNumber(),
+        minTokens: TzFormatTzToMutez(minTokens).toNumber(),
+        deadLine: new Date(new Date().getTime() + deadLine * 60000),
       },
     )
 
     dispatch(cfmmOpeActions.addLiquiditySubmit(payload))
-    callBack()
   }
 
   return {
-    addLiquidity: (
-      checkerAdress: string,
-      ctez: number,
-      kit: number,
-      minTokens: number,
-      deadLine: Date,
-    ) => executeAddLiquidity(checkerAdress, ctez, kit, minTokens, deadLine),
+    addLiquidity: (amount: number, maxResult: number, minTokens: number, deadLine: number) =>
+      executeAddLiquidity(amount, maxResult, minTokens, deadLine),
   }
 }
