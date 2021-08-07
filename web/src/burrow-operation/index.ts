@@ -1,4 +1,4 @@
-export * from '../swap-operation/swap-operation-buy/swap-ope-buy-form.component'
+export * from '../cfmm-operation/swap-operation-buy/swap-ope-buy-form.component'
 export * from './burrow-ope-burn-kit/burrow-ope-burn-kit-form'
 export * from './burrow-ope-create-burrow/create-burrow-form'
 export * from './burrow-ope-delegate/burrow-ope-delegate-form'

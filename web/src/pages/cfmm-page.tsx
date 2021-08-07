@@ -1,6 +1,6 @@
+import { CfmmActionsBox, CfmmOpeList } from '@cfmm-operation'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { SlideBox } from '@shared/ui'
-import { CfmmActionsBox, CfmmOpeList } from '@swap-operation'
 import React, { FunctionComponent } from 'react'
 
 export const CfmmPage: FunctionComponent = () => {

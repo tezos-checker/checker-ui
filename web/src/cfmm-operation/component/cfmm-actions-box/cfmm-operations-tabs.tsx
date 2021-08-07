@@ -1,6 +1,6 @@
+import { CfmmOpeAddLiquidityForm, CfmmOpeRemoveLiquidityForm } from '@cfmm-operation'
 import { LinkIcon } from '@chakra-ui/icons'
 import { Box, Flex } from '@chakra-ui/react'
-import { CfmmOpeAddLiquidityForm, CfmmOpeRemoveLiquidityForm } from '@swap-operation'
 import React, { FunctionComponent } from 'react'
 import { MemoryRouter, NavLink, Route } from 'react-router-dom'
 

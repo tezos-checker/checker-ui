@@ -14,7 +14,7 @@
       "@burrow-operation": ["src/burrow-operation/index.ts"],
       "@storage": ["src/storage/index.ts"],
       "@form": ["src/form/index.ts"],
-      "@swap-operation": ["src/swap-operation/index.ts"],
+      "@cfmm-operation": ["src/cfmm-operation/index.ts"],
       "@meta-view-operation": ["src/meta-view-operation/index.ts"],
       "@checker": ["src/checker/index.ts"]
     }
