@@ -64,7 +64,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         inputProps={{
           onKeyDown: (e) => {
             if (isNumberPressed(e.keyCode)) {
-              updateInputs({ [minExpected]: { value: 0 } })
+              updateInputs({ [minExpected]: { value: '' } })
             }
           },
           onKeyUp: (e) => {

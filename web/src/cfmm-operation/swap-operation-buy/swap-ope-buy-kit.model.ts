@@ -15,7 +15,7 @@ export const getSwapOpeBuyFormModel = (): IFormInitalState =>
       ...FormInputProperties.Builder(amount).addValidators([getMinOneMutezValidator()]).build(),
       ...FormInputProperties.Builder(minExpected)
         .addValidators([getMinOneMutezValidator()])
-        .addValue('0')
+        .addValue('')
         .build(),
       ...FormInputProperties.Builder(deadLine).addValue(20).build(),
       ...FormInputProperties.Builder(slippage).addValue(0.01).build(),
