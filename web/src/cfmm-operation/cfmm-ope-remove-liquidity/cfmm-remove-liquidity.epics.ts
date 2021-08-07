@@ -8,7 +8,7 @@ import { cfmmOpeHandleSubmitRequest } from '../state/cfmm-ope-state.utils'
 import {
   CfmmOpeRemoveLiquiditySubmitParams,
   cfmmOpeRemoveLiquiditySubmitRequest,
-} from './cfmm-ope-remove-liquidity.api'
+} from './cfmm-remove-liquidity.api'
 
 const actionType = 'cfmmOpe/removeLiquiditySubmit'
 

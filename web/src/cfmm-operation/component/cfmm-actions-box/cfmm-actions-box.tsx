@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/layout'
 import { Flex } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
-import { CfmmOperationsMemoryRouter } from './cfmm-operations-tabs'
 
 type Props = {
   onCloseActions: () => void
@@ -17,7 +16,5 @@ export const CfmmActionsBox: FunctionComponent<Props> = ({ onCloseActions }) => 
     >
       <Box fontSize="3xl">Cfmm actions</Box>
     </Flex>
-
-    <CfmmOperationsMemoryRouter onCloseActions={onCloseActions} />
   </Box>
 )

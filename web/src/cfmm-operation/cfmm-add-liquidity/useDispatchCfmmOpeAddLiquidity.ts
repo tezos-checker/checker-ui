@@ -20,7 +20,7 @@ export const useDispatchCfmmOpeAddLiquidity = (checkerAddress: string) => {
         amount: TzFormatTzToMutez(amount).toNumber(),
         maxExpected: TzFormatTzToMutez(maxExpected).toNumber(),
         minToken: TzFormatTzToMutez(minToken).toNumber(),
-        deadLine: new Date(new Date().getTime() + deadLine * 60000 * 240),
+        deadLine: new Date(new Date().getTime() + deadLine * 60000 * 20),
       },
     )
 
