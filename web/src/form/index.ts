@@ -1,5 +1,6 @@
 export * from './component/action-button/action-button'
 export * from './component/checker-selectbox-field'
+export * from './component/input-info/input-info.component'
 export * from './utils/checkers-selectbox.utils'
 export * from './validator/max-number.validator'
 export * from './validator/min-number.validator'

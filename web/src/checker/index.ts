@@ -1,4 +1,3 @@
-export { CheckerCfmmOperations } from './component/cfmm-buy-sell/checker-cfmm-operations.component'
-export { CheckerCard } from './component/checker-card.component'
-export { CheckerList } from './component/checker-list.component'
-export * from './utils/checker.utils'
+export { CheckerCard } from './component/checker-card/checker-card.component'
+export { CheckerList } from './component/checker-list/checker-list.component'
+export { CheckerSwapOperations } from './component/checker-swap/checker-swap-operations.component'

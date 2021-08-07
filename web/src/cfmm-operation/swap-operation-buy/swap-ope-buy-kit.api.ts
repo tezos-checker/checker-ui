@@ -1,18 +1,16 @@
 import { TransactionWalletOperation, WalletOperation } from '@taquito/taquito'
 import { getSwapAddress, getSwapAllowance, getWalletContract, getWalletPKH, tezos } from '@wallet'
 
-export type CfmmOpeAddLiquiditySubmitParams = {
+export type CfmmOpeBuyKitSubmitParams = {
   amount: number
-  maxExpected: number
-  minToken: number
+  minExpected: number
   deadLine: Date
 }
 
-export const cfmmOpeAddLiquiditySubmitRequest = async (
+export const swapOpeBuySubmitRequest = async (
   scAddress: string,
   amount: number,
-  maxExpected: number,
-  minToken: number,
+  minExpected: number,
   deadLine: Date,
 ): Promise<TransactionWalletOperation | WalletOperation> => {
   const checkerContract = await getWalletContract(scAddress)
@@ -27,12 +25,10 @@ export const cfmmOpeAddLiquiditySubmitRequest = async (
     const batch = tezos.wallet
       .batch()
       .withContractCall(swapContract.methods.approve(scAddress, amount))
-      .withContractCall(
-        checkerContract.methods.add_liquidity(amount, maxExpected, minToken, deadLine),
-      )
+      .withContractCall(checkerContract.methods.buy_kit(amount, minExpected, deadLine))
 
     return batch.send()
   }
 
-  return checkerContract.methods.add_liquidity(amount, maxExpected, minToken, deadLine).send()
+  return checkerContract.methods.buy_kit(amount, minExpected, deadLine).send()
 }
