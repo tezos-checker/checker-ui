@@ -1,5 +1,9 @@
-import { SwapOpeBuyForm } from '@burrow-operation'
-import { CfmmOpeAddLiquidityForm, SwapOpeSellForm } from '@cfmm-operation'
+import {
+  CfmmOpeAddLiquidityForm,
+  CfmmRemoveLiquidityForm,
+  SwapOpeBuyForm,
+  SwapOpeSellForm,
+} from '@cfmm-operation'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { Checker } from '@config'
 import React, { FunctionComponent } from 'react'
@@ -8,7 +12,7 @@ type Props = {
   checker: Checker
 }
 
-export const CheckerSwapOperationsTab: FunctionComponent<Props> = ({ checker }) => {
+export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) => {
   const [tabIndex, setTabIndex] = React.useState(0)
 
   return (
@@ -16,7 +20,8 @@ export const CheckerSwapOperationsTab: FunctionComponent<Props> = ({ checker }) 
       <TabList justifyContent="space-between" borderBottom="unset">
         <Tab>Buy</Tab>
         <Tab>Sell</Tab>
-        <Tab>Poll</Tab>
+        <Tab>Add Liquidity</Tab>
+        <Tab>Remove Liquidity</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -27,6 +32,9 @@ export const CheckerSwapOperationsTab: FunctionComponent<Props> = ({ checker }) 
         </TabPanel>
         <TabPanel>
           <CfmmOpeAddLiquidityForm checker={checker} />
+        </TabPanel>
+        <TabPanel>
+          <CfmmRemoveLiquidityForm checker={checker} />
         </TabPanel>
       </TabPanels>
     </Tabs>

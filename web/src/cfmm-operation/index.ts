@@ -1,5 +1,5 @@
 export * from './cfmm-add-liquidity/cfmm-add-liquidity-form.component'
-export * from './cfmm-ope-remove-liquidity/cfmm-ope-remove-liquidity-form'
+export * from './cfmm-ope-remove-liquidity/cfmm-remove-liquidity-form.component'
 export * from './component/cfmm-actions-box/cfmm-actions-box'
 export * from './component/cfmm-ope-list/cfmm-ope-list'
 export * from './state/cfmm-ope.epics'

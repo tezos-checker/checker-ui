@@ -2,7 +2,7 @@ import { AbstractAction, OperationStep, RequestStatus } from '@config'
 import { EntityState } from '@reduxjs/toolkit'
 import { BlockResponse } from '@taquito/rpc'
 import { CfmmOpeAddLiquiditySubmitParams } from '../cfmm-add-liquidity/cfmm-ope-add-liquidity.api'
-import { CfmmOpeRemoveLiquiditySubmitParams } from '../cfmm-ope-remove-liquidity/cfmm-ope-remove-liquidity.api'
+import { CfmmOpeRemoveLiquiditySubmitParams } from '../cfmm-ope-remove-liquidity/cfmm-remove-liquidity.api'
 import { CfmmOpeBuyKitSubmitParams } from '../swap-operation-buy/swap-ope-buy-kit.api'
 import { CfmmOpeSellKitSubmitParams } from '../swap-operation-sell/swap-ope-sell.api'
 
