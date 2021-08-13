@@ -3,26 +3,26 @@ import { BurrowOpeName, BurrowOpeRowState } from '../state/burrow-ope-state.type
 import { createBurrowOpeSubmitPayload } from '../state/burrow-ope-state.utils'
 import { burrowOpeActions } from '../state/burrow-ope.slice'
 
-export const useDispatchBurrowOpeDepositTez = (
+export const useDispatchBurrowOpeDepositCollateral = (
   burrowId: number,
   scAddress: string,
   callBack: () => void,
 ) => {
   const dispatch = useAppDispatch()
 
-  const executeDeposit = (tez: number) => {
+  const executeDeposit = (amount: number) => {
     const payload: BurrowOpeRowState = createBurrowOpeSubmitPayload(
       burrowId,
       scAddress,
-      BurrowOpeName.deposit_tez,
-      tez,
+      BurrowOpeName.deposit_collateral,
+      amount,
     )
 
-    dispatch(burrowOpeActions.depositTezSubmit(payload))
+    dispatch(burrowOpeActions.DepositCollateralSubmit(payload))
     callBack()
   }
 
   return {
-    depositTez: (tez: number) => executeDeposit(tez),
+    DepositCollateral: (amount: number) => executeDeposit(amount),
   }
 }

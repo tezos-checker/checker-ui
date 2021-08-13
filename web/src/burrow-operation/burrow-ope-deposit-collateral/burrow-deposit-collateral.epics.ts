@@ -5,34 +5,36 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.epic'
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { burrowOpeHandleSubmitRequest } from '../state/burrow-ope-state.utils'
-import { burrowOpeDepositTezSubmitRequest } from './burrow-ope-deposit-tez.api'
+import { burrowOpeDepositCollateralSubmitRequest } from './burrow-ope-deposit-collateral.api'
 
-const actionType = 'burrowOpe/depositTezSubmit'
+const actionType = 'burrowOpe/DepositCollateralSubmit'
 
-const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
+const submitDepositCollateral = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
   burrowOpeHandleSubmitRequest(
-    burrowOpeDepositTezSubmitRequest(
+    burrowOpeDepositCollateralSubmitRequest(
       rowState.scAddress,
       rowState.burrowId,
       rowState.operationSubmitParams as number,
     ),
-    'burrowOpe/depositTezSubmit',
-    'burrowOpe/depositTezConfirm',
+    'burrowOpe/DepositCollateralSubmit',
+    'burrowOpe/DepositCollateralConfirm',
     rowState,
   )
 
-const burrowOpeDepositTezSubmitEpic = (action$: any) =>
+const burrowOpeDepositCollateralSubmitEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
     filter((x: BurrowOpeRowState) => isPendingRequest(x.status)),
-    mergeMap((x: BurrowOpeRowState) => submitDepositTez(x)),
+    mergeMap((x: BurrowOpeRowState) => submitDepositCollateral(x)),
   )
 
 // epic factory in order an epic based on the action type
-const burrowOpeDepositTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/depositTezConfirm')
+const burrowOpeDepositCollateralConfirmEpic = createBurrowOpeConfirmEpic(
+  'burrowOpe/DepositCollateralConfirm',
+)
 
-export const burrowOpeDepositTezEpics = combineEpics(
-  burrowOpeDepositTezSubmitEpic,
-  burrowOpeDepositTezConfirmEpic,
+export const burrowOpeDepositCollateralEpics = combineEpics(
+  burrowOpeDepositCollateralSubmitEpic,
+  burrowOpeDepositCollateralConfirmEpic,
 )

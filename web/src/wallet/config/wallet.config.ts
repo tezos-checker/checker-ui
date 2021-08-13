@@ -8,9 +8,13 @@ const rpcNetworkList = {
     url: 'https://api.tez.ie/rpc/florencenet',
     networkType: 'florencenet',
   },
+  granadanet: {
+    url: 'https://api.tez.ie/rpc/granadanet',
+    networkType: 'granadanet',
+  },
 }
 
-export const appNetwork = rpcNetworkList.florencenet
+export const appNetwork = rpcNetworkList.granadanet
 
 export const beaconWallet = new BeaconWallet({
   name: 'Checker',

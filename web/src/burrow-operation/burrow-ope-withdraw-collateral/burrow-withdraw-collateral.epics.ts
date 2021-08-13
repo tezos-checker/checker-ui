@@ -5,34 +5,36 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 import { createBurrowOpeConfirmEpic } from '../common/burrow-ope-common-confirm.epic'
 import { BurrowOpeAction, BurrowOpeRowState } from '../state/burrow-ope-state.type'
 import { burrowOpeHandleSubmitRequest } from '../state/burrow-ope-state.utils'
-import { burrowOpeWithdrawTezSubmitRequest } from './burrow-ope-withdraw-tez.api'
+import { burrowOpeWithdrawCollateralSubmitRequest } from './burrow-ope-withdraw-collateral.api'
 
-const actionType = 'burrowOpe/withdrawTezSubmit'
+const actionType = 'burrowOpe/WithdrawCollateralSubmit'
 
-const submitWithdrawTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
+const submitWithdrawCollateral = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
   burrowOpeHandleSubmitRequest(
-    burrowOpeWithdrawTezSubmitRequest(
+    burrowOpeWithdrawCollateralSubmitRequest(
       rowState.scAddress,
       rowState.burrowId,
       rowState.operationSubmitParams as number,
     ),
-    'burrowOpe/withdrawTezSubmit',
-    'burrowOpe/withdrawTezConfirm',
+    'burrowOpe/WithdrawCollateralSubmit',
+    'burrowOpe/WithdrawCollateralConfirm',
     rowState,
   )
 
-const burrowOpeWithdrawTezSubmitEpic = (action$: any) =>
+const burrowOpeWithdrawCollateralSubmitEpic = (action$: any) =>
   action$.pipe(
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
     filter((x: BurrowOpeRowState) => isPendingRequest(x.status)),
-    mergeMap((x: BurrowOpeRowState) => submitWithdrawTez(x)),
+    mergeMap((x: BurrowOpeRowState) => submitWithdrawCollateral(x)),
   )
 
 // epic factory in order an epic based on the action type
-const burrowOpeWithdrawTezConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/withdrawTezConfirm')
+const burrowOpeWithdrawCollateralConfirmEpic = createBurrowOpeConfirmEpic(
+  'burrowOpe/WithdrawCollateralConfirm',
+)
 
-export const burrowOpeWithdrawTezEpics = combineEpics(
-  burrowOpeWithdrawTezSubmitEpic,
-  burrowOpeWithdrawTezConfirmEpic,
+export const burrowOpeWithdrawCollateralEpics = combineEpics(
+  burrowOpeWithdrawCollateralSubmitEpic,
+  burrowOpeWithdrawCollateralConfirmEpic,
 )

@@ -9,7 +9,7 @@ export type Checker = {
 
 export const mockedCheckers: Checker[] = [
   {
-    address: 'KT1PPL3svzkumTQfq4aXm9LfPnocAMCYQN2w',
+    address: 'KT1FfHEMmoDy8oDuckRinLdDBt4qS6JCQhoe',
     oracle: 'oracle',
     name: 'KIT',
     swapTitle: 'KIT/TEZOS',
