@@ -2,7 +2,7 @@
 
 # Cogarius Checker Tezos DApp
 
-React-based DApps in Tezos. Check out a <a href="https://checker.cogarius.com/" target="_blank">demo</a>.
+React-based DApps in Tezos. Check out the <a href="https://checker.cogarius.com/" target="_blank">demo</a>.
 
 ## How to start
 

@@ -3,27 +3,31 @@ import React, { FunctionComponent } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
 import {
-  burrowOpeWithdrawTezFormModel,
+  burrowOpeWithdrawCollateralFormModel,
   inputWithdraw,
-} from './component/burrow-ope-withdraw-tez.model'
-import { WithdrawTezAmountField } from './component/withdraw-tez-amount-field'
-import { useDispatchBurrowOpeWithdrawTez } from './useDispatchBurrowOpeWithdrawTez'
+} from './burrow-ope-withdraw-collateral.model'
+import { WithdrawCollateralAmountField } from './component/withdraw-collateral-amount-field'
+import { useDispatchBurrowOpeWithdrawCollateral } from './useDispatchBurrowOpeWithdrawCollateral'
 
 type Props = {
   burrow: BurrowRowState
   callBack: () => void
 }
 
-export const BurrowOpeWithdrawTezForm: FunctionComponent<Props> = ({
+export const BurrowOpeWithdrawCollateralForm: FunctionComponent<Props> = ({
   burrow: { burrowId, scAddress },
   callBack,
 }) => {
-  const { withdrawTez } = useDispatchBurrowOpeWithdrawTez(burrowId, scAddress, callBack)
+  const { WithdrawCollateral } = useDispatchBurrowOpeWithdrawCollateral(
+    burrowId,
+    scAddress,
+    callBack,
+  )
   const {
     handleFormChange,
     getInputProps,
     formProperties: { isFormValid },
-  } = useFormManager(burrowOpeWithdrawTezFormModel)
+  } = useFormManager(burrowOpeWithdrawCollateralFormModel)
 
   return (
     <Box
@@ -35,12 +39,12 @@ export const BurrowOpeWithdrawTezForm: FunctionComponent<Props> = ({
       p="20px"
     >
       <Box fontSize="2xl">Withdraw</Box>
-      <WithdrawTezAmountField {...getInputProps(inputWithdraw)} />
+      <WithdrawCollateralAmountField {...getInputProps(inputWithdraw)} />
       <Box textAlign="right">
         <Button
           disabled={!isFormValid}
           mt="15px"
-          onClick={() => withdrawTez(getInputProps(inputWithdraw).value)}
+          onClick={() => WithdrawCollateral(getInputProps(inputWithdraw).value)}
         >
           Withdraw
         </Button>

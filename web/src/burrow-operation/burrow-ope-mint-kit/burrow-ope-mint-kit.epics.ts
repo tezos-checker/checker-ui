@@ -9,7 +9,7 @@ import { burrowOpeMintKitSubmitRequest } from './burrow-ope-mint-kit.api'
 
 const actionType = 'burrowOpe/mintKitSubmit'
 
-const submitDepositTez = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
+const submitDepositCollateral = (rowState: BurrowOpeRowState): Observable<BurrowOpeAction> =>
   burrowOpeHandleSubmitRequest(
     burrowOpeMintKitSubmitRequest(
       rowState.scAddress,
@@ -26,7 +26,7 @@ const burrowOpeMintKitSubmitEpic = (action$: any) =>
     ofType(actionType),
     map((x: BurrowOpeAction) => x.payload),
     filter((x: BurrowOpeRowState) => isPendingRequest(x.status)),
-    mergeMap((x: BurrowOpeRowState) => submitDepositTez(x)),
+    mergeMap((x: BurrowOpeRowState) => submitDepositCollateral(x)),
   )
 
 const burrowOpeMintKitConfirmEpic = createBurrowOpeConfirmEpic('burrowOpe/mintKitConfirm')
