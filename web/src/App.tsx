@@ -1,9 +1,10 @@
 import { Box, Flex, IconButton, useToast } from '@chakra-ui/react'
 import { store } from '@config'
-import { PageBody, PageHeader } from '@pages'
+import { PageBody, PageHeader, PageMenu } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Unsubscribe } from 'redux'
 import { useInitializeStore } from './config/store/initialize-store.hooks'
 import { saveState } from './config/store/store-persist.util'
@@ -40,6 +41,13 @@ const App: React.FC = () => {
     }
   }, [])
 
+  const location = useLocation()
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false)
+    }
+  }, [location])
+
   useEffect(() => {
     setIsMenuOpen(!isMobOrTabletScreen)
   }, [isMobOrTabletScreen])
@@ -68,11 +76,9 @@ const App: React.FC = () => {
           overflow={'auto'}
           padding={['5px', '5px', '20px']}
         >
-          <Box>ssss</Box>
-          <Box>ssss</Box>
-          <Box>ssss</Box>
+          <PageMenu />
         </Box>
-        <Box overflow={'auto'}>
+        <Box overflow={'auto'} marginLeft="auto" marginRight="auto">
           <PageBody />
         </Box>
       </Flex>
