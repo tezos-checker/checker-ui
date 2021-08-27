@@ -21,5 +21,6 @@ export const PageMenu: FunctionComponent = () => (
     {appNetwork.checkers.map((x) => (
       <CheckerMenu key={x.address} checker={x} />
     ))}
+    <Link to={'/cfmm'}>Cfmm</Link>
   </VStack>
 )
