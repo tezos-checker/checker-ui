@@ -50,33 +50,33 @@ const App: React.FC = () => {
         {isMobOrTabletScreen ? (
           <IconButton
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            size={'lg'}
+            size={'sm'}
             icon={<HamburgerMenuIcon isMenuOpen={isMenuOpen} />}
             aria-label={'menu'}
           />
         ) : null}
       </PageHeader>
-      <Box flex={1} overflow={'auto'}>
-        <PageBody />
-      </Box>
+
+      <Flex flex={1}>
+        <Box
+          bg={['white', 'white', 'blackAlpha.300']}
+          display={[isMenuOpen ? 'block' : 'none', isMenuOpen ? 'block' : 'none', 'block']}
+          width={['100%', '100%', 'auto']}
+          position={['absolute', 'absolute', 'relative']}
+          height={'100%'}
+          zIndex={'3'}
+          overflow={'auto'}
+          padding={['5px', '5px', '20px']}
+        >
+          <Box>ssss</Box>
+          <Box>ssss</Box>
+          <Box>ssss</Box>
+        </Box>
+        <Box overflow={'auto'}>
+          <PageBody />
+        </Box>
+      </Flex>
     </Flex>
   )
 }
 export default App
-
-/*
-<WalletV2 />
-<HomePage />
-
-<Grid sx={style.container}>
-        <GridItem sx={style.header}>
-         
-        </GridItem>
-        <GridItem sx={style.body}>
-          <Box sx={style.menu}>
-            <PageMenu />
-          </Box>
-        
-        </GridItem>
-      </Grid>
-*/

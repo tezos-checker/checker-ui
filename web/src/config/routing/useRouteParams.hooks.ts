@@ -1,4 +1,4 @@
-import { mockedCheckers } from '@config'
+import { appNetwork } from '@wallet'
 import { useParams } from 'react-router-dom'
 
 export const useRouteParams = () => {
@@ -7,6 +7,6 @@ export const useRouteParams = () => {
   const { address: checkerAddress } = useParams()
 
   return {
-    checker: mockedCheckers.find((checker) => checker.address === checkerAddress),
+    checker: appNetwork.checkers.find((checker) => checker.address === checkerAddress),
   }
 }

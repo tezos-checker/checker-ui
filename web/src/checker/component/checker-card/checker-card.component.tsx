@@ -1,5 +1,5 @@
 import { Button, Flex, Heading, HStack } from '@chakra-ui/react'
-import { Checker } from '@config'
+import { Checker } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { CheckerOracleTokenInfo } from './checker-oracle-token-info.component'

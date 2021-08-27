@@ -1,26 +1,15 @@
-import { Box, Button, useMultiStyleConfig } from '@chakra-ui/react'
-import { isPendingRequest } from '@shared/utils'
-import { useConnectWallet, useGetWallet } from '@wallet'
+import { Box, Image, useMultiStyleConfig } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import tezos from '../assets/images/tez.svg'
+import { LoginButton } from './login-button.component'
 
 export const Login: FunctionComponent = () => {
-  const walletData = useGetWallet()
-  const connectWallet = useConnectWallet()
-
   const style = useMultiStyleConfig('ui/login', {})
 
   return (
     <Box sx={style.container}>
-      <img src={tezos} />
-      <Button
-        sx={style.button}
-        isLoading={isPendingRequest(walletData.status)}
-        size={'lg'}
-        onClick={connectWallet}
-      >
-        Login
-      </Button>
+      <Image src={tezos} mb="25px" />
+      <LoginButton />
     </Box>
   )
 }
