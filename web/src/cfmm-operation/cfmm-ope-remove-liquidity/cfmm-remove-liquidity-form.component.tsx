@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react'
-import { Checker } from '@config'
 import { ActionButton, InputInfo } from '@form'
 import {
   useMetaViewRemoveLiquidityMinCtezWithdrawn,
   useMetaViewRemoveLiquidityMinKitWithdrawn,
 } from '@meta-view-operation'
 import { isNumberPressed } from '@shared/utils'
+import { Checker } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'

@@ -1,6 +1,7 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
-import { Checker, useRouteParams } from '@config'
+import { useRouteParams } from '@config'
 import { GoToHomeArrow } from '@shared/ui'
+import { Checker } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { CheckerOracleTokenInfo } from '../checker-card/checker-oracle-token-info.component'
 import { CheckerCfmmOperationsTab } from './checker-cfmm-operations-tab'
