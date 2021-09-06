@@ -1,13 +1,6 @@
-import {
-  Box,
-  FormControl,
-  FormLabel,
-  InputGroup,
-  Skeleton,
-  useMultiStyleConfig,
-} from '@chakra-ui/react'
+import { Box, FormControl, FormLabel, InputGroup, useMultiStyleConfig } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import { LoadingBox } from '@shared/ui'
+import { LoadingBox, TextSpinner } from '@shared/ui'
 import React, { FunctionComponent } from 'react'
 
 type Props = {
@@ -22,10 +15,7 @@ export const InputInfo: FunctionComponent<Props> = ({ name, value, symbol, label
   const style = useMultiStyleConfig('ui/form-input-control', {})
 
   return (
-    <LoadingBox
-      status={status}
-      loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
-    >
+    <LoadingBox status={status} loader={<TextSpinner text="Calculation  in progress" />}>
       <FormControl sx={style.formControl} id={name}>
         <FormLabel sx={style.formLabel}>{label}</FormLabel>
         <InputGroup sx={style.inputGroup}>

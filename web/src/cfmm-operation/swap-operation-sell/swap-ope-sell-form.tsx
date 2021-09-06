@@ -1,9 +1,9 @@
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
-import { Box, IconButton, Skeleton } from '@chakra-ui/react'
+import { Box, IconButton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { ActionButton } from '@form'
 import { useMetaViewSellKitMinCtezExpected } from '@meta-view-operation'
-import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
+import { LoadingBox, SlippageAndDeadLineSetting, TextSpinner } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
 import { Checker, useGetUserBalance } from '@wallet'
 import BigNumber from 'bignumber.js'
@@ -91,11 +91,7 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         }}
         symbol={checker.buyToSymbol}
       />
-      {balanceStatus === RequestStatus.success ? (
-        <Box as="span">balance: {userBalance.toNumber()}</Box>
-      ) : (
-        <Box as="span">balance </Box>
-      )}
+
       <Box position="relative">
         <IconButton
           onClick={() => onClickSwitch(0)}
@@ -113,10 +109,16 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
 
       <LoadingBox
         status={minKitExpectedStatus}
-        loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
+        loader={<TextSpinner text="Calulation in progress" />}
       >
         <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
       </LoadingBox>
+
+      {balanceStatus === RequestStatus.success ? (
+        <Box as="span">balance: {userBalance.toNumber()}</Box>
+      ) : (
+        <Box as="span">balance </Box>
+      )}
 
       <ActionButton
         colorScheme="blue"

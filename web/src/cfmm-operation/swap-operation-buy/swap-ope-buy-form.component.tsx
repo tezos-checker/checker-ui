@@ -85,6 +85,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
           right="10px"
           top="-8px"
           colorScheme="blue"
+          isLoading={status === RequestStatus.pending}
           icon={<ArrowUpDownIcon />}
         />
       </Box>
