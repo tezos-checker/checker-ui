@@ -112,7 +112,7 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
 
       <LoadingBox
         status={minKitExpectedStatus}
-        loader={<TextSpinner text="Calculing min ctez expected" />}
+        loader={<TextSpinner text="Calculating min ctez expected" />}
       >
         <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
       </LoadingBox>

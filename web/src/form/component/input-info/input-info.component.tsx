@@ -15,7 +15,7 @@ export const InputInfo: FunctionComponent<Props> = ({ name, value, symbol, label
   const style = useMultiStyleConfig('ui/form-input-control', {})
 
   return (
-    <LoadingBox status={status} loader={<TextSpinner text={`Calculing ${label}`} />}>
+    <LoadingBox status={status} loader={<TextSpinner text={`Calculating ${label}`} />}>
       <FormControl sx={style.formControl} id={name}>
         <FormLabel sx={style.formLabel}>{label}</FormLabel>
         <InputGroup sx={style.inputGroup}>
