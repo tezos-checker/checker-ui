@@ -1,6 +1,5 @@
 import { BeaconWallet } from '@taquito/beacon-wallet'
 import { MichelCodecPacker, TezosToolkit } from '@taquito/taquito'
-import { TezBridgeSigner } from '@taquito/tezbridge-signer'
 import { Tzip16Module } from '@taquito/tzip16'
 
 export type Checker = {
@@ -57,6 +56,6 @@ tezos.setPackerProvider(new MichelCodecPacker())
 tezos.addExtension(new Tzip16Module())
 
 // if we use the same config, TezBridge will overribe beaconWallet
-export const tezosWithSigner = new TezosToolkit(appNetwork.url)
-tezosWithSigner.setPackerProvider(new MichelCodecPacker())
-tezosWithSigner.setProvider({ signer: new TezBridgeSigner() })
+//  export const tezosWithSigner = new TezosToolkit(appNetwork.url)
+//  tezosWithSigner.setPackerProvider(new MichelCodecPacker())
+//  tezosWithSigner.setProvider({ signer: new TezBridgeSigner() })
