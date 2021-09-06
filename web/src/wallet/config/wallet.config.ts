@@ -42,7 +42,7 @@ const rpcNetworkList = {
   },
 }
 
-export const appNetwork = rpcNetworkList.granadanet
+export const appNetwork = rpcNetworkList.florencenet
 
 export const beaconWallet = new BeaconWallet({
   name: 'Checker',

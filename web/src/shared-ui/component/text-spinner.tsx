@@ -21,7 +21,7 @@ export const TextSpinner: FunctionComponent<Props> = (props) => {
       {...rest}
     >
       <Spinner ml="15px" />
-      <Box ml="15px" flex="1">
+      <Box ml="15px" flex="1" fontSize="small">
         {text}
       </Box>
     </Box>

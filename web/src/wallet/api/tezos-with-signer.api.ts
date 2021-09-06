@@ -6,9 +6,7 @@ import BigNumber from 'bignumber.js'
 const getSwapContract = async (
   swapContractAddress: string,
 ): Promise<ContractAbstraction<ContractProvider>> => {
-  debugger
   const swapContract = await tezos.contract.at(swapContractAddress)
-  debugger
   return swapContract
 }
 

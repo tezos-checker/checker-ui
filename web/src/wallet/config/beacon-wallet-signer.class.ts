@@ -9,9 +9,8 @@ export class BeaconWalletSigner implements Signer {
     op: {},
     magicByte?: Uint8Array,
   ): Promise<{ bytes: string; sig: string; prefixSig: string; sbytes: string }> {
-    debugger
     console.log(op, magicByte)
-    throw new Error('Method not implemented.')
+    throw new Error('BeaconWalletSigner -sign - Method not implemented.')
   }
   publicKey(): Promise<string> {
     return this._beaconWallet.client.getActiveAccount().then(

@@ -50,10 +50,12 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
     updateInputs({ [sellTo]: { value: minCtezExpected.toString() } }),
   )
 
+  // user needs to be connected to get the balance
+  // otherwise the balance will not be shown in the form
   const [
     { status: balanceStatus, balance: userBalance },
     loadBalance,
-  ] = useGetUserBalance(checker.address, (balance: BigNumber) => console.log(balance))
+  ] = useGetUserBalance(checker.address, (balance: BigNumber) => console.log('BALANCE', balance))
 
   useEffect(() => {
     const observer = amountChanged
@@ -104,21 +106,20 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
           top="-8px"
           colorScheme="blue"
           icon={<ArrowUpDownIcon />}
+          isLoading={minKitExpectedStatus === RequestStatus.pending}
         />
       </Box>
 
       <LoadingBox
         status={minKitExpectedStatus}
-        loader={<TextSpinner text="Calulation in progress" />}
+        loader={<TextSpinner text="Calculing min ctez expected" />}
       >
         <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
       </LoadingBox>
 
       {balanceStatus === RequestStatus.success ? (
         <Box as="span">balance: {userBalance.toNumber()}</Box>
-      ) : (
-        <Box as="span">balance </Box>
-      )}
+      ) : null}
 
       <ActionButton
         colorScheme="blue"
