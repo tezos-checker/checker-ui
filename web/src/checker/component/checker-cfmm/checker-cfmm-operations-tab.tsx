@@ -31,6 +31,8 @@ const TabItem: FunctionComponent<{
   currentTabIndex: number
 }> = ({ setTabIndex, currentTabIndex, left, right }) => (
   <Box
+    w="110px"
+    textAlign="center"
     fontSize="small"
     bgColor="gray.400"
     p="5px 10px"
@@ -94,7 +96,7 @@ export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) 
         />
       </Box>
       <Box textAlign="end" fontSize="x-small">
-        <Box as="span" w="130px" display="inline-block" textAlign="center">
+        <Box as="span" w="110px" display="inline-block" textAlign="center">
           Liquidity
         </Box>
       </Box>
