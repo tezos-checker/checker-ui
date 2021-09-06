@@ -30,7 +30,6 @@ export const useGetUserBalance = (
       }
 
       try {
-        debugger
         const walletPKH = await getWalletPKH()
 
         const checkerContract = await getWalletContract(checkerToken)

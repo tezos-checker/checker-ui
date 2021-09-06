@@ -1,3 +1,4 @@
+import { BeaconWalletSigner } from '../config/beacon-wallet-signer.class'
 import { appNetwork, beaconWallet, tezos } from '../config/wallet.config'
 
 export const connectWallet = async (): Promise<string> => {
@@ -7,7 +8,9 @@ export const connectWallet = async (): Promise<string> => {
     network: { type: appNetwork.networkType },
   })
   const adress = await beaconWallet.getPKH()
-  tezos.setWalletProvider(beaconWallet)
+
+  //  tezos.setWalletProvider(beaconWallet)
+  tezos.setProvider({ signer: new BeaconWalletSigner(beaconWallet), wallet: beaconWallet })
 
   return adress
 }
