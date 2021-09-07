@@ -18,7 +18,6 @@ export const PageHeader: React.FC = ({ children }) => {
             height={['20px', '20px', '40px']}
           />
         </Button>
-        {children}
       </Box>
       <Box>
         <Button variant={'ghost'} onClick={() => history.push('/')} mx={['2px', '2px', '10px']}>
