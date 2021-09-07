@@ -1,5 +1,6 @@
 export * from './component/clipboard-copy'
 export * from './component/drop-zone'
+export * from './component/error-box'
 export * from './component/go-to-home-arrow'
 export * from './component/hamburger-menu-icon'
 export * from './component/loading-box'

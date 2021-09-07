@@ -92,6 +92,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         value={getInputProps(maxExpected).value}
         name={maxExpected}
         symbol="KIT"
+        onRetry={() => loadMaxResult(new BigNumber(getInputProps(amount).value))}
       />
       <InputInfo
         status={minTokenStatus}
@@ -99,6 +100,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         name={minToken}
         value={getInputProps(minToken).value}
         symbol="MULQT"
+        onRetry={() => loadMinToken(new BigNumber(getInputProps(amount).value))}
       />
 
       <ActionButton

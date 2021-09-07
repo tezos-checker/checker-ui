@@ -1,9 +1,9 @@
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
 import { Box, IconButton } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import { ActionButton } from '@form'
+import { ActionButton, InputInfo } from '@form'
 import { useMetaViewSellKitMinCtezExpected } from '@meta-view-operation'
-import { LoadingBox, SlippageAndDeadLineSetting, TextSpinner } from '@shared/ui'
+import { SlippageAndDeadLineSetting } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
 import { Checker, useGetUserBalance } from '@wallet'
 import BigNumber from 'bignumber.js'
@@ -13,7 +13,6 @@ import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
 import { SellAmount } from './form-fields/sell-amount.component'
-import { SellResult } from './form-fields/sell-result.component'
 import {
   deadLine,
   getMinOneMutezValidator,
@@ -110,12 +109,14 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         />
       </Box>
 
-      <LoadingBox
+      <InputInfo
         status={minKitExpectedStatus}
-        loader={<TextSpinner text="Calculating min ctez expected" />}
-      >
-        <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
-      </LoadingBox>
+        label="Min ctez expected"
+        value={getInputProps(sellTo).value}
+        name={sellTo}
+        symbol={'CTEZ'}
+        onRetry={() => loadMinKitExpected(new BigNumber(getInputProps(sellFrom).value))}
+      />
 
       {balanceStatus === RequestStatus.success ? (
         <Box as="span">balance: {userBalance.toNumber()}</Box>
