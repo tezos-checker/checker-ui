@@ -1,11 +1,11 @@
 import { HStack } from '@chakra-ui/react'
-import { mockedCheckers } from '@config'
+import { appNetwork } from '@wallet'
 import React, { FunctionComponent } from 'react'
 import { CheckerCard } from '../checker-card/checker-card.component'
 
 export const CheckerList: FunctionComponent = () => (
   <HStack>
-    {mockedCheckers.map((checker) => (
+    {appNetwork.checkers.map((checker) => (
       <CheckerCard key={checker.address} checker={checker} />
     ))}
   </HStack>

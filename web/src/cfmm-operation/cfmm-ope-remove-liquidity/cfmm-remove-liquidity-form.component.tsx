@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react'
-import { Checker } from '@config'
 import { ActionButton, InputInfo } from '@form'
 import {
   useMetaViewRemoveLiquidityMinCtezWithdrawn,
   useMetaViewRemoveLiquidityMinKitWithdrawn,
 } from '@meta-view-operation'
 import { isNumberPressed } from '@shared/utils'
+import { Checker } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -92,6 +92,7 @@ export const CfmmRemoveLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         value={getInputProps(minCtez).value}
         name={minCtez}
         symbol="CTEZ"
+        onRetry={() => loadMinCtez(new BigNumber(getInputProps(amount).value))}
       />
       <InputInfo
         status={minKitStatus}
@@ -99,6 +100,7 @@ export const CfmmRemoveLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         name={minKit}
         value={getInputProps(minKit).value}
         symbol="KIT"
+        onRetry={() => loadMinKit(new BigNumber(getInputProps(amount).value))}
       />
 
       <ActionButton

@@ -1,9 +1,10 @@
 import { Box, Flex, IconButton, useToast } from '@chakra-ui/react'
 import { store } from '@config'
-import { PageBody, PageHeader } from '@pages'
+import { PageBody, PageHeader, PageMenu } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Unsubscribe } from 'redux'
 import { useInitializeStore } from './config/store/initialize-store.hooks'
 import { saveState } from './config/store/store-persist.util'
@@ -40,6 +41,13 @@ const App: React.FC = () => {
     }
   }, [])
 
+  const location = useLocation()
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false)
+    }
+  }, [location])
+
   useEffect(() => {
     setIsMenuOpen(!isMobOrTabletScreen)
   }, [isMobOrTabletScreen])
@@ -50,33 +58,31 @@ const App: React.FC = () => {
         {isMobOrTabletScreen ? (
           <IconButton
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            size={'lg'}
+            size={'sm'}
             icon={<HamburgerMenuIcon isMenuOpen={isMenuOpen} />}
             aria-label={'menu'}
           />
         ) : null}
       </PageHeader>
-      <Box flex={1} overflow={'auto'}>
-        <PageBody />
-      </Box>
+
+      <Flex flex={1}>
+        <Box
+          bg={['white', 'white', 'blackAlpha.300']}
+          display={[isMenuOpen ? 'block' : 'none', isMenuOpen ? 'block' : 'none', 'block']}
+          width={['100%', '100%', 'auto']}
+          position={['absolute', 'absolute', 'relative']}
+          height={'100%'}
+          zIndex={'3'}
+          overflow={'auto'}
+          padding={['5px', '5px', '20px']}
+        >
+          <PageMenu />
+        </Box>
+        <Box overflow={'auto'} marginLeft="auto" marginRight="auto">
+          <PageBody />
+        </Box>
+      </Flex>
     </Flex>
   )
 }
 export default App
-
-/*
-<WalletV2 />
-<HomePage />
-
-<Grid sx={style.container}>
-        <GridItem sx={style.header}>
-         
-        </GridItem>
-        <GridItem sx={style.body}>
-          <Box sx={style.menu}>
-            <PageMenu />
-          </Box>
-        
-        </GridItem>
-      </Grid>
-*/

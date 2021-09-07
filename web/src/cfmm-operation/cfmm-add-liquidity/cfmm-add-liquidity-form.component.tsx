@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react'
-import { Checker } from '@config'
 import { ActionButton, InputInfo } from '@form'
 import {
   useMetaViewAddLiquidityMaxKitDeposed,
   useMetaViewAddLiquidityMinLqtMinted,
 } from '@meta-view-operation'
 import { isNumberPressed } from '@shared/utils'
+import { Checker } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -92,6 +92,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         value={getInputProps(maxExpected).value}
         name={maxExpected}
         symbol="KIT"
+        onRetry={() => loadMaxResult(new BigNumber(getInputProps(amount).value))}
       />
       <InputInfo
         status={minTokenStatus}
@@ -99,6 +100,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         name={minToken}
         value={getInputProps(minToken).value}
         symbol="MULQT"
+        onRetry={() => loadMinToken(new BigNumber(getInputProps(amount).value))}
       />
 
       <ActionButton

@@ -1,5 +1,4 @@
 export * from './api/request-status.enum'
-export * from './mock-data'
 export * from './routing/checker-routes'
 export * from './routing/useRouteParams.hooks'
 export * from './store/store'

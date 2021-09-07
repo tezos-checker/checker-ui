@@ -1,11 +1,12 @@
 import { ContractAbstraction, ContractProvider } from '@taquito/taquito'
+import { tezos } from '@wallet'
 import BigNumber from 'bignumber.js'
-import { tezosWithSigner } from '../config/wallet.config'
+// import { tezosWithSigner } from '../config/wallet.config'
 
 const getSwapContract = async (
   swapContractAddress: string,
 ): Promise<ContractAbstraction<ContractProvider>> => {
-  const swapContract = await tezosWithSigner.contract.at(swapContractAddress)
+  const swapContract = await tezos.contract.at(swapContractAddress)
   return swapContract
 }
 

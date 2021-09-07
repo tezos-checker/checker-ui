@@ -1,11 +1,11 @@
 import {
   BurrowOpeBurnKitForm,
   BurrowOpeDelegateForm,
-  BurrowOpeDepositTezForm,
+  BurrowOpeDepositCollateralForm,
   BurrowOpeLiquidateForm,
   BurrowOpeMintKitForm,
   BurrowOpeRepayForm,
-  BurrowOpeWithdrawTezForm,
+  BurrowOpeWithdrawCollateralForm,
 } from '@burrow-operation'
 import {
   AddIcon,
@@ -33,7 +33,7 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: ({ burrow, onCloseActions }: Props) => (
-      <BurrowOpeDepositTezForm burrow={burrow} callBack={onCloseActions} />
+      <BurrowOpeDepositCollateralForm burrow={burrow} callBack={onCloseActions} />
     ),
   },
   {
@@ -43,7 +43,7 @@ const routesConfig = [
 
     // eslint-disable-next-line react/display-name
     getComponent: ({ burrow, onCloseActions }: Props) => (
-      <BurrowOpeWithdrawTezForm burrow={burrow} callBack={onCloseActions} />
+      <BurrowOpeWithdrawCollateralForm burrow={burrow} callBack={onCloseActions} />
     ),
   },
   {

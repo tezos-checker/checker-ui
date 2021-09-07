@@ -1,11 +1,11 @@
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
-import { Box, IconButton, Skeleton } from '@chakra-ui/react'
-import { Checker, RequestStatus } from '@config'
-import { ActionButton } from '@form'
+import { Box, IconButton } from '@chakra-ui/react'
+import { RequestStatus } from '@config'
+import { ActionButton, InputInfo } from '@form'
 import { useMetaViewSellKitMinCtezExpected } from '@meta-view-operation'
-import { LoadingBox, SlippageAndDeadLineSetting } from '@shared/ui'
+import { SlippageAndDeadLineSetting } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
-import { useGetUserBalance } from '@wallet'
+import { Checker, useGetUserBalance } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +13,6 @@ import { Subject } from 'rxjs'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { useFormManager } from 'vdr-react-form-manager'
 import { SellAmount } from './form-fields/sell-amount.component'
-import { SellResult } from './form-fields/sell-result.component'
 import {
   deadLine,
   getMinOneMutezValidator,
@@ -50,10 +49,12 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
     updateInputs({ [sellTo]: { value: minCtezExpected.toString() } }),
   )
 
+  // user needs to be connected to get the balance
+  // otherwise the balance will not be shown in the form
   const [
     { status: balanceStatus, balance: userBalance },
     loadBalance,
-  ] = useGetUserBalance(checker.address, (balance: BigNumber) => console.log(balance))
+  ] = useGetUserBalance(checker.address, (balance: BigNumber) => console.log('BALANCE', balance))
 
   useEffect(() => {
     const observer = amountChanged
@@ -91,11 +92,7 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
         }}
         symbol={checker.buyToSymbol}
       />
-      {balanceStatus === RequestStatus.success ? (
-        <Box as="span">balance: {userBalance.toNumber()}</Box>
-      ) : (
-        <Box as="span">balance </Box>
-      )}
+
       <Box position="relative">
         <IconButton
           onClick={() => onClickSwitch(0)}
@@ -108,15 +105,22 @@ export const SwapOpeSellForm: FunctionComponent<Props> = ({ checker, onClickSwit
           top="-8px"
           colorScheme="blue"
           icon={<ArrowUpDownIcon />}
+          isLoading={minKitExpectedStatus === RequestStatus.pending}
         />
       </Box>
 
-      <LoadingBox
+      <InputInfo
         status={minKitExpectedStatus}
-        loader={<Skeleton mt="15px" w="100%" height="74px" borderRadius="md" />}
-      >
-        <SellResult {...getInputProps(sellTo)} symbol={checker.buyFromSymbol} />
-      </LoadingBox>
+        label="Min ctez expected"
+        value={getInputProps(sellTo).value}
+        name={sellTo}
+        symbol={'CTEZ'}
+        onRetry={() => loadMinKitExpected(new BigNumber(getInputProps(sellFrom).value))}
+      />
+
+      {balanceStatus === RequestStatus.success ? (
+        <Box as="span">balance: {userBalance.toNumber()}</Box>
+      ) : null}
 
       <ActionButton
         colorScheme="blue"

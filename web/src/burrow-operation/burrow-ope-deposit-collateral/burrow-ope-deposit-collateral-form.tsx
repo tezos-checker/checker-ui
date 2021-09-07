@@ -3,27 +3,27 @@ import React, { FunctionComponent } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
 import {
-  burrowOpeDepositTezFormModel,
+  burrowOpeDepositCollateralFormModel,
   inputDeposit,
-} from './component/burrow-ope-deposit-tez.model'
-import { DepositTezAmountField } from './component/deposit-tez-amount-field'
-import { useDispatchBurrowOpeDepositTez } from './useDispatchBurrowOpeDepositTez'
+} from './burrow-ope-deposit-collateral.model'
+import { DepositCollateralAmountField } from './component/deposit-colleteral-amount-field'
+import { useDispatchBurrowOpeDepositCollateral } from './useDispatchBurrowOpeDepositCollateral'
 
 type Props = {
   burrow: BurrowRowState
   callBack: () => void
 }
 
-export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
+export const BurrowOpeDepositCollateralForm: FunctionComponent<Props> = ({
   burrow: { burrowId, scAddress },
   callBack,
 }) => {
-  const { depositTez } = useDispatchBurrowOpeDepositTez(burrowId, scAddress, callBack)
+  const { DepositCollateral } = useDispatchBurrowOpeDepositCollateral(burrowId, scAddress, callBack)
   const {
     handleFormChange,
     getInputProps,
     formProperties: { isFormValid },
-  } = useFormManager(burrowOpeDepositTezFormModel)
+  } = useFormManager(burrowOpeDepositCollateralFormModel)
 
   return (
     <Box
@@ -35,12 +35,12 @@ export const BurrowOpeDepositTezForm: FunctionComponent<Props> = ({
       p="20px"
     >
       <Box fontSize="2xl">Deposit</Box>
-      <DepositTezAmountField {...getInputProps(inputDeposit)} />
+      <DepositCollateralAmountField {...getInputProps(inputDeposit)} />
       <Box textAlign="right">
         <Button
           disabled={!isFormValid}
           mt="15px"
-          onClick={() => depositTez(getInputProps(inputDeposit).value)}
+          onClick={() => DepositCollateral(getInputProps(inputDeposit).value)}
         >
           Deposit
         </Button>

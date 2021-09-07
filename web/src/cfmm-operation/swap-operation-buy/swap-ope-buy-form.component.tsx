@@ -1,10 +1,11 @@
 import { ArrowUpDownIcon } from '@chakra-ui/icons'
 import { Box, IconButton } from '@chakra-ui/react'
-import { Checker, RequestStatus } from '@config'
+import { RequestStatus } from '@config'
 import { ActionButton, InputInfo } from '@form'
 import { useMetaViewBuyKitMinKitExpected } from '@meta-view-operation'
 import { SlippageAndDeadLineSetting } from '@shared/ui'
 import { isNumberPressed } from '@shared/utils'
+import { Checker } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -41,8 +42,9 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
     formProperties: { isFormValid },
   } = useFormManager(formModel)
 
-  const [{ status }, load] = useMetaViewBuyKitMinKitExpected(checker.address, (minKitExpected) =>
-    updateInputs({ [minExpected]: { value: minKitExpected.toString() } }),
+  const [{ status }, loadMinKitExpected] = useMetaViewBuyKitMinKitExpected(
+    checker.address,
+    (minKitExpected) => updateInputs({ [minExpected]: { value: minKitExpected.toString() } }),
   )
 
   useEffect(() => {
@@ -53,7 +55,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         map((i: string) => new BigNumber(i)),
         filter((x: BigNumber) => getMinOneMutezValidator().validate(x) === null),
       )
-      .subscribe((model: BigNumber) => load(new BigNumber(model)))
+      .subscribe((model: BigNumber) => loadMinKitExpected(new BigNumber(model)))
     return () => observer.unsubscribe()
   }, [])
 
@@ -84,6 +86,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
           right="10px"
           top="-8px"
           colorScheme="blue"
+          isLoading={status === RequestStatus.pending}
           icon={<ArrowUpDownIcon />}
         />
       </Box>
@@ -94,6 +97,7 @@ export const SwapOpeBuyForm: FunctionComponent<Props> = ({ checker, onClickSwitc
         value={getInputProps(minExpected).value}
         name={minExpected}
         symbol={checker.buyToSymbol}
+        onRetry={() => loadMinKitExpected(new BigNumber(getInputProps(amount).value))}
       />
 
       <ActionButton
