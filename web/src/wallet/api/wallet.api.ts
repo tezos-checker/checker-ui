@@ -1,12 +1,8 @@
 import { BeaconWalletSigner } from '../config/beacon-wallet-signer.class'
-import { appNetwork, beaconWallet, tezos } from '../config/wallet.config'
+import { beaconWallet, tezos } from '../config/wallet.config'
 
 export const connectWallet = async (): Promise<string> => {
-  await beaconWallet.requestPermissions({
-    // eslint-disable-next-line
-    // @ts-ignore
-    network: { type: appNetwork.networkType },
-  })
+  await beaconWallet.requestPermissions()
   const adress = await beaconWallet.getPKH()
 
   //  tezos.setWalletProvider(beaconWallet)
