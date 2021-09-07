@@ -46,6 +46,10 @@ export const appNetwork = rpcNetworkList.granadanet
 
 export const beaconWallet = new BeaconWallet({
   name: 'Checker',
+
+  // eslint-disable-next-line
+  // @ts-ignore
+  preferredNetwork: 'granadenet',
 })
 
 export const tezos = new TezosToolkit(appNetwork.url)
