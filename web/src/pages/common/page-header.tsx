@@ -1,6 +1,7 @@
-import { Box, Button, Flex, Image, Link } from '@chakra-ui/react'
+import { Box, Button, Flex, Image } from '@chakra-ui/react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import FoxHousePng from '../../assets/images/foxhouse.png'
 import TezosSvg from '../../assets/images/tez.svg'
 import { UserAvatarPopOver } from '../../header/user-avatar-popover'
 
@@ -19,9 +20,15 @@ export const PageHeader: React.FC = ({ children }) => {
         </Button>
         {children}
       </Box>
-      <Link to={'/'} textColor={'white'}>
-        Checkers
-      </Link>
+      <Box>
+        <Button variant={'ghost'} onClick={() => history.push('/')} mx={['2px', '2px', '10px']}>
+          <Image
+            src={FoxHousePng}
+            width={['20px', '20px', '40px']}
+            height={['20px', '20px', '40px']}
+          />
+        </Button>
+      </Box>
       <UserAvatarPopOver />
     </Flex>
   )
