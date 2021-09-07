@@ -11,13 +11,13 @@ export const CheckerMenu: FunctionComponent<{ checker: Checker }> = ({ checker }
     </Box>
     <Link to={`/checker/${checker.address}/cfmm`}>Buy / Sell</Link>
     <Link to={`/checker/${checker.address}/cfmm`}>Pool</Link>
-    <Link to={`/checker/${checker.address}/burrows`}>Mint</Link>
+    <Link to={`/checker/${checker.address}/burrows`}>Burrows</Link>
   </VStack>
 )
 
 export const PageMenu: FunctionComponent = () => (
   <VStack>
-    <Link to={'/'}>Home</Link>
+    <Link to={'/'}>Checkers</Link>
     {appNetwork.checkers.map((x) => (
       <CheckerMenu key={x.address} checker={x} />
     ))}

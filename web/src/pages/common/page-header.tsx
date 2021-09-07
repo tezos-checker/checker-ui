@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Link } from '@chakra-ui/react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import TezosSvg from '../../assets/images/tez.svg'
@@ -19,6 +19,9 @@ export const PageHeader: React.FC = ({ children }) => {
         </Button>
         {children}
       </Box>
+      <Link to={'/'} textColor={'white'}>
+        Checkers
+      </Link>
       <UserAvatarPopOver />
     </Flex>
   )
