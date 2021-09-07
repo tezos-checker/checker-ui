@@ -9,13 +9,26 @@ type Props = {
   value: string
   symbol?: string
   status: RequestStatus
+  onRetry: () => void
 }
 
-export const InputInfo: FunctionComponent<Props> = ({ name, value, symbol, label, status }) => {
+export const InputInfo: FunctionComponent<Props> = ({
+  name,
+  value,
+  symbol,
+  label,
+  status,
+  onRetry,
+}) => {
   const style = useMultiStyleConfig('ui/form-input-control', {})
 
   return (
-    <LoadingBox status={status} loader={<TextSpinner text={`Calculating ${label}`} />}>
+    <LoadingBox
+      status={status}
+      loader={<TextSpinner text={`Calculating ${label}`} />}
+      onRetry={onRetry}
+      errorText={`${label} calculation failed`}
+    >
       <FormControl sx={style.formControl} id={name}>
         <FormLabel sx={style.formLabel}>{label}</FormLabel>
         <InputGroup sx={style.inputGroup}>

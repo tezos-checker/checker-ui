@@ -92,6 +92,7 @@ export const CfmmRemoveLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         value={getInputProps(minCtez).value}
         name={minCtez}
         symbol="CTEZ"
+        onRetry={() => loadMinCtez(new BigNumber(getInputProps(amount).value))}
       />
       <InputInfo
         status={minKitStatus}
@@ -99,6 +100,7 @@ export const CfmmRemoveLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         name={minKit}
         value={getInputProps(minKit).value}
         symbol="KIT"
+        onRetry={() => loadMinKit(new BigNumber(getInputProps(amount).value))}
       />
 
       <ActionButton

@@ -13,10 +13,7 @@ export const getSwapOpeSellFormModel = (): IFormInitalState =>
   ({
     formInputs: {
       ...FormInputProperties.Builder(sellFrom).addValidators([getMinOneMutezValidator()]).build(),
-      ...FormInputProperties.Builder(sellTo)
-        .addValidators([getMinOneMutezValidator()])
-        .addValue('0')
-        .build(),
+      ...FormInputProperties.Builder(sellTo).addValidators([getMinOneMutezValidator()]).build(),
       ...FormInputProperties.Builder(deadLine).addValue(20).build(),
       ...FormInputProperties.Builder(slippage).addValue(0.01).build(),
     },
