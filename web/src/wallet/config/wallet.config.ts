@@ -49,7 +49,7 @@ export const beaconWallet = new BeaconWallet({
 
   // eslint-disable-next-line
   // @ts-ignore
-  preferredNetwork: 'granadenet',
+  preferredNetwork: appNetwork.networkType,
 })
 
 export const tezos = new TezosToolkit(appNetwork.url)
