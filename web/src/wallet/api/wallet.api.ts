@@ -2,7 +2,7 @@ import { BeaconWalletSigner } from '../config/beacon-wallet-signer.class'
 import { appNetwork, beaconWallet, tezos } from '../config/wallet.config'
 
 export const connectWallet = async (): Promise<string> => {
-  //  uncomment if we want to ask which wallet to use ( temple, kukai,) on each connections
+  // ask which wallet to use ( temple, kukai,...)
   await beaconWallet.clearActiveAccount()
   await beaconWallet.requestPermissions({
     // eslint-disable-next-line
