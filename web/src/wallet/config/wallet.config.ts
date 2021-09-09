@@ -11,7 +11,7 @@ export type Checker = {
   buyToSymbol: string
 }
 
-const rpcNetworkList = {
+export const rpcNetworkList = {
   florencenet: {
     url: 'https://api.tez.ie/rpc/florencenet',
     networkType: 'florencenet',
@@ -42,7 +42,8 @@ const rpcNetworkList = {
   },
 }
 
-export const appNetwork = rpcNetworkList.granadanet
+//  improvement : a list <florencenet, granadanet>
+export const appNetwork = rpcNetworkList.florencenet
 
 export const beaconWallet = new BeaconWallet({
   name: 'Checker',

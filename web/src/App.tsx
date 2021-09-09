@@ -1,6 +1,6 @@
 import { Box, Flex, IconButton, useToast } from '@chakra-ui/react'
 import { store } from '@config'
-import { PageBody, PageHeader, PageMenu } from '@pages'
+import { PageBody, PageHeader } from '@pages'
 import { HamburgerMenuIcon } from '@shared/ui'
 import { useScreenBreakPoint } from '@shared/utils'
 import React, { useEffect, useState } from 'react'
@@ -66,18 +66,6 @@ const App: React.FC = () => {
       </PageHeader>
 
       <Flex flex={1}>
-        <Box
-          bg={['white', 'white', 'blackAlpha.300']}
-          display={[isMenuOpen ? 'block' : 'none', isMenuOpen ? 'block' : 'none', 'block']}
-          width={['100%', '100%', 'auto']}
-          position={['absolute', 'absolute', 'relative']}
-          height={'100%'}
-          zIndex={'3'}
-          overflow={'auto'}
-          padding={['5px', '5px', '20px']}
-        >
-          <PageMenu />
-        </Box>
         <Box overflow={'auto'} marginLeft="auto" marginRight="auto">
           <PageBody />
         </Box>
