@@ -43,7 +43,8 @@ export const rpcNetworkList = {
 }
 
 //  improvement : a list <florencenet, granadanet>
-export const appNetwork = rpcNetworkList.florencenet
+// export const appNetwork = rpcNetworkList.florencenet
+export const appNetwork = rpcNetworkList.granadanet // some meta views crash
 
 export const beaconWallet = new BeaconWallet({
   name: 'Checker',
