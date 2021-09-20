@@ -7,6 +7,7 @@
     "yarn": "^1.12.3"
   },
   "scripts": {
+    "postinstall": "yarn build",
     "audit": "audit-ci --moderate",
     "start": "craco start",
     "build": "craco build",

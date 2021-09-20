@@ -1,3 +1,13 @@
 {
-  "dependencies": {}
+  "private": true,
+  "workspaces": [
+    "web"
+  ],
+  "engines": {
+    "node": "14.16.0"
+  },
+  "scripts": {
+    "postinstall": "cd web && yarn build",
+    "start": "cd web && yarn start"
+  }
 }
