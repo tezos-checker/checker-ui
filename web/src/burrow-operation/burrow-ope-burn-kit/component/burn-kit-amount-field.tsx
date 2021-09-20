@@ -6,7 +6,7 @@ type Props = IFormInputProperties
 
 export const BurnKitAmountField: FunctionComponent<Props> = ({ name, value }) => (
   <FormControl id="amoutToBurn" mt="15px">
-    <FormLabel>Amount to burn</FormLabel>
+    <FormLabel>Amount to burn (in mukit)</FormLabel>
     <InputGroup>
       <Box as="span" mt="10px" mr="5px">
         KIT
