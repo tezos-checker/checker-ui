@@ -1,5 +1,6 @@
 import { AbstractAction, RequestStatus, RootState } from '@config'
 import { LoadStorageResp } from '@storage'
+import { appNetwork } from '@wallet'
 import { ofType } from 'redux-observable'
 import { from, Observable, of } from 'rxjs'
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators'
@@ -66,7 +67,7 @@ export const loadCheckerStorageEpic = (
         walletAddress: walletEntities['1'].address || '',
         // eslint-disable-next-line
         // @ts-ignore
-        scAddress: '',
+        scAddress: appNetwork.checkers[0].address || '', // refactor nécessaire sur base des checkers
       }
     }),
     mergeMap((x) => getScStorage(x)),
