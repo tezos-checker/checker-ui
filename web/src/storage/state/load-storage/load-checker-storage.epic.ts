@@ -6,7 +6,7 @@ import { from, Observable, of } from 'rxjs'
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators'
 import { loadCheckerStorageRequest } from '../../api/checker-storage.api'
 import { StorageRow } from '../storage-state.type'
-import { getUpdateStorageAction } from '../update-storage/update-storage.util'
+import { getUpdateCheckerStorageAction } from '../update-storage/update-storage.util'
 import { LoadStorageResultAction } from './load-storage.type'
 
 export const getScStorage = ({
@@ -17,7 +17,7 @@ export const getScStorage = ({
   from(loadCheckerStorageRequest(scAddress)).pipe(
     map((res: LoadStorageResp) => {
       if (res) {
-        return getUpdateStorageAction({
+        return getUpdateCheckerStorageAction({
           ...storageRow,
           status: RequestStatus.success,
           burrowStorage: res.burrowStorage,
@@ -25,7 +25,7 @@ export const getScStorage = ({
           errorMsg: '',
         })
       }
-      return getUpdateStorageAction({
+      return getUpdateCheckerStorageAction({
         ...storageRow,
         status: RequestStatus.error,
         errorMsg: 'Internal error',
@@ -33,7 +33,7 @@ export const getScStorage = ({
     }),
     catchError((err) =>
       of(
-        getUpdateStorageAction({
+        getUpdateCheckerStorageAction({
           ...storageRow,
           status: RequestStatus.error,
           errorMsg: err.message,

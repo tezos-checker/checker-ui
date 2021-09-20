@@ -5,3 +5,8 @@ export const getUpdateStorageAction = (payload: StorageRow): LoadStorageResultAc
   type: 'storage/updateStorage',
   payload,
 })
+
+export const getUpdateCheckerStorageAction = (payload: StorageRow): LoadStorageResultAction => ({
+  type: 'storage/updateCheckerStorage',
+  payload,
+})
