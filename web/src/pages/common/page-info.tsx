@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
 import {
   EmptyBurrowStorage,
-  EmptyCheckerStorage
+  EmptyCheckerStorage,
 } from '../../storage/state/create-storage/create-storage-action.util'
 
 export const PageInfo: React.FC = () => {
