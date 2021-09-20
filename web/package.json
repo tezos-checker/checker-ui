@@ -1,5 +1,5 @@
 {
-  "name": "tezos-react-starter",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -7,6 +7,7 @@
     "yarn": "^1.12.3"
   },
   "scripts": {
+    "postinstall": "yarn build",
     "audit": "audit-ci --moderate",
     "start": "craco start",
     "build": "craco build",

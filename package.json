@@ -1,3 +1,14 @@
 {
-  "dependencies": {}
+  "private": true,
+  "workspaces": [
+    "web"
+  ],
+  "engines": {
+    "node": ">=v12.0.0",
+    "yarn": "^1.12.3"
+  },
+  "scripts": {
+    "postinstall": "yarn workspace web run build",
+    "start": "yarn workspace web run start"
+  }
 }
