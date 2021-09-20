@@ -8,7 +8,7 @@ import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
 import {
   EmptyBurrowStorage,
-  EmptyCheckerStorage,
+  EmptyCheckerStorage
 } from '../../storage/state/create-storage/create-storage-action.util'
 
 export const PageInfo: React.FC = () => {
@@ -33,7 +33,7 @@ export const PageInfo: React.FC = () => {
       <LoadingBox status={status}>
         <HStack spacing="4">
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-            Last Update : {checkerStorage?.last_touched}
+            Update : {checkerStorage?.last_touched}
           </Tag>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Oracle Price : {TzFormatMutezToTz(checkerStorage?.index || 0).toNumber()}
