@@ -1,4 +1,4 @@
-import { Flex, Tag } from '@chakra-ui/react'
+import { Flex, HStack, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { LoadingBox } from '@shared/ui'
 import { useGetStorage, useStorageDispatcher } from '@storage'
@@ -29,11 +29,17 @@ export const PageInfo: React.FC = () => {
 
   return (
     <Flex bg={'blue.500'} p={['5px', '5px', '10px']} justifyContent={'space-between'}>
-      <LoadingBox status={status}>
-        <Tag>Last Update : {checkerStorage?.last_touched}</Tag>
-        <Tag>Oracle Price : {new BigNumber(checkerStorage?.index).toNumber()}</Tag>
-        <Tag>Target Price : 1 Drift : {new BigNumber(checkerStorage?.drift).toNumber()}</Tag>
-      </LoadingBox>
+      <HStack spacing="4">
+        <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+          Last Update : {storage?.checkerStorage.last_touched}
+        </Tag>
+        <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+          Last Update : {storage?.checkerStorage.last_touched}
+        </Tag>
+        <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+          Last Update : {storage?.checkerStorage.last_touched}
+        </Tag>
+      </HStack>
     </Flex>
   )
 }
