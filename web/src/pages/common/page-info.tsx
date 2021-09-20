@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
 import {
   EmptyBurrowStorage,
-  EmptyCheckerStorage,
+  EmptyCheckerStorage
 } from '../../storage/state/create-storage/create-storage-action.util'
 
 export const PageInfo: React.FC = () => {
@@ -29,17 +29,22 @@ export const PageInfo: React.FC = () => {
 
   return (
     <Flex bg={'blue.500'} p={['5px', '5px', '10px']} justifyContent={'space-between'}>
-      <HStack spacing="4">
-        <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-          Last Update : {storage?.checkerStorage.last_touched}
-        </Tag>
-        <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-          Last Update : {storage?.checkerStorage.last_touched}
-        </Tag>
-        <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-          Last Update : {storage?.checkerStorage.last_touched}
-        </Tag>
-      </HStack>
+      <LoadingBox status={status}>
+        <HStack spacing="4">
+          <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+            Last Update : {checkerStorage?.last_touched}
+          </Tag>
+          <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+            Oracle Price : {new BigNumber(checkerStorage?.index).toNumber()}
+          </Tag>
+          <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+            Target Price : 1
+          </Tag>
+          <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+            Drift : {new BigNumber(checkerStorage?.drift).toNumber()}
+          </Tag>
+        </HStack>
+      </LoadingBox>
     </Flex>
   )
 }
