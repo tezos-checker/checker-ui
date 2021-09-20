@@ -45,6 +45,7 @@
 │       ├── page-body.tsx
 │       ├── page-header.tsx
 │       ├── page-menu.tsx
+│       ├── page-info.tsx
 │       ├── page-footer.tsx
 │
 ├── theme

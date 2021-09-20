@@ -13,7 +13,7 @@ const createAction = (payload: WalletRowState) => ({ type: actionType, payload }
 
 export const fetchStorageRequest = (x: WalletRowState) =>
   from(connectWallet()).pipe(
-    timeout(60000), // fix safari issue, when we close the beacon pop-up
+    timeout(10000), // fix safari issue, when we close the beacon pop-up
     map((address: string) => {
       if (address) {
         successToast('Wallet', 'Wallet connected')
