@@ -1,7 +1,10 @@
-import { Flex } from '@chakra-ui/react'
+import { Flex, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
+import { LoadingBox } from '@shared/ui'
 import { useGetStorage, useStorageDispatcher } from '@storage'
+import BigNumber from 'bignumber.js'
 import React, { useEffect } from 'react'
+import { StorageRow } from 'src/storage/state/storage-state.type'
 import {
   EmptyBurrowStorage,
   EmptyCheckerStorage,
@@ -9,7 +12,7 @@ import {
 
 export const PageInfo: React.FC = () => {
   const { loadCheckerStorage } = useStorageDispatcher()
-  const storage = useGetStorage(0) // HACK BURROW ID = 0 as only CHECKER global metrics
+  const { status, checkerStorage } = useGetStorage(0) as StorageRow // HACK BURROW ID = 0 as only CHECKER global metrics
 
   //  refactoring o, burrow part later as useless
   useEffect(() => {
@@ -26,9 +29,11 @@ export const PageInfo: React.FC = () => {
 
   return (
     <Flex bg={'blue.500'} p={['5px', '5px', '10px']} justifyContent={'space-between'}>
-      Last Update : {storage?.checkerStorage.last_touched}
-      Oracle Price : {storage?.checkerStorage.index}
-      Target Price : 1 Drift : {storage?.checkerStorage.drift}
+      <LoadingBox status={status}>
+        <Tag>Last Update : {checkerStorage?.last_touched}</Tag>
+        <Tag>Oracle Price : {new BigNumber(checkerStorage?.index).toNumber()}</Tag>
+        <Tag>Target Price : 1 Drift : {new BigNumber(checkerStorage?.drift).toNumber()}</Tag>
+      </LoadingBox>
     </Flex>
   )
 }
