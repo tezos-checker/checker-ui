@@ -1,7 +1,8 @@
-import { Flex, HStack, Tag } from '@chakra-ui/react'
+import { Flex, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { LoadingBox } from '@shared/ui'
 import { useGetStorage, useStorageDispatcher } from '@storage'
+import { TzFormatMutezToTz } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
@@ -30,12 +31,12 @@ export const PageInfo: React.FC = () => {
   return (
     <Flex bg={'blue.500'} p={['5px', '5px', '10px']} justifyContent={'space-between'}>
       <LoadingBox status={status}>
-        <HStack spacing="4">
+        <Flex>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Last Update : {checkerStorage?.last_touched}
           </Tag>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-            Oracle Price : {new BigNumber(checkerStorage?.index).toNumber()}
+            Oracle Price : {TzFormatMutezToTz(checkerStorage?.index || 0).toNumber()}
           </Tag>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Target Price : 1
@@ -43,7 +44,7 @@ export const PageInfo: React.FC = () => {
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Drift : {new BigNumber(checkerStorage?.drift).toNumber()}
           </Tag>
-        </HStack>
+        </Flex>
       </LoadingBox>
     </Flex>
   )
