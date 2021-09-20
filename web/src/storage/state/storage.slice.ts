@@ -17,6 +17,7 @@ export const storageSlice = createSlice({
     loadStorage: storageAdapter.upsertOne,
     updateStorage: storageAdapter.upsertOne,
     deleteBurrowStorage: storageAdapter.removeOne,
+    loadCheckerStorage: storageAdapter.upsertOne,
   },
 })
 

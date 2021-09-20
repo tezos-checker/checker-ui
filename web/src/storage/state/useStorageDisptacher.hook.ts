@@ -13,6 +13,13 @@ export const useStorageDispatcher = () => {
           status: RequestStatus.pending,
         }),
       ),
+    loadCheckerStorage: (storage: StorageRow) =>
+      dispatch(
+        storageActions.loadCheckerStorage({
+          ...storage,
+          status: RequestStatus.pending,
+        }),
+      ),
     deleteBurrowStorage: (burrowId: number) =>
       dispatch(storageActions.deleteBurrowStorage(burrowId)),
   }
