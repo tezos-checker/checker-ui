@@ -4,10 +4,11 @@
     "web"
   ],
   "engines": {
-    "node": "14.16.0"
+    "node": ">=v12.0.0",
+    "yarn": "^1.12.3"
   },
   "scripts": {
-    "postinstall": "cd web && yarn build",
-    "start": "cd web && yarn start"
+    "postinstall": "yarn workspace web run build",
+    "start": "yarn workspace web run start"
   }
 }
