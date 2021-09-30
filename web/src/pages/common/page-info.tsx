@@ -14,7 +14,7 @@ import {
 
 export const PageInfo: React.FC = () => {
   const { loadCheckerStorage } = useStorageDispatcher()
-  const { status, checkerStorage } = useGetStorage(0) as StorageRow // HACK BURROW ID = 0 as only CHECKER global metrics
+  const storage = useGetStorage(0) as StorageRow // HACK BURROW ID = 0 as only CHECKER global metrics
 
   //  refactoring o, burrow part later as useless
   useEffect(() => {
@@ -29,6 +29,14 @@ export const PageInfo: React.FC = () => {
 
   const checkerAddress = rpcNetworkList.granadanet.checkers[0].address
   const [{ totalSupply, status: totalSupplyStatus }] = useMetaViewTotalSupply(checkerAddress)
+
+  // new user does not have storage -
+  // storage will be created after the useEffect
+  if (!storage) {
+    return <></>
+  }
+
+  const { status, checkerStorage } = storage
 
   // new_target = new_q * (new_index / kit_in_tez_now)
   return (
