@@ -1,8 +1,9 @@
 import { Flex, HStack, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
+import { useMetaViewTotalSupply } from '@meta-view-operation'
 import { LoadingBox } from '@shared/ui'
 import { useGetStorage, useStorageDispatcher } from '@storage'
-import { Checker, TzFormatMutezToTz } from '@wallet'
+import { rpcNetworkList, TzFormatMutezToTz } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
@@ -10,10 +11,6 @@ import {
   EmptyBurrowStorage,
   EmptyCheckerStorage,
 } from '../../storage/state/create-storage/create-storage-action.util'
-
-type Props = {
-  checker: Checker
-}
 
 export const PageInfo: React.FC = () => {
   const { loadCheckerStorage } = useStorageDispatcher()
@@ -30,14 +27,14 @@ export const PageInfo: React.FC = () => {
     })
   }, [])
 
-  // const data = useMetaViewTotalSupply(checker.address)
+  const checkerAddress = rpcNetworkList.granadanet.checkers[0].address
+  const [{ totalSupply, status: totalSupplyStatus }] = useMetaViewTotalSupply(checkerAddress)
 
   // new_target = new_q * (new_index / kit_in_tez_now)
-
   return (
     <Flex bg={'blue.500'} p={['5px', '5px', '10px']} justifyContent={'space-between'}>
-      <LoadingBox status={status}>
-        <HStack spacing="4">
+      <HStack spacing="4">
+        <LoadingBox status={status}>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Update : {new Date(checkerStorage?.last_touched).toLocaleString('en')}
           </Tag>
@@ -50,8 +47,13 @@ export const PageInfo: React.FC = () => {
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Drift : {new BigNumber(checkerStorage?.drift).toNumber()}
           </Tag>
-        </HStack>
-      </LoadingBox>
+        </LoadingBox>
+        <LoadingBox status={totalSupplyStatus}>
+          <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
+            Pool Total Supply : {totalSupply.toNumber()}
+          </Tag>
+        </LoadingBox>
+      </HStack>
     </Flex>
   )
 }
