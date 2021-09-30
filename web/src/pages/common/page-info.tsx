@@ -2,7 +2,7 @@ import { Flex, HStack, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { LoadingBox } from '@shared/ui'
 import { useGetStorage, useStorageDispatcher } from '@storage'
-import { TzFormatMutezToTz } from '@wallet'
+import { Checker, TzFormatMutezToTz } from '@wallet'
 import BigNumber from 'bignumber.js'
 import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
@@ -10,6 +10,10 @@ import {
   EmptyBurrowStorage,
   EmptyCheckerStorage,
 } from '../../storage/state/create-storage/create-storage-action.util'
+
+type Props = {
+  checker: Checker
+}
 
 export const PageInfo: React.FC = () => {
   const { loadCheckerStorage } = useStorageDispatcher()
@@ -26,6 +30,8 @@ export const PageInfo: React.FC = () => {
     })
   }, [])
 
+  // const data = useMetaViewTotalSupply(checker.address)
+
   // new_target = new_q * (new_index / kit_in_tez_now)
 
   return (
@@ -33,7 +39,7 @@ export const PageInfo: React.FC = () => {
       <LoadingBox status={status}>
         <HStack spacing="4">
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-            Update : {checkerStorage?.last_touched}
+            Update : {new Date(checkerStorage?.last_touched).toLocaleString('en')}
           </Tag>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Oracle Price : {TzFormatMutezToTz(checkerStorage?.index || 0).toNumber()}
