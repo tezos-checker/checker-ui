@@ -8,7 +8,7 @@ type Data = {
   totalSupply: BigNumber
   status: RequestStatus
 }
-export const useMetaViewTotalSupply = (checkerToken: string): [Data, () => void] => {
+export const useMetaViewTotalSupply = (checkerAddress: string): [Data, () => void] => {
   const [data, setData] = useState({
     totalSupply: zero,
     status: RequestStatus.pending,
@@ -22,7 +22,7 @@ export const useMetaViewTotalSupply = (checkerToken: string): [Data, () => void]
       }
 
       try {
-        const metadataViews = await getMetaDataViews(checkerToken)
+        const metadataViews = await getMetaDataViews(checkerAddress)
 
         const totalSupply = await metadataViews.total_supply().executeView()
 
