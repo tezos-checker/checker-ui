@@ -53,10 +53,10 @@ export const CheckerCard: FunctionComponent<Props> = ({ checker }) => {
         <CheckerOracleTokenInfo oracle={checker.oracle} address={checker.address} />
 
         <HStack justifyContent="space-between" width="100%">
-          <Link to={`/checker/${checker.address}/cfmm`}>
+          <Link to={`/checker/${checker.address}/cfmm/buy`}>
             <Button>Buy / Sell</Button>
           </Link>
-          <Link to={`/checker/${checker.address}/cfmm`}>
+          <Link to={`/checker/${checker.address}/cfmm/pool`}>
             <Button>Pool</Button>
           </Link>
           <>

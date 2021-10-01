@@ -14,7 +14,7 @@ export type CheckerRoute = {
 // order is imporant
 export const checkerRoutes: CheckerRoute[] = [
   {
-    path: '/checker/:address/cfmm',
+    path: '/checker/:address/cfmm/:cfmmAction',
     exact: true,
     menu: () => null,
     component: () => <CheckerSwapPage />,

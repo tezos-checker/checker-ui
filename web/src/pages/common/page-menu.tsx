@@ -9,8 +9,8 @@ export const CheckerMenu: FunctionComponent<{ checker: Checker }> = ({ checker }
     <Box textAlign={'center'} fontWeight="extrabold" width={'100%'}>
       {truncateStringInTheMiddle(checker.address)}
     </Box>
-    <Link to={`/checker/${checker.address}/cfmm`}>Buy / Sell</Link>
-    <Link to={`/checker/${checker.address}/cfmm`}>Pool</Link>
+    <Link to={`/checker/${checker.address}/cfmm/buy`}>Buy / Sell</Link>
+    <Link to={`/checker/${checker.address}/cfmm/pool`}>Pool</Link>
     <Link to={`/checker/${checker.address}/burrows`}>Burrows</Link>
   </VStack>
 )
