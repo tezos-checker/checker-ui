@@ -9,7 +9,7 @@ import React, { useEffect } from 'react'
 import { StorageRow } from 'src/storage/state/storage-state.type'
 import {
   EmptyBurrowStorage,
-  EmptyCheckerStorage,
+  EmptyCheckerStorage
 } from '../../storage/state/create-storage/create-storage-action.util'
 
 export const PageInfo: React.FC = () => {
@@ -74,7 +74,7 @@ export const PageInfo: React.FC = () => {
       <LoadingBox status={balanceStatus}>
         <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-            Balance: {balance.toNumber()}
+            Pool % : {balance.toNumber()}
           </Tag>
         </Box>
       </LoadingBox>
