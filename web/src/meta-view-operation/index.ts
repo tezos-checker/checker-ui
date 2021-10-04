@@ -6,3 +6,4 @@ export { useMetaViewRemoveLiquidityMinCtezWithdrawn } from './hooks/meta-view-re
 export { useMetaViewRemoveLiquidityMinKitWithdrawn } from './hooks/meta-view-remove-liquidity-min-kit-withdrawn.hooks'
 export { useMetaViewSellKitMinCtezExpected } from './hooks/meta-view-sell-kit-min-ctez-expected.hooks'
 export { useMetaViewTokenMetaData } from './hooks/meta-view-token-meda-data.hooks'
+export { useMetaViewTotalSupply } from './hooks/meta-view-total-supply.hooks'

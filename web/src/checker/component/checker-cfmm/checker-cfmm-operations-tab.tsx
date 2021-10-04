@@ -7,6 +7,7 @@ import {
 import { Box, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { Checker } from '@wallet'
 import React, { FunctionComponent } from 'react'
+import { useParams } from 'react-router-dom'
 
 type Props = {
   checker: Checker
@@ -25,19 +26,20 @@ type TabItemProps = {
 }
 
 const TabItem: FunctionComponent<{
+  isSelected: boolean
   left: TabItemProps
   right: TabItemProps
   setTabIndex: (tabIndex: number) => void
   currentTabIndex: number
-}> = ({ setTabIndex, currentTabIndex, left, right }) => (
+}> = ({ setTabIndex, currentTabIndex, left, right, isSelected }) => (
   <Box
     w="110px"
     textAlign="center"
     fontSize="small"
-    bgColor="gray.400"
+    bgColor={isSelected ? 'blue.400' : 'gray.400'}
     p="5px 10px"
     borderRadius="15px"
-    _hover={{ bgColor: 'gray.500', cursor: 'pointer' }}
+    _hover={{ bgColor: isSelected ? 'blue.600' : 'gray.500', cursor: 'pointer' }}
     onClick={() => {
       if (currentTabIndex === left.tabIndex) {
         setTabIndex(right.tabIndex)
@@ -65,12 +67,17 @@ const TabItem: FunctionComponent<{
 )
 
 export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) => {
-  const [tabIndex, setTabIndex] = React.useState(TabViewEnum.buy)
+  // eslint-disable-next-line
+  // @ts-ignore
+  const { cfmmAction } = useParams()
+
+  const [tabIndex, setTabIndex] = React.useState(cfmmAction === 'buy' ? 0 : 2)
 
   return (
     <Tabs isLazy colorScheme="blue" index={tabIndex} p="0" m="0" w="100%">
       <Box display="flex" justifyContent="space-between">
         <TabItem
+          isSelected={tabIndex <= 1}
           left={{
             label: 'Buy',
             tabIndex: TabViewEnum.buy,
@@ -83,6 +90,7 @@ export const CheckerCfmmOperationsTab: FunctionComponent<Props> = ({ checker }) 
           currentTabIndex={tabIndex}
         />
         <TabItem
+          isSelected={tabIndex >= 2}
           left={{
             label: 'Add',
             tabIndex: TabViewEnum.addLiquidity,
