@@ -1,4 +1,4 @@
-import { Flex, HStack, Tag } from '@chakra-ui/react'
+import { Box, Flex, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { useMetaViewTotalSupply } from '@meta-view-operation'
 import { LoadingBox } from '@shared/ui'
@@ -41,27 +41,35 @@ export const PageInfo: React.FC = () => {
   // new_target = new_q * (new_index / kit_in_tez_now)
   return (
     <Flex bg={'blue.500'} p={['5px', '5px', '10px']} justifyContent={'space-between'}>
-      <HStack spacing="4">
-        <LoadingBox status={status}>
+      <LoadingBox status={status}>
+        <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Update : {new Date(checkerStorage?.last_touched).toLocaleString('en')}
           </Tag>
+        </Box>
+        <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Oracle Price : {TzFormatMutezToTz(checkerStorage?.index || 0).toNumber()}
           </Tag>
+        </Box>
+        <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Target Price : 1
           </Tag>
+        </Box>
+        <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Drift : {new BigNumber(checkerStorage?.drift).toNumber()}
           </Tag>
-        </LoadingBox>
-        <LoadingBox status={totalSupplyStatus}>
+        </Box>
+      </LoadingBox>
+      <LoadingBox status={totalSupplyStatus}>
+        <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Pool Total Supply : {totalSupply.toNumber()}
           </Tag>
-        </LoadingBox>
-      </HStack>
+        </Box>
+      </LoadingBox>
     </Flex>
   )
 }
