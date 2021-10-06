@@ -1,6 +1,6 @@
 import { Box, Flex, Tag } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
-import { useMetaViewGetBalance, useMetaViewTotalSupply } from '@meta-view-operation'
+import { useMetaViewTotalSupply } from '@meta-view-operation'
 import { LoadingBox } from '@shared/ui'
 import { useGetStorage, useStorageDispatcher } from '@storage'
 import { rpcNetworkList, TzFormatMutezToTz } from '@wallet'
@@ -29,7 +29,6 @@ export const PageInfo: React.FC = () => {
 
   const checkerAddress = rpcNetworkList.granadanet.checkers[0].address
   const [{ totalSupply, status: totalSupplyStatus }] = useMetaViewTotalSupply(checkerAddress)
-  const [{ balance, status: balanceStatus }] = useMetaViewGetBalance(checkerAddress)
 
   // new user does not have storage -
   // storage will be created after the useEffect
@@ -68,13 +67,6 @@ export const PageInfo: React.FC = () => {
         <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
             Pool Total Supply : {totalSupply.toNumber()}
-          </Tag>
-        </Box>
-      </LoadingBox>
-      <LoadingBox status={balanceStatus}>
-        <Box>
-          <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-            Pool Shares : {balance.toNumber()}
           </Tag>
         </Box>
       </LoadingBox>
