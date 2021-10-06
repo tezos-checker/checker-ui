@@ -26,8 +26,9 @@ export const useMetaViewGetBalance = (checkerAddress: string): [Data, () => void
       try {
         const metadataViews = await getMetaDataViews(checkerAddress)
 
+        // wallet has to be connected
         let balance = zero
-        if (walletAdress !== undefined) // wallet has to be connected
+        if (walletAdress !== undefined)
           balance = await metadataViews.get_balance().executeView(walletAdress, new BigNumber(1))
 
         setData({
