@@ -74,7 +74,7 @@ export const PageInfo: React.FC = () => {
       <LoadingBox status={balanceStatus}>
         <Box>
           <Tag size="md" key="md" borderRadius="full" variant="solid" colorScheme="orange">
-            Pool % : {balance.toNumber()}
+            Pool Shares : {balance.toNumber()}
           </Tag>
         </Box>
       </LoadingBox>
