@@ -84,7 +84,7 @@ export const CfmmRemoveLiquidityForm: FunctionComponent<Props> = ({ checker }) =
             amountChanged.next(e.currentTarget.value)
           },
         }}
-        symbol={'MULQT'}
+        symbol={'MUKTLQ'}
       />
       <InputInfo
         status={minCtezStatus}

@@ -99,7 +99,7 @@ export const CfmmOpeAddLiquidityForm: FunctionComponent<Props> = ({ checker }) =
         label="Min token expected"
         name={minToken}
         value={getInputProps(minToken).value}
-        symbol="MULQT"
+        symbol="MUKTLQ"
         onRetry={() => loadMinToken(new BigNumber(getInputProps(amount).value))}
       />
 

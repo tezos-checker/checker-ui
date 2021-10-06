@@ -1,6 +1,7 @@
 export { useMetaViewAddLiquidityMaxKitDeposed } from './hooks/meta-view-add-liquidity-max-kit-deposed.hooks'
 export { useMetaViewAddLiquidityMinLqtMinted } from './hooks/meta-view-add-liquidity-min-lqt-minted.hooks'
 export { useMetaViewBuyKitMinKitExpected } from './hooks/meta-view-buy-kit-min-kit-expected.hooks'
+export { useMetaViewGetBalance } from './hooks/meta-view-get-balance.hooks'
 export { useMetaViewMaxMintableKits } from './hooks/meta-view-max-mintable-kits.hooks'
 export { useMetaViewRemoveLiquidityMinCtezWithdrawn } from './hooks/meta-view-remove-liquidity-min-ctez-withdrawn.hooks'
 export { useMetaViewRemoveLiquidityMinKitWithdrawn } from './hooks/meta-view-remove-liquidity-min-kit-withdrawn.hooks'

@@ -1,16 +1,18 @@
 import { RequestStatus } from '@config'
+import { useGetWallet } from '@wallet'
 import BigNumber from 'bignumber.js'
 import { useEffect, useState } from 'react'
 import { getMetaDataViews } from '../utils/meta-data-operation.utils'
 
 const zero = new BigNumber(0)
 type Data = {
-  totalSupply: BigNumber
+  balance: BigNumber
   status: RequestStatus
 }
-export const useMetaViewTotalSupply = (checkerAddress: string): [Data, () => void] => {
+export const useMetaViewGetBalance = (checkerAddress: string): [Data, () => void] => {
+  const { address: walletAdress } = useGetWallet()
   const [data, setData] = useState({
-    totalSupply: zero,
+    balance: zero,
     status: RequestStatus.pending,
   })
 
@@ -24,14 +26,16 @@ export const useMetaViewTotalSupply = (checkerAddress: string): [Data, () => voi
       try {
         const metadataViews = await getMetaDataViews(checkerAddress)
 
-        const totalSupply = await metadataViews.total_supply().executeView(new BigNumber(1))
+        let balance = zero
+        if (walletAdress !== undefined)
+          balance = await metadataViews.get_balance().executeView(walletAdress, new BigNumber(1))
 
         setData({
-          totalSupply: new BigNumber(totalSupply),
+          balance: new BigNumber(balance),
           status: RequestStatus.success,
         })
       } catch (error) {
-        setData({ totalSupply: zero, status: RequestStatus.error })
+        setData({ balance: zero, status: RequestStatus.error })
       }
     }
 
@@ -41,7 +45,7 @@ export const useMetaViewTotalSupply = (checkerAddress: string): [Data, () => voi
   // reload is accessible only if status === error
   const load = () => {
     setData({
-      totalSupply: zero,
+      balance: zero,
       status: RequestStatus.pending,
     })
   }
