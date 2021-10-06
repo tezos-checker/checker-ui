@@ -22,14 +22,13 @@ export const useMetaViewGetBalance = (checkerAddress: string): [Data, () => void
       if (data.status !== RequestStatus.pending) {
         return
       }
-      console.log('useEffect')
-      console.log(walletAdress)
+
       try {
         const metadataViews = await getMetaDataViews(checkerAddress)
 
         let balance = zero
         if (walletAdress !== undefined)
-          balance = await metadataViews.get_balance().executeView(walletAdress)
+          balance = await metadataViews.get_balance().executeView(walletAdress, new BigNumber(1))
 
         setData({
           balance: new BigNumber(balance),
