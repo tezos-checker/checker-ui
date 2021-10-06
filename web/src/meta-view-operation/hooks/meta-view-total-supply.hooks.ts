@@ -24,7 +24,7 @@ export const useMetaViewTotalSupply = (checkerAddress: string): [Data, () => voi
       try {
         const metadataViews = await getMetaDataViews(checkerAddress)
 
-        const totalSupply = await metadataViews.total_supply().executeView()
+        const totalSupply = await metadataViews.total_supply().executeView(new BigNumber(1))
 
         setData({
           totalSupply: new BigNumber(totalSupply),
