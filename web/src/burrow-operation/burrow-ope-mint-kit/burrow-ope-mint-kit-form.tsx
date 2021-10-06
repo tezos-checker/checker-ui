@@ -55,7 +55,9 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       <Box fontSize="2xl">Mint</Box>
       <MintKitAmountField {...getInputProps(tezToMint)} />
       <Box fontSize="xs" textAlign="right">
+        {'Max mintable : '}
         {maxMintableKitsStatus === RequestStatus.success ? maxMintableKits.toString() : null}
+        {' KIT'}
       </Box>
       <Box textAlign="right">
         <Button
