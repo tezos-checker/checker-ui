@@ -22,7 +22,10 @@ export const LoadingBox: FunctionComponent<Props> = ({
       return <>{loader}</>
     case RequestStatus.error:
       return <ErrorBox errorText={errorText} onRetry={onRetry} />
-    default:
+    case RequestStatus.success:
       return <>{children}</>
+    case RequestStatus.idle:
+    default:
+      return <></>
   }
 }

@@ -58,7 +58,7 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
       <LoadingBox status={maxMintableKitsStatus}>
         <Box fontSize="xs" textAlign="right">
           {'Max mintable : '}
-          {maxMintableKitsStatus === RequestStatus.success ? maxMintableKits.toString() : null}
+          {maxMintableKits.toString()}
           {' KIT'}
         </Box>
       </LoadingBox>
