@@ -2,6 +2,7 @@ import { Box, Button } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
 import { getMaxNumberValidator } from '@form'
 import { useMetaViewMaxMintableKits } from '@meta-view-operation'
+import { LoadingBox } from '@shared/ui'
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { useFormManager } from 'vdr-react-form-manager'
 import { BurrowRowState } from '../../burrow/state/burrow-state.type'
@@ -54,11 +55,13 @@ export const BurrowOpeMintKitForm: FunctionComponent<Props> = ({
     >
       <Box fontSize="2xl">Mint</Box>
       <MintKitAmountField {...getInputProps(tezToMint)} />
-      <Box fontSize="xs" textAlign="right">
-        {'Max mintable : '}
-        {maxMintableKitsStatus === RequestStatus.success ? maxMintableKits.toString() : null}
-        {' KIT'}
-      </Box>
+      <LoadingBox status={maxMintableKitsStatus}>
+        <Box fontSize="xs" textAlign="right">
+          {'Max mintable : '}
+          {maxMintableKits.toString()}
+          {' KIT'}
+        </Box>
+      </LoadingBox>
       <Box textAlign="right">
         <Button
           disabled={!isFormValid}

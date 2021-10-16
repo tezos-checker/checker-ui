@@ -2,9 +2,11 @@ import { BurrowOpeRowState } from '@burrow-operation'
 import { DragHandleIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, IconButton, Spinner, useDisclosure, VStack } from '@chakra-ui/react'
 import { RequestStatus } from '@config'
+import { useMetaViewMaxMintableKits } from '@meta-view-operation'
 import { LoadingBox, SlideBox } from '@shared/ui'
 import { isInvalidStorage, isInvalidStorageBurrow, truncateStringInTheMiddle } from '@shared/utils'
 import { TzFormatMutezToTz } from '@wallet'
+import { BigNumber } from 'bignumber.js'
 import React, { FunctionComponent } from 'react'
 import { StorageRow } from '../../../../../storage/state/storage-state.type'
 import { BurrowRowState } from '../../../../state/burrow-state.type'
@@ -79,8 +81,15 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
 }) => {
   const { isOpen, onToggle } = useDisclosure()
 
+  const [{ maxMintableKits, status: maxMintableKitsStatus }, reload] = useMetaViewMaxMintableKits(
+    burrow.scAddress,
+    burrow.burrowId,
+  )
+
   const isLoading =
     storage?.status === RequestStatus.pending || burrowOperation?.status === RequestStatus.pending
+
+  const outstandingKit = new BigNumber(storage?.burrowStorage.outstanding_kit || 0)
 
   return (
     <>
@@ -109,12 +118,16 @@ export const BurrowCardResume: FunctionComponent<Props> = ({
           borderRight="1px solid"
           borderColor="gray.200"
         >
-          <Box fontSize="2xl" fontWeight="extrabold" p="2px">
-            0,00
-            <Box as="span" fontSize="12px" fontWeight="normal">
-              %
+          <LoadingBox status={maxMintableKitsStatus}>
+            <Box fontSize="2xl" fontWeight="extrabold" p="2px">
+              {(
+                TzFormatMutezToTz(outstandingKit).toNumber() / maxMintableKits.toNumber()
+              ).toPrecision(2)}
+              <Box as="span" fontSize="12px" fontWeight="normal">
+                %
+              </Box>
             </Box>
-          </Box>
+          </LoadingBox>
           <Box as="span" fontSize="9px" fontWeight="normal" textAlign="center">
             CURRENT UTILIZATION
           </Box>
